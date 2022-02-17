@@ -22,7 +22,7 @@ class Router
                 
                 $controllerName::selectAll();
 
-                $controllerName::find();
+                // $controllerName::find();
             }
            
             

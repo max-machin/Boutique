@@ -1,10 +1,10 @@
 <?php
 
 
-class UsersModel 
+class UsersModel extends Model
 {
-     public function lol()
-     {
-        echo "Je suis dans le UserModel";
-     }
+   public function lol()
+   {
+      echo "Je suis dans le UserModel";
+   }
 }
