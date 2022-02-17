@@ -1,5 +1,4 @@
 <?php
-namespace Libraries;
 
 /**
  * Class Database instanciation de base de données
