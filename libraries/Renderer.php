@@ -1,7 +1,7 @@
 <?php
 
 
-class Render {
+class Renderer {
 
 /**
      * Undocumented function
