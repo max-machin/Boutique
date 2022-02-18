@@ -3,7 +3,7 @@
 /**
  * Class Database instanciation de base de données
  */
-class Database
+class Database 
 {
     protected static $instance = null;
     

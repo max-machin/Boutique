@@ -20,9 +20,17 @@ class Router
              
             if ($controllerName == "UsersController") {
                 
-                $controllerName::selectAll();
-
+                $controllerName::selectAllUsers();
+                $controllerName::selectUser();
+                $controllerName::createUser();
+                $controllerName::updateUser();
+                $controllerName::deleteUser();
                 // $controllerName::find();
+            }
+
+            if($controllerName == "ProductsController"){
+                $controllerName::selectAllproducts();
+                
             }
            
             

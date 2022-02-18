@@ -7,7 +7,6 @@
     <title>Boutique</title>
 </head>
 <body>
-    
 
 <div class="container">
     <?= $content ?>
