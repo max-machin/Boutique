@@ -7,4 +7,10 @@ class ProductsController extends Controller
         $products = $model->findAll();
         Renderer::render('allProducts' , compact('products'));
     }
+
+    public static function seeProduct($id){
+        $model = new ProductsModel();
+        $product = $model->find($id);
+        Renderer::render('seeProduct' , compact('product'));
+    }
 }

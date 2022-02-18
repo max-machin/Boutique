@@ -22,7 +22,7 @@ class Renderer {
         //  A partir de ce point toute sortie est conservée en mémoire
         ob_start();
         // On crée le chemin vers la vue
-        require_once 'views/'.$fichier.'.html.php';
+        require_once 'views/products/'.$fichier.'.html.php';
 
         //  ob_get_clean permet de stocker le buffer dans la variable $contenu 
         $content = ob_get_clean();

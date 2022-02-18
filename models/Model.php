@@ -44,7 +44,7 @@ class Model extends Database
      * @param integer $id
      * @return this->requete
      */
-    public function find(int $id)
+    public function find($id)
     {
         return $this->requete("SELECT * FROM $this->table WHERE id = $id")->fetch();
     }
