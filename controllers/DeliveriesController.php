@@ -2,3 +2,4 @@
 
 class DeliveriesController extends Controller
 {  
+}
