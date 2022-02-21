@@ -2,3 +2,4 @@
 
 class ImagesController extends Controller
 {  
+}
