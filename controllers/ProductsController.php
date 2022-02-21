@@ -13,4 +13,16 @@ class ProductsController extends Controller
         $product = $model->find($id);
         Renderer::render('seeProduct' , compact('product'));
     }
+
+    public static function createProduct(){
+        $model = new ProductsModel();
+        $product = $model
+            ->setId_sous_categories('Max')
+            ->setId_categories('Max')
+            ->setPrice('Max')
+            ->setDescription('Max')
+            ->setName('Max')
+            ->setId_products('Max');
+
+    }
 }
