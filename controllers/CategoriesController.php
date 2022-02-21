@@ -2,3 +2,5 @@
 
 class CategoriesController extends Controller
 {  
+    
+}
