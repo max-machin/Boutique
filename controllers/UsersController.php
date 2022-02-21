@@ -5,6 +5,17 @@ require_once('libraries/Renderer.php');
 class UsersController extends Controller
 {  
 
+    public static function register(){
+        $model = new UsersModel();
+        $user = $model
+            ->SetNom('Max')
+            ->SetPrenom('Max')
+            ->SetEmail('Max')
+            ->SetPassword('Max');
+        var_dump($user);
+        Renderer::render('users/register' , compact($user));
+        // var_dump($user->create($model));
+    }
     /**
      * Fonction selectAll (fonction permettant de selectionner la totalité de données de la table du Model)
      *
@@ -22,16 +33,7 @@ class UsersController extends Controller
         var_dump($userData);
     }
 
-    public static function createUser(){
-        $model = new UsersModel();
-        $user = $model
-            ->SetNom('Max')
-            ->SetPrenom('Max')
-            ->SetEmail('Max')
-            ->SetPassword('Max');
-        var_dump($user);
-        // var_dump($user->create($model));
-    }
+    
 
     public static function updateUser()
     {

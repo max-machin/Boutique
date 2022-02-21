@@ -2,7 +2,7 @@
 
 class ProductsModel extends Model
 {
-    protected $id_products;
+    protected $id;
     protected $name;
     protected $description;
     protected $price;
@@ -13,6 +13,8 @@ class ProductsModel extends Model
     {
         $this->table = "products";
     }
+
+
 
     /**
      * Get the value of id_sous_categories
@@ -117,9 +119,9 @@ class ProductsModel extends Model
     /**
      * Get the value of id_products
      */ 
-    public function getId_products()
+    public function getId()
     {
-        return $this->id_products;
+        return $this->id;
     }
 
     /**
@@ -127,9 +129,9 @@ class ProductsModel extends Model
      *
      * @return  self
      */ 
-    public function setId_products($id_products)
+    public function setId($id)
     {
-        $this->id_products = $id_products;
+        $this->id = $id;
 
         return $this;
     }
