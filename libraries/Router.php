@@ -31,20 +31,29 @@ class Router
             }
 
 
-           
+        
             if(!empty($url[1])){
                 if($controllerName == "ProductsController"){
-                 $controllerName::seeProduct($url[1]);
+                $controllerName::seeProduct($url[1]);
                 } 
             }elseif ($controllerName == "ProductsController"){
                 $controllerName::selectAllproducts();
             }
-                
-            }
+
+
 
             
+            if ($controllerName == "BagsController") {
+                $controllerName::insertBag();
+                // $controllerName::find();
             }
+                
+                
         }
+
+            
+    }
+}
      
 
 

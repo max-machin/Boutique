@@ -2,7 +2,7 @@
 
 class ProductsModel extends Model
 {
-    protected $id_products;
+    protected $id;
     protected $name;
     protected $description;
     protected $price;
