@@ -20,11 +20,11 @@ class Router
             
 
 
-            if ($controllerName == "UsersController") {
-                
+            if ($controllerName == "UsersController") 
+            {
+                $controllerName::register();
                 $controllerName::selectAllUsers();
                 $controllerName::selectUser();
-                $controllerName::createUser();
                 $controllerName::updateUser();
                 $controllerName::deleteUser();
                 // $controllerName::find();
@@ -35,7 +35,6 @@ class Router
             if(!empty($url[1])){
                 if($controllerName == "ProductsController"){
                 $controllerName::seeProduct($url[1]);
-                } 
             }elseif ($controllerName == "ProductsController"){
                 $controllerName::selectAllproducts();
             }
@@ -51,6 +50,12 @@ class Router
         }
 
             
+            
+            if ($controllerName == "CommentsController")
+            {
+                $controllerName::insert();
+            }
+        }   
     }
 }
      
