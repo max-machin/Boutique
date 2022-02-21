@@ -38,7 +38,8 @@ class Router
                 $controllerName::seeProduct($url[1]);
             }elseif($controllerName == "ProductsController"){
                  $controllerName::selectAllproducts();
-            }}
+                }
+            }
 
 
             if ($controllerName == "BagsController") {

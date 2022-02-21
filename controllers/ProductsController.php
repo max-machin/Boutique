@@ -3,6 +3,7 @@
 class ProductsController extends Controller
 {  
     public static function selectAllProducts(){
+        echo 'je suis dans selectall';
         $model = new ProductsModel();
         $products = $model->findAll();
         Renderer::render('products/allProducts' , compact('products'));
@@ -22,6 +23,6 @@ class ProductsController extends Controller
             ->setPrice('Max')
             ->setDescription('Max')
             ->setName('Max')
-            ->setId_products('Max');
+            ->setId('Max');
     }
 }
