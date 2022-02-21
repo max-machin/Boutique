@@ -23,5 +23,18 @@ class ProductsController extends Controller
             ->setDescription('Max')
             ->setName('Max')
             ->setId_products('Max');
+
+    }
+
+    public static function createbj(){
+        $model = new ProductsModel();
+        $product = $model
+            ->setId_sous_sategories('Max')
+            ->setId_categories('Max')
+            ->setPrice('Max')
+            ->setDescription('Max')
+            ->setName('Max')
+            ->setId_products('Max');
+            
     }
 }
