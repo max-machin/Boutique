@@ -34,6 +34,7 @@ class Router
 
         
             if(!empty($url[1])){
+<<<<<<< HEAD
                 if($controllerName == "ProductsController"){
                 $controllerName::seeProduct($url[1]);
             }elseif($controllerName == "ProductsController"){
@@ -52,13 +53,27 @@ class Router
 
             
             
+=======
+                if($controllerName == "ProductsController")
+                {
+                 $controllerName::seeProduct($url[1]);
+                } 
+            }elseif ($controllerName == "ProductsController"){
+                $controllerName::selectAllproducts();
+            }
+            
+>>>>>>> 410b512db276e1338c62252524554d86ac0bf5a9
             if ($controllerName == "CommentsController")
             {
                 $controllerName::insert();
             }
         }   
     }
+<<<<<<< HEAD
 
+=======
+}
+>>>>>>> 410b512db276e1338c62252524554d86ac0bf5a9
      
 
 
