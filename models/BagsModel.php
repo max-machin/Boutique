@@ -77,26 +77,6 @@ class bagsModel extends Model
     }
 
     /**
-     * Get the value of price
-     */ 
-    public function getPrice_product()
-    {
-        return $this->price_product;
-    }
-
-    /**
-     * Set the value of price
-     *
-     * @return  self
-     */ 
-    public function setPrice_product($price_product)
-    {
-        $this->price_product = $price_product;
-
-        return $this;
-    }
-
-    /**
      * Get the value of quantite
      */ 
     public function getQuantity_product()
