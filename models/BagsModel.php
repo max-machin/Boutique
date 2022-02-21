@@ -7,7 +7,7 @@ class bagsModel extends Model
     protected $id_user;
     protected $id_product;
     protected $price_product;
-    protected $quantite_product;
+    protected $quantity_product;
 
     public function __construct()
     {
@@ -99,9 +99,9 @@ class bagsModel extends Model
     /**
      * Get the value of quantite
      */ 
-    public function getQuantite_product()
+    public function getQuantity_product()
     {
-        return $this->quantite_product;
+        return $this->quantity_product;
     }
 
     /**
@@ -109,9 +109,9 @@ class bagsModel extends Model
      *
      * @return  self
      */ 
-    public function setQuantite_product($quantite_product)
+    public function setQuantity_product($quantity_product)
     {
-        $this->quantite_product = $quantite_product;
+        $this->quantity_product = $quantity_product;
 
         return $this;
     }

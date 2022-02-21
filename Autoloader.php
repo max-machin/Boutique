@@ -14,7 +14,7 @@ class Autoloader {
             require_once("./controllers/".$class.".php");
         } 
         if (file_exists("./models/".$class.".php")) {
-            require_once("./models/".$class.".php");
+            require_once("models/".$class.".php");
         }
         if (file_exists("./libraries/".$class.".php")) {
             require_once("./libraries/".$class.".php");
