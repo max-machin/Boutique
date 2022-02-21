@@ -14,6 +14,8 @@ class ProductsModel extends Model
         $this->table = "products";
     }
 
+
+
     /**
      * Get the value of id_sous_categories
      */ 
