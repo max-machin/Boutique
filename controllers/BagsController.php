@@ -1,16 +1,15 @@
 <?php
+require_once('libraries/Renderer.php');
 
 class BagsController extends Controller
 {
     public function __construct()
     {
         $model = new BagsModel();
-
-        echo "je suis dans bags controller";
          
     }
 
-    public function insertBag()
+    public static function insertBag()
     {
         $productBag = $model->create(); 
         $productAdded = $productBag
@@ -22,3 +21,5 @@ class BagsController extends Controller
         var_dump($productAdded);
     }
 }
+
+?>

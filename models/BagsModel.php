@@ -13,7 +13,6 @@ class bagsModel extends Model
     {
         $this->table = "bags";
 
-        echo "je suis dans bags model";
     }
 
 
