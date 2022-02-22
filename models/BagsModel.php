@@ -95,4 +95,12 @@ class bagsModel extends Model
 
         return $this;
     }
+
+    public function deleteFromBag()
+    {
+        $loginCo=$pdo -> prepare('SELECT `login` FROM `utilisateurs` WHERE `login`=:login');
+        $loginCo -> execute(['login' => $login]);
+        $resultLogCo = $loginCo->fetch(PDO::FETCH_ASSOC);
+   
+    }
 }

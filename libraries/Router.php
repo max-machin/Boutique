@@ -36,10 +36,11 @@ class Router
             if(!empty($url[1])){
                 if($controllerName == "ProductsController"){
                 $controllerName::seeProduct($url[1]);
-            }elseif($controllerName == "ProductsController"){
-                 $controllerName::selectAllproducts();
                 }
-            }
+            }elseif($controllerName == "ProductsController"){
+                 $controllerName::selectAllProducts();
+                }
+            
 
 
             if ($controllerName == "BagsController") {
@@ -47,17 +48,15 @@ class Router
                 
             }
                 
-                
-        }
-
-            
-            
             if ($controllerName == "CommentsController")
             {
                 $controllerName::insert();
-            }
-        }   
-    }
+            }   
+
+        }      
+
+    }   
+}
 
      
 
