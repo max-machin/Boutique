@@ -9,6 +9,8 @@ class BagsController extends Controller
          
     // }
 
+
+
     public static function insertBag()
     {
         if (isset($_POST['addBag']))
@@ -17,14 +19,34 @@ class BagsController extends Controller
         $model = new BagsModel();
         $productAdded = $model
         ->setId_user($_SESSION)
-        ->setId_product(uc)
-        ->setQuantity_product(uc);
+        ->setId_product($product->id)
+        ->setQuantity_product($product->quantity_product);
 
         // $productAdded->create($model);  
         }
 
     }
 
+    public static function showBag()
+    {
+        $model = new BagsModel();
+        $model->find($_SESSION);
+    }
+
+    public static function deleteBag()
+    {
+        $model = new BagsModel();
+        $model->delete($_SESSION);
+    }
+
+    public static function deleteFromBag()
+    {
+        $model = new BagsModel();
+        $model->delete($_SESSION);
+    }
+
+    //delete product from panier
+    //moduler la quantité également de product from panier
 
 }
 
