@@ -77,6 +77,33 @@ class Model extends Database
         return $this->requete('SELECT * FROM '.$this->table.' WHERE '. $liste_champs, $valeurs)->fetchAll();
     }
 
+         /**
+     * Effacer des lignes de la table en fonction de critéres
+     * deleteBy(['actif' => 15])
+     * 
+     * @param array $criteres
+     * @return requete
+     */
+    public function deleteBy(array $criteres)
+    {
+        $champs = [];
+        $valeurs = [];
+
+        // On boucle pour éclater le tableau
+        foreach($criteres as $champ => $valeur){
+            //SELECT * FROM annonces where actif = ? AND signale = 0
+            //bindValue(1, valeur);
+            $champs[] = "$champ = ?";
+            $valeurs[] = $valeur;
+        }
+
+        // On transforme le tableau champs en chaine de caractére
+        $liste_champs = implode(' AND ', $champs);
+
+        // On éxecute la requête 
+        return $this->requete('DELETE FROM '.$this->table.' WHERE '. $liste_champs, $valeurs);
+    }
+
 
     /**
      * Trouver toutes les informations d'une table
