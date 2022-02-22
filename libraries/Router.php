@@ -38,9 +38,12 @@ class Router
                 {
                 $controllerName::seeProduct($url[1]);
                 }
-                elseif ($controllerName == "ProductsController")
+                elseif($controllerName == "ProductsController")
                 {
-                    $controllerName::selectAllproducts();
+                    $controllerName::selectAllProducts();
+                    echo 'coucou';
+                    // $controllerName::deleteProduct();
+
                 }
             }
 
