@@ -30,33 +30,35 @@ class Router
                 // $controllerName::find();
             }
 
-
+//à changer en switch case pour
         
-            if(!empty($url[1])){
-                if($controllerName == "ProductsController"){
+            if(!empty($url[1]))
+            {
+                if($controllerName == "ProductsController")
+                {
                 $controllerName::seeProduct($url[1]);
-            }elseif ($controllerName == "ProductsController"){
-                $controllerName::selectAllproducts();
-            }}
-
-
+                }
+                elseif ($controllerName == "ProductsController")
+                {
+                    $controllerName::selectAllproducts();
+                }
+            }
 
             if ($controllerName == "BagsController") {
                 $controllerName::insertBag();
                 // $controllerName::find();
             }
                 
-                
-        }
-
-            
-            
+         
             if ($controllerName == "CommentsController")
             {
                 $controllerName::insert();
             }
-        }   
-    }
+
+          
+}
+}
+}
 
      
 

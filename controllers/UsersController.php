@@ -50,6 +50,7 @@ class UsersController extends Controller
         var_dump($user->update($model));
     }
 
+    
     public static function deleteUser(){
         $model = new UsersModel();
         var_dump($delete = $model->delete(8));
