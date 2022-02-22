@@ -9,6 +9,9 @@ class ProductsModel extends Model
     protected $id_categories;
     protected $id_sous_categories;
 
+    /**
+     * Fonction construct indique la table concernée par le modele
+     */
     public function __construct()
     {
         $this->table = "products";
@@ -117,7 +120,7 @@ class ProductsModel extends Model
     /**
      * Get the value of id_products
      */ 
-    public function getId_products()
+    public function getId_product()
     {
         return $this->id_products;
     }
@@ -127,7 +130,7 @@ class ProductsModel extends Model
      *
      * @return  self
      */ 
-    public function setId_products($id_products)
+    public function setId_product($id_products)
     {
         $this->id_products = $id_products;
 
