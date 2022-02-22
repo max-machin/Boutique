@@ -41,8 +41,8 @@ class BagsController extends Controller
 
     public static function deleteFromBag()
     {
-        // $model = new BagsModel();
-        // $model->delete($_SESSION);
+        $model = new BagsModel();
+        // $model->deleteBy(['id_user'=> 1, 'id_product' => 7]);
 
     }
 
