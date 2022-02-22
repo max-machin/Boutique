@@ -9,6 +9,9 @@ class ProductsModel extends Model
     protected $id_categories;
     protected $id_sous_categories;
 
+    /**
+     * Fonction construct indique la table concernée par le modele
+     */
     public function __construct()
     {
         $this->table = "products";

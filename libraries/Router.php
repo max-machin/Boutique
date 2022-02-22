@@ -20,10 +20,13 @@ class Router
             //si tu n'instancie pas ton objet, ton autoload ne trouvera pas dans quelle classe aller. En effet, l'autoload va dans application, c'est application qui va trouver selon l'url le controller (et donc l'autoload trouve ainsi sa classe puisqu'ils ont le même nom) ET la task qu'on lui demande grâce à l'url ici de dire hello
             
 
-
-            if ($controllerName == "UsersController") 
-            {
-                $controllerName::register();
+            if (!empty($url[1])){
+                if ( $controllerName == "UsersController"){
+                    $controllerName::register();
+                }
+            }
+            elseif ($controllerName == "UsersController") {
+                
                 $controllerName::selectAllUsers();
                 $controllerName::selectUser();
                 $controllerName::updateUser();
