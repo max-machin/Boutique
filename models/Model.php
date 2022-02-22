@@ -11,7 +11,6 @@ class Model extends Database
     //Instance de la Database
     private $database;
 
-
     /**
      * Gestion des préparations et execute des requetes en fonctions des attributs
      *
@@ -48,6 +47,36 @@ class Model extends Database
     {
         return $this->requete("SELECT * FROM $this->table WHERE id = $id")->fetch();
     }
+
+    
+
+     /**
+     * Trouver des lignes de la table en fonction de critéres
+     * findBy(['actif' => 15])
+     * 
+     * @param array $criteres
+     * @return requete
+     */
+    public function findBy(array $criteres)
+    {
+        $champs = [];
+        $valeurs = [];
+
+        // On boucle pour éclater le tableau
+        foreach($criteres as $champ => $valeur){
+            //SELECT * FROM annonces where actif = ? AND signale = 0
+            //bindValue(1, valeur);
+            $champs[] = "$champ = ?";
+            $valeurs[] = $valeur;
+        }
+
+        // On transforme le tableau champs en chaine de caractére
+        $liste_champs = implode(' AND ', $champs);
+
+        // On éxecute la requête 
+        return $this->requete('SELECT * FROM '.$this->table.' WHERE '. $liste_champs, $valeurs)->fetchAll();
+    }
+
 
     /**
      * Trouver toutes les informations d'une table
