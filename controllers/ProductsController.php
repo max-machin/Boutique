@@ -1,4 +1,5 @@
 <?php
+require_once('libraries/Renderer.php');
 
 class ProductsController extends Controller
 {  
@@ -34,35 +35,35 @@ class ProductsController extends Controller
     
     public static function pagination()
     {
-        $model = new ProductsModel();
-        $count_products= $model->productsByCategories();
+       
         $page = "";
         if(isset($_GET['page']))
         {
             $page = $_GET["page"];
         }
-        
+        if(isset($_GET['categorie']))
+        {
+            $page_categorie = $_GET['categorie'];
+        }
         if (empty($page)) {
             $page = 1;
         }
+
+        $model = new ProductsModel();
+        $count_products= $model->productsByCategories($page_categorie );
+
         $nbr_product_par_page = 5;
         $nbr_page = ceil($count_products[0]["liste"] / $nbr_product_par_page);
         $debut = ($page - 1) * $nbr_product_par_page;
         
         $products = $model->productsByPage($nbr_product_par_page, $debut);
+        $model->productsByPage($nbr_product_par_page, $debut);
 
+        // echo 'pagination';
+
+        
        
-       
-        if (count($products) == 0) {
-            header("location: products.php");
-        }
-
-        if(isset($_GET['categorie']))
-        {
-            $page_categorie = $_GET['categorie'];
-        }
-
-        Renderer::render('products/AllProducts' , compact('products'));
+        Renderer::render('products/allProducts' , compact('products'));
     }
     
 

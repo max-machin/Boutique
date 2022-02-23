@@ -39,11 +39,11 @@ class Router
                 $controllerName::seeProduct($url[1]);
                 }
             }       
-            elseif($controllerName == "ProductsController")
+            elseif($controllerName == "ProductsController" && $controllerName == "CategoriesController")
                 {
                     $controllerName::selectAllProducts();
-                    echo 'coucou';
-                    // $controllerName::deleteProduct();
+                    $controllerName::pagination();
+                    $controllerName::getCategories();
 
                 }
 
@@ -57,6 +57,10 @@ class Router
             {
                 $controllerName::insert();
             }
+            // if ($controllerName == "CategoriesController")
+            // {
+            //     $controllerName::getCategories();
+            // }
 
           
 }

@@ -26,7 +26,7 @@ class Model extends Database
 
         //On vérifie si on a des attributs 
         if ($attributs !== null){
-            var_dump($attributs);
+            // var_dump($attributs);
             //requête préparée
             $query = $this->database->prepare($sql);
             $query->execute($attributs);
@@ -46,7 +46,7 @@ class Model extends Database
      */
     public function find($id)
     {
-        return $this->requete("SELECT * FROM $this->table WHERE id = $id")->fetch();
+        return $this->requete("SELECT * FROM {$this->table} WHERE id = $id")->fetch();
     }
 
     /**

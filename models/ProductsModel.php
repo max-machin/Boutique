@@ -144,31 +144,33 @@ class ProductsModel extends Model
 
     public function productsByPage($nbr_products_by_page,$debut)
     {
-        $query = $this->requete("SELECT * FROM {$this->table} DESC LIMIT $debut , $nbr_products_by_page");
+        $query = $this->requete("SELECT * FROM {$this->table} LIMIT $debut , $nbr_products_by_page");
         return $query->fetchAll();
     }
 
-    public function productsByCategories() 
+    public function productsByCategories($page_categorie) 
     {
         $query = $this->requete("SELECT COUNT(products.id_categorie) 
         AS liste_cat 
         FROM {$this->table} 
         INNER JOIN `categories` 
-        ON categories.id = products.id_categorie WHERE categories.name = '$page_categorie'");
+        ON categories.id = products.id_categorie WHERE categories.name_categorie = '$page_categorie'");
         return $query->fetchAll();
     }
 
-    public function productsBySousCategories()
-    {
-        $query = $this->requete("SELECT products.*, categories.name 
-        FROM {$this->table}  
-        INNER JOIN categories 
-        ON categories.id = products.id_categorie 
-        WHERE categories.name = '$page_categorie' 
-        DESC 
-        LIMIT $debut_cat");
-         return $query->fetchAll();
-    }
+    //? a checker quand sous categories reconnues
+
+    // public function productsBySousCategories($page_categorie)
+    // {
+    //     $query = $this->requete("SELECT products.*, categories.name_categorie
+    //     FROM {$this->table}  
+    //     INNER JOIN categories 
+    //     ON categories.id = products.id_categorie 
+    //     WHERE categories.name_categorie = '$page_categorie' 
+    //     DESC 
+    //     LIMIT $debut_cat");
+    //      return $query->fetchAll();
+    // }
     
     
 }
