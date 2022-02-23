@@ -20,7 +20,6 @@ class BagsController extends Controller
     public static function showBag()
     {
 
-        // inner join
         $model = new BagsModel();
         $bagProducts = $model->checkBag(1);
         // var_dump($bagProducts);
@@ -36,7 +35,7 @@ class BagsController extends Controller
     public static function deleteFromBag()
     {
         $model = new BagsModel();
-        // $model->deleteBy(['id_user'=> 1, 'id_product' => 7]);
+        @$model->deleteBy(['id_user'=> 1, 'id_product' => $_SESSION['bag']['id_product']]);
 
     }
 
