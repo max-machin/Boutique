@@ -25,7 +25,6 @@ class Model extends Database
 
         //On vérifie si on a des attributs 
         if ($attributs !== null){
-            var_dump($attributs);
             //requête préparée
             $query = $this->database->prepare($sql);
             $query->execute($attributs);

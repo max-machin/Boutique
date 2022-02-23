@@ -1,4 +1,5 @@
 <?php
+
 function valid_data($données)
 {
     //trim permet de supprimer les espaces inutiles
@@ -10,11 +11,8 @@ function valid_data($données)
     return $données;
 }
 
-
 class UsersController extends Controller
 {  
-
-    
     /**
      * Fonction register Enregistre un user en base de données aprés vérification et sécurisation des données entrée en formulaire
      *
@@ -30,8 +28,8 @@ class UsersController extends Controller
         $error_validPassword = "";
 
         // Si le formulaire est envoyé
-        if ( isset ($_POST['submit'])){
-            
+        if ( isset ($_POST['submit']))
+        {    
             if ( !empty($_POST['email']))
             {
                 if ( !empty ($_POST['surname']))
@@ -59,7 +57,7 @@ class UsersController extends Controller
 
                                     // Si l'E-mail n'existe pas
                                     if ( empty ($valid_email) ){
-
+                                        $password_hash = password_hash($password, PASSWORD_DEFAULT);
                                         // On crée un nouveau UserModel
                                         $model = new UsersModel();
 
@@ -68,12 +66,12 @@ class UsersController extends Controller
                                         ->SetNom($name)
                                         ->SetPrenom($surname)
                                         ->SetEmail($email)
-                                        ->SetPassword($password);
+                                        ->SetPassword($password_hash);
                                         
                                         // On inscrit l'utilisateur en base de données
                                         $user->create($model);
                                         // On le redirige vers la connection
-                                        header ('location: users/login');
+                                        header ('location: login');
 
                                     } else {
                                         $error_email = "E-mail déjà utilisé";
@@ -81,7 +79,6 @@ class UsersController extends Controller
                                 } else {
                                     $error_validPassword = "Insérer deux mot de passe identiques";
                                 }
-                            
                             } else {
                                 $error_validPassword = "Veuillez valider votre mot de passe";
                             }
@@ -108,10 +105,43 @@ class UsersController extends Controller
      *
      * @return résultat_requete
      */
-    public static function selectAllUsers(){
-        $model = new UsersModel();
-        $users = $model->findAll();
-        var_dump($users);
+    public static function login(){
+
+        $error_email = "";
+        $error_password = "";
+        $error = "";
+
+        if ( isset ( $_POST['submit']))
+        {
+            if ( !empty ($_POST['email']))
+            {
+                if ( !empty ( $_POST['password']))
+                {
+                    $password = valid_data($_POST['password']);
+                    $email = valid_data($_POST['email']);
+
+                    $user = new UsersModel();
+                    $data_user = $user->findBy(['email' => $email]);
+
+                    if ( !empty ( $data_user ))
+                    {
+                        if ( password_verify($password, $data_user[0]->password))
+                        {
+                            echo "connecté";
+                        } else {
+                            $error = "Login/Mot de passe incorrect";
+                        }
+                    } else {
+                        $error = "Login/Mot de passe incorrect";
+                    }
+                } else {
+                    $error_password = "Veuillez insérer un password";
+                }
+            } else {
+                $error_email = "Veuillez insérer un E-mail";
+            }
+        }
+        Renderer::render('users/login' , compact('error_email' , 'error_password' , 'error'));
     }
 
     public static function selectUser(){

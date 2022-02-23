@@ -21,12 +21,16 @@ class Router
             
             if (!empty($url[1])){
                 if ( $controllerName == "UsersController"){
-                    $controllerName::register();
+                    if ( $url[1] == "register"){
+                        $controllerName::register();
+                    }
+                    elseif ( $url[1] == "login"){
+                        $controllerName::login();
+                    }
+                   
                 }
             }
-            elseif ($controllerName == "UsersController") {
-                
-                $controllerName::selectAllUsers();
+            elseif ($controllerName == "UsersController") { 
                 $controllerName::selectUser();
                 $controllerName::updateUser();
                 $controllerName::deleteUser();
