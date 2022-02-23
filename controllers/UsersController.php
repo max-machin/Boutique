@@ -29,8 +29,9 @@ class UsersController extends Controller
         $error_adresse = "";
         $error_validPassword = "";
 
-        
+        // Si le formulaire est envoyé
         if ( isset ($_POST['submit'])){
+            
             if ( !empty($_POST['email']))
             {
                 if ( !empty ($_POST['surname']))
@@ -41,35 +42,42 @@ class UsersController extends Controller
                         {
                             if ( !empty ($_POST['validPassword'])){
 
+                                // Sécurisation des password et récupération dans des variables
                                 $password = valid_data($_POST['password']);
                                 $validPassword = valid_data($_POST['validPassword']);
 
+                                // Vérification des passwords
                                 if ( $password === $validPassword){
+
+                                    // Sécurisation des données du formulaire
                                     $email = valid_data($_POST['email']);
                                     $surname = valid_data($_POST['surname']);
                                     $name = valid_data($_POST['name']);
-
+                                    // Vérification de l'unicité des Emails en base de données
                                     $model = new UsersModel();
                                     $valid_email = $model->findBy(['email' => $email]);
 
+                                    // Si l'E-mail n'existe pas
                                     if ( empty ($valid_email) ){
 
+                                        // On crée un nouveau UserModel
                                         $model = new UsersModel();
 
+                                        // On récupère les informations entrées en formulaire
                                         $user = $model
                                         ->SetNom($name)
                                         ->SetPrenom($surname)
                                         ->SetEmail($email)
                                         ->SetPassword($password);
-                                        var_dump($user);
+                                        
+                                        // On inscrit l'utilisateur en base de données
                                         $user->create($model);
-
+                                        // On le redirige vers la connection
                                         header ('location: users/login');
 
                                     } else {
                                         $error_email = "E-mail déjà utilisé";
                                     }
-
                                 } else {
                                     $error_validPassword = "Insérer deux mot de passe identiques";
                                 }
@@ -96,7 +104,7 @@ class UsersController extends Controller
     }
 
     /**
-     * Fonction selectAll (fonction permettant de selectionner la totalité de données de la table du Model)
+     * Fonction Login fonction de connexion de l'utilisateur, création d'une session
      *
      * @return résultat_requete
      */
