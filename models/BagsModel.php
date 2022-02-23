@@ -95,4 +95,16 @@ class bagsModel extends Model
 
         return $this;
     }
+
+    public function checkBag($id_user){
+
+        $this->database = DataBase::getPdo();
+
+        $bag=$this->database -> prepare('SELECT products.name, products.price FROM `products` INNER JOIN bags ON products.id=id_product WHERE id_user=:id_user');
+        $bag-> execute(['id_user'=>$id_user]);
+        $resultBag=$bag->fetchAll();
+
+        return($resultBag);
+        // var_dump($result);
+    }
 }

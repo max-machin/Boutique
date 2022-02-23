@@ -47,9 +47,8 @@ class Router
 
 
             if ($controllerName == "BagsController") {
-                $controllerName::insertBag();
-                $controllerName::deleteFromBag();
-                
+                $controllerName::showBag(); 
+                $controllerName::deleteFromBag();  
             }
                 
             if ($controllerName == "CommentsController")
