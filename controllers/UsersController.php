@@ -69,9 +69,6 @@ class UsersController extends Controller
                                     } else {
                                         $error_email = "E-mail déjà utilisé";
                                     }
-                                    
-
-                                    
 
                                 } else {
                                     $error_validPassword = "Insérer deux mot de passe identiques";
