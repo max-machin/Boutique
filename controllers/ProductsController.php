@@ -22,7 +22,7 @@ class ProductsController extends Controller
             ->setPrice('Max')
             ->setDescription('Max')
             ->setName('Max')
-            ->setId_product('Max');
+            ->setId('Max');
 
     }
 }

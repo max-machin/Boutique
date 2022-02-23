@@ -29,47 +29,72 @@ class UsersController extends Controller
         $error_adresse = "";
         $error_validPassword = "";
 
-        $model = new UsersModel();
-        if ( !empty($_POST['email']))
-        {
-            if ( !empty ($_POST['surname']))
+        
+        if ( isset ($_POST['submit'])){
+            if ( !empty($_POST['email']))
             {
-                if ( !empty ($_POST['name']))
+                if ( !empty ($_POST['surname']))
                 {
-                    if ( !empty ($_POST['password']))
+                    if ( !empty ($_POST['name']))
                     {
-                        if ( !empty ($_POST['validPassword'])){
-                            $password = valid_data($_POST['password']);
-                            $validPassword = valid_data($_POST['validPassword']);
-                            if ( $password === $validPassword){
-                                $email = valid_data($email);
-                                $
+                        if ( !empty ($_POST['password']))
+                        {
+                            if ( !empty ($_POST['validPassword'])){
+
+                                $password = valid_data($_POST['password']);
+                                $validPassword = valid_data($_POST['validPassword']);
+
+                                if ( $password === $validPassword){
+                                    $email = valid_data($_POST['email']);
+                                    $surname = valid_data($_POST['surname']);
+                                    $name = valid_data($_POST['name']);
+
+                                    $model = new UsersModel();
+                                    $valid_email = $model->findBy(['email' => $email]);
+
+                                    if ( empty ($valid_email) ){
+
+                                        $model = new UsersModel();
+
+                                        $user = $model
+                                        ->SetNom($name)
+                                        ->SetPrenom($surname)
+                                        ->SetEmail($email)
+                                        ->SetPassword($password);
+                                        var_dump($user);
+                                        $user->create($model);
+
+                                        header ('location: users/login');
+
+                                    } else {
+                                        $error_email = "E-mail déjà utilisé";
+                                    }
+                                    
+
+                                    
+
+                                } else {
+                                    $error_validPassword = "Insérer deux mot de passe identiques";
+                                }
+                            
                             } else {
-                                $error_validPassword = "Insérer deux mot de passe identiques";
+                                $error_validPassword = "Veuillez valider votre mot de passe";
                             }
-                        
                         } else {
-                            $error_validPassword = "Veuillez valider votre mot de passe";
+                            $error_password = "Veuillez insérer un mot de passe";
                         }
                     } else {
-                        $error_password = "Veuillez insérer un mot de passe";
+                        $error_name = "Veuillez insérer un nom";
                     }
                 } else {
-                    $error_name = "Veuillez insérer un nom";
+                    $error_surname = "Veuillez insérer un prénom";
                 }
             } else {
-                $error_surname = "Veuillez insérer un prénom";
+                $error_email = "Veuillez insérer un E-mail";
             }
-        } else {
-            $error_email = "Veuillez insérer un E-mail";
         }
-        $user = $model
-            ->SetNom('Max')
-            ->SetPrenom('Max')
-            ->SetEmail('Max')
-            ->SetPassword('Max');
-        var_dump($user);
-        Renderer::render('users/register' , compact('user' , 'error_email' , 'error_surname' , 'error_name' , 'error_password' , 'error_validPassword'));
+    
+    Renderer::render('users/register' , compact( 'error_email' , 'error_surname' , 'error_name' , 'error_password' , 'error_validPassword'));
         // var_dump($user->create($model));
     }
 
@@ -109,7 +134,5 @@ class UsersController extends Controller
         $model = new UsersModel();
         var_dump($delete = $model->delete(8));
         
-    }
-
-    
+    } 
 }

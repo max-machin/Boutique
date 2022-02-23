@@ -120,7 +120,7 @@ class ProductsModel extends Model
     /**
      * Get the value of id_products
      */ 
-    public function getId_product()
+    public function getId()
     {
         return $this->id_products;
     }
@@ -130,7 +130,7 @@ class ProductsModel extends Model
      *
      * @return  self
      */ 
-    public function setId_product($id_products)
+    public function setId($id_products)
     {
         $this->id_products = $id_products;
 
