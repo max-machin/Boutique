@@ -1,6 +1,6 @@
 <?php
 // use Controllers\UsersController;
-
+session_start();
 
 require_once('Autoloader.php');
 Autoloader::Autoload();

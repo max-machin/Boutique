@@ -127,7 +127,11 @@ class UsersController extends Controller
                     {
                         if ( password_verify($password, $data_user[0]->password))
                         {
-                            echo "connecté";
+                            $_SESSION['user_data'] = 
+                            [
+                                "id" => $data_user[0]->id,
+                                "email" => $data_user[0]->id;
+                            ]
                         } else {
                             $error = "Login/Mot de passe incorrect";
                         }

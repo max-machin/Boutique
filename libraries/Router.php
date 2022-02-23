@@ -27,7 +27,6 @@ class Router
                     elseif ( $url[1] == "login"){
                         $controllerName::login();
                     }
-                   
                 }
             }
             elseif ($controllerName == "UsersController") { 
