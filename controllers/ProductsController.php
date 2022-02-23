@@ -31,6 +31,39 @@ class ProductsController extends Controller
         var_dump($product = $model->delete((3)));
         
     }
+    
+    public static function pagination()
+    {
+        $model = new ProductsModel();
+        $count_products= $model->productsByCategories();
+        $page = "";
+        if(isset($_GET['page']))
+        {
+            $page = $_GET["page"];
+        }
+        
+        if (empty($page)) {
+            $page = 1;
+        }
+        $nbr_product_par_page = 5;
+        $nbr_page = ceil($count_products[0]["liste"] / $nbr_product_par_page);
+        $debut = ($page - 1) * $nbr_product_par_page;
+        
+        $products = $model->productsByPage($nbr_product_par_page, $debut);
 
+       
+       
+        if (count($products) == 0) {
+            header("location: products.php");
+        }
+
+        if(isset($_GET['categorie']))
+        {
+            $page_categorie = $_GET['categorie'];
+        }
+
+        Renderer::render('products/AllProducts' , compact('products'));
+    }
+    
 
 }

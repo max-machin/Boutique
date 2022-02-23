@@ -136,5 +136,39 @@ class ProductsModel extends Model
         return $this;
     }
 
+    // public function countProducts()
+    // {
+    //     $query = $this->requete("SELECT COUNT(*) AS list FROM {$this->table}");
+    //     return $query->fetchAll();
+    // }
+
+    public function productsByPage($nbr_products_by_page,$debut)
+    {
+        $query = $this->requete("SELECT * FROM {$this->table} DESC LIMIT $debut , $nbr_products_by_page");
+        return $query->fetchAll();
+    }
+
+    public function productsByCategories() 
+    {
+        $query = $this->requete("SELECT COUNT(products.id_categorie) 
+        AS liste_cat 
+        FROM {$this->table} 
+        INNER JOIN `categories` 
+        ON categories.id = products.id_categorie WHERE categories.name = '$page_categorie'");
+        return $query->fetchAll();
+    }
+
+    public function productsBySousCategories()
+    {
+        $query = $this->requete("SELECT products.*, categories.name 
+        FROM {$this->table}  
+        INNER JOIN categories 
+        ON categories.id = products.id_categorie 
+        WHERE categories.name = '$page_categorie' 
+        DESC 
+        LIMIT $debut_cat");
+         return $query->fetchAll();
+    }
+    
     
 }
