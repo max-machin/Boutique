@@ -175,14 +175,7 @@ class UsersController extends Controller
     {
         $model = new UsersModel();
         
-        $user = $model
-            // ->setId(2)
-            // ->SetNom('Max')
-            // ->setPrenom('Max')
-            ->setAdresse('Marseille')
-            ->setEmail('Max')
-            ->setPassword('Max');
-        var_dump($user);
+        $user = $model->find($_SESSION['user_data']['id']);
         // var_dump($user->update($model));
 
         Renderer::render('users/profil' , compact('user'));
