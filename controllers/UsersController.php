@@ -58,15 +58,19 @@ class UsersController extends Controller
                                     // Si l'E-mail n'existe pas
                                     if ( empty ($valid_email) ){
                                         $password_hash = password_hash($password, PASSWORD_DEFAULT);
+
+                                        $adresse = valid_data($_POST['adresse']);
+
                                         // On crée un nouveau UserModel
                                         $model = new UsersModel();
 
                                         // On récupère les informations entrées en formulaire
                                         $user = $model
-                                        ->SetNom($name)
-                                        ->SetPrenom($surname)
-                                        ->SetEmail($email)
-                                        ->SetPassword($password_hash);
+                                        ->setNom($name)
+                                        ->setPrenom($surname)
+                                        ->setEmail($email)
+                                        ->setPassword($password_hash)
+                                        ->setAdresse($adresse);
                                         
                                         // On inscrit l'utilisateur en base de données
                                         $user->create($model);
@@ -125,13 +129,19 @@ class UsersController extends Controller
 
                     if ( !empty ( $data_user ))
                     {
-                        if ( password_verify($password, $data_user[0]->password))
+                        if ( password_verify($password, $data_user[0]->password) )
                         {
                             $_SESSION['user_data'] = 
                             [
-                                "id" => $data_user[0]->id,
-                                "email" => $data_user[0]->id;
-                            ]
+                                'id' => $data_user[0]->id,
+                                'email' => $data_user[0]->email,
+                                'nom' => $data_user[0]->nom,
+                                'prenom' => $data_user[0]->prenom,
+                                'adresse' => $data_user[0]->adresse
+                            ];
+                            var_dump($_SESSION['user_data']);
+                            // header ('location: ../index');
+
                         } else {
                             $error = "Login/Mot de passe incorrect";
                         }
@@ -148,27 +158,34 @@ class UsersController extends Controller
         Renderer::render('users/login' , compact('error_email' , 'error_password' , 'error'));
     }
 
+    public static function disconnect()
+    {
+        session_destroy();
+        header('location: ../index');
+    }
+
     public static function selectUser(){
         $model = new UsersModel();
         $userData = $model->find(2);
         var_dump($userData);
     }
 
-    
 
-    public static function updateUser()
+    public static function updateProfil()
     {
         $model = new UsersModel();
         
         $user = $model
-            ->setId(2)
-            ->SetNom('Max')
-            ->setPrenom('Max')
+            // ->setId(2)
+            // ->SetNom('Max')
+            // ->setPrenom('Max')
             ->setAdresse('Marseille')
             ->setEmail('Max')
             ->setPassword('Max');
         var_dump($user);
-        var_dump($user->update($model));
+        // var_dump($user->update($model));
+
+        Renderer::render('users/profil' , compact('user'));
     }
 
     public static function deleteUser(){

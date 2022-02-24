@@ -26,6 +26,13 @@ class Router
                     }
                     elseif ( $url[1] == "login"){
                         $controllerName::login();
+                    } 
+                    elseif ( $url[1] == "disconnect"){
+                        $controllerName::disconnect();
+                    }
+                    elseif ( $url[1] == "profil")
+                    {
+                        $controllerName::UpdateProfil();
                     }
                 }
             }
