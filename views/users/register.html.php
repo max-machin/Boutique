@@ -21,7 +21,7 @@
     <span><?= $error_validPassword ?></span></br>
 
     <label for="adresse">Adresse</label></br>
-    <input id="adresse" type="text" name="Adresse" placeholder="Adresse"></br>
+    <input id="adresse" type="text" name="adresse" placeholder="Adresse"></br>
 
     <input type="submit" name="submit">
 </form>
