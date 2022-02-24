@@ -3,34 +3,27 @@ require_once('libraries/Renderer.php');
 
 class BagsController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $model = new BagsModel();
-         
-    // }
-
-
 
     public static function insertBag()
     {
-        if (isset($_POST['addBag']))
-        {
 
         $model = new BagsModel();
         $productAdded = $model
-        ->setId_user($_SESSION)
-        ->setId_product($product->id)
+        ->setId_user($_SESSION['user']['id'])
+        ->setId_product($_SESSION['product']['id'])
         ->setQuantity_product($product->quantity_product);
 
         // $productAdded->create($model);  
-        }
-
+        
     }
 
     public static function showBag()
     {
+
         $model = new BagsModel();
-        $model->find($_SESSION);
+        $bagProducts = $model->checkBag(1);
+        // var_dump($bagProducts);
+        Renderer::render('bag/userBag', compact('bagProducts'));
     }
 
     public static function deleteBag()
@@ -42,12 +35,16 @@ class BagsController extends Controller
     public static function deleteFromBag()
     {
         $model = new BagsModel();
-        // $model->deleteBy(['id_user'=> 1, 'id_product' => 7]);
+        @$model->deleteBy(['id_user'=> 1, 'id_product' => $_SESSION['bag']['id_product']]);
 
     }
 
-    //delete product from panier
-    //moduler la quantité également de product from panier
+    public static function quantityBag()
+    {
+        $quantity = new BagsModel();
+        @$quantity -> updateQuantity(1, $_SESSION['bag']['id_product'], $_SESSION['bag']['quantity']);
+        var_dump($quantity);
+    }
 
 }
 
