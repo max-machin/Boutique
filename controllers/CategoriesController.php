@@ -3,20 +3,19 @@
 require_once('libraries/Renderer.php');
 
 
-class CategoriesController extends Controller
-{  
-    public function __construct()
-    {
-        $this->table = "categories";
-    }
+// class CategoriesController extends Controller
+// {  
+//     public function __construct()
+//     {
+//         $this->table = "categories";
+//     }
 
-    public static function getCategories()
-    {
-        $catModel = new CategoriesModel();
-        $categories = $catModel->findAll();
-        // echo 'caterrrr';
+//     public static function getCategories()
+//     {
+//         $catModel = new CategoriesModel();
+//         $categories = $catModel->findAll();
 
-        Renderer::render('products/allProducts' , compact('categories'));
-    }
+//         Renderer::render('products/allProducts' , compact('categories'));
+//     }
     
-}
+// }

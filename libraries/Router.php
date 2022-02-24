@@ -37,13 +37,14 @@ class Router
                 if($controllerName == "ProductsController")
                 {
                 $controllerName::seeProduct($url[1]);
+                
                 }
             }       
-            elseif($controllerName == "ProductsController" && $controllerName == "CategoriesController")
+            elseif($controllerName == "ProductsController" )
                 {
                     $controllerName::selectAllProducts();
-                    $controllerName::pagination();
-                    $controllerName::getCategories();
+                    // $controllerName::pagination();
+                    // $controllerName::getCategories();
 
                 }
 
