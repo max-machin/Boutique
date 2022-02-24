@@ -96,7 +96,8 @@ class bagsModel extends Model
         return $this;
     }
 
-    public function checkBag($id_user){
+    public function checkBag($id_user)
+    {
 
         $this->database = DataBase::getPdo();
 
@@ -106,5 +107,15 @@ class bagsModel extends Model
 
         return($resultBag);
         // var_dump($result);
+    }
+
+    public function updateQuantity($id_user, $id_product, $quantity_product)
+    {
+        $this->database = DataBase::getPdo();
+
+        $bag=$this->database -> prepare('UPDATE `bags` SET `quantity_product`=:quantity_product WHERE `id_user`=:id_user AND `id_product`=:id_product');
+        $bag-> execute(['id_user'=>$id_user, 'id_product'=>$id_product, 'quantity_product'=>$quantity_product]);
+
+        var_dump($bag);
     }
 }

@@ -45,11 +45,18 @@ class Router
                 }
             
 
-
+            if($url[1] == 'delete'){
             if ($controllerName == "BagsController") {
-                $controllerName::showBag(); 
-                $controllerName::deleteFromBag();  
+                $controllerName::showBag();
+                $controllerName::deleteFromBag();
+                }
+            }elseif ($controllerName == "BagsController"){
+                $controllerName::showBag();
+                $controllerName::quantityBag(); 
             }
+
+                  
+
                 
             if ($controllerName == "CommentsController")
             {

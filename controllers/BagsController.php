@@ -39,8 +39,12 @@ class BagsController extends Controller
 
     }
 
-
-    //moduler la quantité également de product from panier
+    public static function quantityBag()
+    {
+        $quantity = new BagsModel();
+        @$quantity -> updateQuantity(1, $_SESSION['bag']['id_product'], $_SESSION['bag']['quantity']);
+        var_dump($quantity);
+    }
 
 }
 
