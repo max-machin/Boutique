@@ -7,13 +7,14 @@ class Router
         if(!empty($_GET['p'])){
         // le filter va filtrer ce qu'on a dans le get afin donc de sécuriser, le nom du filtre suit
             $url = explode('/', filter_var($_GET['p'], FILTER_SANITIZE_URL));
-            var_dump($_GET['p']);
+            // var_dump($_GET['p']);
             
             //ucfirst = première lettre en maj
             $controller = ucfirst($url[0]);
             // echo $controller;
             $controllerName = $controller."Controller";
-            var_dump($controllerName);
+            // var_dump($controllerName);
+
             // $controllerFile = "controllers/".$controllerName.".php";
 
             //le router va définir quelle page il va inclure selon l'action de l'utilisateur càd, si l'utilisateur va chercher accueil -> à travers toutes les transformations d'en-haut, le controller choisi sera ControllerAccueil.php
@@ -36,16 +37,26 @@ class Router
 
 
         
-            if(!empty($url[1])){
+            if(!empty($url[1]) && empty($url[2])){
                 if($controllerName == "ProductsController"){
                 $controllerName::seeProduct($url[1]);
+                }            
+                
+            }elseif(!empty($url[1]) && !empty($url[2])){
+                if($controllerName == "ProductsController"){
+                    if($url[2] == 'update'){
+                        $controllerName::seeUpdateProduct($url[1]);
+                        }
+                    }
                 }
-            }elseif($controllerName == "ProductsController"){
+            elseif($controllerName == "ProductsController"){
                  $controllerName::selectAllProducts();
                 }
+
+            
             
 
-            if($url[1] == 'delete'){
+            if(@$url[1] == 'delete'){
             if ($controllerName == "BagsController") {
                 $controllerName::showBag();
                 $controllerName::deleteFromBag();
@@ -55,13 +66,17 @@ class Router
                 $controllerName::quantityBag(); 
             }
 
-                  
 
                 
             if ($controllerName == "CommentsController")
             {
                 $controllerName::insert();
-            }   
+            } 
+            
+
+            if ($controllerName == "AdminController"){
+                $controllerName::updateProduct();
+            }
 
         }      
 

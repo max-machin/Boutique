@@ -15,6 +15,13 @@ class ProductsController extends Controller
         Renderer::render('products/seeProduct' , compact('product'));
     }
 
+    public static function seeUpdateProduct($id){
+        // var_dump($id);
+        $model = new ProductsModel();
+        $product = $model->find($id);
+        Renderer::render('products/updateProduct' , compact('product'));
+    }
+
     public static function createProduct(){
         $model = new ProductsModel();
         $product = $model
