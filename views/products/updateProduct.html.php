@@ -1,6 +1,11 @@
 <?php
 require_once('libraries/Renderer.php');
 
+if(@$_SERVER['user_data']['id'] !== 1)
+{
+    header('Location : http://localhost:8080/Boutique/products');
+}
+
 if(isset($_POST['saveUpdate'])){
     $_SESSION['product']['id']=$product->id;
     $_SESSION['product']['name']=$_POST['name'];
