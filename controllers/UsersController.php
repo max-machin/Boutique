@@ -13,13 +13,16 @@ function valid_data($données)
 
 class UsersController extends Controller
 {  
+
     /**
+     * 
      * Fonction register Enregistre un user en base de données aprés vérification et sécurisation des données entrée en formulaire
      *
      * @return void
      */
     public static function register(){
 
+        // Création des valeurs pas défault des variables utilisées
         $error_email = "";
         $error_name = "";
         $error_surname = "";
@@ -27,45 +30,53 @@ class UsersController extends Controller
         $error_password = "";
         $error_validPassword = "";
 
-        // Si le formulaire est envoyé
+        // Validation du formulaire
         if ( isset ($_POST['submit']))
         {    
+            // Vérification des champs
             if ( !empty($_POST['email']))
             {
+                // Vérification des champs
                 if ( !empty ($_POST['surname']))
                 {
+                    // Vérification des champs
                     if ( !empty ($_POST['name']))
                     {
+                        // Vérification des champs
                         if ( !empty ($_POST['password']))
                         {
+                            // Vérification des champs
                             if ( !empty ($_POST['validPassword'])){
 
-                                // Sécurisation des password et récupération dans des variables
+                                //! Sécurisation des données
                                 $password = valid_data($_POST['password']);
                                 $validPassword = valid_data($_POST['validPassword']);
 
-                                // Vérification des passwords
+                                // Vérification de la correspondance des mot de passe
                                 if ( $password === $validPassword){
 
-                                    // Sécurisation des données du formulaire
+                                    //! Sécurisation des données du formulaire
                                     $email = valid_data($_POST['email']);
                                     $surname = valid_data($_POST['surname']);
                                     $name = valid_data($_POST['name']);
+
                                     // Vérification de l'unicité des Emails en base de données
                                     $model = new UsersModel();
                                     $valid_email = $model->findBy(['email' => $email]);
 
                                     // Si l'E-mail n'existe pas
                                     if ( empty ($valid_email) ){
+                                        // Hashage du mot de passe avant insertion en base de données
                                         $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
+                                        //! Sécurisation des données
                                         $adresse = valid_data($_POST['adresse']);
 
                                         // On crée un nouveau UserModel
                                         $model = new UsersModel();
 
                                         // On récupère les informations entrées en formulaire
-                                        $user = $model
+                                        $user_data = $model
                                         ->setNom($name)
                                         ->setPrenom($surname)
                                         ->setEmail($email)
@@ -73,7 +84,7 @@ class UsersController extends Controller
                                         ->setAdresse($adresse);
                                         
                                         // On inscrit l'utilisateur en base de données
-                                        $user->create($model);
+                                        $user_data->create($model);
                                         // On le redirige vers la connection
                                         header ('location: login');
 
@@ -110,27 +121,35 @@ class UsersController extends Controller
      * @return résultat_requete
      */
     public static function login(){
-
+        // Création des valeurs pas défault des variables utilisées
         $error_email = "";
         $error_password = "";
         $error = "";
 
+        // Validation du formulaire
         if ( isset ( $_POST['submit']))
         {
+            // Vérification des champs
             if ( !empty ($_POST['email']))
             {
+                // Vérification des champs
                 if ( !empty ( $_POST['password']))
                 {
+                    //! Sécurisation des données
                     $password = valid_data($_POST['password']);
                     $email = valid_data($_POST['email']);
 
-                    $user = new UsersModel();
-                    $data_user = $user->findBy(['email' => $email]);
+                    // Création du model et vérification de l'existance de l'Email inscrit en POST
+                    $login = new UsersModel();
+                    $data_user = $login->findBy(['email' => $email]);
 
+                    // Si des données sont récupérées
                     if ( !empty ( $data_user ))
-                    {
+                    { 
+                        // Si le mot de passe entré en POST correspond au password connu en base de données déhasher
                         if ( password_verify($password, $data_user[0]->password) )
                         {
+                            // On conserve les infos user en $_SESSION
                             $_SESSION['user_data'] = 
                             [
                                 'id' => $data_user[0]->id,
@@ -139,7 +158,6 @@ class UsersController extends Controller
                                 'prenom' => $data_user[0]->prenom,
                                 'adresse' => $data_user[0]->adresse
                             ];
-                            var_dump($_SESSION['user_data']);
                             // header ('location: ../index');
 
                         } else {
@@ -158,15 +176,15 @@ class UsersController extends Controller
         Renderer::render('users/login' , compact('error_email' , 'error_password' , 'error'));
     }
 
+    /**
+     * Fonction disconnect Destroy la $_SESSION de l'utilisateur et et le redirige vers l'index
+     *
+     * @return void
+     */
     public static function disconnect()
     {
         session_destroy();
         header('location: ../index');
-    }
-
-    public static function selectUser(){
-        $model = new UsersModel();
-        $userData = $model->find(2);
     }
 
     /**
@@ -197,7 +215,7 @@ class UsersController extends Controller
             // Si le champ E-mail est bien rempli
             if ( !empty ( $_POST['email']))
             {
-                // On sécurise les données 
+                //! On sécurise les données 
                 $email = valid_data($_POST['email']);
 
                 // On set les valeurs dans le model user précedemment crée
@@ -213,6 +231,7 @@ class UsersController extends Controller
             // Même fonctionnement que pour l'E-mail
             if ( !empty ( $_POST['surname']))
             {
+                //! Sécurisation des données
                 $prenom = valid_data($_POST['surname']);
 
                 $users = $model
@@ -227,6 +246,7 @@ class UsersController extends Controller
             // Même fonctionnement que pour l'E-mail
             if ( !empty ( $_POST['name']))
             {
+                //! Sécurisation des données
                 $nom = valid_data($_POST['name']);
 
                 $users = $model
@@ -243,7 +263,7 @@ class UsersController extends Controller
             // Vérification des champs
             if ( !empty ( $_POST['oldPassword']))
             {
-                // Sécurisaion des données
+                //! Sécurisaion des données
                 $password = valid_data($_POST['oldPassword']);
 
                 // On récupère les informations de l'utilisateur concerné
@@ -271,7 +291,7 @@ class UsersController extends Controller
                 // Vérification des données
                 if ( !empty ( $_POST['validPassword']))
                 {
-                    // 
+                    //! Sécurisation des données
                     $newPassword = valid_data($_POST['newPassword']);
                     $validPassword = valid_data($_POST['validPassword']);
 
@@ -304,6 +324,11 @@ class UsersController extends Controller
        
 
         Renderer::render('users/profil' , compact('user', 'error_new_password', 'error_validPassword', 'error_old_password', 'display1' , 'display2'));
+    }
+
+    public static function selectUser(){
+        $model = new UsersModel();
+        $userData = $model->find(2);
     }
 
     public static function deleteUser(){

@@ -1,6 +1,9 @@
 <?php
 
-
+/**
+ * Class User permettant la récuperation et la modification des propriétés de la classe de
+ * définit également la table SQL concernée dans le "modèle mére"
+ */
 class UsersModel extends Model
 {
    protected $id;
@@ -10,7 +13,9 @@ class UsersModel extends Model
    protected $password;
    protected $adresse;
 
-
+   /**
+    * Définit la table SQL concernée dans le modèle mère"
+    */
    public function __construct()
    {
       $this->table = 'users';
