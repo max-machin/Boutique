@@ -136,49 +136,60 @@ class ProductsModel extends Model
         return $this;
     }
 
-    // public function countProducts()
-    // {
-    //     $query = $this->requete("SELECT COUNT(*) AS liste FROM {$this->table}");
-    //     return $query->fetchAll();
-    // }
 
-    // public function productsByPage($nbr_products_by_page,$debut)
-    // {
-    //     $query = $this->requete("SELECT * FROM {$this->table} LIMIT $debut , $nbr_products_by_page");
-    //     return $query->fetchAll();
-    // }
 
-    // public function productsByCategories($page_categorie) 
-    // {
-    //     $query = $this->requete("SELECT COUNT(products.id_sous_categorie) 
-    //     AS liste_cat
-    //     FROM {$this->table} 
-    //     INNER JOIN `sous_categories` 
-    //     ON sous_categories.id = products.id_sous_categorie WHERE sous_categories.name = '$page_categorie'");
-    //     return $query->fetchAll();
-    // }
+    public function countProducts()
+    {
+        $query = $this->requete("SELECT COUNT(*) AS liste FROM {$this->table}");
+        return $query->fetchAll();
+    }
 
+    public function productsByPage($nbr_products_by_page,$debut)
+    {
+        $query = $this->requete("SELECT * FROM {$this->table} LIMIT $debut , $nbr_products_by_page");
+        return $query->fetchAll();
+    }
+
+    public function productsByCategories($page_categorie) 
+    {
+        $query = $this->requete("SELECT COUNT(products.id_sous_categorie) 
+        AS liste_cat
+        FROM {$this->table} 
+        INNER JOIN `sous_categories` 
+        ON sous_categories.id = products.id_sous_categorie WHERE sous_categories.name = '$page_categorie'");
+        return $query->fetchAll();
+    }
+    public function productsByCategorie($page_categorie) 
+    {
+        $query = $this->requete("SELECT products.id_categorie) 
+        -- AS liste_categorie
+        FROM {$this->table} 
+        INNER JOIN `categories` 
+        ON categories.id = products.id_categorie WHERE categories.name = '$page_categorie'");
+        return $query->fetchAll();
+    }
+    
     // //? a checker quand sous categories reconnues
 
-    // public function productsBySousCategories($page_categorie,$debut_cat )
-    // {
-    //     $query = $this->requete("SELECT products.*, sous_categories.name
-    //     FROM {$this->table}  
-    //     INNER JOIN sous_categories 
-    //     ON sous_categories.id = products.id_sous_categorie 
-    //     WHERE categories.name_categorie = '$page_categorie' 
-    //     DESC 
-    //     LIMIT $debut_cat");
-    //      return $query->fetchAll();
-    // }
+    public function productsBySousCategories($page_categorie,$debut_cat )
+    {
+        $query = $this->requete("SELECT products.*, sous_categories.name
+        FROM {$this->table}  
+        INNER JOIN sous_categories 
+        ON sous_categories.id = products.id_sous_categorie 
+        WHERE categories.name_categorie = '$page_categorie' 
+        DESC 
+        LIMIT $debut_cat");
+         return $query->fetchAll();
+    }
     
-    // public function findAllCategories()
-    // {
-    //     $query = $this->requete("SELECT * FROM `sous_categories`");
-    //     // var_dump($query->fetchAll());
-    //     // return ("test");
-    //    return $query->fetchAll();
-    // }
+    public function findAllCategories()
+    {
+        $query = $this->requete("SELECT * FROM `categories`");
+        // var_dump($query->fetchAll());
+        // return ("test");
+       return $query->fetchAll();
+    }
 
     
 }

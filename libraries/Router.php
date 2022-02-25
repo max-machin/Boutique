@@ -18,8 +18,10 @@ class Router
             //le router va définir quelle page il va inclure selon l'action de l'utilisateur càd, si l'utilisateur va chercher accueil -> à travers toutes les transformations d'en-haut, le controller choisi sera ControllerAccueil.php
             //si tu n'instancie pas ton objet, ton autoload ne trouvera pas dans quelle classe aller. En effet, l'autoload va dans application, c'est application qui va trouver selon l'url le controller (et donc l'autoload trouve ainsi sa classe puisqu'ils ont le même nom) ET la task qu'on lui demande grâce à l'url ici de dire hello
             
-
-
+            // echo 'test';
+            // var_dump($url[2]);
+            // echo 'test';
+    
             if ($controllerName == "UsersController") 
             {
                 $controllerName::register();
@@ -34,16 +36,23 @@ class Router
         
             if(!empty($url[1]))
             {
+                foreach($categories as $categorie){
+                    if($url[1] == 'skincare'){
+                    if($controllerName == "ProductsController"){
+                        $controllerName::pagination(); 
+                    }  
+                }
+                }
+                
                 if($controllerName == "ProductsController")
                 {
-                $controllerName::seeProduct($url[1]);
-                
+                // $controllerName::seeProduct($url[1]);
                 }
             }       
             elseif($controllerName == "ProductsController" )
                 {
-                    $controllerName::selectAllProducts();
-                    // $controllerName::pagination();
+                    // $controllerName::selectAllProducts();
+                    $controllerName::pagination();
                     // $controllerName::getCategories();
 
                 }
