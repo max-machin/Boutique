@@ -12,7 +12,7 @@ if(isset($_POST['saveUpdate'])){
     $_SESSION['product']['price']=$_POST['price'];
     $_SESSION['product']['description']=$_POST['description'];
 
-    AdminController::updateProduct();
+    ProductsController::updateProduct();
 }
 
 ?>
