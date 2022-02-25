@@ -14,10 +14,10 @@
     ?>
         <nav>
             <ul>
-                <li><a href="register">Inscription</a></li>
-                <li><a href="login">Connexion</a></li>
-                <li><a href="profil">Profil</a></li>
-                <li><a href="disconnect">Deconnexion</a></li>
+               
+                <li><a href="<?= url ?>users/login">Connexion</a></li>
+                <li><a href="<?= url ?>users/profil">Profil</a></li>
+                <li><a href="<?= url ?>users/disconnect">Deconnexion</a></li>
             </ul>
         </nav>
     <?php
@@ -25,8 +25,8 @@
     ?>
         <nav>
             <ul>
-                <li><a href="register">Inscription</a></li>
-                <li><a href="login">Connexion</a></li>
+                <li><a href="<?= url ?>users/register">Inscription</a></li>
+                <li><a href="<?= url ?>users/login">Connexion</a></li>
             </ul>
         </nav>
     <?php

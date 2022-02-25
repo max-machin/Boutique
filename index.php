@@ -2,11 +2,14 @@
 // use Controllers\UsersController;
 session_start();
 
+CONST url = 'http://localhost/Boutique/';
+CONST urlmac = 'http://localhost8888/Boutique/';
+
 require_once('Autoloader.php');
 Autoloader::Autoload();
 Router::process();
-?>
 
+?>
 
 <p>je suis dans l'index</p>
 

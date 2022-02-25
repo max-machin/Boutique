@@ -9,7 +9,7 @@ function valid_data($données)
     //htmlspecialchars permet d'échapper certains caractéres spéciaux et les transforment en entité HTML
     $données = htmlspecialchars($données);
     return $données;
-}
+} 
 
 class UsersController extends Controller
 {  
@@ -23,8 +23,8 @@ class UsersController extends Controller
         $error_email = "";
         $error_name = "";
         $error_surname = "";
-        $error_password = "";
         $error_adresse = "";
+        $error_password = "";
         $error_validPassword = "";
 
         // Si le formulaire est envoyé
@@ -167,18 +167,121 @@ class UsersController extends Controller
     public static function selectUser(){
         $model = new UsersModel();
         $userData = $model->find(2);
-        var_dump($userData);
     }
 
-
+    /**
+     * UpdateProfil 
+     *
+     * @return void
+     */
     public static function updateProfil()
     {
+        $error_old_password = "";
+        $error_new_password = "";
+        $error_validPassword = "";
+        $display1 = "";
+        $display2 = "none";
+
         $model = new UsersModel();
         
         $user = $model->find($_SESSION['user_data']['id']);
         // var_dump($user->update($model));
+        if ( isset ($_POST['submit']))
+        {
+            if ( !empty ( $_POST['email']))
+            {
+                $email = valid_data($_POST['email']);
 
-        Renderer::render('users/profil' , compact('user'));
+                $users = $model
+
+                    ->setId($_SESSION['user_data']['id'])
+                    ->setEmail($email);
+
+                $users->Update($model);
+                header('refresh: 0');
+            }
+
+            if ( !empty ( $_POST['surname']))
+            {
+                $prenom = valid_data($_POST['surname']);
+
+                $users = $model
+
+                    ->setId($_SESSION['user_data']['id'])
+                    ->setPrenom($prenom);
+
+                $users->Update($model);
+                header('refresh: 0');
+            }
+            
+            if ( !empty ( $_POST['name']))
+            {
+                $nom = valid_data($_POST['name']);
+
+                $users = $model
+
+                    ->setId($_SESSION['user_data']['id'])
+                    ->setNom($nom);
+
+                $users->Update($model);
+            }
+        }
+        elseif ( isset ( $_POST['subPassword']))
+        {
+            if ( !empty ( $_POST['oldPassword']))
+            {
+                $password = valid_data($_POST['oldPassword']);
+
+                $users = $model->find($_SESSION['user_data']['id']);
+
+                if ( password_verify( $password, $users->password ) )
+                {
+                    $display2 = "block";
+                    $display1 = "none";
+                } else {
+                    $error_old_password = "Ancien mot de passe incorrect";
+                }
+            } else {
+                $error_old_password = "Veuillez remplir le champ";
+            }
+        }
+        elseif ( isset ( $_POST['subNewPassword']))
+        {
+            if ( !empty ( $_POST['newPassword']))
+            {
+                if ( !empty ( $_POST['validPassword']))
+                {
+                    $newPassword = $_POST['newPassword'];
+                    $validPassword = $_POST['validPassword'];
+
+                    if ( $newPassword == $validPassword )
+                    {
+                        var_dump($_POST);
+                        $hash = password_hash( $newPassword, PASSWORD_DEFAULT );
+
+                        $users = $model
+                            ->setId($_SESSION['user_data']['id'])
+                            ->setPassword($hash);
+                        echo "Mot de passe modifié avec succés";
+                    } else {
+                        $error_validPassword = "Validation de mot de passe échouée";
+                        $display2 = "block";
+                        $display1 = "none";
+                    }
+                } else {
+                    $error_validPassword = "Veuillez valider votre mot de passe";
+                    $display2 = "block";
+                    $display1 = "none";
+                }
+            } else {
+                $error_new_password = "Veuillez remplir le champ";
+                $display2 = "block";
+                $display1 = "none";
+            }
+        }
+       
+
+        Renderer::render('users/profil' , compact('user', 'error_new_password', 'error_validPassword', 'error_old_password', 'display1' , 'display2'));
     }
 
     public static function deleteUser(){
