@@ -170,37 +170,47 @@ class UsersController extends Controller
     }
 
     /**
-     * UpdateProfil 
+     * UpdateProfil Fonction permettant à l'utilisateur de modifier ses informations personnelles
+     * Séparer en deux formulaires disctincts (infos & mot de passe)
+     * Demande de confirmation de l'ancien mot de passe pour modification de ce dernier.
      *
      * @return void
      */
     public static function updateProfil()
     {
+        // Création des valeurs pas défault des variables utilisées
         $error_old_password = "";
         $error_new_password = "";
         $error_validPassword = "";
         $display1 = "";
         $display2 = "none";
 
+        // Création du model user 
         $model = new UsersModel();
         
+        // Récupération des informations de l'utilisateur à l'aide de son id
         $user = $model->find($_SESSION['user_data']['id']);
-        // var_dump($user->update($model));
+
+        // Si le formulaire d'infos est envoyé
         if ( isset ($_POST['submit']))
         {
+            // Si le champ E-mail est bien rempli
             if ( !empty ( $_POST['email']))
             {
+                // On sécurise les données 
                 $email = valid_data($_POST['email']);
 
+                // On set les valeurs dans le model user précedemment crée
                 $users = $model
-
                     ->setId($_SESSION['user_data']['id'])
                     ->setEmail($email);
 
+                // Puis on update les infos et on rafraichit la page pour affichage des informations à jour
                 $users->Update($model);
                 header('refresh: 0');
             }
 
+            // Même fonctionnement que pour l'E-mail
             if ( !empty ( $_POST['surname']))
             {
                 $prenom = valid_data($_POST['surname']);
@@ -214,6 +224,7 @@ class UsersController extends Controller
                 header('refresh: 0');
             }
             
+            // Même fonctionnement que pour l'E-mail
             if ( !empty ( $_POST['name']))
             {
                 $nom = valid_data($_POST['name']);
@@ -226,14 +237,19 @@ class UsersController extends Controller
                 $users->Update($model);
             }
         }
+        // FORMULAIRE NOUVEAU MOT DE PASSE
         elseif ( isset ( $_POST['subPassword']))
         {
+            // Vérification des champs
             if ( !empty ( $_POST['oldPassword']))
             {
+                // Sécurisaion des données
                 $password = valid_data($_POST['oldPassword']);
 
+                // On récupère les informations de l'utilisateur concerné
                 $users = $model->find($_SESSION['user_data']['id']);
 
+                // Si le mot de passe entré en POST correspond à celui en base de données alors on donne accés au formulaire de modif
                 if ( password_verify( $password, $users->password ) )
                 {
                     $display2 = "block";
@@ -245,14 +261,19 @@ class UsersController extends Controller
                 $error_old_password = "Veuillez remplir le champ";
             }
         }
+
+        // FORMULAIRE MODIFICATION NOUVEAU MOT DE PASSE
         elseif ( isset ( $_POST['subNewPassword']))
         {
+            // Vérification des champs
             if ( !empty ( $_POST['newPassword']))
             {
+                // Vérification des données
                 if ( !empty ( $_POST['validPassword']))
                 {
-                    $newPassword = $_POST['newPassword'];
-                    $validPassword = $_POST['validPassword'];
+                    // 
+                    $newPassword = valid_data($_POST['newPassword']);
+                    $validPassword = valid_data($_POST['validPassword']);
 
                     if ( $newPassword == $validPassword )
                     {
@@ -262,6 +283,7 @@ class UsersController extends Controller
                         $users = $model
                             ->setId($_SESSION['user_data']['id'])
                             ->setPassword($hash);
+                        
                         echo "Mot de passe modifié avec succés";
                     } else {
                         $error_validPassword = "Validation de mot de passe échouée";

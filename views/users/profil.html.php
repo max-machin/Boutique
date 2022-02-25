@@ -1,7 +1,4 @@
 <h2>Vos informations personnelles</h2>
-<?php
-var_dump($user);
-?>
 <form action="" method="post">
     <label for="email">E-mail *</label></br>
     <input id="email" type="email" name="email" value="<?= $user->email ?>"></br>
