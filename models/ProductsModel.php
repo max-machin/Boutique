@@ -136,6 +136,10 @@ class ProductsModel extends Model
         return $this;
     }
 
+    public function getAllProducts()
+    {
+        $query = $this->requete("SELECT * FROM {$this->table}");
+    }
 
 
     public function countProducts()
@@ -150,22 +154,18 @@ class ProductsModel extends Model
         return $query->fetchAll();
     }
 
-    public function productsByCategories($page_categorie) 
+    public function countProductsByCategories($page_categorie) 
     {
-        $query = $this->requete("SELECT COUNT(products.id_sous_categorie) 
+        $query = $this->requete("SELECT COUNT(products.id_categorie) 
         AS liste_cat
         FROM {$this->table} 
         INNER JOIN `sous_categories` 
-        ON sous_categories.id = products.id_sous_categorie WHERE sous_categories.name = '$page_categorie'");
+        ON categories.id = products.id_categorie WHERE categories.name = '$page_categorie'");
         return $query->fetchAll();
     }
-    public function productsByCategorie($page_categorie) 
+    public function productsByCategorie() 
     {
-        $query = $this->requete("SELECT products.id_categorie) 
-        -- AS liste_categorie
-        FROM {$this->table} 
-        INNER JOIN `categories` 
-        ON categories.id = products.id_categorie WHERE categories.name = '$page_categorie'");
+        $query = $this->requete("SELECT * FROM products WHERE products.id_categorie = 1");
         return $query->fetchAll();
     }
     
@@ -177,7 +177,7 @@ class ProductsModel extends Model
         FROM {$this->table}  
         INNER JOIN sous_categories 
         ON sous_categories.id = products.id_sous_categorie 
-        WHERE categories.name_categorie = '$page_categorie' 
+        WHERE categories.name = '$page_categorie' 
         DESC 
         LIMIT $debut_cat");
          return $query->fetchAll();
@@ -185,10 +185,17 @@ class ProductsModel extends Model
     
     public function findAllCategories()
     {
-        $query = $this->requete("SELECT * FROM `categories`");
+        $query = $this->requete("SELECT * FROM `categories` ");
         // var_dump($query->fetchAll());
         // return ("test");
        return $query->fetchAll();
+    }
+
+    public function findAllSousCategories()
+    {
+        $query = $this->requete("SELECT * FROM `sous_categories` ");
+     
+        return $query->fetchAll();
     }
 
     

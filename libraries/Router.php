@@ -12,7 +12,7 @@ class Router
             $controller = ucfirst($url[0]);
             // echo $controller;
             $controllerName = $controller."Controller";
-            var_dump($controllerName);
+            // var_dump($controllerName);
             $controllerFile = "Controllers/".$controllerName.".php";
 
             //le router va définir quelle page il va inclure selon l'action de l'utilisateur càd, si l'utilisateur va chercher accueil -> à travers toutes les transformations d'en-haut, le controller choisi sera ControllerAccueil.php
@@ -33,29 +33,39 @@ class Router
             }
 
 //à changer en switch case pour
-        
+        //cat à definir en amont 
+        //refaire une query pour avoir une liste de categorie
+
+        if($controllerName == "ProductsController")
+        {
             if(!empty($url[1]))
             {
-                foreach($categories as $categorie){
-                    if($url[1] == 'skincare'){
-                    if($controllerName == "ProductsController"){
-                        $controllerName::pagination(); 
+                var_dump($url[1]);
+                // // $controllerName::selectAllProducts();
+                if($url[1] == 'makeup'){
+                    // foreach($categories as $categorie){
+                        $controllerName::selectAllProductsCategory();
+                        $controllerName::selectAllSousCategory();
+                        $controllerName::getCategories();
+                        // $controllerName::productsByCategories();
+                        // $controllerName::pagination(); 
                     }  
-                }
-                }
-                
-                if($controllerName == "ProductsController")
+                // }
+            }    
+                // if($controllerName == "ProductsController")
+                // {
+                // // $controllerName::seeProduct($url[2]);
+                // }
+                 
+            elseif(empty($url[1]))
                 {
-                // $controllerName::seeProduct($url[1]);
+                    // $controllerName::pagination();
+                    // $controllerName::paginationGenerale();
+                    $controllerName::selectAllProducts();
+                    $controllerName::selectAllSousCategory();
+                    $controllerName::getCategories();
                 }
-            }       
-            elseif($controllerName == "ProductsController" )
-                {
-                    // $controllerName::selectAllProducts();
-                    $controllerName::pagination();
-                    // $controllerName::getCategories();
-
-                }
+        } 
 
             if ($controllerName == "BagsController") {
                 $controllerName::insertBag();
@@ -67,10 +77,10 @@ class Router
             {
                 $controllerName::insert();
             }
-            // if ($controllerName == "CategoriesController")
-            // {
-            //     $controllerName::getCategories();
-            // }
+            if ($controllerName == "CategoriesController")
+            {
+                $controllerName::getCategories();
+            }
 
           
 }

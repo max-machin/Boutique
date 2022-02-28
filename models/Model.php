@@ -57,8 +57,9 @@ class Model extends Database
     public function findAll()
     {
         $query = $this->requete('SELECT * FROM '. $this->table);
-        var_dump($query);
-        return $query->fetchAll();
+        $find_all = $query->fetchAll();
+        // var_dump($find_all);
+        return $find_all;
     }
 
     /**
