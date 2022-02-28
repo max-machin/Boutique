@@ -75,9 +75,13 @@ class Router
             
 
             if ($controllerName == "AdminController"){
-                ProductsController::createProduct();
-
+                if(!empty($url[1])){
+                    if($url[1] == 'create'){
+                    Renderer::render('admin/addProduct' , compact('product'));    
+                    } 
+                }
             }
+
 
         }      
 

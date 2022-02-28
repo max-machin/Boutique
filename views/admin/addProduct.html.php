@@ -1,3 +1,35 @@
+<?php
+    if(isset($_POST['createProduct']))
+    {
+        if($_POST['category'] == 'skincare')
+        {
+            $_SESSION['category']['id'] = 2;
+
+            if($_POST['subcategory'] == 'cleansers'){
+                $_SESSION['subcategory']['id'] = 4;
+            }elseif($_POST['subcategory'] == 'lotions'){
+                $_SESSION['subcategory']['id'] = 3;
+            }elseif($_POST['subcategory'] == 'serums'){
+                $_SESSION['subcategory']['id'] = 2;
+            }elseif($_POST['subcategory'] == 'moisturizers'){
+                $_SESSION['subcategory']['id'] = 1;
+            }
+
+        }
+        else{
+            $_SESSION['category']['id'] = 1;
+
+            if($_POST['subcategory'] == 'eyes'){
+                $_SESSION['subcategory']['id'] = 6;
+            }elseif($_POST['subcategory'] == 'face'){
+                $_SESSION['subcategory']['id'] = 5;
+            }elseif($_POST['subcategory'] == 'lips'){
+                $_SESSION['subcategory']['id'] = 7;
+            }  
+        }
+        ProductsController::createProduct();
+    }
+?>
 
         <form action="" method="post">
         <label for="name">Name of the product</label>
@@ -21,9 +53,6 @@
 
         if($_POST['category'] == 'skincare')
         {
-            $_POST['category'] = 2;
-            // demander l'id de skincare et makeup
-            var_dump($_POST['category']);
         ?>
 
         <label for="subcategory-select">Choose a sub-category:</label>
@@ -35,19 +64,9 @@
         </select>
 
         <?php
-            if($_POST['subcategory'] == 'cleansers'){
-                $_POST['subcategory'] = 4;
-            }elseif($_POST['subcategory'] == 'lotions'){
-                $_POST['subcategory'] = 3;
-            }elseif($_POST['subcategory'] == 'serums'){
-                $_POST['subcategory'] = 2;
-            }elseif($_POST['subcategory'] == 'moisturizers'){
-                $_POST['subcategory'] = 1;
-            }
         }
         elseif($_POST['category'] == 'makeup')
             {
-                $_POST['category'] = 1;
         ?>
         <label for="subcategory-select">Choose a sub-category:</label>
         <select name="subcategory" id="subcategory-select">
@@ -56,15 +75,14 @@
             <option value="lips">Lips</option>
         </select>
         <?php
-
-            if($_POST['subcategory'] == 'eyes'){
-                $_POST['subcategory'] = 6;
-            }elseif($_POST['subcategory'] == 'face'){
-                $_POST['subcategory'] = 5;
-            }elseif($_POST['subcategory'] == 'lips'){
-                $_POST['subcategory'] = 7;
-            }  
         }
         ?>
+<button type="submit" name="getTheSubCate">Get the subcategories</button>
+<?php
+    if(isset($_POST['getTheSubCate'])){
+?>
 <button type="submit" name="createProduct">Add the product</button>
+<?php
+    }
+?>
 </form>

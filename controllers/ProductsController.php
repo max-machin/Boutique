@@ -37,12 +37,11 @@ class ProductsController extends Controller
     public static function createProduct(){
         $model = new ProductsModel();
         $product = $model
-            ->setId_sous_categories('Max')
-            ->setId_categories('Max')
-            ->setPrice('Max')
-            ->setDescription('Max')
-            ->setName('Max')
-            ->setId('Max');
-        Renderer::render('admin/addProduct' , compact('product'));
+            ->setId_sous_categorie($_SESSION['subcategory']['id'])
+            ->setId_categorie($_SESSION['category']['id'])
+            ->setPrice($_POST['price'])
+            ->setDescription($_POST['description'])
+            ->setName($_POST['name']);
+        $product->create($model); 
     }
 }

@@ -6,8 +6,8 @@ class ProductsModel extends Model
     protected $name;
     protected $description;
     protected $price;
-    protected $id_categories;
-    protected $id_sous_categories;
+    protected $id_categorie;
+    protected $id_sous_categorie;
 
     /**
      * Fonction construct indique la table concernée par le modele
@@ -22,9 +22,9 @@ class ProductsModel extends Model
     /**
      * Get the value of id_sous_categories
      */ 
-    public function getId_sous_categories()
+    public function getId_sous_categorie()
     {
-        return $this->id_sous_categories;
+        return $this->id_sous_categorie;
     }
 
     /**
@@ -32,9 +32,9 @@ class ProductsModel extends Model
      *
      * @return  self
      */ 
-    public function setId_sous_categories($id_sous_categories)
+    public function setId_sous_categorie($id_sous_categorie)
     {
-        $this->id_sous_categories = $id_sous_categories;
+        $this->id_sous_categorie = $id_sous_categorie;
 
         return $this;
     }
@@ -42,9 +42,9 @@ class ProductsModel extends Model
     /**
      * Get the value of id_categories
      */ 
-    public function getId_categories()
+    public function getId_categorie()
     {
-        return $this->id_categories;
+        return $this->id_categorie;
     }
 
     /**
@@ -52,9 +52,9 @@ class ProductsModel extends Model
      *
      * @return  self
      */ 
-    public function setId_categories($id_categories)
+    public function setId_categorie($id_categorie)
     {
-        $this->id_categories = $id_categories;
+        $this->id_categorie = $id_categorie;
 
         return $this;
     }
