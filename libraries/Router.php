@@ -75,7 +75,8 @@ class Router
             
 
             if ($controllerName == "AdminController"){
-                $controllerName::updateProduct();
+                ProductsController::createProduct();
+
             }
 
         }      
