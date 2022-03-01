@@ -159,7 +159,7 @@ class ProductsModel extends Model
         $query = $this->requete("SELECT COUNT(products.id_categorie) 
         AS liste_cat
         FROM {$this->table} 
-        INNER JOIN `sous_categories` 
+        INNER JOIN `categories` 
         ON categories.id = products.id_categorie WHERE categories.name = '$page_categorie'");
         return $query->fetchAll();
     }
@@ -193,7 +193,7 @@ class ProductsModel extends Model
 
     public function findAllSousCategories()
     {
-        $query = $this->requete("SELECT * FROM `sous_categories` ");
+        $query = $this->requete("SELECT * FROM `sous_categories` WHERE id_categorie = 1");
      
         return $query->fetchAll();
     }

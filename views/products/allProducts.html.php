@@ -10,12 +10,12 @@
 </form>
 
 <?php 
-    var_dump($categories);
+    // var_dump($categories);
     // var_dump($products);
-    echo 'heloooo';
-    var_dump($_GET);
-    echo 'heloooo';
-    var_dump($sousCategories);
+    // echo 'heloooo';
+    // var_dump($_GET);
+    // echo 'heloooo';
+    // var_dump($sousCategories);
 
 // if (isset($_GET['categorie'])) {
     

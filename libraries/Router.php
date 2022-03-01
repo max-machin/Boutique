@@ -7,7 +7,7 @@ class Router
         if(!empty($_GET['p'])){
         // le filter va filtrer ce qu'on a dans le get afin donc de sécuriser, le nom du filtre suit
             $url = explode('/', filter_var($_GET['p'], FILTER_SANITIZE_URL));
-            var_dump($_GET['p']);
+            // var_dump($_GET['p']);
             //ucfirst = première lettre en maj
             $controller = ucfirst($url[0]);
             // echo $controller;
@@ -32,7 +32,7 @@ class Router
                 // $controllerName::find();
             }
 
-//à changer en switch case pour
+
         //cat à definir en amont 
         //refaire une query pour avoir une liste de categorie
 
@@ -40,13 +40,16 @@ class Router
         {
             if(!empty($url[1]))
             {
-                var_dump($url[1]);
+                // var_dump($url[1]);
+              
                 // // $controllerName::selectAllProducts();
                 if($url[1] == 'makeup'){
                     // foreach($categories as $categorie){
-                        $controllerName::selectAllProductsCategory();
-                        $controllerName::selectAllSousCategory();
-                        $controllerName::getCategories();
+                        // $controllerName::selectAllSousCategory();
+                        // $controllerName::selectAllProductsCategory();
+                        // $controllerName::getCategories();
+                        $controllerName::createViewProducts();
+                        // $controllerName::seeProduct();
                         // $controllerName::productsByCategories();
                         // $controllerName::pagination(); 
                     }  
@@ -60,11 +63,17 @@ class Router
             elseif(empty($url[1]))
                 {
                     // $controllerName::pagination();
-                    // $controllerName::paginationGenerale();
-                    $controllerName::selectAllProducts();
-                    $controllerName::selectAllSousCategory();
-                    $controllerName::getCategories();
+                    // $controllerName::seeProduct();
+                    $controllerName::createViewProducts();
+
+                    // $controllerName::selectAllProducts();
+                    // $controllerName::selectAllSousCategory();
+                    // $controllerName::getCategories();
                 }
+            // elseif(!empty($url[2]))
+            // {
+
+            // }
         } 
 
             if ($controllerName == "BagsController") {
@@ -77,10 +86,10 @@ class Router
             {
                 $controllerName::insert();
             }
-            if ($controllerName == "CategoriesController")
-            {
-                $controllerName::getCategories();
-            }
+            // if ($controllerName == "CategoriesController")
+            // {
+            //     $controllerName::getCategories();
+            // }
 
           
 }
