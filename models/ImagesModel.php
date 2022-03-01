@@ -73,12 +73,32 @@ class ImagesModel extends Model
     {
         $database = DataBase::getPdo();
 
-        var_dump($url_image);
-        var_dump($id_product);
-
         $updateImg=$database->prepare('INSERT INTO `images` SET url_image=:url_image, id_product=:id_product');
         $updateImg -> execute(['url_image'=>$url_image,'id_product'=>$id_product]);
     }
+
+    public static function seeImage($id)
+    {
+        $database = DataBase::getPdo();
+
+        $seeImg=$database->prepare('SELECT url_image FROM images WHERE id_product=:id');        
+        $seeImg -> execute(['id'=>$id]);
+        $resultImg = $seeImg -> fetchAll();
+
+        return ($resultImg);   
+    }
+
+    public static function seeImageProduct($id)
+    {
+        $database = DataBase::getPdo();
+
+        $seeImg=$database->prepare('SELECT url_image FROM products INNER JOIN images ON products.id = images.id_product WHERE products.id=:id');        
+        $seeImg -> execute(['id'=>$id]);
+        $resultImg = $seeImg -> fetchAll();
+
+        return ($resultImg);   
+    }
 }
 
+// FROM products INNER JOIN images ON products.id = images.id_product
 // UPDATE `images` SET `url_image`=:url_image WHERE id_product=:id_product

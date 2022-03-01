@@ -25,7 +25,7 @@ class Model extends Database
 
         //On vérifie si on a des attributs 
         if ($attributs !== null){
-            var_dump($attributs);
+            // var_dump($attributs);
             //requête préparée
             $query = $this->database->prepare($sql);
             $query->execute($attributs);
@@ -115,7 +115,7 @@ class Model extends Database
     public function findAll()
     {
         $query = $this->requete('SELECT * FROM '. $this->table);
-        var_dump($query);
+        // var_dump($query);
         return $query->fetchAll();
     }
 

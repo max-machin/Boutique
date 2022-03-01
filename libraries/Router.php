@@ -41,7 +41,6 @@ class Router
                 if($controllerName == "ProductsController"){
                 $controllerName::seeProduct($url[1]);
                 }            
-                
             }elseif(!empty($url[1]) && !empty($url[2])){
                 if($controllerName == "ProductsController"){
                     if($url[2] == 'update'){
@@ -50,9 +49,12 @@ class Router
                     }
                 }
             elseif($controllerName == "ProductsController"){
-                 $controllerName::selectAllProducts();
+                $controllerName::selectAllProducts();
                 }
 
+                // if($controllerName == "ImagesController"){
+                //     $controllerName::seeProductImg();
+                // }
             
             
 

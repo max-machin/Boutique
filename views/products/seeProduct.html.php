@@ -5,8 +5,9 @@ require_once('libraries/Renderer.php');
 
 if(@$_SERVER['user_data']['id'] == 1)
 {
+    ImagesController::imageProduct($product->id);
     ?>
-
+   
     <h1><?= $product->name ?></h1>
 
 <?php var_dump($product);?>
@@ -20,6 +21,7 @@ if(@$_SERVER['user_data']['id'] == 1)
 
 } else
 {
+    ImagesController::imageForProduct($product->id);
     ?>
     <h1><?= $product->name ?></h1>
 
