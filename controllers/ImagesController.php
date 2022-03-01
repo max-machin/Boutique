@@ -7,10 +7,6 @@ class ImagesController extends Controller
     public static function uploadImage() {
 
         Renderer::render('admin/uploadImage');
-        // if(isset($_POST['select'])){
-        //     $_SESSION['products']['id'] = $_POST['products'];
-        //     var_dump($_SESSION['products']['id']);
-        // }
 
         if(isset($_POST['sauvimg']))
         {

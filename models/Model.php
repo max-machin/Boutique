@@ -9,7 +9,7 @@ class Model extends Database
     protected $table;
 
     //Instance de la Database
-    private $database;
+    protected $database;
 
     /**
      * Gestion des préparations et execute des requetes en fonctions des attributs

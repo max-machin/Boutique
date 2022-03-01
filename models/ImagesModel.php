@@ -6,7 +6,7 @@ class ImagesModel extends Model
     protected $id;
     protected $id_product;
     protected $url_image;
-    private $database;
+    // protected $database;
 
 
     /**
@@ -71,9 +71,14 @@ class ImagesModel extends Model
 
     public static function uploadImage($url_image, $id_product)
     {
-        $this->database = DataBase::getPdo();
+        $database = DataBase::getPdo();
 
-        $updateImg=$database-> prepare("UPDATE `images` SET `url_image`=: url_image WHERE id_product=:id_product");
-        $updateImg -> execute(['url_image' => $url_image,'id_product' => $id_product]);
+        var_dump($url_image);
+        var_dump($id_product);
+
+        $updateImg=$database->prepare('INSERT INTO `images` SET url_image=:url_image, id_product=:id_product');
+        $updateImg -> execute(['url_image'=>$url_image,'id_product'=>$id_product]);
     }
 }
+
+// UPDATE `images` SET `url_image`=:url_image WHERE id_product=:id_product
