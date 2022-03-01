@@ -75,10 +75,17 @@ class Router
             
 
             if ($controllerName == "AdminController"){
-                if(!empty($url[1])){
+                if(!empty($url[1]) && empty($url[2])){
                     if($url[1] == 'create'){
                     Renderer::render('admin/addProduct' , compact('product'));    
                     } 
+                }elseif(!empty($url[1]) && !empty($url[2])){
+                    if($url[1]== 'create' && $url[2] == 'image'){
+                        ProductsController::selectAll();
+                        ImagesController::uploadImage();
+
+                    
+                    }
                 }
             }
 

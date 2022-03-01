@@ -9,7 +9,7 @@ class BagsController extends Controller
 
         $model = new BagsModel();
         $productAdded = $model
-        ->setId_user($_SESSION['user']['id'])
+        ->setId_user($_SESSION['user_data']['id'])
         ->setId_product($_SESSION['product']['id'])
         ->setQuantity_product($product->quantity_product);
 
@@ -35,7 +35,7 @@ class BagsController extends Controller
     public static function deleteFromBag()
     {
         $model = new BagsModel();
-        @$model->deleteBy(['id_user'=> 1, 'id_product' => $_SESSION['bag']['id_product']]);
+        @$model->deleteBy(['id_user'=> $_SESSION['user_data']['id'], 'id_product' => $_SESSION['bag']['id_product']]);
 
     }
 

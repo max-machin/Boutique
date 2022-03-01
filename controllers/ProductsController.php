@@ -6,7 +6,13 @@ class ProductsController extends Controller
         echo 'je suis dans selectall';
         $model = new ProductsModel();
         $products = $model->findAll();
-        Renderer::render('products/allProducts' , compact('products'));
+        Renderer::render('products/allProducts' , compact('products'));    
+    }
+
+    public static function selectAll(){
+        $model = new ProductsModel();
+        $products = $model->findAll();
+        Renderer::render('admin/uploadImage' , compact('products'));    
     }
 
     public static function seeProduct($id){
