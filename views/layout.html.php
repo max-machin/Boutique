@@ -7,6 +7,32 @@
     <title>Boutique</title>
 </head>
 <body>
+    <?php
+
+    if ( isset ($_SESSION['user_data'] ) )
+    {
+    ?>
+        <nav>
+            <ul>
+               
+                <li><a href="<?= url ?>users/login">Connexion</a></li>
+                <li><a href="<?= url ?>users/profil">Profil</a></li>
+                <li><a href="<?= url ?>users/disconnect">Deconnexion</a></li>
+            </ul>
+        </nav>
+    <?php
+    } else {
+    ?>
+        <nav>
+            <ul>
+                <li><a href="<?= url ?>users/register">Inscription</a></li>
+                <li><a href="<?= url ?>users/login">Connexion</a></li>
+            </ul>
+        </nav>
+    <?php
+    }
+
+    ?>
 
 <div class="container">
     <?= $content ?>

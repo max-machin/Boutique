@@ -14,14 +14,14 @@
 
     <label for="password">Mot de passe *</label></br>
     <input id="password" type="password" name="password" placeholder="Mot de passe"></br>
-    <span><?= $error_password ?></span></br>
+    <span><?= $error_new_password ?></span></br>
 
     <label for="validPassword">Valider mot de passe *</label></br>
     <input id="validPassword" type="password" name="validPassword" placeholder="Confirmez mot de passe"></br>
     <span><?= $error_validPassword ?></span></br>
 
     <label for="adresse">Adresse</label></br>
-    <input id="adresse" type="text" name="Adresse" placeholder="Adresse"></br>
+    <input id="adresse" type="text" name="adresse" placeholder="Adresse"></br>
 
     <input type="submit" name="submit">
 </form>
