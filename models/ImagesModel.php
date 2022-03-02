@@ -77,18 +77,4 @@ class ImagesModel extends Model
         $updateImg -> execute(['url_image'=>$url_image,'id_product'=>$id_product]);
     }
 
-
-    public static function seeImageProduct($id)
-    {
-        $database = DataBase::getPdo();
-
-        $seeImg=$database->prepare('SELECT url_image FROM products INNER JOIN images ON products.id = images.id_product WHERE products.id=:id');        
-        $seeImg -> execute(['id'=>$id]);
-        $resultImg = $seeImg -> fetchAll();
-
-        return ($resultImg);   
-    }
 }
-
-// FROM products INNER JOIN images ON products.id = images.id_product
-// UPDATE `images` SET `url_image`=:url_image WHERE id_product=:id_product

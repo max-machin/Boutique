@@ -19,8 +19,11 @@ class ProductsController extends Controller
 
     public static function seeProduct($id){
         $model = new ProductsModel();
-        $product = $model->find($id);
-        Renderer::render('products/seeProduct' , compact('product'));
+        $soloproduct = $model->selectProductbyId($id);
+        foreach($soloproduct as $product){
+            $images = explode(',', $product->url); 
+         }  
+        Renderer::render('products/seeProduct' , compact('product', 'images'));
     }
 
     public static function seeUpdateProduct($id){

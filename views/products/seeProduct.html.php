@@ -4,10 +4,14 @@ require_once('libraries/Renderer.php');
 <?php
 
 if(@$_SERVER['user_data']['id'] == 1)
-{
-    ImagesController::imageProduct($product->id);
+{      
+        foreach($images as $image){
     ?>
-   
+            
+        <img src="../Uploads/<?= $image ?>" width="50px">
+     <?php
+        }
+    ?>
     <h1><?= $product->name ?></h1>
 
 <?php var_dump($product);?>
@@ -18,10 +22,14 @@ if(@$_SERVER['user_data']['id'] == 1)
     </form>
 
 <?php
-
+ 
 } else
 {
-    ImagesController::imageForProduct($product->id);
+        foreach($images as $image){
+            ?>         
+            <img src="../Uploads/<?= $image ?>" width="50px">
+        <?php
+        }
     ?>
     <h1><?= $product->name ?></h1>
 
@@ -39,5 +47,6 @@ if(@$_SERVER['user_data']['id'] == 1)
             <button class="#" type="submit" name="addBag">Add</button>
         </form>
     <?php
-}
+    }
+
 
