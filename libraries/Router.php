@@ -47,23 +47,31 @@ class Router
 
 
         
-            if(!empty($url[1])){
+            if(!empty($url[1]) && empty($url[2])){
                 if($controllerName == "ProductsController"){
                 $controllerName::seeProduct($url[1]);
-                }
-            }elseif($controllerName == "ProductsController"){
-                 $controllerName::selectAllProducts();
-                }
-            
-            if ( !empty ( $url[1])){
-                if($url[1] == 'delete'){
-                    if ($controllerName == "BagsController") {
-                    $controllerName::showBag();
-                    $controllerName::deleteFromBag();
+                }            
+            }elseif(!empty($url[1]) && !empty($url[2])){
+                if($controllerName == "ProductsController"){
+                    if($url[2] == 'update'){
+                        $controllerName::seeUpdateProduct($url[1]);
                         }
-                }elseif ($controllerName == "BagsController"){
-                    $controllerName::showBag();
-                    $controllerName::quantityBag(); 
+                    }
+                }
+            elseif($controllerName == "ProductsController"){
+                $controllerName::selectAllProducts();
+                }
+
+                // if($controllerName == "ImagesController"){
+                //     $controllerName::seeProductImg();
+                // }
+            
+            
+
+            if(@$url[1] == 'delete'){
+            if ($controllerName == "BagsController") {
+                $controllerName::showBag();
+                $controllerName::deleteFromBag();
                 }
             }
 
@@ -71,7 +79,24 @@ class Router
             if ($controllerName == "CommentsController")
             {
                 $controllerName::insert();
-            }   
+            } 
+            
+
+            if ($controllerName == "AdminController"){
+                if(!empty($url[1]) && empty($url[2])){
+                    if($url[1] == 'create'){
+                    Renderer::render('admin/addProduct' , compact('product'));    
+                    } 
+                }elseif(!empty($url[1]) && !empty($url[2])){
+                    if($url[1]== 'create' && $url[2] == 'image'){
+                        ProductsController::selectAll();
+                        ImagesController::uploadImage();
+
+                    
+                    }
+                }
+            }
+
 
         }      
 

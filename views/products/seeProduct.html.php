@@ -1,16 +1,52 @@
-<h1><?= $product->name ?></h1>
-
-<?php var_dump($product);
-
-if(isset($_POST['addBag']))
-{
-   $_SESSION['product']['id'] = $product->id;
-   BagsController::insertBag();
-}
-
+<?php
+require_once('libraries/Renderer.php');
 ?>
+<?php
 
-    <form action="" method="post">           
-        <button class="#" type="submit" name="addBag">Add</button>
+if(@$_SERVER['user_data']['id'] == 1)
+{      
+        foreach($images as $image){
+    ?>
+            
+        <img src="../Uploads/<?= $image ?>" width="50px">
+     <?php
+        }
+    ?>
+    <h1><?= $product->name ?></h1>
+
+<?php var_dump($product);?>
+
+    <form action="<?= $product->id ?>/update" method="post">  
+        <input type="hidden" name="id" value="<?= $product->id ?>"/>          
+        <button class="#" type="submit" name="updateProduct">Update</button>
     </form>
+
+<?php
+ 
+} else
+{
+        foreach($images as $image){
+            ?>         
+            <img src="../Uploads/<?= $image ?>" width="50px">
+        <?php
+        }
+    ?>
+    <h1><?= $product->name ?></h1>
+
+    <?php var_dump($product);
+
+    if(isset($_POST['addBag']))
+    {
+    $_SESSION['product']['id'] = $product->id;
+    BagsController::insertBag();
+    }
+
+    ?>
+
+        <form action="" method="post">           
+            <button class="#" type="submit" name="addBag">Add</button>
+        </form>
+    <?php
+    }
+
 

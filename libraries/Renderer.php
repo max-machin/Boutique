@@ -14,7 +14,7 @@ class Renderer {
     public static function render(string $fichier, array $donnees = [], string $template = 'layout')
     {
 
-        echo "je suis dans render";
+        // echo "je suis dans render";
         // On extrait le contenu de $donnees
         extract($donnees);
 

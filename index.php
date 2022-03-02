@@ -10,6 +10,5 @@ Autoloader::Autoload();
 Router::process();
 
 ?>
-
-<p>je suis dans l'index</p>
+<!-- <p>je suis dans l'index</p> -->
 

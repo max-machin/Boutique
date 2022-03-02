@@ -9,7 +9,7 @@ class Model extends Database
     protected $table;
 
     //Instance de la Database
-    private $database;
+    protected $database;
 
     /**
      * Gestion des préparations et execute des requetes en fonctions des attributs
@@ -114,7 +114,7 @@ class Model extends Database
     public function findAll()
     {
         $query = $this->requete('SELECT * FROM '. $this->table);
-        var_dump($query);
+        // var_dump($query);
         return $query->fetchAll();
     }
 
