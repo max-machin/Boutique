@@ -47,7 +47,8 @@ class ProductsController extends Controller
                     ->setComment( $comment )
                     ->setDate(date('Y-m-d H:i:s'))
                     ->setNote($_POST['star']);
-                // $comment->create($model);
+                $comment->create($model);
+                header('refresh: 0');
 
             } else {
                 $errorComment = "Veuillez remplir le champ";
@@ -56,22 +57,5 @@ class ProductsController extends Controller
 
 
         Renderer::render('products/seeProduct' , compact('product' , 'allComments', 'errorComment'));
-    }
-
-    public static function createProduct(){
-        $model = new ProductsModel();
-        $product = $model
-            ->setId_sous_sategories('Max')
-            ->setId_categories('Max')
-            ->setPrice('Max')
-            ->setDescription('Max')
-            ->setName('Max')
-            ->setId('Max');
-    }
-
-    public static function addComment()
-    {
-        
-        // Renderer::render('products/seeProduct', compact('errorComment'));
     }
 }
