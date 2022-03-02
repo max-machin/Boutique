@@ -331,6 +331,7 @@ class UsersController extends Controller
         $userData = $model->find(2);
     }
 
+    
     public static function deleteUser(){
         $model = new UsersModel();
         var_dump($delete = $model->delete(8));

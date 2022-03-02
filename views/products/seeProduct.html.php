@@ -3,6 +3,7 @@ require_once('libraries/Renderer.php');
 ?>
 <?php
 
+
 if(@$_SERVER['user_data']['id'] == 1)
 {      
         foreach($images as $image){

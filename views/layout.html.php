@@ -6,6 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boutique</title>
 </head>
+
+   
+<header>
+    <nav class= "navbar">
+        <form action="index.php" method="post" >
+            <ul class="navul">
+
+                    <?php
+                    session_start();
+                // balise php avec la condition de reconnaisance du profil user
+              
+                    echo('<li class="navli"><a href="index.php">Home</a></li>');
+                    echo ('<li class="navli"><a href="users">Connexion</a></li>');
+                    echo ('<li class="navli"><a href="users">Inscription</a></li>');
+                    foreach ($categories as $categorie)  
+                    {
+                        echo ('<li class="navli"><a href="'. urlmac.'products/'.$categorie['name'].'">'.$categorie['name'].'</a></li>');
+                    }
+                
+                ?>
+            </ul>
+        </form>
+    </nav>
+</header>
 <body>
     <?php
 

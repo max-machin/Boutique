@@ -67,6 +67,49 @@ class Router
                 // }
             
             
+        //cat à definir en amont 
+        //refaire une query pour avoir une liste de categorie
+
+        if($controllerName == "ProductsController")
+        {
+            if(!empty($url[1]))
+            {
+                // var_dump($url[1]);
+              
+                // // $controllerName::selectAllProducts();
+                if($url[1] == 'makeup'||'skincare'){
+                    // foreach($categories as $categorie){
+                        // $controllerName::selectAllSousCategory();
+                        // $controllerName::selectAllProductsCategory();
+                        // $controllerName::getCategories();
+                        $controllerName::createViewProducts();
+                        $controllerName::getNameCategories();
+                        // $controllerName::seeProduct();
+                        // $controllerName::productsByCategories();
+                        // $controllerName::pagination(); 
+                    }  
+                // }
+            }    
+                // if($controllerName == "ProductsController")
+                // {
+                // // $controllerName::seeProduct($url[2]);
+                // }
+                 
+            elseif(empty($url[1]))
+                {
+                    // $controllerName::pagination();
+                    // $controllerName::seeProduct();
+                    $controllerName::createViewProducts();
+
+                    // $controllerName::selectAllProducts();
+                    // $controllerName::selectAllSousCategory();
+                    // $controllerName::getCategories();
+                }
+            // elseif(!empty($url[2]))
+            // {
+
+            // }
+        } 
 
             if(@$url[1] == 'delete'){
             if ($controllerName == "BagsController") {
