@@ -3,24 +3,7 @@ require_once('libraries/Renderer.php');
 
 class ProductsController extends Controller
 {  
-
-    // public function __construct(){
-
-    // }
-    
-    public static function seeProduct()
-    {
-        $model = new ProductsModel();
-        $product = $model->find($id);
-        return $product;
-        Renderer::render('products/seeProduct' , compact('product'));
-    }
-    
-   
-
-    public static function selectAllProducts()
-    {
-        
+    public static function selectAllProducts(){
         $model = new ProductsModel();
         $products = $model->selectAllProducts(); 
         foreach($products as $product){
@@ -29,17 +12,21 @@ class ProductsController extends Controller
         Renderer::render('products/allProducts' , compact('products', 'product', 'images'));    
     }
 
-    public static function selectAll()
-    {
+    public static function selectAll(){
         $model = new ProductsModel();
         $products = $model->findAll();
         Renderer::render('admin/uploadImage' , compact('products'));    
-        return $products;
-        // var_dump($products);
-
-        // Renderer::render('products/allProducts' , compact('products'));
-       
     }
+
+    public static function seeProduct($id){
+        $model = new ProductsModel();
+        $soloproduct = $model->selectProductbyId($id);
+        foreach($soloproduct as $product){
+            $images = explode(',', $product->url); 
+         }  
+        Renderer::render('products/seeProduct' , compact('product', 'images'));
+    }
+
     public static function selectAllProductsCategory()
     {
         $model = new ProductsModel();

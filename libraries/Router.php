@@ -116,6 +116,9 @@ class Router
                 $controllerName::showBag();
                 $controllerName::deleteFromBag();
                 }
+            }elseif ($controllerName == "BagsController"){
+                $controllerName::showBag();
+                $controllerName::quantityBag(); 
             }
 
                 
