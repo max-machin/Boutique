@@ -37,4 +37,9 @@ class ImagesController extends Controller
             }
         }
     }
+
+    public static function updateImage()
+    {
+        
+    }
 }
