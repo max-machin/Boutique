@@ -6,6 +6,8 @@ class Commentsmodel extends Model
     protected $id_user;
     protected $id_product;
     protected $comment;
+    protected $note;
+    protected $date;
 
     public function __construct()
     {
@@ -90,5 +92,56 @@ class Commentsmodel extends Model
         $this->id_comments = $id_comments;
 
         return $this;
+    }
+
+    /**
+     * Get the value of note
+     */ 
+    public function getNote()
+    {
+        return $this->note;
+    }
+
+    /**
+     * Set the value of note
+     *
+     * @return  self
+     */ 
+    public function setNote($note)
+    {
+        $this->note = $note;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of date
+     */ 
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * Set the value of date
+     *
+     * @return  self
+     */ 
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Requete de récupération des données des commentaires relatifs au produit
+     *
+     * @param [type] $id
+     * @return void
+     */
+    public function productComment($id)
+    {
+        return $this->requete("SELECT users.prenom, comments.comment, comments.note, DATE_FORMAT(date, '%d/%m/%Y') AS 'datefr' , DATE_FORMAT(date, '%H:%i:%s') AS 'heurefr' FROM `comments` INNER JOIN `users` WHERE comments.id_user = users.id AND comments.id_product = $id")->fetchAll();
     }
 }

@@ -186,4 +186,20 @@ class Model extends Database
     {
         return $this->requete("DELETE FROM {$this->table} WHERE id =?", [$id]);
     }
+
+
+    //Requête générique Inner Join en développement
+    
+    // public function innerJoin(array $criteres, string $tableJoin, string $where1, string $where2)
+    // {
+    //     $champs = [];
+    //     foreach ( $criteres as $champ)
+    //     {
+    //         $champs[] = $champ;
+    //     }
+
+    //     $liste_champ = implode(',', $champs);
+    //     //On éxecute la requête 
+    //     return $this->requete('SELECT '.$liste_champ.' FROM '. $this->table.' INNER JOIN '. $tableJoin.' WHERE '.$this->table.'.'.$where1.' = '.$tableJoin.'.'.$where2.'')->fetchAll();
+    // }
 }

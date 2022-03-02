@@ -1,3 +1,9 @@
+<?php 
+if ( empty ( $user)) {
+    header('location: index.php');
+}
+if ( !empty ($user)){
+?>
 <h2>Vos informations personnelles</h2>
 <form action="" method="post">
     <label for="email">E-mail *</label></br>
@@ -33,4 +39,10 @@
     <input type="submit" name="subNewPassword" value="Modifier password">
 </form>
 
-<h2>Vos dernières commandes</h2>
+<h2>Vos dernières commandes</h2>*
+
+
+<?php
+}
+
+?>

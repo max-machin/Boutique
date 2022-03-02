@@ -140,4 +140,9 @@ class UsersModel extends Model
 
       return $this;
    }
+
+   public function emailPassword($password, $email)
+   {
+      return $this->requete(" UPDATE users SET password = ? WHERE email = ?", array($password, $email));
+   }
 }

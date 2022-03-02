@@ -1,4 +1,12 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
+
+require_once ('libraries/phpmailer/Exception.php');
+require_once ('libraries/phpmailer/PHPMailer.php');
+require_once ('libraries/phpmailer/SMTP.php');
+
 
 function valid_data($données)
 {
@@ -10,6 +18,8 @@ function valid_data($données)
     $données = htmlspecialchars($données);
     return $données;
 } 
+
+
 
 class UsersController extends Controller
 {  
@@ -48,14 +58,14 @@ class UsersController extends Controller
                             // Vérification des champs
                             if ( !empty ($_POST['validPassword'])){
 
-                                //! Sécurisation des données
+                                // Sécurisation des données
                                 $password = valid_data($_POST['password']);
                                 $validPassword = valid_data($_POST['validPassword']);
 
                                 // Vérification de la correspondance des mot de passe
                                 if ( $password === $validPassword){
 
-                                    //! Sécurisation des données du formulaire
+                                    // Sécurisation des données du formulaire
                                     $email = valid_data($_POST['email']);
                                     $surname = valid_data($_POST['surname']);
                                     $name = valid_data($_POST['name']);
@@ -69,7 +79,7 @@ class UsersController extends Controller
                                         // Hashage du mot de passe avant insertion en base de données
                                         $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
-                                        //! Sécurisation des données
+                                        // Sécurisation des données
                                         $adresse = valid_data($_POST['adresse']);
 
                                         // On crée un nouveau UserModel
@@ -135,7 +145,7 @@ class UsersController extends Controller
                 // Vérification des champs
                 if ( !empty ( $_POST['password']))
                 {
-                    //! Sécurisation des données
+                    // Sécurisation des données
                     $password = valid_data($_POST['password']);
                     $email = valid_data($_POST['email']);
 
@@ -215,7 +225,7 @@ class UsersController extends Controller
             // Si le champ E-mail est bien rempli
             if ( !empty ( $_POST['email']))
             {
-                //! On sécurise les données 
+                // On sécurise les données 
                 $email = valid_data($_POST['email']);
 
                 // On set les valeurs dans le model user précedemment crée
@@ -231,7 +241,7 @@ class UsersController extends Controller
             // Même fonctionnement que pour l'E-mail
             if ( !empty ( $_POST['surname']))
             {
-                //! Sécurisation des données
+                // Sécurisation des données
                 $prenom = valid_data($_POST['surname']);
 
                 $users = $model
@@ -246,7 +256,7 @@ class UsersController extends Controller
             // Même fonctionnement que pour l'E-mail
             if ( !empty ( $_POST['name']))
             {
-                //! Sécurisation des données
+                // Sécurisation des données
                 $nom = valid_data($_POST['name']);
 
                 $users = $model
@@ -263,7 +273,7 @@ class UsersController extends Controller
             // Vérification des champs
             if ( !empty ( $_POST['oldPassword']))
             {
-                //! Sécurisaion des données
+                // Sécurisaion des données
                 $password = valid_data($_POST['oldPassword']);
 
                 // On récupère les informations de l'utilisateur concerné
@@ -291,7 +301,7 @@ class UsersController extends Controller
                 // Vérification des données
                 if ( !empty ( $_POST['validPassword']))
                 {
-                    //! Sécurisation des données
+                    // Sécurisation des données
                     $newPassword = valid_data($_POST['newPassword']);
                     $validPassword = valid_data($_POST['validPassword']);
 
@@ -304,7 +314,7 @@ class UsersController extends Controller
                             ->setId($_SESSION['user_data']['id'])
                             ->setPassword($hash);
                         
-                        echo "Mot de passe modifié avec succés";
+                        $users->Update($model);
                     } else {
                         $error_validPassword = "Validation de mot de passe échouée";
                         $display2 = "block";
@@ -326,14 +336,65 @@ class UsersController extends Controller
         Renderer::render('users/profil' , compact('user', 'error_new_password', 'error_validPassword', 'error_old_password', 'display1' , 'display2'));
     }
 
-    public static function selectUser(){
-        $model = new UsersModel();
-        $userData = $model->find(2);
-    }
+    /**
+     * Fonction de récupération du mot de passe par Mail
+     *
+     * @return void
+     */
+    public static function forgotPassword()
+    {
+        // Envoi du formulaire
+        if ( isset ( $_POST['sendPassword'] ) )
+        {
+            // Vérification des champs
+            if ( isset ( $_POST['email']))
+            {
+                // Création du nouveau password
+                $newPassword = uniqid ();
+                
+                // Hachage du password précédemment crée
+                $hashedPassword = password_hash ( $newPassword, PASSWORD_DEFAULT );
 
-    public static function deleteUser(){
-        $model = new UsersModel();
-        var_dump($delete = $model->delete(8));
-        
-    } 
+                // Sécuristaion des données
+                $email = valid_data($_POST['email']);
+
+                // Instanciation du Model User pour update password
+                $model = new UsersModel();
+                
+                // Update du password
+                $model->emailPassword($hashedPassword, $email);
+            
+                // Envoi du mail
+                // Création du nouveau Model de PHPMailer
+                $mail = new PHPMailer();
+                $mail->IsSMTP();
+                $mail->Host = "smtp.gmail.com";
+                $mail->From = "everglowcosmeticscontact@gmail.com";
+                $mail->FromName  =  "My name";
+                $mail->AddAddress("$email");
+                $mail->SMTPAuth = "true";
+                $mail->Username = "everglowcosmeticscontact@gmail.com";
+                $mail->Password =  "Everglow13";
+                $mail->Port  =  "587";
+                $mail->SMTPSecure = 'tls';
+            
+                $mail->Subject = "Nouveau mot de passe";
+                $mail->Body = " Suite à votre demande de récupération de mot de passe.
+                Votre nouveau mot de passe : $newPassword";
+                $mail->WordWrap = 50;
+            
+                if(!$mail->Send())
+                {
+                    echo "Il y a eu une erreur lors de l'envoi de l'email.";
+                    echo 'Mailer error: ' . $mail->ErrorInfo;
+                }
+                else
+                {
+                    echo 'Le mail a été envoyer avec succés. Consultez vos courriels indésirables';
+                }
+
+            }
+        }
+        Renderer::render('users/forgotPassword');
+    }
 }

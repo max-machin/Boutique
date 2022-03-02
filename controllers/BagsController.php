@@ -6,14 +6,15 @@ class BagsController extends Controller
 
     public static function insertBag()
     {
-
+        if ( isset ( $_POST['addBag']))
+        {
         $model = new BagsModel();
         $productAdded = $model
-        ->setId_user($_SESSION['user']['id'])
-        ->setId_product($_SESSION['product']['id'])
-        ->setQuantity_product($product->quantity_product);
+        ->setId_user($_SESSION['user_data']['id'])
+        ->setId_product($_SESSION['product']['id']);
 
         // $productAdded->create($model);  
+        }
         
     }
 

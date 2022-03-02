@@ -9,5 +9,7 @@
     <input id="password" type="password" name="password" placeholder="Mot de passe"></br>
     <span><?= $error_password ?></span></br>
 
+    <a href="forgotPassword">Mot de passe oublié?</a><br>
+
     <input type="submit" name="submit">
 </form>
