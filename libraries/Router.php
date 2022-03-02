@@ -43,12 +43,13 @@ class Router
                 // var_dump($url[1]);
               
                 // // $controllerName::selectAllProducts();
-                if($url[1] == 'makeup'){
+                if($url[1] == 'makeup'||'skincare'){
                     // foreach($categories as $categorie){
                         // $controllerName::selectAllSousCategory();
                         // $controllerName::selectAllProductsCategory();
                         // $controllerName::getCategories();
                         $controllerName::createViewProducts();
+                        $controllerName::getNameCategories();
                         // $controllerName::seeProduct();
                         // $controllerName::productsByCategories();
                         // $controllerName::pagination(); 
