@@ -3,13 +3,14 @@ require_once('libraries/Renderer.php');
 
 class ProductsController extends Controller
 {  
+    
     public static function selectAllProducts(){
         $model = new ProductsModel();
         $products = $model->selectAllProducts(); 
         foreach($products as $product){
             $images = explode(',', $product->url); 
          }      
-        Renderer::render('products/allProducts' , compact('products', 'product', 'images'));    
+        // Renderer::render('products/allProducts' , compact('products', 'product', 'images'));    
     }
 
     public static function selectAll(){
@@ -22,9 +23,43 @@ class ProductsController extends Controller
         $model = new ProductsModel();
         $soloproduct = $model->selectProductbyId($id);
         foreach($soloproduct as $product){
-            $images = explode(',', $product->url); 
+            $images = explode(',', $product['url']); 
          }  
-        Renderer::render('products/seeProduct' , compact('product', 'images'));
+
+        $productModel = new ProductsModel();
+        $product = $productModel->find($id);
+
+        if ( empty($product))
+        {
+            header('location: ../products');
+        }
+
+        $commentModel = new CommentsModel();
+        $allComments = $commentModel->productComment($id);
+
+        $errorComment = "";
+
+        if ( isset ($_POST['addComment']))
+        {
+            if ( !empty ($_POST['comment']))
+            {
+                $model = new CommentsModel();
+                $comment = valid_data($_POST['comment']);
+
+                $comment = $model
+                    ->setId_product($_POST['id_product'])
+                    ->setId_user( $_SESSION['user_data']['id'])
+                    ->setComment( $comment )
+                    ->setDate(date('Y-m-d H:i:s'))
+                    ->setNote($_POST['star']);
+                $comment->create($model);
+                header('refresh: 0');
+
+            } else {
+                $errorComment = "Veuillez remplir le champ";
+            }
+        }
+        Renderer::render('products/seeProduct' , compact('product', 'images', 'allComments', 'errorComment'));
     }
 
     public static function selectAllProductsCategory()
@@ -39,15 +74,15 @@ class ProductsController extends Controller
         // Renderer::render('products/allProducts' , [compact('productsByCategories')]);
     }
 
-    public static function selectAllSousCategory()
-    {
-        $model = new ProductsModel();
-        $soloproduct = $model->selectProductbyId($id);
-        foreach($soloproduct as $product){
-            $images = explode(',', $product->url); 
-         }  
-        Renderer::render('products/seeProduct' , compact('product', 'images'));
-    }
+    // public static function selectAllSousCategory()
+    // {
+    //     $model = new ProductsModel();
+    //     $soloproduct = $model->findBy($id);
+    //     foreach($soloproduct as $product){
+    //         $images = explode(',', $product->url); 
+    //      }  
+    //     Renderer::render('products/seeProduct' , compact('product', 'images'));
+    // }
 
     public static function seeUpdateProduct($id)
     {
@@ -81,16 +116,6 @@ class ProductsController extends Controller
             ->setName($_POST['name']);
         $product->create($model); 
     }
-
-        // $sousCategories = $model->findAllSousCategories();
-
-        // return $sousCategories;
-        // echo '<pre>';
-        // var_dump($sousCategories);
-        // echo '</pre>';
-        // Renderer::render('products/allProducts' , compact('sousCategories'));
-
-    
     
     public static function deleteProduct(){
         // $model = new ProductsModel();
@@ -106,11 +131,10 @@ class ProductsController extends Controller
 
     public static function getCategories()
     {
-        $model = new ProductsModel();
-        $categories = $model->findAllCategories();
-        return  $categories;
-        // var_dump($categories);
-        // Renderer::render('products/allProducts' , compact('categories'));
+        $model = new CategoriesModel();
+        $categories = $model->findAll();
+        Renderer::render('layout' , compact('categories'));
+        return $categories;
     }
     
     
@@ -198,26 +222,22 @@ class ProductsController extends Controller
 
         foreach ($categories as $categorie)
         {
-            echo $categorie;
+            var_dump($categorie);
 
         }
-        $categorieName = array();
-        while ($categories = self::getCategories()){
-            $name = $categories['name'];
-        }
+        
         echo "cateeeeee";
-        var_dump($categorieName);
         // Renderer::render('products/allProducts' , compact('categories', 'categorieName', 'categorie'));
-        return $categorieName;
+        return $categories;
     }
     
                     
     public static function createViewProducts() 
     {
         
-        $categorieName = self::getCategorieName();
+        $categorieName = self::getNameCategories();
         $categories = self::getCategories();
-        $sousCategories = self::selectAllSousCategory();
+        // $sousCategories = self::selectAllSousCategory();
         $products = self::selectAllProducts();
         $productsByCategories = self::selectAllProductsCategory();
         $pagination = self::pagination();
@@ -226,28 +246,28 @@ class ProductsController extends Controller
         if(isset($categories))
         {
             var_dump($categories);
-            var_dump($categories["name"]);
+            var_dump($categories);
         }
         echo 'brrr';
             
         echo 'brrr';
-        var_dump($categories[0]["name"]);
+        var_dump($categories[0]['name']);
         
         
         $url = explode("/", filter_var($_GET['p'], FILTER_SANITIZE_URL));
-        // var_dump($url[1]);
+        var_dump($url);
         
-        if($url[1] !== $categories['name']){
+        if($url[1] !== $categories[0]['name']){
 
             echo "test operationnel";
             // if()
 
         }
-        // var_dump($categories);
+        var_dump($categories);
         // var_dump($sousCategories);
         // var_dump($products);
         // var_dump($productsByCategories);
-        Renderer::render('products/allProducts' , compact('categories', 'products', 'productsByCategories', 'sousCategories', 'page'));
+        Renderer::render('products/allProducts' , compact('categories', 'products', 'productsByCategories'));
     }             
 }
     
