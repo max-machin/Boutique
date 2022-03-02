@@ -10,7 +10,7 @@
 </form>
 
 <?php 
-    // var_dump($categories);
+    var_dump($categories);
     // var_dump($products);
     // echo 'heloooo';
     // var_dump($_GET);
