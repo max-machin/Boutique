@@ -18,17 +18,6 @@
 
                     <?php
                 // balise php avec la condition de reconnaisance du profil user
-<<<<<<< HEAD
-                    // echo('<li class="navli"><a href="index.php">Home</a></li>');
-                    // echo ('<li class="navli"><a href="users">Connexion</a></li>');
-                    // echo ('<li class="navli"><a href="users">Inscription</a></li>');
-                    // var_dump($categories);
-                    // foreach ($categories as $categorie)  
-                    
-                    // {
-                    //     echo ('<li class="navli"><a href="'. url.'products/'.$categorie[0]['name'].'">'.$categorie['name'].'</a></li>');
-                    // }
-=======
               
                     echo('<li class="navli"><a href="index.php">Home</a></li>');
                     echo ('<li class="navli"><a href="users">Connexion</a></li>');
@@ -37,7 +26,6 @@
                     {
                         echo ('<li class="navli"><a href="'.urlmac.'products/'.$categorie['name'].'">'.$categorie['name'].'</a></li>');
                     }
->>>>>>> product
                 
                 ?>
             </ul>
