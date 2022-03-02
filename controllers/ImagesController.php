@@ -38,19 +38,6 @@ class ImagesController extends Controller
         }
     }
 
-    public static function imageProduct($productId){
-        $modelBis = new ImagesModel();
-        $productImg = $modelBis->seeImage($productId);
-        // var_dump($productImg);
-
-        foreach($productImg as $image){
-            // var_dump($image->url_image);
-?>
-    <img src="Uploads/<?= $image->url_image ?>" width="50px">
-<?php
-        }
-    }
-
     public static function imageForProduct($productId){
         $modelBis = new ImagesModel();
         $productImg = $modelBis->seeImageProduct($productId);

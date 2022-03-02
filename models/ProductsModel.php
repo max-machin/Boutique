@@ -138,4 +138,16 @@ class ProductsModel extends Model
 
         return $this;
     }
+
+    public function selectAllProducts()
+    {
+        $this->database = DataBase::getPdo();
+
+        $findProduct=$this->database->prepare('SELECT products.*, GROUP_CONCAT(images.url_image SEPARATOR ",") as url FROM `products` INNER JOIN images ON products.id = images.id_product GROUP BY products.id');        
+        $findProduct -> execute();
+        $resultProduct = $findProduct -> fetchAll();
+
+
+        return($resultProduct);
+    }
 }

@@ -4,8 +4,11 @@ class ProductsController extends Controller
 {  
     public static function selectAllProducts(){
         $model = new ProductsModel();
-        $products = $model->findAll();       
-        Renderer::render('products/allProducts' , compact('products'));    
+        $products = $model->selectAllProducts(); 
+        foreach($products as $product){
+            $images = explode(',', $product->url); 
+         }      
+        Renderer::render('products/allProducts' , compact('products', 'product', 'images'));    
     }
 
     public static function selectAll(){
