@@ -1,10 +1,12 @@
 <?php
+
 require_once('libraries/Renderer.php');
 
 class ProductsController extends Controller
 {  
     
     public static function selectAllProducts(){
+        
         $model = new ProductsModel();
         $products = $model->selectAllProducts(); 
         foreach($products as $product){
@@ -161,7 +163,7 @@ class ProductsController extends Controller
         
         //     $page = $_GET["page"];
 
-        $categories = self::getCategories();
+        // $categories = self::getCategories();
        
         // if(isset($_GET['categorie']))
         // {
@@ -280,7 +282,7 @@ class ProductsController extends Controller
         // var_dump($sousCategories);
         // var_dump($products);
         // var_dump($productsByCategories);
-        Renderer::render('products/allProducts' , compact('categories', 'products', 'productsByCategories', 'sousCategories', 'page', 'categorieName'));
+        Renderer::render('products/allProducts' , compact('categories', 'products', 'productsByCategories', 'categorieName'));
     }             
 }
     
