@@ -6,11 +6,11 @@ class ProductsController extends Controller
     
     public static function selectAllProducts(){
         $model = new ProductsModel();
-        $products = $model->selectAllProducts(); 
-        foreach($products as $product){
-            $images = explode(',', $product->url); 
-         }      
-        // Renderer::render('products/allProducts' , compact('products', 'product', 'images'));    
+        $products = $model->findAllProducts(); 
+        // foreach($products as $product){
+        //     $images = explode(',', $product->url); 
+        //  }      
+         Renderer::render('products/allProducts' , compact('products'));    
     }
 
     public static function selectAll(){
@@ -256,7 +256,6 @@ class ProductsController extends Controller
         
         $url = explode("/", filter_var($_GET['p'], FILTER_SANITIZE_URL));
         var_dump($url);
-        
         if($url[1] !== $categories[0]['name']){
 
             echo "test operationnel";
