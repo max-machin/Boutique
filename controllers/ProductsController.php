@@ -7,7 +7,7 @@ class ProductsController extends Controller
     public static function selectAllProducts(){
         $model = new ProductsModel();
         $products = $model->selectAllProducts(); //changer le nom du model  
-        Renderer::render('products/allProducts' , compact('products', 'product', 'images'));    
+        Renderer::render('products/allProducts' , compact('products'));    
     }
 
     public static function selectAll(){
