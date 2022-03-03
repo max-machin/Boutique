@@ -6,7 +6,7 @@ class ProductsController extends Controller
 {  
     
     public static function selectAllProducts(){
-        
+
         $model = new ProductsModel();
         $products = $model->selectAllProducts(); 
         foreach($products as $product){
@@ -238,7 +238,7 @@ class ProductsController extends Controller
 
         //     $categorieNames[] = array("name" => $name);
         // }
-        print_r($categorieNames);
+        // print_r($categorieNames);
         // 
         // Renderer::render('products/allProducts' , compact('categories', 'categorieName', 'categorie'));
         return $categories;
@@ -259,8 +259,8 @@ class ProductsController extends Controller
         // var_dump($_GET['categorie']);
         if(isset($categorieName))
         {
-            var_dump($categories);
-            var_dump($categories);
+            // var_dump($categories);
+            // var_dump($categories);
            
         }
         // echo 'brrr';
