@@ -7,7 +7,7 @@ class ProductsController extends Controller
         $model = new ProductsModel();
         $products = $model->selectAllProducts(); 
         foreach($products as $product){
-            $images = explode(',', $product->url); 
+            $images = explode(',', $product['url']); 
          }      
         Renderer::render('products/allProducts' , compact('products', 'product', 'images'));    
     }
@@ -22,7 +22,7 @@ class ProductsController extends Controller
         $model = new ProductsModel();
         $soloproduct = $model->selectProductbyId($id);
         foreach($soloproduct as $product){
-            $images = explode(',', $product->url); 
+            $images = explode(',', $product['url']); 
          }  
         Renderer::render('products/seeProduct' , compact('product', 'images'));
     }
