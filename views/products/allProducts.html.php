@@ -16,11 +16,16 @@ if(isset($products))
 
 foreach($products as $product){
     var_dump($product);
+    $images = explode(',', $product['url']);
+    var_dump($images);
+     
 ?>
 
 <div class="products">
     <?php
         foreach($images as $image){
+
+            var_dump($image);
             ?>
             <img src="Uploads/<?= $image ?>" width="50px">
             <?php

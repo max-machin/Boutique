@@ -5,10 +5,7 @@ class ProductsController extends Controller
 {  
     public static function selectAllProducts(){
         $model = new ProductsModel();
-        $products = $model->selectAllProducts(); 
-        foreach($products as $product){
-            $images = explode(',', $product['url']); 
-         }      
+        $products = $model->selectAllProducts();   
         Renderer::render('products/allProducts' , compact('products', 'product', 'images'));    
     }
 
