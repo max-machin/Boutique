@@ -6,7 +6,6 @@ class bagsModel extends Model
     protected $id;
     protected $id_user;
     protected $id_product;
-    protected $price_product;
     protected $quantity_product;
 
     public function __construct()
@@ -52,26 +51,6 @@ class bagsModel extends Model
     public function setId_user($id_user)
     {
         $this->id_user = $id_user;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of id_products
-     */ 
-    public function getId_product()
-    {
-        return $this->id_product;
-    }
-
-    /**
-     * Set the value of id_products
-     *
-     * @return  self
-     */ 
-    public function setId_product($id_product)
-    {
-        $this->id_product = $id_product;
 
         return $this;
     }

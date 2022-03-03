@@ -34,6 +34,17 @@ class ProductsController extends Controller
             header('location: ../products');
         }
 
+        if ( isset ($_POST['addBag']))
+        {
+        $model = new BagsModel();
+        $productAdded = $model
+        ->setId_user($id_user)
+        ->setId_product($id_product)
+        ->setQuantity_product($quantity);
+
+        // $productAdded->create($model);  
+        }
+
         $commentModel = new CommentsModel();
         $allComments = $commentModel->productComment($id);
 
