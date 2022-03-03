@@ -10,37 +10,6 @@
     <title>Boutique</title>
 </head>
 
-   
-<header>
-    <nav class= "navbar">
-        <form action="index.php" method="post" >
-            <ul class="navul">
-
-                    <?php
-                // balise php avec la condition de reconnaisance du profil user
-                    // echo('<li class="navli"><a href="index.php">Home</a></li>');
-                    // echo ('<li class="navli"><a href="users">Connexion</a></li>');
-                    // echo ('<li class="navli"><a href="users">Inscription</a></li>');
-                    // var_dump($categories);
-                    // foreach ($categories as $categorie)  
-                    
-                    // {
-                    //     echo ('<li class="navli"><a href="'. url.'products/'.$categorie[0]['name'].'">'.$categorie['name'].'</a></li>');
-                    // }
-              
-                    echo('<li class="navli"><a href="index">Home</a></li>');
-                    echo ('<li class="navli"><a href="login">Connexion</a></li>');
-                    echo ('<li class="navli"><a href="register">Inscription</a></li>');
-                    foreach ($categories as $categorie)  
-                    {
-                        echo ('<li class="navli"><a href="'.url.'products/'.$categorie['name'].'">'.$categorie['name'].'</a></li>');
-                    }
-                
-                ?>
-            </ul>
-        </form>
-    </nav>
-</header>
 <body>
     <?php
 
@@ -49,9 +18,9 @@
     ?>
         <nav>
             <ul>
-                <li><a href="<?= url ?>products">Nos produits</a></li>
-                <li><a href="<?= url ?>users/profil">Profil</a></li>
-                <li><a href="<?= url ?>users/disconnect">Deconnexion</a></li>
+                <li><a href="<?= urlLaura ?>products">Nos produits</a></li>
+                <li><a href="<?= urlLaura ?>users/profil">Profil</a></li>
+                <li><a href="<?= urlLaura ?>users/disconnect">Deconnexion</a></li>
             </ul>
         </nav>
     <?php
@@ -59,8 +28,8 @@
     ?>
         <nav>
             <ul>
-                <li><a href="<?= url ?>users/register">Inscription</a></li>
-                <li><a href="<?= url ?>users/login">Connexion</a></li>
+                <li><a href="<?= urlLaura ?>users/register">Inscription</a></li>
+                <li><a href="<?= urlLaura ?>users/login">Connexion</a></li>
             </ul>
         </nav>
     <?php
