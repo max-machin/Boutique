@@ -10,7 +10,6 @@
 </form>
 
 <?php 
-<<<<<<< HEAD
 
 foreach($products as $product){
     var_dump($product);
@@ -32,9 +31,6 @@ foreach($products as $product){
 }
 //  }
     // var_dump($categories);
-=======
-    var_dump($categories);
->>>>>>> product
     // var_dump($products);
     // echo 'heloooo';
     // var_dump($_GET);
