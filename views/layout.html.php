@@ -18,9 +18,9 @@
     ?>
         <nav>
             <ul>
-                <li><a href="<?= urlLaura ?>products">Nos produits</a></li>
-                <li><a href="<?= urlLaura ?>users/profil">Profil</a></li>
-                <li><a href="<?= urlLaura ?>users/disconnect">Deconnexion</a></li>
+                <li><a href="<?= urlmac ?>products">Nos produits</a></li>
+                <li><a href="<?= urlmac ?>users/profil">Profil</a></li>
+                <li><a href="<?= urlmac ?>users/disconnect">Deconnexion</a></li>
             </ul>
         </nav>
     <?php
@@ -28,8 +28,8 @@
     ?>
         <nav>
             <ul>
-                <li><a href="<?= urlLaura ?>users/register">Inscription</a></li>
-                <li><a href="<?= urlLaura ?>users/login">Connexion</a></li>
+                <li><a href="<?= urlmac ?>users/register">Inscription</a></li>
+                <li><a href="<?= urlmac ?>users/login">Connexion</a></li>
             </ul>
         </nav>
     <?php
