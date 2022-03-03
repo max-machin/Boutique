@@ -139,7 +139,7 @@ class ProductsModel extends Model
         return $this;
     }
 
-    public function selectAllProducts()
+    public function findAllProducts()
     {
         $this->database = DataBase::getPdo();
 

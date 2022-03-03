@@ -11,6 +11,34 @@
 
 <?php 
 
+//  }
+    // var_dump($categories);
+    // var_dump($products);
+    // echo 'heloooo';
+    // var_dump($_GET);
+    // echo 'heloooo';
+    // var_dump($sousCategories);
+
+// if (isset($_GET['categorie'])) {
+    
+//  $page_categorie = $_GET['categorie']; 
+//     for ($i = 1; $i <= $nbr_page_cat; $i++) {
+//         if ($page != $i)
+//             echo "<a class='page' href='?page=$i&categorie=$page_categorie'>$i</a>&nbsp";
+//         else
+//             echo "<a class='page'>$i</a>&nbsp";
+//     }
+// } 
+// else {
+//     for ($i = 1; $i <= $nbr_page; $i++) {
+//         if ($page != $i)
+//             echo "<a class='page' href='?page=$i'>$i</a>";
+//         else
+//             echo "<a class='page'>$i</a>";
+//     }
+// }
+
+
 if(isset($products))
 {
 
@@ -52,4 +80,3 @@ else
 }
 
 ?>
-
