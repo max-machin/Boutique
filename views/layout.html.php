@@ -27,6 +27,14 @@
                     // {
                     //     echo ('<li class="navli"><a href="'. url.'products/'.$categorie[0]['name'].'">'.$categorie['name'].'</a></li>');
                     // }
+              
+                    echo('<li class="navli"><a href="index.php">Home</a></li>');
+                    echo ('<li class="navli"><a href="users">Connexion</a></li>');
+                    echo ('<li class="navli"><a href="users">Inscription</a></li>');
+                    foreach ($categories as $categorie)  
+                    {
+                        echo ('<li class="navli"><a href="'.urlmac.'products/'.$categorie['name'].'">'.$categorie['name'].'</a></li>');
+                    }
                 
                 ?>
             </ul>

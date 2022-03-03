@@ -43,7 +43,6 @@ if(isset($products))
 {
 
 foreach($products as $product){
-
     var_dump($product);
     $images = explode(',', $product['url']);
     var_dump($images);
