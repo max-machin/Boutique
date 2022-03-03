@@ -19,25 +19,25 @@ class Database
 
         try {
             
-        self::$instance = new PDO('mysql:host=localhost;dbname=boutique;charset=utf8', 'root', '', [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-        ]);
-        // self::$instance = new PDO('mysql:host=localhost;dbname=boutique;charset=utf8', 'root', 'root', [
+        // self::$instance = new PDO('mysql:host=localhost;dbname=boutique;charset=utf8', 'root', '', [
         //     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         //     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
         // ]);
+        self::$instance = new PDO('mysql:host=localhost;dbname=boutique;charset=utf8', 'root', 'root', [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+        ]);
 
         } catch (PDOException $e) {
             die('Erreur : ' .$e->getMessage());
         }
         
         }
-        //windows
-        self::$instance = new PDO('mysql:host=localhost;dbname=boutique;charset=utf8', 'root', '', [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-        ]);
+        // windows
+        // self::$instance = new PDO('mysql:host=localhost;dbname=boutique;charset=utf8', 'root', '', [
+        //     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        //     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+        // ]);
         
         return self::$instance;
     }

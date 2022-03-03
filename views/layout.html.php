@@ -49,9 +49,9 @@
     ?>
         <nav>
             <ul>
-                <li><a href="<?= url ?>products">Nos produits</a></li>
-                <li><a href="<?= url ?>users/profil">Profil</a></li>
-                <li><a href="<?= url ?>users/disconnect">Deconnexion</a></li>
+                <li><a href="<?= urlmac ?>products">Nos produits</a></li>
+                <li><a href="<?= urlmac ?>users/profil">Profil</a></li>
+                <li><a href="<?= urlmac ?>users/disconnect">Deconnexion</a></li>
             </ul>
         </nav>
     <?php
@@ -59,8 +59,8 @@
     ?>
         <nav>
             <ul>
-                <li><a href="<?= url ?>users/register">Inscription</a></li>
-                <li><a href="<?= url ?>users/login">Connexion</a></li>
+                <li><a href="<?= urlmac ?>users/register">Inscription</a></li>
+                <li><a href="<?= urlmac ?>users/login">Connexion</a></li>
             </ul>
         </nav>
     <?php

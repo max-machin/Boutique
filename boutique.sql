@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Hôte : localhost:8889
--- Généré le : lun. 21 fév. 2022 à 17:35
--- Version du serveur : 5.7.34
--- Version de PHP : 8.0.8
+-- Hôte : 127.0.0.1:3306
+-- Généré le : jeu. 03 mars 2022 à 11:16
+-- Version du serveur :  5.7.31
+-- Version de PHP : 7.3.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -27,12 +27,21 @@ SET time_zone = "+00:00";
 -- Structure de la table `bags`
 --
 
-CREATE TABLE `bags` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `bags`;
+CREATE TABLE IF NOT EXISTS `bags` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_user` int(11) NOT NULL,
   `id_product` int(11) NOT NULL,
-  `quantity_product` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `quantity_product` int(11) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `bags`
+--
+
+INSERT INTO `bags` (`id`, `id_user`, `id_product`, `quantity_product`) VALUES
+(1, 13, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -40,26 +49,36 @@ CREATE TABLE `bags` (
 -- Structure de la table `categories`
 --
 
-CREATE TABLE `categories` (
-  `id` int(11) NOT NULL,
-  `name_categorie` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+DROP TABLE IF EXISTS `categories`;
+CREATE TABLE IF NOT EXISTS `categories` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `categories`
 --
 
-INSERT INTO `categories` (`id`, `name_categorie`) VALUES
+INSERT INTO `categories` (`id`, `name`) VALUES
 (1, 'make-up'),
 (2, 'skincare');
 
+-- --------------------------------------------------------
+
 --
--- Déchargement des données de la table `categories`
+-- Structure de la table `command`
 --
 
-INSERT INTO `categories` (`id_categorie`, `name_categorie`) VALUES
-(1, 'make-up'),
-(2, 'skincare');
+DROP TABLE IF EXISTS `command`;
+CREATE TABLE IF NOT EXISTS `command` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_command` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `id_product` int(11) NOT NULL,
+  `quantity_product` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -67,12 +86,29 @@ INSERT INTO `categories` (`id_categorie`, `name_categorie`) VALUES
 -- Structure de la table `comments`
 --
 
-CREATE TABLE `comments` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `comments`;
+CREATE TABLE IF NOT EXISTS `comments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_user` int(11) NOT NULL,
   `id_product` int(11) NOT NULL,
-  `comment` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `comment` text NOT NULL,
+  `note` int(11) NOT NULL,
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `relation_comment_product` (`id_product`),
+  KEY `relation_user_comment` (`id_user`)
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `comments`
+--
+
+INSERT INTO `comments` (`id`, `id_user`, `id_product`, `comment`, `note`, `date`) VALUES
+(4, 13, 2, 'wesh\r\n', 5, '2022-02-28 12:48:39'),
+(8, 13, 2, 'Sa marche ou quoi?\r\n', 5, '2022-02-28 11:56:10'),
+(16, 13, 2, 'La notation marche', 3, '2022-02-28 13:55:57'),
+(30, 14, 2, 'Je suis l\'admin et je commente des choses parceque je suis l\'admin', 5, '2022-02-28 15:43:07'),
+(32, 17, 4, 'Ca bavouille', 4, '2022-03-02 11:11:29');
 
 -- --------------------------------------------------------
 
@@ -80,11 +116,13 @@ CREATE TABLE `comments` (
 -- Structure de la table `deliveries`
 --
 
-CREATE TABLE `deliveries` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `deliveries`;
+CREATE TABLE IF NOT EXISTS `deliveries` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_user` int(11) NOT NULL,
   `id_commande` int(11) NOT NULL,
-  `address_delevery` varchar(255) NOT NULL
+  `address_delevery` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -93,11 +131,24 @@ CREATE TABLE `deliveries` (
 -- Structure de la table `images`
 --
 
-CREATE TABLE `images` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `images`;
+CREATE TABLE IF NOT EXISTS `images` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_product` int(11) NOT NULL,
-  `url_image` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `url_image` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `relation_img_product` (`id_product`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `images`
+--
+
+INSERT INTO `images` (`id`, `id_product`, `url_image`) VALUES
+(1, 2, 'balm.jpeg'),
+(2, 2, 'balm_.jpeg'),
+(3, 3, 'cream1.jpeg'),
+(4, 3, 'cream2.jpeg');
 
 -- --------------------------------------------------------
 
@@ -105,14 +156,18 @@ CREATE TABLE `images` (
 -- Structure de la table `products`
 --
 
-CREATE TABLE `products` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `products`;
+CREATE TABLE IF NOT EXISTS `products` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `description` varchar(1000) NOT NULL,
   `price` float NOT NULL,
   `id_categorie` int(11) NOT NULL,
-  `id_sous_categorie` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `id_sous_categorie` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `relation_product_cat` (`id_categorie`),
+  KEY `relation_product_sous_cat` (`id_sous_categorie`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `products`
@@ -123,26 +178,20 @@ INSERT INTO `products` (`id`, `name`, `description`, `price`, `id_categorie`, `i
 (3, 'cream', 'like a \"cream fouettée\"', 40, 2, 1),
 (4, 'snail saliva', 'bave d\'escargot', 33, 2, 2);
 
---
--- Déchargement des données de la table `products`
---
-
-INSERT INTO `products` (`id_product`, `name`, `description`, `price`, `id_categorie`, `id_sous_categorie`) VALUES
-(2, 'lipgloss', 'glossy glossy', 15, 1, 7),
-(3, 'cream', 'like a \"cream fouettée\"', 40, 2, 1),
-(4, 'snail saliva', 'bave d\'escargot', 33, 2, 2);
-
 -- --------------------------------------------------------
 
 --
 -- Structure de la table `sous_categories`
 --
 
-CREATE TABLE `sous_categories` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `sous_categories`;
+CREATE TABLE IF NOT EXISTS `sous_categories` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_categorie` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `relation_sous_cat` (`id_categorie`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `sous_categories`
@@ -157,150 +206,35 @@ INSERT INTO `sous_categories` (`id`, `id_categorie`, `name`) VALUES
 (6, 1, 'eyes'),
 (7, 1, 'lips');
 
---
--- Déchargement des données de la table `sous_categories`
---
-
-INSERT INTO `sous_categories` (`id_sous_categorie`, `id_categorie`, `name`) VALUES
-(1, 2, 'mosturizer'),
-(2, 2, 'serum'),
-(3, 2, 'lotion'),
-(4, 2, 'cleanser'),
-(5, 1, 'face'),
-(6, 1, 'eyes'),
-(7, 1, 'lips');
-
 -- --------------------------------------------------------
 
 --
 -- Structure de la table `users`
 --
 
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(255) NOT NULL,
   `prenom` varchar(255) NOT NULL,
   `nom` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `adresse` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `adresse` varchar(255) NOT NULL DEFAULT '',
+  `token` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `prenom`, `nom`, `password`, `adresse`) VALUES
-(1, 'admin@gmail.com', 'admin', 'admin', 'admin', 'admin');
-
---
--- Index pour les tables déchargées
---
-
---
--- Index pour la table `bags`
---
-ALTER TABLE `bags`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `categories`
---
-ALTER TABLE `categories`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `comments`
---
-ALTER TABLE `comments`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `relation_comment_product` (`id_product`),
-  ADD KEY `relation_user_comment` (`id_user`);
-
---
--- Index pour la table `deliveries`
---
-ALTER TABLE `deliveries`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `images`
---
-ALTER TABLE `images`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `relation_img_product` (`id_product`);
-
---
--- Index pour la table `products`
---
-ALTER TABLE `products`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `relation_product_cat` (`id_categorie`),
-  ADD KEY `relation_product_sous_cat` (`id_sous_categorie`);
-
---
--- Index pour la table `sous_categories`
---
-ALTER TABLE `sous_categories`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `relation_sous_cat` (`id_categorie`);
-
---
--- Index pour la table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT pour les tables déchargées
---
-
---
--- AUTO_INCREMENT pour la table `bags`
---
-ALTER TABLE `bags`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `categories`
---
-ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT pour la table `comments`
---
-ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `deliveries`
---
-ALTER TABLE `deliveries`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `images`
---
-ALTER TABLE `images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `products`
---
-ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT pour la table `sous_categories`
---
-ALTER TABLE `sous_categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT pour la table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+INSERT INTO `users` (`id`, `email`, `prenom`, `nom`, `password`, `adresse`, `token`) VALUES
+(1, 'admin@gmail.com', 'admin', 'admin', '$2y$10$Y761JaL5y.o6n0KAZKLPU.SLABNfAcSWEliCNDHFEQ4rF8i503UY6', '', NULL),
+(13, 'b@a.com', 'b', 'b', '$2y$10$LpmzxRasxvRHBuv2P5vH9uNcPEEw3smd6XBc32by4rSALYcmknH1m', '13000 Marseille', NULL),
+(14, 'a@a.com', 'Laura', 'Laura', '$2y$10$uMHlkNCyPyQLaPfAqVMidOOFs51VHDD9i26Z6O2mXXuQ5Pw/KJGL6', 'a', NULL),
+(15, 'Cooker_13@outlook.fr', 'max', 'max', '$2y$10$NzwEl64Xo/UgsfHRQOSnIOlxxu9iODLfM/hzRBoeskoVpDNcjllxa', '10 Rue Beauvau', NULL),
+(16, 'max.machin@laplateforme.io', 'max', 'max', '$2y$10$v3ciHfPyXuWtXO/rNd/lR.5nXnYHH48dqecyD8CVARl.df6ABYlZy', 'max', NULL),
+(17, 'laura.savickaite@laplateforme.io', 'laura', 'laura', '$2y$10$FOvApXNg9OmENOm73OSpb.m7SKVXWcQjsuUQ6kMUZF1MK0IjU6BgC', 'laura', NULL);
 
 --
 -- Contraintes pour les tables déchargées
