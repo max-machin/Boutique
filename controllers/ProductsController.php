@@ -1,10 +1,12 @@
 <?php
+
 require_once('libraries/Renderer.php');
 
 class ProductsController extends Controller
 {  
     
     public static function selectAllProducts(){
+
         $model = new ProductsModel();
         $products = $model->findAllProducts(); 
         // foreach($products as $product){
@@ -244,6 +246,32 @@ class ProductsController extends Controller
                         
     }
 
+    public static function getNameCategories()
+    {
+        $categories = self::getCategories();
+
+        foreach ($categories as $categorie)
+        {
+
+        }
+        
+        echo "cateeeeee";
+            
+            //    $categorieNames[] = array();
+
+        // for ($i = 0; $i <)
+        // while ($categories = self::getCategories())
+        // {
+        //     $name = $categories['name'];
+
+        //     $categorieNames[] = array("name" => $name);
+        // }
+        // print_r($categorieNames);
+        // 
+        // Renderer::render('products/allProducts' , compact('categories', 'categorieName', 'categorie'));
+        return $categories;
+    }
+    
     
                     
     public static function createViewProducts() 
