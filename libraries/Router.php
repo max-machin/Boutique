@@ -87,7 +87,10 @@ class Router
             elseif($controllerName == "ProductsController"){
                 $controllerName::selectAllProducts();
                 }
+           
+            {
 
+            }
                 // if($controllerName == "ImagesController"){
                 //     $controllerName::seeProductImg();
                 // }
@@ -100,7 +103,7 @@ class Router
         {
             if(!empty($url[1]))
             {
-                // var_dump($url[1]);
+                var_dump($url[1]);
               
                 // // $controllerName::selectAllProducts();
                 if($url[1] == 'makeup'||'skincare'){

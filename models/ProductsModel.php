@@ -161,10 +161,11 @@ class ProductsModel extends Model
 
         return($resultProduct);
     }
-    public function getAllProducts()
-    {
-        $query = $this->requete("SELECT * FROM {$this->table}");
-    }
+    // public function getAllProducts()
+    // {
+    //     $query = $this->requete("SELECT * FROM {$this->table}");
+    //     return $query->fetchAll();
+    // }
 
 
     public function countProducts()
@@ -208,20 +209,15 @@ class ProductsModel extends Model
          return $query->fetchAll();
     }
     
-    public function findAllCategories()
-    {
-        $query = $this->requete("SELECT * FROM `categories` ");
-        // var_dump($query->fetchAll());
-        // return ("test");
-       return $query->fetchAll();
-    }
+    // public function findAllCategories()
+    // {
+    //     $query = $this->requete("SELECT * FROM `categories` ");
+    //     // var_dump($query->fetchAll());
+    //     // return ("test");
+    //    return $query->fetchAll();
+    // }
 
-    public function findAllSousCategories()
-    {
-        $query = $this->requete("SELECT * FROM `sous_categories` WHERE id_categorie = 1");
-     
-        return $query->fetchAll();
-    }
+   
 
     
 }

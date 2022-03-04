@@ -64,11 +64,17 @@ class ProductsController extends Controller
 
     public static function selectAllProductsCategory()
     {
+        $categories = self::getAllCategories();
         $model = new ProductsModel();
-        $productsByCategories = $model->productsByCategorie();
+        $productsByCategories = $model->findby($categories);
+
+
+
+
+        var_dump($productsByCategories);
+        var_dump($categories);
         return $productsByCategories;
         // var_dump($_GET['categorie']);
-        // var_dump($productsByCategories);
         
 
         // Renderer::render('products/allProducts' , [compact('productsByCategories')]);
@@ -127,14 +133,25 @@ class ProductsController extends Controller
     // {
     //     $model = new ProductsModel();
     //     $products_cat = $model->productsByCategorie();
-    // }
+    // }^
 
     public static function getCategories()
     {
         $model = new CategoriesModel();
         $categories = $model->findAll();
+        // $modelSousCat = new SousCategoriesModel();
+        // $sousCategories = $model->findAll();
         Renderer::render('layout' , compact('categories'));
+        
+        // var_dump($categories);
+        
         return $categories;
+    }
+
+    public static function getMakeupSouscategories()
+    {
+        $model = new SousCategoriesModel();
+        $makeupSousCat = $model->findBy();
     }
     
     
@@ -161,7 +178,7 @@ class ProductsController extends Controller
         
         //     $page = $_GET["page"];
 
-        $categories = self::getCategories();
+        // $categories = self::getCategories();
        
         // if(isset($_GET['categorie']))
         // {
@@ -216,32 +233,6 @@ class ProductsController extends Controller
                         
     }
 
-    public static function getNameCategories()
-    {
-        $categories = self::getCategories();
-
-        foreach ($categories as $categorie)
-        {
-
-        }
-        
-        echo "cateeeeee";
-            
-            //    $categorieNames[] = array();
-
-        // for ($i = 0; $i <)
-        // while ($categories = self::getCategories())
-        // {
-        //     $name = $categories['name'];
-
-        //     $categorieNames[] = array("name" => $name);
-        // }
-        print_r($categorieNames);
-        // 
-        // Renderer::render('products/allProducts' , compact('categories', 'categorieName', 'categorie'));
-        return $categories;
-    }
-    
     
                     
     public static function createViewProducts() 
@@ -250,15 +241,15 @@ class ProductsController extends Controller
         $categorieName = self::getNameCategories();
         $categories = self::getCategories();
         // $sousCategories = self::selectAllSousCategory();
-        $products = self::selectAllProducts();
-        $productsByCategories = self::selectAllProductsCategory();
-        $pagination = self::pagination();
+        // $products = self::selectAllProducts();
+        // $productsByCategories = self::selectAllProductsCategory();
+        // $pagination = self::pagination();
         
         // var_dump($_GET['categorie']);
-        if(isset($categorieName))
+        if(isset($categories))
         {
             var_dump($categories);
-            var_dump($categories);
+            // var_dump($categories);
            
         }
         // echo 'brrr';
@@ -269,17 +260,23 @@ class ProductsController extends Controller
         
         $url = explode("/", filter_var($_GET['p'], FILTER_SANITIZE_URL));
         var_dump($url);
-        if($url[1] !== $categories[0]['name']){
+        if($url[1] == $categories[0]['name']){
 
-            echo "test operationnel";
+            $categories[0]['name'] = $nameCategorie;
             // if()
 
         }
-        var_dump($categories);
+        // var_dump($categories);
         // var_dump($sousCategories);
         // var_dump($products);
         // var_dump($productsByCategories);
         Renderer::render('products/allProducts' , compact('categories', 'products', 'productsByCategories', 'sousCategories', 'page', 'categorieName'));
-    }             
+    }
+    
+    public static function createMakeupView() 
+    {
+
+    }
 }
     
+//! faire une fonction pour make up et une func pour skincare avec deux renderer différents 

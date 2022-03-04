@@ -12,6 +12,7 @@
 
 <body>
     <?php
+    // var_dump($categories);
 
     if ( isset ($_SESSION['user_data'] ) )
     {
@@ -21,6 +22,12 @@
                 <li><a href="<?= urlmac ?>products">Nos produits</a></li>
                 <li><a href="<?= urlmac ?>users/profil">Profil</a></li>
                 <li><a href="<?= urlmac ?>users/disconnect">Deconnexion</a></li>
+                <?php
+                foreach ($categories as $categorie)  
+                    {
+                        echo ('<li class="navli"><a href="'.urlmac.'products/'.$categorie['name'].'">'.$categorie['name'].'</a></li>');
+                    }
+                ?>
             </ul>
         </nav>
     <?php
@@ -30,6 +37,12 @@
             <ul>
                 <li><a href="<?= urlmac ?>users/register">Inscription</a></li>
                 <li><a href="<?= urlmac ?>users/login">Connexion</a></li>
+                <?php
+                foreach ($categories as $categorie)  
+                    {
+                        echo ('<li class="navli"><a href="'.urlmac.'products/'.$categorie['name'].'">'.$categorie['name'].'</a></li>');
+                    }
+                ?>
             </ul>
         </nav>
     <?php
