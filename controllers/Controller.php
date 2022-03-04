@@ -12,6 +12,7 @@ abstract class Controller
         //permet d'éviter les XSS (cross-site scripting) injections (plus ou moins fool-proof)
         $allowed_tags = array('<p>', '<a>', '<h1>', '<h2>', '<h3>', '<body>', '<head>', '<nav>');
         $test = strip_tags($string, $allowed_tags = null);
-        echo htmlspecialchars($test, ENT_QUOTES, 'UTF-8');
+        
+        return(htmlspecialchars($test, ENT_QUOTES, 'UTF-8'));
     }
 }

@@ -11,6 +11,11 @@
 </head>
 
 <body>
+<form action="" method="post">
+    <input type="text" name="search" placeholder="Search">
+    <button type="submit" name="submit-search">search</button>
+</form>
+
     <?php
 
     if ( isset ($_SESSION['user_data'] ) )

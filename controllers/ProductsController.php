@@ -73,6 +73,18 @@ class ProductsController extends Controller
         Renderer::render('products/seeProduct' , compact('product', 'images', 'allComments', 'errorComment'));
     }
 
+    public static function searchbarProduct()
+    {
+        if(isset($_POST['submit-search'])){
+            $motclef = Controller::preventXSS($_POST['search']);
+
+            $model = new ProductsModel;
+            $searchedProducts = $model->searchProduct($motclef);
+            Renderer::render('searchbar', compact('searchedProducts'));
+            var_dump($searchedProducts);
+         }   
+    }
+
     public static function selectAllProductsCategory()
     {
         $model = new ProductsModel();

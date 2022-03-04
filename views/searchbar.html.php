@@ -1,14 +1,21 @@
-<form action="" method="post">
-    <input type="text" name="search" placeholder="Search">
-    <button type="submit" name="submit-search"></button>
-</form>
-
-<!-- search.php -> file loaded with all the results -->
 
 <?php
+foreach($searchedProducts as $searchProduct){
+    $images = explode(',', $searchProduct['url']);
+?>
 
-if(isset($_POST['submit-search'])){
-    Controller::preventXSS($_POST['search']);
+<div class="foundproducts">
+    <?php
+        foreach($images as $image){
+
+            var_dump($image);
+            ?>
+            <img src="Uploads/<?= $image ?>" width="50px">
+            <?php
+        }
+        ?>
+        <h2><a href="products/<?= $searchProduct['id'] ?>"><?= $searchProduct['name'] ?></a></h2>
+    </div>
+    <?php
 }
-
 ?>
