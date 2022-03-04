@@ -313,7 +313,7 @@ class ProductsController extends Controller
         $productsByCat = self::getProductByCategorie();
         // $sousCategories = self::selectAllSousCategory();
         // $products = self::selectAllProducts();
-        // $productsByCategories = self::selectAllProductsCategory();
+        $productsByCategories = self::selectAllProductsCategory();
         // $pagination = self::pagination();
         
         // var_dump($_GET['categorie']);
@@ -342,7 +342,7 @@ class ProductsController extends Controller
         // var_dump($sousCategories);
         // var_dump($products);
         // var_dump($productsByCategories);
-        Renderer::render('products/allProducts' , compact('categories', 'products', 'productsByCat', 'sousCategories', 'page', 'nameCategorie'));
+        Renderer::render('products/allProducts' , compact('categories', 'products', 'productsByCat', 'sousCategories', 'productsByCategories', 'nameCategorie'));
     }
     
     public static function createMakeupView() 
