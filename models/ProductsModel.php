@@ -189,9 +189,9 @@ class ProductsModel extends Model
         ON categories.id = products.id_categorie WHERE categories.name = '$page_categorie'");
         return $query->fetchAll();
     }
-    public function productsByCategorie() 
+    public function productsByCategorie($nameCategorie) 
     {
-        $query = $this->requete("SELECT * FROM products WHERE products.id_categorie = 1");
+        $query = $this->requete("SELECT * FROM products WHERE products.id_categorie = '$nameCategorie' ");
         return $query->fetchAll();
     }
     
