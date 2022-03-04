@@ -4,3 +4,11 @@
 </form>
 
 <!-- search.php -> file loaded with all the results -->
+
+<?php
+
+if(isset($_POST['submit-search'])){
+    Controller::preventXSS($_POST['search']);
+}
+
+?>
