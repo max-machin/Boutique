@@ -36,11 +36,12 @@ else
 
     <?php var_dump($product);
 
-    if(isset($_POST['addBag']))
-    {
-    $_SESSION['product']['id'] = $product['id'];
-    BagsController::insertBag();
-    }
+    // if(isset($_POST['addBag']))
+    // {
+    // $_SESSION['product']['id'] = $product['id'];
+    // // var_dump($_SESSION['product']['id']);
+    // BagsController::insertBag($_SESSION['user_data']['id'], $_SESSION['product']['id'], $product['quantity']);
+    // }
 
     ?>
 
