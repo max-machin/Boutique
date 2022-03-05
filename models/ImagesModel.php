@@ -9,6 +9,11 @@ class ImagesModel extends Model
     // protected $database;
 
 
+    public function __construct()
+    {
+       $this->table = 'images';
+    }
+
     /**
      * Get the value of id
      */ 

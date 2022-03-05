@@ -150,21 +150,27 @@ class Router
             }
             
 
-            if ($controllerName == "AdminController"){
-                // Renderer::render('admin/backoffice');
-                if(!empty($url[1]) && empty($url[2])){
-                    if($url[1] == 'create'){
-                    Renderer::render('admin/addProduct');    
-                    } 
-                }elseif(!empty($url[1]) && !empty($url[2])){
-                    if($url[1]== 'create' && $url[2] == 'image'){
-                        ProductsController::selectAll();
-                        ImagesController::updateImage();
 
+            // if (!empty($url[1]))
+            // {
+                if ($controllerName == "AdminController"){
+                    if(empty($url[1]) && empty($url[2])){
+                        echo 'je suis là';
+                        Renderer::render('admin/backoffice');
+                    }
+                    elseif(!empty($url[1]) && empty($url[2])){
+                        if($url[1] == 'create'){
+                            Renderer::render('admin/addProduct');    
+                        } 
+                    }elseif(!empty($url[1]) && !empty($url[2])){
+                        if($url[1]== 'create' && $url[2] == 'image'){
+                            ProductsController::selectAll();
+                            ImagesController::updateImage();
+
+                        }
                     }
                 }
-            }
-
+            // }
 
         }      
     }   

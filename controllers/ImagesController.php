@@ -42,5 +42,12 @@ class ImagesController extends Controller
            }
         } 
     }
+
+    public function seeImages(){
+        $model = new ImagesModel();
+        $test = $model->findAll();
+
+        var_dump($test);
+    }
 }     
 
