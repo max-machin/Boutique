@@ -331,9 +331,12 @@ class UsersController extends Controller
                 $display1 = "none";
             }
         }
+
+        $command = new CommandsModel();
+        $userCommand = $command->userCommand( $_SESSION['user_data']['id']);
        
 
-        Renderer::render('users/profil' , compact('user', 'error_new_password', 'error_validPassword', 'error_old_password', 'display1' , 'display2'));
+        Renderer::render('users/profil' , compact('user', 'error_new_password', 'error_validPassword', 'error_old_password', 'display1' , 'display2', 'userCommand'));
     }
 
     /**
@@ -396,5 +399,113 @@ class UsersController extends Controller
             }
         }
         Renderer::render('users/forgotPassword');
+    }
+
+    public static function seeCommand()
+    {
+
+        $_SESSION['user_data']['promo'] = NULL;
+        $model = new BagsModel();
+        $command = $model->checkBag($_SESSION['user_data']['id']);
+        if ( empty ( $_SESSION['user_data']) )
+        {
+            header('location: login');
+        }
+
+        if ( isset($_POST['promo']))
+        {
+            if ( !empty ($_POST['codePromo']) )
+            {
+                if ( $_POST['codePromo'] === codePromo)
+                {
+                    foreach ($command as $product) 
+                    {
+                        $_SESSION['user_data']['promo'] = 1;
+                    }
+                }
+            }
+        } 
+
+        Renderer::render('users/commands', compact('command'));
+    } 
+
+    public static function paiement() 
+    {
+        
+        if ( isset ( $_POST['prix']) && !empty ( $_POST['prix']))
+        {
+            require_once('vendor/autoload.php');
+            $prix = ($_POST['prix']);
+
+            // On insctancie stripe
+            \Stripe\Stripe::setApiKey('sk_test_51KZXuDJm5576Uzo35LWKkxbWACB19bTEv0cn494ONQLuQqfQd7GHXeCWMp2LxLUbbCikvt6siO7nY5TdBdaMeFcd00Hl7keAL2');
+
+            $intent = \Stripe\PaymentIntent::create([
+               'amount' => $prix*100,
+               'currency' => 'eur'
+           ]);
+        } else {
+            header('location: commands');
+        }
+        Renderer::render('users/paiement', compact('intent'));
+    }
+
+    public static function successCommand()
+    {
+        $model = new BagsModel();
+
+        $command = $model->checkCommandBag($_SESSION['user_data']['id']);
+
+        
+
+        $DateAndTime = date('m-d-Y h:i:s');
+        if (isset($command)){
+            if ( !empty ($command))
+            {
+                $check = new CommandsModel();
+                $checkNum = $check->checkNumCommand();
+                $numCommand = intval($checkNum['MAX(id_command)'])+1;
+                
+                if ( isset ( $_SESSION['user_data']['promo'])){
+                    foreach ($command as $product)
+                    {
+                        $promo = 15;
+                        $insert = new CommandsModel();
+                        $insertCommand = $insert
+                            ->setPrice($product['price'])
+                            ->setId_user($_SESSION['user_data']['id'])
+                            ->setId_command($numCommand)
+                            ->setId_product($product['id'])
+                            ->setPromo($promo)
+                            ->setQuantity_product($product['quantity_product']);
+                        $insertCommand->create($insert);
+                    }
+                } else {
+                    foreach ($command as $product)
+                    {
+                        $insert = new CommandsModel();
+                        $insertCommand = $insert
+                            ->setPrice($product['price'])
+                            ->setId_user($_SESSION['user_data']['id'])
+                            ->setId_command($numCommand)
+                            ->setId_product($product['id'])
+                            ->setQuantity_product($product['quantity_product']);
+                        $insertCommand->create($insert);
+                    }
+                }
+                
+                $delete = new BagsModel();
+                $deleteBag = $delete->deleteBy(['id_user' => $_SESSION['user_data']['id']]);
+
+                unset($_SESSION['user_data']['promo']);
+
+            } else {
+                header('location: ../bags');
+            }
+        }
+        $command = NULL;
+        
+
+        Renderer::render('users/successCommand' , compact('command'));
     }
 }

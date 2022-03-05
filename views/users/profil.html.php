@@ -1,22 +1,22 @@
 <?php 
 if ( empty ( $user)) {
-    header('location: index.php');
+    header('location: login');
 }
 if ( !empty ($user)){
 ?>
 <h2>Vos informations personnelles</h2>
 <form action="" method="post">
     <label for="email">E-mail *</label></br>
-    <input id="email" type="email" name="email" value="<?= $user->email ?>"></br>
+    <input id="email" type="email" name="email" value="<?= $user['email'] ?>"></br>
 
     <label for="surname">Prénom *</label></br>
-    <input id="surname" type="text" name="surname" value="<?= $user->prenom ?>"></br>
+    <input id="surname" type="text" name="surname" value="<?= $user['prenom'] ?>"></br>
 
     <label for="name">Nom *</label></br>
-    <input id="name" type="text" name="name" value="<?= $user->nom ?>"></br>
+    <input id="name" type="text" name="name" value="<?= $user['nom'] ?>"></br>
 
     <label for="adresse">Adresse</label></br>
-    <input id="adresse" type="text" name="adresse" value="<?= $user->adresse ?>"></br>
+    <input id="adresse" type="text" name="adresse" value="<?= $user['adresse'] ?>"></br>
 
     <input type="submit" name="submit" value="Modifier infos">
 </form>
@@ -43,6 +43,7 @@ if ( !empty ($user)){
 
 
 <?php
+
 }
 
 ?>

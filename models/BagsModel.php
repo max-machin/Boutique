@@ -101,7 +101,7 @@ class bagsModel extends Model
 
         $this->database = DataBase::getPdo();
 
-        $bag=$this->database -> prepare('SELECT products.id, products.name, products.price FROM `products` INNER JOIN bags ON products.id=id_product WHERE id_user=:id_user');
+        $bag=$this->database -> prepare('SELECT products.id, products.name, products.price, bags.quantity_product FROM `products` INNER JOIN bags ON products.id=id_product WHERE id_user=:id_user');
         $bag-> execute(['id_user'=>$id_user]);
         $resultBag=$bag->fetchAll();
 
@@ -109,13 +109,22 @@ class bagsModel extends Model
         // var_dump($result);
     }
 
-    public function updateQuantity($id_user, $id_product, $quantity_product)
+    public function updateQuantity($quantity_product,$id_product, $id_user)
     {
+        return $this->requete(" UPDATE $this->table SET `quantity_product` = ? WHERE `id_product` = ? AND id_user = ?", array($quantity_product, $id_product, $id_user));
+    }
+
+    public function checkCommandBag($id_user)
+    {
+
         $this->database = DataBase::getPdo();
 
-        $bag=$this->database -> prepare('UPDATE `bags` SET `quantity_product`=:quantity_product WHERE `id_user`=:id_user AND `id_product`=:id_product');
-        $bag-> execute(['id_user'=>$id_user, 'id_product'=>$id_product, 'quantity_product'=>$quantity_product]);
+        $bag=$this->database -> prepare('SELECT products.id, products.price, bags.quantity_product FROM `products` INNER JOIN bags ON products.id=id_product WHERE id_user=:id_user');
+        $bag-> execute(['id_user'=>$id_user]);
+        $resultBag=$bag->fetchAll();
 
-        var_dump($bag);
+        return($resultBag);
+        // var_dump($result);
     }
+    
 }

@@ -15,8 +15,6 @@ if(@$_SERVER['user_data']['id'] == 1)
     ?>
     <h1><?= $product['name'] ?></h1>
 
-<?php var_dump($product);?>
-
     <form action="<?= $product['id'] ?>/update" method="post">  
         <input type="hidden" name="id" value="<?= $product['id'] ?>"/>          
         <button class="#" type="submit" name="updateProduct">Update</button>
@@ -34,20 +32,25 @@ else
     ?>
     <h1><?= $product['name'] ?></h1>
 
-    <?php var_dump($product);
+    <?php
 
-    if(isset($_POST['addBag']))
+    if ( isset ( $_SESSION['user_data']))
     {
-    $_SESSION['product']['id'] = $product['id'];
-    BagsController::insertBag();
-    }
-
     ?>
-
-        <form action="" method="post">           
+        <form action="" method="post">  
+            <select name="product_quantity" id="product_quantity">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <input type="hidden" name="id_Product" value="<?= $product['id'] ?>">
             <button class="#" type="submit" name="addBag">Add</button>
         </form>
-    
+    <?php
+    }
+    ?>
 <section class="sectionComments"> 
     
     <?php

@@ -7,10 +7,10 @@ class ProductsController extends Controller
     public static function selectAllProducts(){
         $model = new ProductsModel();
         $products = $model->findAllProducts(); 
-        // foreach($products as $product){
-        //     $images = explode(',', $product->url); 
-        //  }      
-         Renderer::render('products/allProducts' , compact('products'));    
+        foreach($products as $product){
+            $images = explode(',', $product['url']); 
+         }      
+         Renderer::render('products/allProducts' , compact('products', 'images'));    
     }
 
     public static function selectAll(){
@@ -20,6 +20,8 @@ class ProductsController extends Controller
     }
 
     public static function seeProduct($id){
+        $findUser = "";
+
         $model = new ProductsModel();
         $soloproduct = $model->selectProductbyId($id);
         foreach($soloproduct as $product){
@@ -32,6 +34,55 @@ class ProductsController extends Controller
         if ( empty($product))
         {
             header('location: ../products');
+        }
+
+        if ( isset ( $_POST['addBag']))
+        {
+            $user = new BagsModel();
+            $findUser = $user->findBy(['id_user' => $_SESSION['user_data']['id']]);
+            if (empty ($findUser))
+            {
+                $model = new BagsModel();
+                $productAdded = $model
+                    ->setId_user($_SESSION['user_data']['id'])
+                    ->setId_product($_POST['id_Product'])
+                    ->setQuantity_product($_POST['product_quantity']);
+                $productAdded->create($model);  
+
+                
+                $findModel = new BagsModel();
+                $find = $findModel->findBy(['id_product' => $_POST['id_Product']]);
+                if ( empty ($find) )
+                {
+                    $model = new BagsModel();
+                    $productAdded = $model
+                    ->setId_user($_SESSION['user_data']['id'])
+                    ->setId_product($_POST['id_Product'])
+                    ->setQuantity_product($_POST['product_quantity']);
+                    $productAdded->create($model);  
+                } else {
+                    $model = new BagsModel();
+                    $updateBag = $model->updateQuantity($_POST['product_quantity'], $_POST['id_Product'], $_SESSION['user_data']['id']);
+                    
+                }
+            } else {
+
+                $findModel = new BagsModel();
+                $find = $findModel->findBy(['id_product' => $_POST['id_Product'], 'id_user' => $_SESSION['user_data']['id']]);
+                if ( empty ($find) )
+                {
+                    $model = new BagsModel();
+                    $productAdded = $model
+                    ->setId_user($_SESSION['user_data']['id'])
+                    ->setId_product($_POST['id_Product'])
+                    ->setQuantity_product($_POST['product_quantity']);
+                    $productAdded->create($model);  
+                } else {
+                    $model = new BagsModel();
+                    $updateBag = $model->updateQuantity($_POST['product_quantity'], $_POST['id_Product'], $_SESSION['user_data']['id']);
+                    
+                }
+            }
         }
 
         $commentModel = new CommentsModel();
@@ -59,7 +110,7 @@ class ProductsController extends Controller
                 $errorComment = "Veuillez remplir le champ";
             }
         }
-        Renderer::render('products/seeProduct' , compact('product', 'images', 'allComments', 'errorComment'));
+        Renderer::render('products/seeProduct' , compact('product', 'images', 'allComments', 'errorComment', 'findUser'));
     }
 
     public static function selectAllProductsCategory()

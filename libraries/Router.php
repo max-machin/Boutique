@@ -4,6 +4,7 @@ class Router
 {
     public static function process() 
     {
+        
         // ce qu'on va inclure comme fichier en fonction des différentes actions de l'utilisateur
         if(!empty($_GET['p'])){
         // le filter va filtrer ce qu'on a dans le get afin donc de sécuriser, le nom du filtre suit
@@ -20,6 +21,7 @@ class Router
             // Si on a un élément en url
             if (!empty($url[1]))
             {
+               
                 // Si le controller utilisé est "UserController"
                 if ( $controllerName == "UsersController")
                 {
@@ -68,8 +70,21 @@ class Router
                     {
                         $controllerName::forgotPassword();
                     }
+                    elseif ( $url[1] == "commands")
+                    {
+                        $controllerName::seeCommand();
+                    }
+                    elseif ( $url[1] == "paiement")
+                    {
+                        $controllerName::paiement();
+                    } 
+                    elseif ( $url[1] == "successCommand")
+                    {
+                    $controllerName::successCommand();
+                    }
                 } 
             }
+
 
 
         
@@ -136,15 +151,13 @@ class Router
 
             // }
         } 
-
-            if(@$url[1] == 'delete'){
-            if ($controllerName == "BagsController") {
-                $controllerName::showBag();
-                $controllerName::deleteFromBag();
+ 
+            if ( $controllerName == "BagsController")
+            {
+                if ( $url[0] == "bags")
+                {
+                    $controllerName::showBag();
                 }
-            }elseif ($controllerName == "BagsController"){
-                $controllerName::showBag();
-                $controllerName::quantityBag(); 
             }
             
 
@@ -161,7 +174,7 @@ class Router
 
                     }
                 }
-            }
+        }
 
 
         }      
