@@ -2,6 +2,8 @@
 <?php
     if ( !empty ( $command ) )
     {
+        var_dump($_SESSION['user_data']['promo']);
+        var_dump($_SESSION['user_data']);
         $commandQuantity = 0;
         $commandPrice = 0;
         
@@ -23,16 +25,25 @@
                 $commandQuantity += $product['quantity_product'];
 
             ?>
-                <article>
+                <article class="product">
                     <p><?= $product['name'] ?></p>
                     <p> <?= $product['price'] ?>€/u</p>
                     <h3><?= $productPrice ?>€ (quantité : <?= $product['quantity_product'] ?>)</h3>
                 </article>
 
-                <h3>Total (<?= $commandQuantity ?> articles) : </h3>
-                <p>(-15% grâce au code PROMO)</p>
-
+                
                 <form action="paiement" method="post">
+                    <h3>Infomartions personnelles</h3>
+                    <label for="livraison">Adresse de livraison</label><br>
+                    <input type="text" name="livraison" id="livraison" value="<?= $_SESSION['user_data']['adresse'] ?>" readonly><br>
+
+                    <label for="facturation">Email de facturation</label><br>
+                    <input type="text" name="facturation" id="facturation" value="<?= $_SESSION['user_data']['email'] ?>"><br>
+                    <?= $_SESSION['error'] ?>
+
+                    <h3>Total (<?= $commandQuantity ?> articles) : </h3>
+                    <p>(-15% grâce au code PROMO)</p>
+
                     <input type="text" name="prix" id="prix" value="<?= $commandPrice ?>" readonly><br>
                     <button>Procédez au paiement</button>
                 </form>
@@ -57,8 +68,18 @@
                     <input type="submit" name="promo" value="Appliquez PROMO">
                 </form>
 
-                <h3>Total (<?= $commandQuantity ?> articles) : </h3>
+            
                 <form action="paiement" method="post">
+                    <h3>Infomartions personnelles</h3>
+                    <label for="livraison">Adresse de livraison</label><br>
+                    <input type="text" name="livraison" id="livraison" value="<?= $_SESSION['user_data']['adresse'] ?>" readonly><br>
+
+                    <label for="facturation">Email de facturation</label><br>
+                    <input type="text" name="facturation" id="facturation" value="<?= $_SESSION['user_data']['email'] ?>"><br>
+                    <?= $_SESSION['error'] ?>
+
+                    <h3>Total (<?= $commandQuantity ?> articles) : </h3>
+
                     <input type="text" name="prix" id="prix" value="<?= $commandPrice ?>" readonly><br>
                     <button>Procédez au paiement</button>
                 </form>
@@ -74,5 +95,6 @@
     </article>
 
 <?php 
-    }
+
+    } 
 ?>

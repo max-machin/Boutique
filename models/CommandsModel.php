@@ -10,7 +10,8 @@ class CommandsModel extends Model
     protected $price;
     protected $promo;
     protected $date;
-
+    protected $adresse_livraison;
+    protected $adresse_facturation;
 
     public function __construct()
     {
@@ -210,6 +211,48 @@ class CommandsModel extends Model
     public function setPromo($promo)
     {
         $this->promo = $promo;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of adresse_livraison
+     */ 
+    public function getAdresse_livraison()
+    {
+        return $this->adresse_livraison;
+    }
+
+    /**
+     * Set the value of adresse_livraison
+     *
+     * @return  self
+     */ 
+    public function setAdresse_livraison($adresse_livraison)
+    {
+        $this->adresse_livraison = $adresse_livraison;
+
+        return $this;
+    }
+
+   
+
+    /**
+     * Get the value of adresse_facturation
+     */ 
+    public function getAdresse_facturation()
+    {
+        return $this->adresse_facturation;
+    }
+
+    /**
+     * Set the value of adresse_facturation
+     *
+     * @return  self
+     */ 
+    public function setAdresse_facturation($adresse_facturation)
+    {
+        $this->adresse_facturation = $adresse_facturation;
 
         return $this;
     }

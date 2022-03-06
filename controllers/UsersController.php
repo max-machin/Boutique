@@ -168,7 +168,8 @@ class UsersController extends Controller
                                 'prenom' => $data_user[0]['prenom'],
                                 'adresse' => $data_user[0]['adresse']
                             ];
-                            // header ('location: ../index');
+                            $_SESSION['user_data']['promo'] = NULL;
+                            header ('location: profil');
 
                         } else {
                             $error = "Login/Mot de passe incorrect";
@@ -404,9 +405,10 @@ class UsersController extends Controller
     public static function seeCommand()
     {
 
-        $_SESSION['user_data']['promo'] = NULL;
+
         $model = new BagsModel();
         $command = $model->checkBag($_SESSION['user_data']['id']);
+        
         if ( empty ( $_SESSION['user_data']) )
         {
             header('location: login');
@@ -422,32 +424,46 @@ class UsersController extends Controller
                     {
                         $_SESSION['user_data']['promo'] = 1;
                     }
+               
                 }
             }
+        } else {
+            $_SESSION['user_data']['promo'] = 0;
+        }
+        if ( empty ($_POST['livraison']) || empty ($_POST['facturation']))
+        {
+            $_SESSION['error'] = "Veuillez renseignez une adresse";
         } 
-
+        
         Renderer::render('users/commands', compact('command'));
     } 
 
     public static function paiement() 
     {
-        
-        if ( isset ( $_POST['prix']) && !empty ( $_POST['prix']))
-        {
-            require_once('vendor/autoload.php');
-            $prix = ($_POST['prix']);
+        if ( !empty ($_POST['livraison']) && !empty($_POST['facturation']))
+        {   
+            $_SESSION['user_data']['livraison'] = $_POST['livraison'];
+            $_SESSION['user_data']['facturation'] = $_POST['facturation'];
 
-            // On insctancie stripe
-            \Stripe\Stripe::setApiKey('sk_test_51KZXuDJm5576Uzo35LWKkxbWACB19bTEv0cn494ONQLuQqfQd7GHXeCWMp2LxLUbbCikvt6siO7nY5TdBdaMeFcd00Hl7keAL2');
+            if ( isset ( $_POST['prix']) && !empty ( $_POST['prix']))
+            {
+                require_once('vendor/autoload.php');
+                $prix = ($_POST['prix']);
 
-            $intent = \Stripe\PaymentIntent::create([
-               'amount' => $prix*100,
-               'currency' => 'eur'
-           ]);
+                // On insctancie stripe
+                \Stripe\Stripe::setApiKey('sk_test_51KZXuDJm5576Uzo35LWKkxbWACB19bTEv0cn494ONQLuQqfQd7GHXeCWMp2LxLUbbCikvt6siO7nY5TdBdaMeFcd00Hl7keAL2');
+
+                $intent = \Stripe\PaymentIntent::create([
+                'amount' => $prix*100,
+                'currency' => 'eur'
+            ]);
+            } else {
+                header('location: commands');
+            }
         } else {
             header('location: commands');
         }
-        Renderer::render('users/paiement', compact('intent'));
+            Renderer::render('users/paiement', compact('intent'));
     }
 
     public static function successCommand()
@@ -466,10 +482,11 @@ class UsersController extends Controller
                 $checkNum = $check->checkNumCommand();
                 $numCommand = intval($checkNum['MAX(id_command)'])+1;
                 
-                if ( isset ( $_SESSION['user_data']['promo'])){
+                if ( $_SESSION['user_data']['promo'] === 1){
                     foreach ($command as $product)
                     {
                         $promo = 15;
+                        
                         $insert = new CommandsModel();
                         $insertCommand = $insert
                             ->setPrice($product['price'])
@@ -477,19 +494,26 @@ class UsersController extends Controller
                             ->setId_command($numCommand)
                             ->setId_product($product['id'])
                             ->setPromo($promo)
-                            ->setQuantity_product($product['quantity_product']);
+                            ->setQuantity_product($product['quantity_product'])
+                            ->setAdresse_livraison($_SESSION['user_data']['livraison'])
+                            ->setAdresse_facturation($_SESSION['user_data']['facturation']);
                         $insertCommand->create($insert);
                     }
                 } else {
                     foreach ($command as $product)
                     {
+                        $promo = 0;
+
                         $insert = new CommandsModel();
                         $insertCommand = $insert
                             ->setPrice($product['price'])
                             ->setId_user($_SESSION['user_data']['id'])
                             ->setId_command($numCommand)
                             ->setId_product($product['id'])
-                            ->setQuantity_product($product['quantity_product']);
+                            ->setQuantity_product($product['quantity_product'])
+                            ->setPromo($promo)
+                            ->setAdresse_livraison($_SESSION['user_data']['livraison'])
+                            ->setAdresse_facturation($_SESSION['user_data']['facturation']);
                         $insertCommand->create($insert);
                     }
                 }
@@ -497,14 +521,16 @@ class UsersController extends Controller
                 $delete = new BagsModel();
                 $deleteBag = $delete->deleteBy(['id_user' => $_SESSION['user_data']['id']]);
 
-                unset($_SESSION['user_data']['promo']);
+               
 
             } else {
                 header('location: ../bags');
             }
         }
         $command = NULL;
-        
+         $_SESSION['user_data']['promo'] = 0;
+        unset($_SESSION['user_data']['livraison']);
+        unset($_SESSION['user_data']['facturation']);
 
         Renderer::render('users/successCommand' , compact('command'));
     }
