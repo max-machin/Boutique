@@ -170,43 +170,57 @@ class ProductsModel extends Model
 
     public function countProducts()
     {
-        $query = $this->requete("SELECT COUNT(*) AS liste FROM {$this->table}");
+        $query = $this->requete("SELECT COUNT(id) AS liste FROM {$this->table}");
+        $query -> execute();
         return $query->fetchAll();
     }
+
 
     public function productsByPage($nbr_products_by_page,$debut)
     {
         $query = $this->requete("SELECT * FROM {$this->table} LIMIT $debut , $nbr_products_by_page");
+
         return $query->fetchAll();
     }
 
-    public function countProductsByCategories($page_categorie) 
+    public function countProductsByCategories($nameCategorie) 
     {
         $query = $this->requete("SELECT COUNT(products.id_categorie) 
         AS liste_cat
         FROM {$this->table} 
         INNER JOIN `categories` 
-        ON categories.id = products.id_categorie WHERE categories.name = '$page_categorie'");
+        ON categories.id = products.id_categorie 
+        WHERE categories.name = '$nameCategorie'");
+        $query-> execute();
         return $query->fetchAll();
     }
     public function productsByCategorie($nameCategorie) 
     {
-        $query = $this->requete("SELECT * FROM products WHERE products.id_categorie = '$nameCategorie' ");
-        return $query->fetchAll();
+        $this->database = DataBase::getPdo();
+
+        $findProduct = $this->database->prepare("SELECT products.*, GROUP_CONCAT(images.url_image SEPARATOR ',') as url FROM `products` 
+        INNER JOIN images ON products.id = images.id_product 
+        INNER JOIN categories ON products.id_categorie = categories.id
+        WHERE categories.name = '$nameCategorie'");        
+        $findProduct -> execute();
+        $resultProduct = $findProduct -> fetchAll();
+
+
+        return($resultProduct);
     }
     
-    // //? a checker quand sous categories reconnues
+    
 
-    public function productsBySousCategories($page_categorie,$debut_cat )
+    public function productsBySousCategories($nameCategorie,$debut_cat )
     {
-        $query = $this->requete("SELECT products.*, sous_categories.name
-        FROM {$this->table}  
-        INNER JOIN sous_categories 
+        $query = $this->requete("SELECT products.*, GROUP_CONCAT(images.url_image SEPARATOR ',') as url FROM `products` 
+        INNER JOIN images ON products.id = images.id_product
+        INNER JOIN sous_categories
         ON sous_categories.id = products.id_sous_categorie 
-        WHERE categories.name = '$page_categorie' 
-        DESC 
+        WHERE categories.name = '$nameCategorie' 
         LIMIT $debut_cat");
-         return $query->fetchAll();
+        $query->execute();
+        $result = $query->fetchAll();
     }
     
     // public function findAllCategories()

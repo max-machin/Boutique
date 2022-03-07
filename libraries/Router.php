@@ -71,26 +71,34 @@ class Router
                 } 
             }
 
-
+            var_dump($url);
         
             if(!empty($url[1]) && empty($url[2])){
                 if($controllerName == "ProductsController"){
-                $controllerName::seeProduct($url[1]);
+                    if(($url[1] == 'makeup'||$url[1] == 'skincare'))
+                    {
+                        echo"test";
+                        $controllerName::createViewProducts();
+                        
+                    }else{
+                        
+                        echo"test 4";
+                    $controllerName::seeProduct($url[1]);
+                }
                 }            
             }elseif(!empty($url[1]) && !empty($url[2])){
                 if($controllerName == "ProductsController"){
+                    
                     if($url[2] == 'update'){
                         $controllerName::seeUpdateProduct($url[1]);
                         }
                     }
                 }
+          
             elseif($controllerName == "ProductsController"){
+                echo"test";
                 $controllerName::selectAllProducts();
                 }
-            elseif($url[1] == 'makeup'||'skincare')
-            {
-                $controllerName::createViewProducts();
-            }
        
 
             if(@$url[1] == 'delete'){

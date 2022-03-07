@@ -77,21 +77,12 @@ class ProductsController extends Controller
 
     public static function selectAllProductsCategory()
     {
-        $categories = self::getAllCategories();
+        $categories = self::getCategories();
         $model = new ProductsModel();
         $productsByCategories = $model->findby($categories);
 
-
-
-        echo "bfnefrjfd";
-        var_dump($productsByCategories);
-        var_dump($categories);
-        echo "bfnefrjfd";
         return $productsByCategories;
-        // var_dump($_GET['categorie']);
-        
-
-        // Renderer::render('products/allProducts' , [compact('productsByCategories')]);
+       
     }
 
     // public static function selectAllSousCategory()
@@ -153,64 +144,50 @@ class ProductsController extends Controller
     {
         $model = new CategoriesModel();
         $categories = $model->findAll();
-        // $modelSousCat = new SousCategoriesModel();
-        // $sousCategories = $model->findAll();
-        Renderer::render('layout' , compact('categories'));
+        $modelSousCat = new SousCategoriesModel();
+        $sousCategories = $model->findAll();
+        Renderer::render('layout' , compact('categories', 'sousCategories' ));
         // echo "<pre>";
-        // var_dump($categories);
+        var_dump($categories);
         // echo "</pre>";
         
         return $categories;
     }
-
-    public static function getMakeupSouscategories()
-    {
-        $model = new SousCategoriesModel();
-        $makeupSousCat = $model->findBy();
-    }
     
-    
-    public static function getProductByCategorie()
+    public static function getCategorieName()
     {
 
         $products = new ProductsModel();
         $categories = self::getCategories();
         foreach ($categories as $categorie )
         {
-            // var_dump($categories);
+            echo "get category NAME";
             var_dump($categorie['name']);
 
-
+            // $categories[0]['name'] = $nameCategorie;
         }
-            // var_dump($categories);
-       
-        
+          
         
         $url = explode("/", filter_var($_GET['p'], FILTER_SANITIZE_URL));
         var_dump($url);
         if($url[1] !== $categories[0]['name']){
 
-            $categories[0]['name'] = $nameCategorie;
-            $model = new ProductsModel();
-            $productByCat = $model->productsByCategorie($nameCategorie);
-            echo "bla bla";
+            $categories['name'] = $nameCategorie;
+            // $model = new ProductsModel();
+            // $productByCat = $model->productsByCategorie($nameCategorie);
+            // echo "bla bla";
             // var_dump($productsByCat);
-            // var_dump($nameCategorie);
+            var_dump($nameCategorie);
         
 
         }
+        return $nameCategorie;
     }
     
     public static function pagination()
     {
-        //     // $productByCat::paginationGenerale();
+   
         
-        //     // $catModel = new CategoriesModel();
-        //     // $categories = $catModel->findAll();
-        
-        // var_dump('OK');
-        // var_dump($_GET);
-        // var_dump('OK');
         
         //     $productModel = new ProductsModel();
         //     $products = $productModel->findAll();
@@ -222,7 +199,7 @@ class ProductsController extends Controller
         
         //     $page = $_GET["page"];
 
-        // $categories = self::getCategories();
+        $nameCategorie = self::getCategorieName();
        
         // if(isset($_GET['categorie']))
         // {
@@ -233,18 +210,22 @@ class ProductsController extends Controller
         // {
         //         $page = 1;
         // }
-                    // $model = new ProductsModel();
-                    // $count_products= $model->countProductsByCategories('makeup'); 
+                    $model = new ProductsModel();
+
+
+                    $countProducts= $model->countProductsByCategories($nameCategorie); 
                     // $categories = $model->findAllCategories();
                 
+                    // var_dump('OK');
+                    // var_dump($_GET);
+                    // var_dump('OK');
                 
                 
+                    $nbrProductsByPage = 1;
+                    $nbrPages = ceil($countProducts[0]["liste"] / $nbrProductsByPage);
+                //     $debut = ($page - 1) * $nbrProductsByPage;
                 
-                //     $nbr_product_par_page = 3;
-                //     $nbr_page = ceil($count_products[0]["liste"] / $nbr_product_par_page);
-                //     $debut = ($page - 1) * $nbr_product_par_page;
-                
-                //     $productsByPage = $model->productsByPage($nbr_product_par_page, $debut);
+                //     $productsByPage = $model->productsByPage($nbrProductsByPage, $debut);
                 //     // $model->productsByPage($nbr_product_par_page, $debut);
                 
                 //     echo 'pagination';
@@ -277,65 +258,22 @@ class ProductsController extends Controller
                         
     }
 
-    public static function getNameCategories()
-    {
-        $categories = self::getCategories();
-
-        foreach ($categories as $categorie)
-        {
-
-        }
-        
-        echo "cateeeeee";
-            
-            //    $categorieNames[] = array();
-
-        // for ($i = 0; $i <)
-        // while ($categories = self::getCategories())
-        // {
-        //     $name = $categories['name'];
-
-        //     $categorieNames[] = array("name" => $name);
-        // }
-        // print_r($categorieNames);
-        // 
-        // Renderer::render('products/allProducts' , compact('categories', 'categorieName', 'categorie'));
-        return $categories;
-    }
     
     
                     
     public static function createViewProducts() 
     {
         
-        // $categorieName = self::getNameCategories();
+        echo "1";
         $categories = self::getCategories();
-        $productsByCat = self::getProductByCategorie();
+        $$nameCategorie = self::getCategorieName();
+        echo "1";
+        $productsByCategories = self::selectAllProductsCategory();
+        echo "1";
         // $sousCategories = self::selectAllSousCategory();
         // $products = self::selectAllProducts();
-        $productsByCategories = self::selectAllProductsCategory();
-        // $pagination = self::pagination();
-        
-        // var_dump($_GET['categorie']);
-        // if(isset($categories))
-        // {
-        //     var_dump($categories);
-        //     // var_dump($categories);
-           
-        // }
-        // // echo 'brrr';
-            
-        // // echo 'brrr';
-        // // var_dump($categories[0]["name"]);
-        
-        
-        // $url = explode("/", filter_var($_GET['p'], FILTER_SANITIZE_URL));
-        // var_dump($url);
-        // if($url[1] == $categories[0]['name']){
-
-        //     $categories[0]['name'] = $nameCategorie;
-        //     $model = new ProductsModel();
-        //     $productByCat = $model->productsByCategorie($nameCategorie);
+        $pagination = self::pagination();
+      
 
         // }
         // var_dump($categories);
