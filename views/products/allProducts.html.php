@@ -10,9 +10,9 @@
 </form>
 
 <?php 
-
+ echo "all products";
 //  }
-    // var_dump($categories);
+    var_dump($categories);
     // var_dump($products);
     // echo 'heloooo';
     // var_dump($_GET);
@@ -21,14 +21,30 @@
 
 // if (isset($_GET['categorie'])) {
     
-//  $page_categorie = $_GET['categorie']; 
-//     for ($i = 1; $i <= $nbr_page_cat; $i++) {
-//         if ($page != $i)
-//             echo "<a class='page' href='?page=$i&categorie=$page_categorie'>$i</a>&nbsp";
-//         else
-//             echo "<a class='page'>$i</a>&nbsp";
-//     }
-// } 
+//  $page_categorie = $_GET['categorie'];
+//!pagination 
+for ($i = 1; $i <= $nbrPages; $i++) {
+       
+    echo "<a href =''>$i</a> ";
+    var_dump($nbrPages);
+    // if ($page != $i)
+    //         echo "<a class='page' href='?page=$i&categorie=$page_categorie'>$i</a>&nbsp";
+    //     else
+    //         echo "<a class='page'>$i</a>&nbsp";
+    }
+
+//!affichage d'article
+
+// for ($i=0;$i<count($products);$i++)
+// {
+//     echo $products[$i];
+// }
+// var_dump($products[$i]);
+
+foreach ($products as $product) {
+    var_dump($product);
+}
+
 // else {
 //     for ($i = 1; $i <= $nbr_page; $i++) {
 //         if ($page != $i)
@@ -71,9 +87,9 @@ else
     foreach($productsByCategories as $product){
         ?>
         <div class="products">
-            <h2><a href="products/<?= $product->id ?>"><?= $product->name ?></a></h2>
-            <h3><?= $product->description ?></h3>
-            <p><?= $product->price?>€</p>
+            <h2><a href="products/<?= $product['id'] ?>"><?= $product['name'] ?></a></h2>
+            <h3><?= $product['description'] ?></h3>
+            <p><?= $product['price']?>€</p>
         </div>
     <?php
     }

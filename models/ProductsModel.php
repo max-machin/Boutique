@@ -183,25 +183,26 @@ class ProductsModel extends Model
         return $query->fetchAll();
     }
 
-    public function countProductsByCategories($nameCategorie) 
+    public function countProductsByCategories() 
     {
         $query = $this->requete("SELECT COUNT(products.id_categorie) 
         AS liste_cat
         FROM {$this->table} 
         INNER JOIN `categories` 
         ON categories.id = products.id_categorie 
-        WHERE categories.name = '$nameCategorie'");
+        WHERE categories.name = 'skincare'");
         $query-> execute();
         return $query->fetchAll();
     }
-    public function productsByCategorie($nameCategorie) 
+    public function productsByCategorie() 
     {
         $this->database = DataBase::getPdo();
 
         $findProduct = $this->database->prepare("SELECT products.*, GROUP_CONCAT(images.url_image SEPARATOR ',') as url FROM `products` 
         INNER JOIN images ON products.id = images.id_product 
         INNER JOIN categories ON products.id_categorie = categories.id
-        WHERE categories.name = '$nameCategorie'");        
+        WHERE categories.name = 'skincare'
+        GROUP BY products.id");        
         $findProduct -> execute();
         $resultProduct = $findProduct -> fetchAll();
 
@@ -217,9 +218,12 @@ class ProductsModel extends Model
         INNER JOIN images ON products.id = images.id_product
         INNER JOIN sous_categories
         ON sous_categories.id = products.id_sous_categorie 
-        WHERE categories.name = '$nameCategorie' 
-        LIMIT $debut_cat");
-        $query->execute();
+        WHERE categories.name = :nameCategorie 
+        LIMIT :debut_cat");
+        $query->execute([
+            'nameCategorie' => $nameCategorie,
+            'debut_cat' => $debut_cat
+        ]);
         $result = $query->fetchAll();
     }
     

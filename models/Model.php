@@ -22,7 +22,7 @@ class Model extends Database
     
         //On récupere l'instance de database
         $this->database = DataBase::getPdo();
-        var_dump($sql);
+        // var_dump($sql);
         //On vérifie si on a des attributs 
         if ($attributs !== null){
             //requête préparée

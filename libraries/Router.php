@@ -71,20 +71,23 @@ class Router
                 } 
             }
 
-            var_dump($url);
-        
+            // var_dump($url);
+        //!virer le if 
             if(!empty($url[1]) && empty($url[2])){
                 if($controllerName == "ProductsController"){
-                    if(($url[1] == 'makeup'||$url[1] == 'skincare'))
+                    if(($url[1] == 'makeup'|| $url[1] == 'skincare'))
                     {
-                        echo"test";
                         $controllerName::createViewProducts();
                         
                     }else{
-                        
-                        echo"test 4";
+                   
                     $controllerName::seeProduct($url[1]);
-                }
+                    }
+
+                    if (in_array($url[1], $controllerName::getCategories())) {
+
+
+                    }
                 }            
             }elseif(!empty($url[1]) && !empty($url[2])){
                 if($controllerName == "ProductsController"){
@@ -93,14 +96,10 @@ class Router
                         $controllerName::seeUpdateProduct($url[1]);
                         }
                     }
-                }
-          
-            elseif($controllerName == "ProductsController"){
+            }elseif($controllerName == "ProductsController"){
                 echo"test";
-                $controllerName::selectAllProducts();
+                $controllerName::createViewProducts();
                 }
-       
-
             if(@$url[1] == 'delete'){
             if ($controllerName == "BagsController") {
                 $controllerName::showBag();

@@ -13,11 +13,6 @@
 <body>
 
     <form action="" method="GET">
-    <select name="categorie">
-        <?php foreach ($result_cat as $categorie) { ?>
-            <option value="<?php echo $categorie['nom']; ?> "><?php echo $categorie['nom']; ?> </option>
-        <?php } ?>
-    </select>
     <input type='hidden' name='page' value='1'>
     <button type='submit' name="submit" class="formButton">Valider</button>
 </form>
