@@ -74,14 +74,14 @@ class ImagesModel extends Model
         return $this;
     } 
 
-    public static function updateImage($url_image)
-    {
-        $database = DataBase::getPdo();
+    // public static function updateImage($url_image)
+    // {
+    //     $database = DataBase::getPdo();
 
-        $updateImg=$database->prepare('UPDATE `images` SET url_image=:url_image WHERE url_image=:url_image');
-        $updateImg -> execute(['url_image'=>$url_image]);
+    //     $updateImg=$database->prepare('UPDATE `images` SET url_image=:url_image WHERE url_image=:url_image');
+    //     $updateImg -> execute(['url_image'=>$url_image]);
 
-    }
+    // }
 
     public static function uploadImage($url_image, $id_product)
     {

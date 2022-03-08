@@ -161,13 +161,14 @@ class Router
                             Renderer::render('admin/addProduct');    
                         }elseif($url[1] == 'update'){
                             ProductsController::findAllProducts();
+                            ImagesController::updateImage();
                         }elseif($url[1] == 'images'){
                             ImagesController::seeImages();
                         }
                     }elseif(!empty($url[1]) && !empty($url[2])){
                         if($url[1]== 'create' && $url[2] == 'image'){
                             ProductsController::selectAll();
-                            ImagesController::updateImage();
+                            ImagesController::uploadImage();
                         }
                     }
                 }

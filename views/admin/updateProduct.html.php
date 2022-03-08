@@ -1,20 +1,17 @@
 <?php
 
-
-    // var_dump($products);
+// appuyer sur choisir un fichier puis sur l'image pour envoyer :
+// dans le front, faire en sorte que l'utilisateur clique sur l'image, donc stocke l'id de l'image puis ça sort un pop up avec le formulaire et un autre bouton pour valider (à voir si on le fait ou pas).
 
     foreach($products as $product)
     {
         $url = explode(';', $product['url']);
-        // var_dump($url);
             foreach($url as $test){
               $image = explode(',', $test);     
-              if(isset($_POST['submit']))
-                {
-                    var_dump($_POST['id_image']);
-                } 
               ?>
-              <form action = "" method=post>
+              
+              <form action = "" method=post enctype="multipart/form-data">
+              <input type="file" name="productImg">
                 <button type=submit name="submit">              
                     <input type="hidden" name="id_image" value="<?= $image[1] ?>"/>
                     <img src="../Uploads/<?= $image[0] ?>" width="50px">
