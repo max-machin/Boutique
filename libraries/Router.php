@@ -5,7 +5,8 @@ class Router
     public static function process() 
     {
         // ce qu'on va inclure comme fichier en fonction des différentes actions de l'utilisateur
-        if(!empty($_GET['p'])){
+        if(!empty($_GET['p']))
+        {
         // le filter va filtrer ce qu'on a dans le get afin donc de sécuriser, le nom du filtre suit
             $url = explode('/', filter_var($_GET['p'], FILTER_SANITIZE_URL));
             
@@ -151,27 +152,25 @@ class Router
             
 
 
-            // if (!empty($url[1]))
-            // {
                 if ($controllerName == "AdminController"){
                     if(empty($url[1]) && empty($url[2])){
-                        echo 'je suis là';
                         Renderer::render('admin/backoffice');
                     }
                     elseif(!empty($url[1]) && empty($url[2])){
                         if($url[1] == 'create'){
                             Renderer::render('admin/addProduct');    
-                        } 
+                        }elseif($url[1] == 'update'){
+                            ProductsController::findAllProducts();
+                        }elseif($url[1] == 'images'){
+                            ImagesController::seeImages();
+                        }
                     }elseif(!empty($url[1]) && !empty($url[2])){
                         if($url[1]== 'create' && $url[2] == 'image'){
                             ProductsController::selectAll();
                             ImagesController::updateImage();
-
                         }
                     }
                 }
-            // }
-
         }      
     }   
 }

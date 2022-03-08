@@ -1,4 +1,30 @@
-<!-- ici, tous les produits en liste par catégorie serait cool
-maybe par référencement (ajouter dans produits une colonne référencement)
+<?php
 
-maybe direct dans l'update, voir toutes les photos (à prendre l'id image dans la requête comme ça l'admin peut choisir quelle image en particulier il veut update)-->
+
+    // var_dump($products);
+
+    foreach($products as $product)
+    {
+        $url = explode(';', $product['url']);
+        // var_dump($url);
+            foreach($url as $test){
+              $image = explode(',', $test);     
+              if(isset($_POST['submit']))
+                {
+                    var_dump($_POST['id_image']);
+                } 
+              ?>
+              <form action = "" method=post>
+                <button type=submit name="submit">              
+                    <input type="hidden" name="id_image" value="<?= $image[1] ?>"/>
+                    <img src="../Uploads/<?= $image[0] ?>" width="50px">
+                </button>     
+              </form>                
+              <?php
+            }
+    ?>
+     <h2><a href="<?= urlLaura ?>products/<?= $product['id'] ?>"><?= $product['name'] ?></a></h2>
+</form>
+    <?php
+    }
+?>

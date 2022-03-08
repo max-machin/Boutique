@@ -10,13 +10,19 @@ class ProductsController extends Controller
         // foreach($products as $product){
         //     $images = explode(',', $product->url); 
         //  }      
-         Renderer::render('products/allProducts' , compact('products'));    
+        Renderer::render('products/allProducts' , compact('products'));   
     }
 
     public static function selectAll(){
         $model = new ProductsModel();
         $products = $model->findAll();
         Renderer::render('admin/uploadImage' , compact('products'));    
+    }
+
+    public static function findAllProducts(){
+        $model = new ProductsModel();
+        $products = $model->findProductsforUpdate();
+        Renderer::render('admin/updateProduct' , compact('products'));    
     }
 
     public static function seeProduct($id){
