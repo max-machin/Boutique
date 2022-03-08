@@ -2,7 +2,7 @@
 
 if(@$_SERVER['user_data']['id'] !== 1)
 {
-  header('Location: urlLaura/index');
+    header('Location:../index');
 }
 
     if(isset($_POST['createProduct']))

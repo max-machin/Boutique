@@ -13,7 +13,7 @@
 <body>
 <form action="" method="post">
     <input type="text" name="search" placeholder="Search">
-    <button type="submit" name="submit-search">search</button>
+    <button type="submit" name="submit-search"><img src="Images/searchbaricon.svg" width="50px"></button>
 </form>
 
     <?php
