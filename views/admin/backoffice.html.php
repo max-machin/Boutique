@@ -1,5 +1,10 @@
 <?php
-    echo 'je suis dans backoffice';
+
+if(@$_SERVER['user_data']['id'] !== 1)
+{
+  header('Location: urlLaura/index');
+}
+
 ?>
 
 <form action="<?=urlLaura ?>admin/create" method="post">

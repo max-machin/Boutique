@@ -1,4 +1,10 @@
 <?php
+
+if(@$_SERVER['user_data']['id'] !== 1)
+{
+  header('Location: urlLaura/index');
+}
+
     if(isset($_POST['createProduct']))
     {
         if($_POST['category'] == 'skincare')

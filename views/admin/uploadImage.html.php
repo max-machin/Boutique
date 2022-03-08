@@ -1,3 +1,12 @@
+<?php
+
+if(@$_SERVER['user_data']['id'] !== 1)
+{
+  header('Location: urlLaura/index');
+}
+
+?>
+
 <form action="" method="post" enctype="multipart/form-data">
     <label for="product-select">Choose which product you want to add your images:</label>
 

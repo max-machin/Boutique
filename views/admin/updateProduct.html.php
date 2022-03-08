@@ -1,5 +1,10 @@
 <?php
 
+if(@$_SERVER['user_data']['id'] !== 1)
+{
+  header('Location: urlLaura/index');
+}
+
 // appuyer sur choisir un fichier puis sur l'image pour envoyer :
 // dans le front, faire en sorte que l'utilisateur clique sur l'image, donc stocke l'id de l'image puis ça sort un pop up avec le formulaire et un autre bouton pour valider (à voir si on le fait ou pas).
 
