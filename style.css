@@ -1,3 +1,159 @@
+/* ------------------------------------------------
+
+                    Custom properties
+
+--------------------------------------------------- */
+
+:root {
+    --clr-black: 0, 0, 0;
+    --clr-white: 255, 255, 255;
+    --clr-lightpink: 250, 225, 221;
+    --clr-pink: 254, 197, 187;
+    --clr-mint: 216, 226, 220;
+    --clr-lightmint: 232, 232, 228;
+
+    /* à utiliser comme ceci : <div class="bg-light">
+    .bg-light{
+        background-color/ou color : rgb(var(--clr-white));
+    }
+    comme ceci je serai en mesure de pouvoir gérer les alpha valeurs (opacité) au lieu d'avec le #0000 */
+
+}
+
+
+/* ------------------------------------------------
+
+                    RESET
+
+--------------------------------------------------- */
+
+
+/* Box sizing */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Reset margin */
+
+body,
+h1,
+h2,
+h3,
+h4,
+figure,
+picture {
+    margin: 0;
+    padding: 0;
+}
+
+/* Set up the body */
+
+body {
+    line-height: 1.5;
+    min-height: 100vh;
+}
+
+/* Make images easier to work with (si dieu le veut) */
+
+img,
+picture {
+    max-width: 100%;
+    display: block;
+}
+
+/* Make forms elements easier to work with */
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+/* Remove animations for those who turned them off (pour ceux qui décident d'enlever les animations dans lur browser : question d'accessiblilité) */
+
+@media (prefers-reduced-motions: reduce){
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+
+/* ------------------------------------------------
+
+                UTILITY CLASSES
+
+--------------------------------------------------- */
+/* Utility classes : 
+-do one thing, and they do that very well
+-often only have one declaration, but they can have multiple when required 
+-allow things to be much more modular and allow us to write much less code in the long run
+*/
+
+.flex {
+    display: flex;
+    gap: var(--gap, 1rem);
+}
+
+.grid {
+    display: grid;
+    gap: var(--gap, 1rem);
+}
+
+/* souvent quand on veut centrer un conteneur avec qqchose à l'intérieur comme des images etc..., c'est responsive*/
+.container {
+    padding: 0 2em;
+    max-width: 80rem;
+    margin-inline: auto;
+}
+
+/* (screen reader only -> pour les personnes malvoyantes qui ont des screen reader donc des assistive technologies qui leur lit les pages web) */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap; /* added line */
+    border: 0;
+}
+
+/* exemple comment utiliser (à essayer avec des div couleur pour que vous compreniez comment ça va marcher) 
+
+-> <div class="container flex" style="--gap : 5rem;"> 
+== ceci donne plus de personnalisation à notre class communes/utilities, en injectant style directement dans notre div surtout pour changer les var des gap
+SINON rajouter avant container une autre class/un autre mot donc et après le déclarer dans la page css en rajoutant : --gap : 5em; et toutes les autres propriétés qu'il nous faut
+
+    <div class="box">a</div>
+    <div class="box">b</div>
+    <div class="box">c</div>
+    <div class="box">d</div>
+
+</div>*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .txt-center {
 	text-align: center;
 }
