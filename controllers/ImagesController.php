@@ -42,12 +42,5 @@ class ImagesController extends Controller
            }
         } 
     }
-
-    public static function seeImages(){
-        $model = new ImagesModel();
-        $images = $model->findAll();
-        Renderer::render('admin/updateImages', compact('images'));
-        
-    }
 }     
 
