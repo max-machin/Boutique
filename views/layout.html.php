@@ -7,15 +7,17 @@
     <script src="https://kit.fontawesome.com/81dc42ea59.js" crossorigin="anonymous"></script>
     <link href="image/fontawesome-free-5.15.4-web.zip/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="../style.css">
-    <title>Everglow</title>
+    <title>Everglow | Clean Skincare & Beauty products </title>
 </head>
 
 <body>
     <header>
        <form action="" method="post">
             <input type="text" name="search" placeholder="Search">
-            <button type="submit" name="submit-search"><img src="Images/searchbaricon.svg" width="50px"></button>
+            <button type="submit" name="submit-search"><img src="Images/utilitaires/searchbaricon.svg" width="50px"></button>
         </form>
+
+        <img src="Images/utilitaires/Everglow.png" width="120px">
 
         <?php
         if ( isset ($_SESSION['user_data'] ) )
