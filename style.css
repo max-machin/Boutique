@@ -1,5 +1,34 @@
 /* ------------------------------------------------
 
+                    Fonts
+
+--------------------------------------------------- */
+
+@font-face {
+    font-family: Titreprincipal;
+    src: url(Fonts/EloquentJFCaptionPro.ttf);
+}
+
+@font-face {
+    font-family: AccentFont;
+    src: url(Fonts/Cooper\ Black.ttf);
+}
+
+@font-face {
+    font-family: SousTitreouAccent;
+    src: url(Fonts/Butler_Medium.otf);
+}
+
+@font-face {
+    font-family: LoremIpsum;
+    src: url(Fonts/Butler_Regular.otf);
+}
+
+
+
+
+/* ------------------------------------------------
+
                     Custom properties
 
 --------------------------------------------------- */
@@ -10,7 +39,7 @@
     --clr-lightpink: 250, 225, 221;
     --clr-pink: 254, 197, 187;
     --clr-mint: 216, 226, 220;
-    --clr-lightmint: 232, 232, 228;
+    --clr-lightgrey: 232, 232, 228;
 
     /* à utiliser comme ceci : <div class="bg-light">
     .bg-light{
