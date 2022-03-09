@@ -9,9 +9,10 @@ class Router
         {
         // le filter va filtrer ce qu'on a dans le get afin donc de sécuriser, le nom du filtre suit
             $url = explode('/', filter_var($_GET['p'], FILTER_SANITIZE_URL));
-            
+
             //ucfirst = première lettre en maj
             $controller = ucfirst($url[0]);
+
             // echo $controller;
             $controllerName = $controller."Controller";
             // $controllerFile = "controllers/".$controllerName.".php";
@@ -20,7 +21,15 @@ class Router
             
             ProductsController::searchbarProduct();
 
+
+            if(!empty($url[0]))
+            {
+                if($url[0] == 'accueil'){ 
+                    Renderer::render('accueil');  
+                }  
+            }
             // Si on a un élément en url
+
             if (!empty($url[1]))
             {
                 // Si le controller utilisé est "UserController"
@@ -39,7 +48,7 @@ class Router
                        
                     }
                     // Sinon si l'index 1 du l'url == login, instanciation de la requête concernée
-                    elseif ( $url[1] == "login")
+                    elseif ($url[1] == "login")
                     {
                         // Si aucune session n'est défini alors on affiche le form de connexion / Sinon redirection page profil
                         if ( empty ( $_SESSION['user_data'] ) )
@@ -51,12 +60,12 @@ class Router
                         }
                     } 
                     // Sinon si l'index 1 du l'url == disconnect, instanciation de la requête concernée
-                    elseif ( $url[1] == "disconnect")
+                    elseif ($url[1] == "disconnect")
                     {
                         $controllerName::disconnect();
                     }
                     // Sinon si l'index 1 du l'url == UpdateProfil, instanciation de la requête concernée
-                    elseif ( $url[1] == "profil")
+                    elseif ($url[1] == "profil")
                     {
                         // Si une session user existe on affiche sinon redirection
                         if (!empty ($_SESSION['user_data']))
@@ -67,7 +76,7 @@ class Router
                         }
                         
                     } 
-                    elseif ( $url[1] == "forgotPassword")
+                    elseif ($url[1] == "forgotPassword")
                     {
                         $controllerName::forgotPassword();
                     }
