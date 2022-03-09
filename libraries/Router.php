@@ -75,18 +75,21 @@ class Router
         //!virer le if 
             if(!empty($url[1]) && empty($url[2])){
                 if($controllerName == "ProductsController"){
-                    if(($url[1] == 'makeup'|| $url[1] == 'skincare'))
-                    {
-                        $controllerName::createViewProducts();
+                    // if(($url[1] == 'makeup'|| $url[1] == 'skincare'))
+                    // {
+                    //     $controllerName::createViewProducts();
                         
-                    }else{
+                    // }else{
                    
-                    $controllerName::seeProduct($url[1]);
-                    }
+                    // $controllerName::seeProduct($url[1]);
+                    // }
 
-                    if (in_array($url[1], $controllerName::getCategories())) {
+                    if (in_array($url[1], $controllerName::getCategorieName())) {
 
+                        $controllerName::createViewProducts($url[1]);
+                    } else {
 
+                        echo 'tata';
                     }
                 }            
             }elseif(!empty($url[1]) && !empty($url[2])){

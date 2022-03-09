@@ -15,6 +15,7 @@ class ProductsModel extends Model
     public function __construct()
     {
         $this->table = "products";
+        $this->database = DataBase::getPdo();
     }
 
 
@@ -194,7 +195,8 @@ class ProductsModel extends Model
         $query-> execute(['nameCategorie' => $nameCategorie]);
         return $query->fetchAll();
     }
-    public function productsByCategorie() 
+
+    public function productsByCategorie($nameCategorie) 
     {
         $this->database = DataBase::getPdo();
 
@@ -214,7 +216,7 @@ class ProductsModel extends Model
 
     public function productsBySousCategories($nameSousCategorie,$debut_cat )
     {
-        $query = $this->requete("SELECT products.*, GROUP_CONCAT(images.url_image SEPARATOR ',') as url FROM `products` 
+        $query = $this->database->requete("SELECT products.*, GROUP_CONCAT(images.url_image SEPARATOR ',') as url FROM `products` 
         INNER JOIN images ON products.id = images.id_product
         INNER JOIN sous_categories
         ON sous_categories.id = products.id_sous_categorie 

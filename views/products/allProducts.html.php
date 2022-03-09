@@ -41,9 +41,9 @@ for ($i = 1; $i <= $nbrPages; $i++) {
 // }
 // var_dump($products[$i]);
 
-foreach ($products as $product) {
-    var_dump($product);
-}
+// foreach ($products as $product) {
+//     var_dump($product);
+// }
 
 // else {
 //     for ($i = 1; $i <= $nbr_page; $i++) {
@@ -58,33 +58,34 @@ foreach ($products as $product) {
 if(isset($products))
 {
 
-foreach($products as $product){
-    var_dump($product);
-    $images = explode(',', $product['url']);
-    var_dump($images);
-     
-?>
-
-<div class="products">
-    <?php
-        foreach($images as $image){
-
-            var_dump($image);
-            ?>
-            <img src="Uploads/<?= $image ?>" width="50px">
-            <?php
-        }
+    foreach($products as $product)
+    {
+        var_dump($product);
+        $images = explode(',', $product['url']);
+        var_dump($images);
+        
     ?>
-    <h2><a href="products/<?= $product['id'] ?>"><?= $product['name'] ?></a></h2>
-    <h3><?= $product['description'] ?></h3>
-    <p><?= $product['price'] ?></p>
-</div>
-<?php
-}
+
+            <div class="products">
+                <?php
+                    foreach($images as $image){
+
+                        // var_dump($image);
+                        ?>
+                        <img src="Uploads/<?= $image ?>" width="50px">
+                        <?php
+                    }
+                ?>
+                <h2><a href="products/<?= $product['id'] ?>"><?= $product['name'] ?></a></h2>
+                <h3><?= $product['description'] ?></h3>
+                <p><?= $product['price'] ?></p>
+            </div>
+    <?php
+    }
 }
 else
 {
-    foreach($productsByCategories as $product){
+    foreach($products as $product){
         ?>
         <div class="products">
             <h2><a href="products/<?= $product['id'] ?>"><?= $product['name'] ?></a></h2>
