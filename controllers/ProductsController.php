@@ -137,8 +137,6 @@ class ProductsController extends Controller
     {
         $model = new CategoriesModel();
         $categories = $model->findAll();
-       
-        // Renderer::render('layout' , compact('categories' ));
         // echo "<pre>";
         // var_dump($categories);
         // echo "</pre>";
@@ -150,6 +148,10 @@ class ProductsController extends Controller
     {
         $modelSousCat = new SousCategoriesModel();
         $sousCategories = $modelSousCat->findAll();
+
+        // echo "<pre>";
+        // var_dump($sousCategories);
+        // echo "</pre>";
         // Renderer::render('layout' , compact('sousCategories' ));
 
         return $sousCategories;
@@ -158,24 +160,25 @@ class ProductsController extends Controller
     public static function getCategorieName()
     {
 
-        $products = new CategoriesModel();
+        // $products = new CategoriesModel();
         $categories = self::getCategories();
-        foreach ($categories as $categorie )
-        {
-            // echo "get category NAME";
-            // var_dump($categorie['name']);
-            $nameCategorie = $categorie['name'];
-            // echo "bkedhiDHMIOS";
-            // var_dump($categorie);
-
-            // $categories[0]['name'] = $nameCategorie;
-        }
+        // foreach ($categories as $categorie )
+        // {
+    
+        //     $nameCategorie = $categorie['name'];
+           
+        // }
+          echo "<pre>";
+        var_dump($nameCategorie);
+        echo "</pre>";
         return $nameCategorie;
     }
+
     public static function productsByCategories()
     {
         $model = new ProductsModel();
-        $products_cat = $model->productsByCategorie();
+        $productsCat = $model->productsByCategorie();
+
     }
 
     
@@ -188,7 +191,7 @@ class ProductsController extends Controller
         // var_dump($url);
         if($url[1] === $categorieUrl){
 
-            // $categories['name'] = $nameCategorie;
+
             // $model = new ProductsModel();
             // $productByCat = $model->productsByCategorie();
             echo "bla bla";
@@ -204,36 +207,24 @@ class ProductsController extends Controller
     {
    
         
-        
-        //     $productModel = new ProductsModel();
-        //     $products = $productModel->findAll();
-        //     // $productByCat = $model->getProductByCategorie();
-        
-        //     // var_dump($productByCat);
-        //     // echo "</pre>";
-        //     //  var_dump($productByCat);
-        
-        //     $page = $_GET["page"];
-
+      
+        $model = new ProductsModel();
+        $countProducts= $model->countProducts();
+        $products= $model->productsByCategorie();
+        $categorieUrl = self::getUrlCategories();
         $nameCategorie = self::getCategorieName();
-       
-        // if(isset($_GET['categorie']))
+        // var_dump($categorieUrl);
+        // if(isset())
         // {
             
-            // $page_categorie = 2;  
+        //     $page_categorie = 2;  
         // }
         // if (empty($page)) 
         // {
         //         $page = 1;
         // }
-                    $model = new ProductsModel();
-                    $countProducts= $model->countProducts();
-                    $products= $model->productsByCategorie();
-                    // $categories = $model->findAllCategories();
-                
-                    // var_dump('OK');
-                    // var_dump($countProducts);
-                    // var_dump('OK');
+                  
+            
                 
                 
                     $nbrProductsByPage = 1;
@@ -243,8 +234,9 @@ class ProductsController extends Controller
                 
                 //     $productsByPage = $model->productsByPage($nbrProductsByPage, $debut);
                 //     // $model->productsByPage($nbr_product_par_page, $debut);
-            return [$products, $nbrPages];
-                //     echo 'pagination';
+              
+            return [$products, $nbrPages,];
+ 
                 
                 
                 
@@ -281,6 +273,7 @@ class ProductsController extends Controller
     {
         // echo "1";
         $categories = self::getCategories();
+        $sousCategories = self::getSousCategories();
         $nameCategorie = self::getCategorieName();
         $categorieUrl = self::getUrlCategories();
         // echo "1";
@@ -293,17 +286,8 @@ class ProductsController extends Controller
         $products = $pagination[0];
         $nbrPages = $pagination[1];
 
-        $sousCategories = self::getSousCategories();
-        
-        // }
-        // var_dump($categories);
-        // var_dump('OKOKOK');
-        // var_dump($categorieUrl);
-        // var_dump($NameCategorie);
-        // var_dump($pagination);
-        // var_dump($sousCategories);
         // var_dump($products);
-        // var_dump($productsByCategories);
+       
         Renderer::render('products/allProducts' , compact('categories', 'categorieUrl','nameCategorie', 'products', 'nbrPages', 'sousCategories'));
         // Renderer::render('products/allProducts' , compact('categories', 'products', 'countProducts', 'productsByCat', 'sousCategories', 'productsByCategories', 'categorieUrl','nameCategorie', 
         // 'nbrPages'));

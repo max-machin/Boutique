@@ -190,8 +190,8 @@ class ProductsModel extends Model
         FROM {$this->table} 
         INNER JOIN `categories` 
         ON categories.id = products.id_categorie 
-        WHERE categories.name = 'skincare'");
-        $query-> execute();
+        WHERE categories.name = :nameCategorie");
+        $query-> execute(['nameCategorie' => $nameCategorie]);
         return $query->fetchAll();
     }
     public function productsByCategorie() 
@@ -201,9 +201,9 @@ class ProductsModel extends Model
         $findProduct = $this->database->prepare("SELECT products.*, GROUP_CONCAT(images.url_image SEPARATOR ',') as url FROM `products` 
         INNER JOIN images ON products.id = images.id_product 
         INNER JOIN categories ON products.id_categorie = categories.id
-        WHERE categories.name = 'skincare'
+        WHERE categories.name = :nameCategorie
         GROUP BY products.id");        
-        $findProduct -> execute();
+        $findProduct -> execute(['nameCategorie' => $nameCategorie]);
         $resultProduct = $findProduct -> fetchAll();
 
 
@@ -212,28 +212,21 @@ class ProductsModel extends Model
     
     
 
-    public function productsBySousCategories($nameCategorie,$debut_cat )
+    public function productsBySousCategories($nameSousCategorie,$debut_cat )
     {
         $query = $this->requete("SELECT products.*, GROUP_CONCAT(images.url_image SEPARATOR ',') as url FROM `products` 
         INNER JOIN images ON products.id = images.id_product
         INNER JOIN sous_categories
         ON sous_categories.id = products.id_sous_categorie 
-        WHERE categories.name = :nameCategorie 
+        WHERE sous_categories.name = :nameSousCategorie 
         LIMIT :debut_cat");
         $query->execute([
-            'nameCategorie' => $nameCategorie,
+            'nameSousCategorie' => $nameSousCategorie,
             'debut_cat' => $debut_cat
         ]);
         $result = $query->fetchAll();
     }
-    
-    // public function findAllCategories()
-    // {
-    //     $query = $this->requete("SELECT * FROM `categories` ");
-    //     // var_dump($query->fetchAll());
-    //     // return ("test");
-    //    return $query->fetchAll();
-    // }
+   
 
    
 

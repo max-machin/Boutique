@@ -97,7 +97,7 @@ class Router
                         }
                     }
             }elseif($controllerName == "ProductsController"){
-                echo"test";
+                // echo"test";
                 $controllerName::createViewProducts();
                 }
             if(@$url[1] == 'delete'){

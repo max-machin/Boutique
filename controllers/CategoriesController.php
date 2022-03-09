@@ -5,10 +5,7 @@ require_once('libraries/Renderer.php');
 
 class CategoriesController extends Controller
 {  
-    public function __construct()
-    {
-        $this->table = "categories";
-    }
+  
 
     public static function getCategories()
     {

@@ -4,11 +4,12 @@ class CategoriesModel extends Model
 {
     protected $id;
     protected $name;
-   
-
+    
     public function __construct()
     {
+ 
         $this->table = "categories";
+
     }
 
     public function getId()

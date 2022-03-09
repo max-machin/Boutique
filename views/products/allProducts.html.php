@@ -15,7 +15,7 @@
     var_dump($categories);
     // var_dump($products);
     // echo 'heloooo';
-    // var_dump($_GET);
+    var_dump($_GET);
     // echo 'heloooo';
     // var_dump($sousCategories);
 
