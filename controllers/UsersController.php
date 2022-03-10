@@ -7,7 +7,7 @@ require_once ('libraries/phpmailer/Exception.php');
 require_once ('libraries/phpmailer/PHPMailer.php');
 require_once ('libraries/phpmailer/SMTP.php');
 
-
+// Validation des données
 function valid_data($données)
 {
     //trim permet de supprimer les espaces inutiles
@@ -36,7 +36,6 @@ class UsersController extends Controller
         $error_email = "";
         $error_name = "";
         $error_surname = "";
-        $error_adresse = "";
         $error_password = "";
         $error_validPassword = "";
 
@@ -79,8 +78,6 @@ class UsersController extends Controller
                                         // Hashage du mot de passe avant insertion en base de données
                                         $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
-                                        // Sécurisation des données
-                                        $adresse = valid_data($_POST['adresse']);
 
                                         // On crée un nouveau UserModel
                                         $model = new UsersModel();
@@ -90,8 +87,7 @@ class UsersController extends Controller
                                         ->setNom($name)
                                         ->setPrenom($surname)
                                         ->setEmail($email)
-                                        ->setPassword($password_hash)
-                                        ->setAdresse($adresse);
+                                        ->setPassword($password_hash);
                                         
                                         // On inscrit l'utilisateur en base de données
                                         $user_data->create($model);
@@ -122,7 +118,6 @@ class UsersController extends Controller
         }
     
     Renderer::render('users/register' , compact( 'error_email' , 'error_surname' , 'error_name' , 'error_password' , 'error_validPassword'));
-        // var_dump($user->create($model));
     }
 
     /**
@@ -166,9 +161,9 @@ class UsersController extends Controller
                                 'email' => $data_user[0]['email'],
                                 'nom' => $data_user[0]['nom'],
                                 'prenom' => $data_user[0]['prenom'],
-                                'adresse' => $data_user[0]['adresse']
                             ];
-                            // header ('location: ../index');
+                            $_SESSION['user_data']['promo'] = NULL;
+                            header ('location: profil');
 
                         } else {
                             $error = "Login/Mot de passe incorrect";
@@ -201,8 +196,10 @@ class UsersController extends Controller
      * UpdateProfil Fonction permettant à l'utilisateur de modifier ses informations personnelles
      * Séparer en deux formulaires disctincts (infos & mot de passe)
      * Demande de confirmation de l'ancien mot de passe pour modification de ce dernier.
+     * Affichage des commandes passés précedemment
+     * Affichage des commentaires de l'utilisateur et possibilité de les supprimer
      *
-     * @return void
+     * @return void 
      */
     public static function updateProfil()
     {
@@ -235,6 +232,9 @@ class UsersController extends Controller
 
                 // Puis on update les infos et on rafraichit la page pour affichage des informations à jour
                 $users->Update($model);
+
+                $_SESSION['user_data']['email'] = $email;
+
                 header('refresh: 0');
             }
 
@@ -250,8 +250,10 @@ class UsersController extends Controller
                     ->setPrenom($prenom);
 
                 $users->Update($model);
+
+                $_SESSION['user_data']['prenom'] = $prenom;
                 header('refresh: 0');
-            }
+            } 
             
             // Même fonctionnement que pour l'E-mail
             if ( !empty ( $_POST['name']))
@@ -265,10 +267,29 @@ class UsersController extends Controller
                     ->setNom($nom);
 
                 $users->Update($model);
+
+                $_SESSION['user_data']['nom'] = $nom;
+            }
+
+            // Même fonctionnement que pour l'E-mail
+            if ( !empty ( $_POST['adresse']))
+            {
+                // Sécurisation des données
+                $adresse = valid_data($_POST['adresse']);
+
+                $users = $model
+
+                    ->setId($_SESSION['user_data']['id'])
+                    ->setAdresse($adresse);
+
+                    
+                $users->Update($model);
+
+                $_SESSION['user_data']['adresse'] = $adresse;
             }
         }
         // FORMULAIRE NOUVEAU MOT DE PASSE
-        elseif ( isset ( $_POST['subPassword']))
+        elseif ( isset ( $_POST['subPassword'])) 
         {
             // Vérification des champs
             if ( !empty ( $_POST['oldPassword']))
@@ -331,9 +352,22 @@ class UsersController extends Controller
                 $display1 = "none";
             }
         }
-       
+        
+        $model = new CommandsModel();
+        $userCommands = $model->findCommand($_SESSION['user_data']['id']);
 
-        Renderer::render('users/profil' , compact('user', 'error_new_password', 'error_validPassword', 'error_old_password', 'display1' , 'display2'));
+        $comments = new CommentsModel();
+        $userComments = $comments->userComments($_SESSION['user_data']['id']);
+
+        if ( isset ( $_POST['deleteComment']) )
+        {
+            $delete = new CommentsModel();
+            $deleteComment = $delete->deleteBy(['id' => $_POST['id_comment']]);
+            header('Refresh: 0');
+        }
+        
+
+        Renderer::render('users/profil' , compact('user', 'error_new_password', 'error_validPassword', 'error_old_password', 'display1' , 'display2', 'userCommands', 'userComments'));
     }
 
     /**
@@ -396,5 +430,177 @@ class UsersController extends Controller
             }
         }
         Renderer::render('users/forgotPassword');
+    }
+    /**
+     * Fonction d'affichage de la commande user en fonction du panier user 
+     * Possibilité dans cette fonction pour l'user d'ajouter un code PROMO sur sa commande afin de bénficier d'une réduction
+     *
+     * @return void
+     */
+    public static function seeCommand()
+    {
+
+
+        $error = "";
+
+        $model = new BagsModel();
+        $command = $model->checkBag($_SESSION['user_data']['id']);
+
+        $modelColors = new BagsModel();
+        $commandColors = $modelColors->checkBagColors($_SESSION['user_data']['id']);
+        
+        // Si l'utilisateur n'est pas connecté alors on le redirige vers le login
+        if ( empty ( $_SESSION['user_data']) )
+        {
+            header('location: login');
+        }
+
+        // Ajout d'un code PROMO sur la commande
+        if ( isset($_POST['promo']))
+        {
+            // Si le code n'est pas vide
+            if ( !empty ($_POST['codePromo']) )
+            {
+                // Si le code correspond
+                if ( $_POST['codePromo'] === codePromo)
+                {
+        
+                    $_SESSION['user_data']['promo'] = 1;
+                    
+                }
+            }
+        } 
+
+        // Si les informations de livraisons de sont pas remplis
+        if ( empty ($_POST['adresse']) || empty ($_POST['ville']) || empty ($_POST['codePostale']) || empty ($_POST['facturation']))
+        {
+            $error = "Veuillez remplir les informations de livraison";
+        }
+        
+        
+        Renderer::render('users/commands', compact('command','commandColors' ,'error'));
+    } 
+
+    /**
+     * Fonction permettant à l'utilisateur de procéder au paiment de sa commande à l'aide de STRIPE
+     *
+     * @return void
+     */
+    public static function paiement() 
+    {
+        // Si toutes les informations de livraisons ont été correctement remplies
+        if ( !empty ($_POST['adresse']) && !empty($_POST['facturation']) && !empty ($_POST['ville']) && !empty ($_POST['codePostale']))
+        {   
+            // Sécurisation des données
+            $adresse = valid_data($_POST['adresse']);
+            $ville = valid_data($_POST['ville']);
+            $codePostale = valid_data($_POST['codePostale']);
+
+            // On concatene 'l'adresse' + 'le code postale' + 'la ville' afin de le rentrer en BDD en tant que colonne unique
+            // ex = 13 av de marseille 13000 Marseille 
+            $_SESSION['user_data']['livraison'] = $adresse." ".$codePostale." ".$ville;
+
+            $_SESSION['user_data']['facturation'] = $_POST['facturation'];
+
+            // Si un prix est définit / différent de vide = commande vide
+            if ( isset ( $_POST['prix']) && !empty ( $_POST['prix']))
+            {
+                require_once('vendor/autoload.php');
+                $prix = ($_POST['prix']);
+
+                // On insctancie stripe
+                \Stripe\Stripe::setApiKey('sk_test_51KZXuDJm5576Uzo35LWKkxbWACB19bTEv0cn494ONQLuQqfQd7GHXeCWMp2LxLUbbCikvt6siO7nY5TdBdaMeFcd00Hl7keAL2');
+
+                $intent = \Stripe\PaymentIntent::create([
+                'amount' => $prix*100,
+                'currency' => 'eur'
+            ]);
+            // On redirige vers la page commande car vide
+            } else {
+                header('location: commands');
+            }
+        // On redirige vers la page commande car informations mal remplis
+        } else {
+            header('location: commands');
+        }
+            Renderer::render('users/paiement', compact('intent'));
+    }
+
+    public static function successCommand()
+    {
+        $model = new BagsModel();
+
+        $command = $model->checkCommandBag($_SESSION['user_data']['id']);
+
+        // Vérification que la commande n'est pas vide 
+        if (isset($command)){
+            // Si la commande n'est pas vide
+            if ( !empty ($command))
+            {
+                // On récupère le plus grand numéro de commande et on l'incrémente pour la prochaine commande à entrer en BDD
+                $check = new CommandsModel();
+                $checkNum = $check->checkNumCommand();
+                $numCommand = intval($checkNum['MAX(id_command)'])+1;
+                
+                // Si l'utilisateur a entré un code PROMO
+                if ( $_SESSION['user_data']['promo'] === 1){
+                    // Insertion de la commande avec PROMO ( totalité de la table bags + infos par rapport à l'id user)
+                    foreach ($command as $product)
+                    {
+                        $promo = 15;
+                        
+                        $insert = new CommandsModel();
+                        $insertCommand = $insert
+                            ->setPrice($product['price'])
+                            ->setTotal_price($product['total_price'] * $product['quantity'])
+                            ->setId_user($_SESSION['user_data']['id'])
+                            ->setId_command($numCommand)
+                            ->setId_product($product['id'])
+                            ->setPromo($promo)
+                            ->setQuantity_product($product['quantity_product'])
+                            ->setAdresse_livraison($_SESSION['user_data']['livraison'])
+                            ->setAdresse_facturation($_SESSION['user_data']['facturation'])
+                            ->setId_color($product['id_color']);
+                        $insertCommand->create($insert);
+                    }
+                } else {
+                    // Insertion de la commande sans PROMO ( totalité de la table bags + infos par rapport à l'id user)
+                    foreach ($command as $product)
+                    {
+                        $promo = 0;
+
+                        $insert = new CommandsModel();
+                        $insertCommand = $insert
+                            ->setPrice($product['price'])
+                            ->setTotal_price($product['price'] * $product['quantity_product'])
+                            ->setId_user($_SESSION['user_data']['id'])
+                            ->setId_command($numCommand)
+                            ->setId_product($product['id'])
+                            ->setQuantity_product($product['quantity_product'])
+                            ->setPromo($promo)
+                            ->setAdresse_livraison($_SESSION['user_data']['livraison'])
+                            ->setAdresse_facturation($_SESSION['user_data']['facturation'])
+                            ->setId_color($product['id_color']);
+                        $insertCommand->create($insert);
+                    }
+                }
+                // On vide le panier car insérer en base de données dans la table COMMANDS
+                $delete = new BagsModel();
+                $deleteBag = $delete->deleteBy(['id_user' => $_SESSION['user_data']['id']]);
+
+               
+            // Redirection vers le panier car commande vide 
+            } else {
+                header('location: ../bags');
+            }
+        }
+        // Remise à null de la command car payé et insérer en BDD
+        // Réinitialisation des variables plus nécessaires
+        $command = NULL;
+        $_SESSION['user_data']['promo'] = 0;
+        unset($_SESSION['user_data']['livraison']);
+        unset($_SESSION['user_data']['facturation']);
+
+        Renderer::render('users/successCommand' , compact('command'));
     }
 }

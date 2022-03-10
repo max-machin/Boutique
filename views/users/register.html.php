@@ -20,9 +20,6 @@
     <input id="validPassword" type="password" name="validPassword" placeholder="Confirmez mot de passe"></br>
     <span><?= $error_validPassword ?></span></br>
 
-    <label for="adresse">Adresse</label></br>
-    <input id="adresse" type="text" name="adresse" placeholder="Adresse"></br>
-
     <input type="submit" name="submit">
 </form>
 

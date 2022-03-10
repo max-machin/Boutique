@@ -43,23 +43,20 @@ if(isset($products))
 {
 
 foreach($products as $product){
-    var_dump($product);
     $images = explode(',', $product['url']);
-    var_dump($images);
-     
+
 ?>
 
 <div class="products">
     <?php
         foreach($images as $image){
 
-            var_dump($image);
             ?>
             <img src="Uploads/<?= $image ?>" width="50px">
             <?php
         }
     ?>
-    <h2><a href="products/<?= $product['id'] ?>"><?= $product['name'] ?></a></h2>
+    <h2><a href="<?= url ?>products/<?= $product['id'] ?>"><?= $product['name'] ?></a></h2>
     <h3><?= $product['description'] ?></h3>
     <p><?= $product['price'] ?></p>
 </div>
@@ -71,9 +68,9 @@ else
     foreach($productsByCategories as $product){
         ?>
         <div class="products">
-            <h2><a href="products/<?= $product->id ?>"><?= $product->name ?></a></h2>
-            <h3><?= $product->description ?></h3>
-            <p><?= $product->price?>€</p>
+            <h2><a href="products/<?= $product['id'] ?>"><?= $product['name'] ?></a></h2>
+            <h3><?= $product['description'] ?></h3>
+            <p><?= $product['price']?>€</p>
         </div>
     <?php
     }

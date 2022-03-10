@@ -11,7 +11,6 @@ class UsersModel extends Model
    protected $prenom;
    protected $nom;
    protected $password;
-   protected $adresse;
 
    /**
     * Définit la table SQL concernée dans le modèle mère"
@@ -141,6 +140,13 @@ class UsersModel extends Model
       return $this;
    }
 
+   /**
+    * Update du profil user pour récupération de mot de passe par mail
+    *
+    * @param [type] $password
+    * @param [type] $email
+    * @return void
+    */
    public function emailPassword($password, $email)
    {
       return $this->requete(" UPDATE users SET password = ? WHERE email = ?", array($password, $email));

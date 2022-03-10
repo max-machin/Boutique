@@ -15,8 +15,6 @@ if(@$_SERVER['user_data']['id'] == 1)
     ?>
     <h1><?= $product['name'] ?></h1>
 
-<?php var_dump($product);?>
-
     <form action="<?= $product['id'] ?>/update" method="post">  
         <input type="hidden" name="id" value="<?= $product['id'] ?>"/>          
         <button class="#" type="submit" name="updateProduct">Update</button>
@@ -34,21 +32,80 @@ else
     ?>
     <h1><?= $product['name'] ?></h1>
 
-    <?php var_dump($product);
+    <?php
 
-    // if(isset($_POST['addBag']))
-    // {
-    // $_SESSION['product']['id'] = $product['id'];
-    // // var_dump($_SESSION['product']['id']);
-    // BagsController::insertBag($_SESSION['user_data']['id'], $_SESSION['product']['id'], $product['quantity']);
-    // }
-
+    if ( isset ( $_SESSION['user_data']))
+    {
+        
     ?>
+        <form action="" method="post">  
 
-        <form action="" method="post">           
+            <article class="product_color">
+
+                <?php
+                    foreach( $findColors as $color)
+                    {
+                ?>
+                    <label class="color" for="<?= $color['name'] ?>" style="background-color: #<?= $color['code'] ?>">
+                        <input id="<?= $color['name'] ?>" type="radio" name="color" value="<?= $color['id'] ?>">
+                    </label>
+                <?php
+                    } 
+                    echo $error_color;
+                ?>
+            </article>
+            <select name="product_quantity" id="product_quantity">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+
+            
+            <input type="hidden" name="id_Product" value="<?= $product['id'] ?>">
             <button class="#" type="submit" name="addBag">Add</button>
+
+                <?php
+                if( isset($findFav) && $favoritFind == true )
+                {
+                ?>
+                    
+                    <button class="fav outfav" type="submit" name="addFav">
+                        <img src="../images/heart_fill.png" alt="" width="20px">
+                    </button>
+
+                <?php
+                } elseif ( $favoritFind == false ) {
+                    
+                ?>
+                    
+                    <button class="fav infav" type="submit" name="addFav">
+                    <img src="../images/heart_empty.png" alt="" width="20px">
+                    </button>
+                <?php
+                }
+                ?>
         </form>
-    
+    <?php
+    } else {
+    ?>
+        <article class="product_color">
+
+    <?php
+            foreach( $findColors as $color)
+            {
+    ?>
+            <label class="color" for="<?= $color['name'] ?>" style="background-color: #<?= $color['code'] ?>">
+                
+            </label>
+    <?php
+            } 
+    ?>
+        </article>
+    <?php
+    }
+    ?>
 <section class="sectionComments"> 
     
     <?php

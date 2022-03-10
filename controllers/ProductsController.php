@@ -25,32 +25,237 @@ class ProductsController extends Controller
         Renderer::render('admin/updateProduct' , compact('products'));    
     }
 
+    /**
+     * Fonction affichage du produit seul, contenant également tout le traitement de l'ajout panier selon
+     * quantité, couleur, possibilité également d'ajouter le produit en favoris, affichage des commentaires relatif au produit.
+     *
+     * @param [type] $id
+     * @return void
+     */
     public static function seeProduct($id){
+
+        $findUser = "";
+        $error_color = "";
+
         $model = new ProductsModel();
         $soloproduct = $model->selectProductbyId($id);
+
         foreach($soloproduct as $product){
             $images = explode(',', $product['url']); 
          }  
 
+         // Récupération des couleurs selon l'id du produit
+        $model = new ColorsModel();
+        $findColors = $model->findBy(['id_product' => $id]);
+
+        // Récupération du produit selon son id
         $productModel = new ProductsModel();
         $product = $productModel->find($id);
 
+        // Si le produit n'est pas connu en base de données on redirige vers la liste des produits
         if ( empty($product))
         {
             header('location: ../products');
         }
 
-        if ( isset ($_POST['addBag']))
+        // Ajout d'un produit au panier
+        if ( isset ( $_POST['addBag']))
         {
-        $model = new BagsModel();
-        $productAdded = $model
-        ->setId_user($id_user)
-        ->setId_product($id_product)
-        ->setQuantity_product($quantity);
+            $user = new BagsModel();
+            $findUser = $user->findBy(['id_user' => $_SESSION['user_data']['id']]);
 
-        // $productAdded->create($model);  
+            /**
+             * AJOUT D'UN PRODUIT AU PANIER AVEC COULEUR
+             */
+            // Si l'article posséde des couleurs
+            if ( !empty($findColors))
+            {
+                if ( isset($_POST['color']))
+                {
+                    // Si l'utilisateur n'a pas de panier
+                    if (empty ($findUser)) 
+                    {
+                        $color = intval($_POST['color']);
+                        // On ajoute un produit au panier
+                        $model = new BagsModel();
+                        $productAdded = $model
+                            ->setId_user($_SESSION['user_data']['id'])
+                            ->setId_product($_POST['id_Product'])
+                            ->setId_color($color)
+                            ->setQuantity_product($_POST['product_quantity']);
+                        $productAdded->create($model);  
+
+                        
+                        $findModel = new BagsModel();
+                        $find = $findModel->findBy(['id_product' => $_POST['id_Product']]);
+
+
+                        // Si le produit n'est pas dans le panier alors on le créer et on l'insert
+                        if ( empty ($find) )
+                        {
+                
+                            $color = intval($_POST['color']);
+
+                            $model = new BagsModel();
+                            $productAdded = $model
+                            ->setId_user($_SESSION['user_data']['id'])
+                            ->setId_product($_POST['id_Product'])
+                            ->setQuantity_product($_POST['product_quantity'])
+                            ->setId_color($color);
+                            $productAdded->create($model);  
+
+                        // Sinon on update sa quantité
+                        } else {
+                            
+                            $model = new BagsModel();
+                            $updateBag = $model->updateQuantityColors($_POST['product_quantity'], $_POST['id_Product'], $_SESSION['user_data']['id'], $_POST['color']);
+                        }
+                    // Si l'utilisateur a déjà un panier
+                    } else {
+
+                        $findModel = new BagsModel();
+                        $find = $findModel->findBy(['id_product' => $_POST['id_Product'], 'id_user' => $_SESSION['user_data']['id'], 'id_color' => $_POST['color']]);
+                        // Si le produite n'existe pas dans le panier on l'insert
+                        if ( empty ($find) )
+                        {
+                            $color = intval($_POST['color']);
+
+                            $model = new BagsModel();
+                            $productAdded = $model
+                            ->setId_user($_SESSION['user_data']['id'])
+                            ->setId_product($_POST['id_Product'])
+                            ->setQuantity_product($_POST['product_quantity'])
+                            ->setId_color($color);
+                            $productAdded->create($model);  
+
+                        // Sinon on l'update
+                        } else {
+
+                        $model = new BagsModel();
+                        $updateBag = $model->updateQuantityColors($_POST['product_quantity'], $_POST['id_Product'], $_SESSION['user_data']['id'], $_POST['color']);
+                        }
+                    }
+                } 
+                else 
+                {
+                    $error_color = "Veuillez sélectionner une couleur";
+                } 
+            } 
+            /**
+             * AJOUT D'UN PRODUIT AU PANIER SANS COULEUR
+             */
+            else 
+            {
+                // Si l'utilisateur n'a pas de panier
+                if (empty ($findUser))
+                {
+                    // On ajoute un panier au produit
+                    $model = new BagsModel();
+                    $productAdded = $model
+                        ->setId_user($_SESSION['user_data']['id'])
+                        ->setId_product($_POST['id_Product'])
+                        ->setQuantity_product($_POST['product_quantity']);
+                    $productAdded->create($model);  
+
+                    
+                    $findModel = new BagsModel();
+                    $find = $findModel->findBy(['id_product' => $_POST['id_Product']]);
+
+                    // Si le produit n'est pas dans le panier alors on le créer et on l'insert
+                    if ( empty ($find) )
+                    {
+                       
+                        var_dump($find);
+                        $model = new BagsModel();
+                        $productAdded = $model
+                        ->setId_user($_SESSION['user_data']['id'])
+                        ->setId_product($_POST['id_Product'])
+                        ->setQuantity_product($_POST['product_quantity']);
+                        
+                        $productAdded->create($model);  
+
+                    // Sinon on update sa quantité
+                    } else {
+                        
+
+                        $model = new BagsModel();
+                        $updateBag = $model->updateQuantity($_POST['product_quantity'],$_POST['id_Product'], $_SESSION['user_data']['id']);
+                        
+                    }
+                // Si l'utilisateur a déjà un panier
+                } else {
+
+                    $findModel = new BagsModel();
+                    $find = $findModel->findBy(['id_product' => $_POST['id_Product'], 'id_user' => $_SESSION['user_data']['id']]);
+                    // Si le produite n'existe pas dans le panier on l'insert
+                    if ( empty ($find) )
+                    {
+                        $model = new BagsModel();
+                        $productAdded = $model
+                        ->setId_user($_SESSION['user_data']['id'])
+                        ->setId_product($_POST['id_Product'])
+                        ->setQuantity_product($_POST['product_quantity']);
+                       
+                        $productAdded->create($model);  
+
+                    // Sinon on l'update
+                    } else {
+
+
+                    $model = new BagsModel();
+                    $updateBag = $model->updateQuantity($_POST['product_quantity'], $_POST['id_Product'], $_SESSION['user_data']['id']);
+                    
+                    }
+                }
+            
+            }
+
         }
 
+        /**
+         * AJOUT EN FAVORIS D'UN PRODUIT
+         */
+        // Si l'utilisateur est connecté
+        if ( isset ( $_SESSION['user_data']))
+        {
+            // Action sur le bouton ajout/suppression favoris
+            if ( isset ( $_POST['addFav']))
+            {
+    
+            
+            $fav = new favorisModel();
+            $findFav = $fav->findFavoris( $_SESSION['user_data']['id'],$id);
+                
+                // Si le produit est en favoris ( connu en base de données selon l'id de l'user)
+                if ( !empty ( $findFav))
+                {
+                    $delete = new favorisModel();
+                    $deleteFavoris = $delete->deleteBy(['id_product' => $_POST['id_Product'], 'id_user' => $_SESSION['user_data']['id']]);
+                // Si le produit n'est pas en favoris ( inconnu en base de données)on l'ajoute
+                } elseif ($findFav == null) {
+                    $favoris = new favorisModel();
+                    $addFav = $favoris
+                        ->setId_user($_SESSION['user_data']['id'])
+                        ->setId_product($_POST['id_Product'])
+                        ->setFav(1);
+                    $addFav->create($favoris);
+                    
+                }
+            }
+        
+        // Requête de vérification d'existence du produit en favoris pour l'user
+        $fav = new favorisModel();
+        $findFav = $fav->findFavoris( $_SESSION['user_data']['id'],$id);
+
+        // Requête pour l'affichage du bouton add/delete favoris en fonction du résultat
+        $find = new favorisModel();
+        $favoritFind = $find->findFavorisUser($_SESSION['user_data']['id'],$id);
+
+        }
+
+        /**
+         * AFFICHAGE DES COMMENTAIRES DU PRODUIT
+         */
         $commentModel = new CommentsModel();
         $allComments = $commentModel->productComment($id);
 
@@ -61,7 +266,7 @@ class ProductsController extends Controller
             if ( !empty ($_POST['comment']))
             {
                 $model = new CommentsModel();
-                $comment = valid_data($_POST['comment']);
+                $comment = $_POST['comment'];
 
                 $comment = $model
                     ->setId_product($_POST['id_product'])
@@ -76,7 +281,14 @@ class ProductsController extends Controller
                 $errorComment = "Veuillez remplir le champ";
             }
         }
-        Renderer::render('products/seeProduct' , compact('product', 'images', 'allComments', 'errorComment'));
+
+        if ( isset ( $_SESSION['user_data']))
+        {
+            Renderer::render('products/seeProduct' , compact('product', 'images', 'allComments', 'errorComment', 'findUser', 'findColors', 'error_color', 'findFav', 'favoritFind'));
+        } else {
+            Renderer::render('products/seeProduct' , compact('product', 'images', 'allComments', 'errorComment', 'findUser', 'findColors'));
+        }
+        
     }
 
     public static function searchbarProduct()

@@ -8,6 +8,10 @@ class ImagesModel extends Model
     protected $url_image;
     // protected $database;
 
+    public function __construct()
+    {
+        $this->table = "images";
+    }
 
     public function __construct()
     {
@@ -90,5 +94,4 @@ class ImagesModel extends Model
         $updateImg=$database->prepare('INSERT INTO `images` SET url_image=:url_image, id_product=:id_product');
         $updateImg -> execute(['url_image'=>$url_image,'id_product'=>$id_product]);
     }
-
 }
