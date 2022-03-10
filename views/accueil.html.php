@@ -1,6 +1,6 @@
 <article>
     <section>
-        
+        ici le content du main
     </section>
     <section>
         
