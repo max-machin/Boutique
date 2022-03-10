@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/81dc42ea59.js" crossorigin="anonymous"></script>
     <link href="image/fontawesome-free-5.15.4-web.zip/css/all.css" rel="stylesheet">
-    <link rel="stylesheet" href="<?= url ?>style.css">
+    <link rel="stylesheet" href="<?= urlLaura ?>style.css">
     <title>Everglow | Clean Skincare & Beauty products </title>
 </head>
 
@@ -35,9 +35,9 @@
         ?>
             <nav>
                 <ul>
-                    <li><a href="<?= url ?>users/profil"><img src="Images/utilitaires/user.svg" width="40px"></a></li>
-                    <li><a href="<?= url ?>users/disconnect"><img src="Images/utilitaires/power.svg" width="43px"></a></li>
-                    <li><a href="<?= url ?>bags"><img src="Images/utilitaires/bag.svg" width="40px"></a></li>
+                    <li><a href="<?= urlLaura ?>users/profil"><img src="Images/utilitaires/user.svg" width="40px"></a></li>
+                    <li><a href="<?= urlLaura ?>users/disconnect"><img src="Images/utilitaires/power.svg" width="43px"></a></li>
+                    <li><a href="<?= urlLaura ?>bags"><img src="Images/utilitaires/bag.svg" width="40px"></a></li>
                 </ul>
             </nav>
         <?php
@@ -45,8 +45,8 @@
         ?>
             <nav>
                 <ul>
-                    <li><a href="<?= url ?>users/register">Inscription</a></li>
-                    <li><a href="<?= url ?>users/login">Connexion</a></li>
+                    <li><a href="<?= urlLaura ?>users/register">Inscription</a></li>
+                    <li><a href="<?= urlLaura ?>users/login">Connexion</a></li>
                 </ul>
             </nav>
         <?php
@@ -57,8 +57,8 @@
         <div class="bottom-header">
         <nav class="categories">
             <ul>
-                <li><a href="<?= url ?>">Skincare</a></li>
-                <li><a href="<?= url ?>">Make up</a></li>
+                <li><a href="<?= urlLaura ?>">Skincare</a></li>
+                <li><a href="<?= urlLaura ?>">Make up</a></li>
             </ul>
         </nav>
         </div> 
