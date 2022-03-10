@@ -239,6 +239,10 @@ SINON rajouter avant container une autre class/un autre mot donc et apr√®s le d√
     z-index: 2;
 }
 
+.top-header form {
+    
+}
+
 
 .categories ul{
     padding: 0;
@@ -246,6 +250,7 @@ SINON rajouter avant container une autre class/un autre mot donc et apr√®s le d√
     flex-direction: row;
     justify-content: space-around;
 }
+
 
 /* .menu-user{
     position: fixed;

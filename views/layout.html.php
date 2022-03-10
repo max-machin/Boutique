@@ -14,6 +14,10 @@
     <header>
         <div class="top-header">
             <div class="top-before-animation">
+                <div class="btn-search">
+                    <img src="Images/utilitaires/search.svg" width="35px"> 
+                </div>
+                
                 <form action="" method="post">
                     <input type="text" name="search" placeholder="Search">
                     <button id="searchbutton" type="submit" name="submit-search"><img src="Images/utilitaires/search.svg" width="35px"></button>
