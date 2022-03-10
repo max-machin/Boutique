@@ -13,6 +13,7 @@
 <body>
     <header>
         <div class="top-header">
+            <div class="top-before-animation">
                 <form action="" method="post">
                     <input type="text" name="search" placeholder="Search">
                     <button id="searchbutton" type="submit" name="submit-search"><img src="Images/utilitaires/search.svg" width="35px"></button>
@@ -23,7 +24,7 @@
                 <div class="btn-navigation">
                     <img src="Images/utilitaires/menu.svg" width="40px">
                 </div>
-
+            </div>
                  <?php
                 if ( isset ($_SESSION['user_data'] ) )
                 {
@@ -31,7 +32,10 @@
                     <nav>
                         <ul>
                             <li><a href="<?= urlLaura ?>users/profil"><img src="Images/utilitaires/user.svg" width="40px"></a></li>
+<<<<<<< HEAD
                             <li><a href="<?= urlLaura ?>users/commands">Commandes</a></li>
+=======
+>>>>>>> 7748730883dd89b02679a6c77c5cd117589b2867
                             <li><a href="<?= urlLaura ?>users/disconnect"><img src="Images/utilitaires/power.svg" width="43px"></a></li>
                             <li><a href="<?= urlLaura ?>bags"><img src="Images/utilitaires/bag.svg" width="40px"></a></li>
                         </ul>

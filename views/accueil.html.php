@@ -1,6 +1,6 @@
 <article>
     <section>
-        ici le content du main
+        <img src="Images/generalvibe/girls.jpeg">
     </section>
     <section>
         
