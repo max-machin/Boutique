@@ -15,13 +15,13 @@
         <div class="top-header">
                 <form action="" method="post">
                     <input type="text" name="search" placeholder="Search">
-                    <button type="submit" name="submit-search"><img src="Images/utilitaires/searchbaricon.svg" width="20px"></button>
+                    <button id="searchbutton" type="submit" name="submit-search"><img src="Images/utilitaires/search.svg" width="35px"></button>
                 </form>                
 
                 <img src="Images/utilitaires/Everglow.png" width="120px">
 
                 <div class="btn-navigation">
-                    <img src="Images/utilitaires/menu.svg" width="60px">
+                    <img src="Images/utilitaires/menu.svg" width="40px">
                 </div>
 
                  <?php
@@ -30,10 +30,10 @@
                 ?>
                     <nav>
                         <ul>
-                            <li><a href="<?= urlLaura ?>users/profil">Profil</a></li>
+                            <li><a href="<?= urlLaura ?>users/profil"><img src="Images/utilitaires/user.svg" width="40px"></a></li>
                             <li><a href="<?= urlLaura ?>users/commands">Commandes</a></li>
-                            <li><a href="<?= urlLaura ?>users/disconnect">Deconnexion</a></li>
-                            <li><a href="<?= urlLaura ?>bags">🛒</a></li>
+                            <li><a href="<?= urlLaura ?>users/disconnect"><img src="Images/utilitaires/power.svg" width="43px"></a></li>
+                            <li><a href="<?= urlLaura ?>bags"><img src="Images/utilitaires/bag.svg" width="40px"></a></li>
                         </ul>
                     </nav>
                 <?php
