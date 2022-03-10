@@ -202,7 +202,15 @@ SINON rajouter avant container une autre class/un autre mot donc et aprÃ¨s le dÃ
     z-index: 1;
     padding: 0 5%;
 
+    transition: transform .6s ease-in-out;
+    -webkit-transition: transform .6s ease-in-out;
     transform: translateX(100%);
+    -webkit-transform: translateX(100%);
+}
+
+.top-header nav.open{
+    transform: translateX(0%);
+    -webkit-transform: translateX(0%);
 }
 
 .top-header nav ul{
