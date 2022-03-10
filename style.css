@@ -193,6 +193,12 @@ SINON rajouter avant container une autre class/un autre mot donc et apr√®s le d√
     background-color: rgb(var(--clr-lightpink));
 }
 
+.top-before-animation{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
 #searchbutton {
     border: none;
     background-color: transparent;

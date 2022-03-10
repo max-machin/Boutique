@@ -13,6 +13,7 @@
 <body>
     <header>
         <div class="top-header">
+            <div class="top-before-animation">
                 <form action="" method="post">
                     <input type="text" name="search" placeholder="Search">
                     <button id="searchbutton" type="submit" name="submit-search"><img src="Images/utilitaires/search.svg" width="35px"></button>
@@ -23,7 +24,7 @@
                 <div class="btn-navigation">
                     <img src="Images/utilitaires/menu.svg" width="40px">
                 </div>
-
+            </div>
                  <?php
                 if ( isset ($_SESSION['user_data'] ) )
                 {
