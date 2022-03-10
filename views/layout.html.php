@@ -19,14 +19,14 @@
             <div class="top-before-animation">
                 <form action="" method="post">
                     <input type="text" name="search" placeholder="Search">
-                    <button id="searchbutton" type="submit" name="submit-search"><img src="Images/utilitaires/search.svg" width="35px"></button>
+                    <button id="searchbutton" type="submit" name="submit-search"><img src="<?= url ?>images/utilitaires/search.svg" width="35px"></button>
                 </form>                
 
-                <img src="Images/utilitaires/Everglow.png" width="120px">
+                <img src="<?= url ?>images/utilitaires/Everglow.png" width="120px">
     
     
                 <div class="btn-navigation">
-                <img src="Images/utilitaires/menu.svg" width="40px">
+                <img src="<?= url ?>images/utilitaires/menu.svg" width="40px">
                 </div>
             </div>
       <?php
