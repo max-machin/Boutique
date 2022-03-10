@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="<?= urlLaura ?>style.css">
+    <script src="<?= urlLaura ?>index.js" charset="utf-8"></script>
     <script src="https://kit.fontawesome.com/81dc42ea59.js" crossorigin="anonymous"></script>
     <link href="image/fontawesome-free-5.15.4-web.zip/css/all.css" rel="stylesheet">
-    <link rel="stylesheet" href="<?= url ?>style.css">
     <title>Everglow | Clean Skincare & Beauty products </title>
 </head>
 
@@ -19,14 +20,14 @@
             <div class="top-before-animation">
                 <form action="" method="post">
                     <input type="text" name="search" placeholder="Search">
-                    <button id="searchbutton" type="submit" name="submit-search"><img src="<?= url ?>images/utilitaires/search.svg" width="35px"></button>
+                    <button id="searchbutton" type="submit" name="submit-search"><img src="<?= urlLaura ?>images/utilitaires/search.svg" width="35px"></button>
                 </form>                
 
-                <img src="<?= url ?>images/utilitaires/Everglow.png" width="120px">
+                <img src="<?= urlLaura ?>images/utilitaires/Everglow.png" width="120px">
     
     
                 <div class="btn-navigation">
-                <img src="<?= url ?>images/utilitaires/menu.svg" width="40px">
+                <img src="<?= urlLaura ?>images/utilitaires/menu.svg" width="40px">
                 </div>
             </div>
       <?php
@@ -35,9 +36,9 @@
         ?>
             <nav>
                 <ul>
-                    <li><a href="<?= url ?>users/profil"><img src="Images/utilitaires/user.svg" width="40px"></a></li>
-                    <li><a href="<?= url ?>users/disconnect"><img src="Images/utilitaires/power.svg" width="43px"></a></li>
-                    <li><a href="<?= url ?>bags"><img src="Images/utilitaires/bag.svg" width="40px"></a></li>
+                    <li><a href="<?= urlLaura ?>users/profil"><img src="<?= urlLaura ?>images/utilitaires/user.svg" width="40px"></a></li>
+                    <li><a href="<?= urlLaura ?>users/disconnect"><img src="<?= urlLaura ?>images/utilitaires/power.svg" width="43px"></a></li>
+                    <li><a href="<?= urlLaura ?>bags"><img src="<?= urlLaura ?>images/utilitaires/bag.svg" width="40px"></a></li>
                 </ul>
             </nav>
         <?php
@@ -45,8 +46,8 @@
         ?>
             <nav>
                 <ul>
-                    <li><a href="<?= url ?>users/register">Inscription</a></li>
-                    <li><a href="<?= url ?>users/login">Connexion</a></li>
+                    <li><a href="<?= urlLaura ?>users/register">Inscription</a></li>
+                    <li><a href="<?= urlLaura ?>users/login">Connexion</a></li>
                 </ul>
             </nav>
         <?php
@@ -80,6 +81,6 @@
         ici le footer
     </footer>
 
-    <script src="index.js" charset="utf-8"></script>
+    
 </body>
 </html>

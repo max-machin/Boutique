@@ -487,7 +487,6 @@ class ProductsController extends Controller
                     
     public static function createViewProducts() 
     {
-        
         $categorieName = self::getNameCategories();
         $categories = self::getCategories();
         // $sousCategories = self::selectAllSousCategory();
