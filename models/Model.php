@@ -85,7 +85,6 @@ class Model extends Database
      */
     public function deleteBy(array $criteres)
     {
-        var_dump($criteres);
 
         $champs = [];
         $valeurs = [];

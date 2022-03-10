@@ -8,10 +8,13 @@ class CommandsModel extends Model
     protected $id_product;
     protected $quantity_product;
     protected $price;
+    protected $total_price;
     protected $promo;
     protected $date;
     protected $adresse_livraison;
     protected $adresse_facturation;
+    protected $id_color;
+    
 
     public function __construct()
     {
@@ -179,22 +182,6 @@ class CommandsModel extends Model
         return $this;
     }
 
-
-    public function checkNumCommand()
-    {
-        return $this->requete("SELECT MAX(id_command) from commands")->fetch();
-    }
-
-    public function userCommand($id_user)
-    {
-        return $this->requete("SELECT * FROM {$this->table} WHERE id_user = ?", array($id_user))->fetchAll();
-    }
-    
-    public function findCommand($id_user, $id_command)
-    {
-        return $this->requete("SELECT * FROM {$this->table} WHERE id_user = ? GROUP BY id_command = ?", array($id_user, $id_command))->fetchAll();
-    }
-
     /**
      * Get the value of promo
      */ 
@@ -255,5 +242,77 @@ class CommandsModel extends Model
         $this->adresse_facturation = $adresse_facturation;
 
         return $this;
+    }
+
+    /**
+     * Get the value of id_color
+     */ 
+    public function getId_color()
+    {
+        return $this->id_color;
+    }
+
+    /**
+     * Set the value of id_color
+     *
+     * @return  self
+     */ 
+    public function setId_color($id_color)
+    {
+        $this->id_color = $id_color;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of total_price
+     */ 
+    public function getTotal_price()
+    {
+        return $this->total_price;
+    }
+
+    /**
+     * Set the value of total_price
+     *
+     * @return  self
+     */ 
+    public function setTotal_price($total_price)
+    {
+        $this->total_price = $total_price;
+
+        return $this;
+    }
+
+    /**
+     * Récupération du numéro de commande afin de l'incrémenter pour le prochaine commande entrée en BDD
+     *
+     * @return void
+     */
+    public function checkNumCommand()
+    {
+        return $this->requete("SELECT MAX(id_command) from commands")->fetch();
+    }
+
+    /**
+     * Récupération de la totalité des informations des commandes de l'utilisateur 
+     *
+     * @param [type] $id_user
+     * @return void
+     */
+    public function userCommand($id_user)
+    {
+        return $this->requete("SELECT * FROM {$this->table} WHERE id_user = ?", array($id_user))->fetchAll();
+    }
+    
+    /**
+     * Récupération des commandes de l'utilisateur en concatenant les informations d'une commmande selon le NUMERO DE COMMANDE
+     *
+     * @param [type] $id_user
+     * @return void
+     */
+    public function findCommand($id_user)
+    {
+        return $this->requete("SELECT DISTINCT GROUP_CONCAT(c.id) as id,GROUP_CONCAT(id_command) as id_command, GROUP_CONCAT(c.id_product) as id_product,GROUP_CONCAT(quantity_product) as quantity_product,GROUP_CONCAT(c.price) as price, GROUP_CONCAT(total_price) as total_price ,GROUP_CONCAT(date) as date,GROUP_CONCAT(promo) as promo ,GROUP_CONCAT(adresse_livraison) as adresse_livraison ,GROUP_CONCAT(adresse_facturation) as adresse_facturation , GROUP_CONCAT(p.name) as product_name, GROUP_CONCAT(c.id_color) as id_color FROM {$this->table} as c INNER JOIN products as p ON c.id_product = p.id WHERE id_user = ? GROUP BY id_command", array($id_user))->fetchAll();
     }
 }

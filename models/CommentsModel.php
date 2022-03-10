@@ -135,7 +135,7 @@ class Commentsmodel extends Model
     }
 
     /**
-     * Requete de récupération des données des commentaires relatifs au produit
+     * Requête de récupération des données des commentaires relatifs au produit
      *
      * @param [type] $id
      * @return void
@@ -143,5 +143,16 @@ class Commentsmodel extends Model
     public function productComment($id)
     {
         return $this->requete("SELECT users.prenom, comments.comment, comments.note, DATE_FORMAT(date, '%d/%m/%Y') AS 'datefr' , DATE_FORMAT(date, '%H:%i:%s') AS 'heurefr' FROM `comments` INNER JOIN `users` WHERE comments.id_user = users.id AND comments.id_product = $id")->fetchAll();
+    }
+
+    /**
+     * Requête de récupération des données des commentaires relatifs à l'utilisateur 
+     *
+     * @param [type] $id_user
+     * @return void
+     */
+    public function userComments($id_user)
+    {
+        return $this->requete("SELECT products.id as id_product ,products.name, comments.comment, comments.note, comments.id, DATE_FORMAT(date, '%d/%m/%Y') AS 'datefr' , DATE_FORMAT(date, '%H:%i:%s') AS 'heurefr' FROM `comments` INNER JOIN `products` ON comments.id_product = products.id AND comments.id_user = $id_user ORDER BY date DESC")->fetchAll();
     }
 }

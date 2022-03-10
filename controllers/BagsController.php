@@ -3,23 +3,60 @@ require_once('libraries/Renderer.php');
 
 class BagsController extends Controller
 { 
-
+    /**
+     * Fonction Show Bag : Fonction permettant l'affichage du panier de l'utilisateur, ainsi que la modification
+     * de la quantité produit
+     *
+     * @return void
+     */
     public static function showBag()
     {
+        $error_color = "" ;
+        $findColors = "";
+
         // Affichage du bags user
-        // Création du model Bags
+        // Récuperation des produits avec couleur
         $model = new BagsModel();
+        $bagProductsColors = $model->checkBagColors($_SESSION['user_data']['id']);
 
-        // Requête permettant l'affichage des données du panier
-        $bagProducts = $model->checkBag($_SESSION['user_data']['id']);
+        // Boucle pour récupérer les couleurs des produits 
+        foreach($bagProductsColors as $product)
+        {
+            $model = new ColorsModel();
+            $findColors = $model->findBy(['id_product' => $product['id']]);
+        }
 
-        if ( isset ( $_POST['submitQuantity']))
+        // Récupération des produits sans couleurs
+        $bagModel = new BagsModel();
+        $bagProducts = $bagModel->checkBag($_SESSION['user_data']['id']);
+
+        
+            
+        // Update de la quantité produit avec COULEUR
+        if ( isset ( $_POST['submitQuantityColors']))
+        {
+            $bag = new BagsModel();
+            $updateBag = $bag->updateQuantityColors($_POST['quantityColors'], $_POST['idProductColors'], $_SESSION['user_data']['id'], $_POST['id_color']);
+            header('refresh: 0');
+        } 
+        // Suppression d'un produit en panier avec COULEUR
+        elseif ( isset ( $_POST['deleteFromBagColors']))
+        {
+            $id_product = $_POST['idProductColors'];
+            $model = new BagsModel();
+            $deleteBag = $model->deleteBy(['id_product' => $id_product, 'id_user' => $_SESSION['user_data']['id'], 'id_color' => $_POST['id_color']]);
+            header('refresh: 0');
+            echo "Produit supprimé avec succés";
+        } 
+        // Update de la quantité produit sans COULEUR
+        elseif ( isset ($_POST['submitQuantity']))
         {
             $bag = new BagsModel();
             $updateBag = $bag->updateQuantity($_POST['quantity'], $_POST['idProduct'], $_SESSION['user_data']['id']);
             header('refresh: 0');
-        } 
-        elseif ( isset ( $_POST['deleteFromBag']))
+        }
+        // Suppression d'un produit en panier sans COULEUR
+        elseif( isset ($_POST['deleteFromBag']))
         {
             $id_product = $_POST['idProduct'];
             $model = new BagsModel();
@@ -27,20 +64,13 @@ class BagsController extends Controller
             header('refresh: 0');
             echo "Produit supprimé avec succés";
         }
+        // Validation du panier pour passer commande
         elseif ( isset ( $_POST['command']))
         {
             header('location: users/commands');
         }
-
-        Renderer::render('bag/userBag', compact('bagProducts'));
+        Renderer::render('bag/userBag', compact('bagProductsColors','bagProducts', 'findColors'));
     }
-
-    public static function deleteBag()
-    {
-        // $model = new BagsModel();
-        // $model->delete($_SESSION);
-    }
-
 }
 
 
