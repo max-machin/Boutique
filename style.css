@@ -193,6 +193,11 @@ SINON rajouter avant container une autre class/un autre mot donc et apr√®s le d√
     background-color: rgb(var(--clr-lightpink));
 }
 
+#searchbutton {
+    border: none;
+    background-color: transparent;
+}
+
 .top-header nav{
     background-color: rgb(var(--clr-pink));
     width: 80%;
@@ -221,6 +226,7 @@ SINON rajouter avant container une autre class/un autre mot donc et apr√®s le d√
 
 .top-header nav li{
     margin: 20px 0;
+
 }
 
 .btn-navigation {
