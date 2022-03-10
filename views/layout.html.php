@@ -32,7 +32,6 @@
                     <nav>
                         <ul>
                             <li><a href="<?= urlLaura ?>users/profil"><img src="Images/utilitaires/user.svg" width="40px"></a></li>
-                            <li><a href="<?= urlLaura ?>users/commands">Commandes</a></li>
                             <li><a href="<?= urlLaura ?>users/disconnect"><img src="Images/utilitaires/power.svg" width="43px"></a></li>
                             <li><a href="<?= urlLaura ?>bags"><img src="Images/utilitaires/bag.svg" width="40px"></a></li>
                         </ul>
