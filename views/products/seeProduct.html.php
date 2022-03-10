@@ -9,7 +9,7 @@ if(@$_SERVER['user_data']['id'] == 1)
         foreach($images as $image){
     ?>
             
-        <img src="../Uploads/<?= $image ?>" width="50px">
+        <img src="<?= url ?>uploads/<?= $image ?>" width="50px">
      <?php
         }
     ?>
@@ -26,7 +26,7 @@ else
 {
         foreach($images as $image){
         ?>         
-            <img src="../Uploads/<?= $image ?>" width="50px">
+            <img src="<?= url ?>uploads/<?= $image ?>" width="50px">
         <?php
         }
     ?>
@@ -72,7 +72,7 @@ else
                 ?>
                     
                     <button class="fav outfav" type="submit" name="addFav">
-                        <img src="../images/heart_fill.png" alt="" width="20px">
+                        <img src="<?= url ?>images/utilitaires/heart_fill.png" alt="" width="20px">
                     </button>
 
                 <?php
@@ -81,7 +81,7 @@ else
                 ?>
                     
                     <button class="fav infav" type="submit" name="addFav">
-                    <img src="../images/heart_empty.png" alt="" width="20px">
+                        <img src="<?= url ?>images/utilitaires/heart_empty.png" alt="" width="20px">
                     </button>
                 <?php
                 }

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/81dc42ea59.js" crossorigin="anonymous"></script>
     <link href="image/fontawesome-free-5.15.4-web.zip/css/all.css" rel="stylesheet">
-    <link rel="stylesheet" href="<?= urlLaura ?>style.css">
+    <link rel="stylesheet" href="<?= url ?>style.css">
     <title>Everglow | Clean Skincare & Beauty products </title>
 </head>
 
@@ -22,11 +22,11 @@
                     <button id="searchbutton" type="submit" name="submit-search"><img src="<?= url ?>images/utilitaires/search.svg" width="35px"></button>
                 </form>                
 
-                <img src="<?= urlLaura ?>images/utilitaires/Everglow.png" width="120px">
+                <img src="<?= url ?>images/utilitaires/Everglow.png" width="120px">
     
     
                 <div class="btn-navigation">
-                <img src="<?= urlLaura ?>images/utilitaires/menu.svg" width="40px">
+                <img src="<?= url ?>images/utilitaires/menu.svg" width="40px">
                 </div>
             </div>
       <?php
@@ -35,9 +35,9 @@
         ?>
             <nav>
                 <ul>
-                    <li><a href="<?= urlLaura ?>users/profil"><img src="Images/utilitaires/user.svg" width="40px"></a></li>
-                    <li><a href="<?= urlLaura ?>users/disconnect"><img src="Images/utilitaires/power.svg" width="43px"></a></li>
-                    <li><a href="<?= urlLaura ?>bags"><img src="Images/utilitaires/bag.svg" width="40px"></a></li>
+                    <li><a href="<?= url ?>users/profil"><img src="Images/utilitaires/user.svg" width="40px"></a></li>
+                    <li><a href="<?= url ?>users/disconnect"><img src="Images/utilitaires/power.svg" width="43px"></a></li>
+                    <li><a href="<?= url ?>bags"><img src="Images/utilitaires/bag.svg" width="40px"></a></li>
                 </ul>
             </nav>
         <?php
@@ -45,8 +45,8 @@
         ?>
             <nav>
                 <ul>
-                    <li><a href="<?= urlLaura ?>users/register">Inscription</a></li>
-                    <li><a href="<?= urlLaura ?>users/login">Connexion</a></li>
+                    <li><a href="<?= url ?>users/register">Inscription</a></li>
+                    <li><a href="<?= url ?>users/login">Connexion</a></li>
                 </ul>
             </nav>
         <?php
