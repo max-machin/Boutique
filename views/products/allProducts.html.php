@@ -12,10 +12,10 @@
 <?php 
  echo "all products";
 //  }
-    var_dump($categories);
+    // var_dump($categories);
     // var_dump($products);
     // echo 'heloooo';
-    var_dump($_GET);
+    // var_dump($_GET);
     // echo 'heloooo';
     // var_dump($sousCategories);
 
@@ -26,11 +26,11 @@
 for ($i = 1; $i <= $nbrPages; $i++) {
        
     echo "<a href =''>$i</a> ";
-    var_dump($nbrPages);
-    // if ($page != $i)
-    //         echo "<a class='page' href='?page=$i&categorie=$page_categorie'>$i</a>&nbsp";
-    //     else
-    //         echo "<a class='page'>$i</a>&nbsp";
+    // var_dump($nbrPages);
+    if ($page != $i)
+            echo "<a class='page' href='?page=$i&souscategorie=$page'>$i</a>&nbsp";
+        else
+            echo "<a class='page'>$i</a>&nbsp";
     }
 
 //!affichage d'article
@@ -60,9 +60,9 @@ if(isset($products))
 
     foreach($products as $product)
     {
-        var_dump($product);
+        // var_dump($product);
         $images = explode(',', $product['url']);
-        var_dump($images);
+        // var_dump($images);
         
     ?>
 

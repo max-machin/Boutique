@@ -141,11 +141,10 @@ class ProductsController extends Controller
         return $categories;
     }
 
-    public static function getSousCategories() 
+    public static function getSousCategories($cat) 
     {
         $modelSousCat = new SousCategoriesModel();
-        $sousCategories = $modelSousCat->findAll();
-        // var_dump($sousCategories);
+        $sousCategories = $modelSousCat->findSousCategories($cat);
 
         return $sousCategories;
     }
@@ -165,9 +164,9 @@ class ProductsController extends Controller
         return $nameCategorie;
     }
 
-    public static function getSousCategorieName()
+    public static function getSousCategorieName($cat)
     {
-        $sousCategories = self::getSousCategories();
+        $sousCategories = self::getSousCategories($cat);
 
         $nameSousCategorie = [];
 
@@ -204,6 +203,17 @@ class ProductsController extends Controller
         
       
     }
+
+    public static function pagination()
+    {
+        $model = new ProductsModel();
+        $countProducts= $model->countProducts($countProducts);
+
+        $page = 1;
+        $nbrProductsByPage = 1;
+        $nbrPages = ceil($countProducts[0]["liste"] / $nbrProductsByPage);
+        $debut = ($page - 1) * $nbrProductsByPage;
+    }
     
     
                     
@@ -214,26 +224,34 @@ class ProductsController extends Controller
         $model = new ProductsModel();
         $countProducts= $model->countProducts();
         $categories = self::getCategories();
-        $sousCategories = self::getSousCategories();
         $nameCategorie = self::getCategorieName();
-        $nameSousCategorie = self::getSousCategorieName();
         $categorieUrl = self::getUrlCategories();
         
         
         
-        $nbrProductsByPage = 1;
-        $nbrPages = ceil($countProducts[0]["liste"] / $nbrProductsByPage);
-        
+        //3 fonction pour les produits
         if ($sousCat != null) {
             
             $products = self::productsBySouscat($sousCat);
+            $nbrProductsByPage = 1;
+            $nbrPages = ceil($countProducts[0]["liste"] / $nbrProductsByPage);
         } else if ($cat != null) {
-
+            
+            $nameSousCategorie = self::getSousCategorieName($cat);
+            $sousCategories = self::getSousCategories($cat);
             $products = self::productsByCategories($cat);
         } else {
 
             $products = self::allProducts();
         }
+
+        
+
+        // if(isset($categorieUrl))
+        // {
+        //     $page = 1;
+        // }
+      
 
         // echo "1";
       
@@ -249,7 +267,7 @@ class ProductsController extends Controller
 
         // var_dump($products);
        
-        Renderer::render('products/allProducts' , compact('categories', 'categorieUrl','nameCategorie', 'nbrPages', 'sousCategories', 'products', 'nameSousCategorie'));
+        Renderer::render('products/allProducts' , compact('categories', 'categorieUrl','nameCategorie', 'nbrPages', 'sousCategories', 'products', 'nameSousCategorie', 'debut', 'page'));
         // Renderer::render('products/allProducts' , compact('categories', 'products', 'countProducts', 'productsByCat', 'sousCategories', 'productsByCategories', 'categorieUrl','nameCategorie', 
         // 'nbrPages'));
     }

@@ -12,9 +12,12 @@ class SousCategoriesModel extends Model
 
 
 
-    public function findSousCategories()
+    public function findSousCategories($nameCategorie)
     {
-        $query = $this->requete("SELECT * FROM `sous_categories` INNER JOIN `categories` WHERE sous_categories.id_categorie = categories.id");
+        $this->database = DataBase::getPdo();
+
+        $query = $this->database->prepare("SELECT sous_categories.* FROM `sous_categories` INNER JOIN `categories` ON sous_categories.id_categorie = categories.id WHERE categories.name = :nameCategorie");
+        $query ->execute(['nameCategorie' => $nameCategorie]);
        
         return $query->fetchAll();
     }

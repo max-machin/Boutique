@@ -168,6 +168,12 @@ class ProductsModel extends Model
     //     return $query->fetchAll();
     // }
 
+    public function productsByPage($nbrProductsByPage,$debut)
+    {
+        $query = $this->requete("SELECT * FROM {$this->table} LIMIT $debut , $nbrProductsByPage");
+
+        return $query->fetchAll();
+    }
 
     public function countProducts()
     {
@@ -177,12 +183,6 @@ class ProductsModel extends Model
     }
 
 
-    public function productsByPage($nbr_products_by_page,$debut)
-    {
-        $query = $this->requete("SELECT * FROM {$this->table} LIMIT $debut , $nbr_products_by_page");
-
-        return $query->fetchAll();
-    }
 
     public function countProductsByCategories() 
     {
@@ -214,17 +214,17 @@ class ProductsModel extends Model
     
     
 
-    public function productsBySousCategories($nameSousCategorie,$debut_cat )
+    public function productsBySousCategories($nameSousCategorie,$debut )
     {
         $query = $this->database->requete("SELECT products.*, GROUP_CONCAT(images.url_image SEPARATOR ',') as url FROM `products` 
         INNER JOIN images ON products.id = images.id_product
         INNER JOIN sous_categories
         ON sous_categories.id = products.id_sous_categorie 
         WHERE sous_categories.name = :nameSousCategorie 
-        LIMIT :debut_cat");
+        LIMIT :debut");
         $query->execute([
             'nameSousCategorie' => $nameSousCategorie,
-            'debut_cat' => $debut_cat
+            'debut' => $debut
         ]);
         $result = $query->fetchAll();
     }
