@@ -417,6 +417,19 @@ SINON rajouter avant container une autre class/un autre mot donc et apr√®s le d√
     text-decoration: underline;
 }
 
+/* ------------------------------------------------
+
+                USER PROFIL
+
+--------------------------------------------------- */
+.submit-profil {
+    margin-bottom: 7%;
+}
+
+.sous-titre {
+    font-family: "SousTitreouAccent";
+    margin-bottom: 3%;
+}
 
 /* ------------------------------------------------
 
