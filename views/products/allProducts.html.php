@@ -10,30 +10,30 @@
 </form>
 
 <?php 
- echo "all products";
+
 //  }
-    // var_dump($categories);
-    // var_dump($products);
+    // var_dump($nameCategorie);
+    // var_dump($nbrPages);
     // echo 'heloooo';
     // var_dump($_GET);
     // echo 'heloooo';
     // var_dump($sousCategories);
 
-// if (isset($_GET['categorie'])) {
+// if (isset($nameCategorie)) {
     
-//  $page_categorie = $_GET['categorie'];
-//!pagination 
-for ($i = 1; $i <= $nbrPages; $i++) {
-       
-    echo "<a href =''>$i</a> ";
-    // var_dump($nbrPages);
-    if ($page != $i)
-            echo "<a class='page' href='?page=$i&souscategorie=$page'>$i</a>&nbsp";
-        else
-            echo "<a class='page'>$i</a>&nbsp";
-    }
+//  $page_categorie = $nameCategorie;
 
-//!affichage d'article
+// for ($i = 1; $i <= $nbrPages; $i++) {
+       
+//     echo "<a href =''>$i</a> ";
+//     // var_dump($nbrPages);
+//     if ($page != $i)
+//             echo "<a class='page' href='?page=$i&categorie=$page_categorie'>$i</a>&nbsp";
+//         else
+//             echo "<a class='page'>$i</a>&nbsp";
+//     }
+
+// }
 
 // for ($i=0;$i<count($products);$i++)
 // {

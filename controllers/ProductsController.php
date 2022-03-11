@@ -4,7 +4,7 @@ require_once('libraries/Renderer.php');
 
 class ProductsController extends Controller
 {  
-    public $NameCategorie;
+    
     public static function selectAllProducts(){
 
         $model = new ProductsModel();
@@ -175,7 +175,7 @@ class ProductsController extends Controller
     
             array_push($nameSousCategorie, $sousCategorie['name']);
         }
-         var_dump($nameSousCategorie);
+        //  var_dump($nameSousCategorie);
         return $nameSousCategorie;
     }
 
@@ -190,51 +190,64 @@ class ProductsController extends Controller
     }
 
     
-    public static function getUrlCategories()
-    {
+    // public static function getUrlCategories()
+    // {
 
-        $categorieUrl = self::getCategorieName();
+    //     $categorieUrl = self::getCategorieName();
 
-        $url = explode("/", filter_var($_GET['p'], FILTER_SANITIZE_URL));
-        // var_dump($url);
-        // if($url[1] === $categorieUrl){
-        // }
+    //     $url = explode("/", filter_var($_GET['p'], FILTER_SANITIZE_URL));
+    //     // var_dump($url);
+    //     // if($url[1] === $categorieUrl){
+    //     // }
 
         
       
-    }
+    // }
 
+    //pagination va prendre en paramètre des countsrproducts all , cat et sous cat. Il va également recevoir en paramètre le resultat de la requete select...
     public static function pagination()
     {
         $model = new ProductsModel();
-        $countProducts= $model->countProducts($countProducts);
+        $countProducts = $model->countProducts();
 
         $page = 1;
         $nbrProductsByPage = 1;
         $nbrPages = ceil($countProducts[0]["liste"] / $nbrProductsByPage);
         $debut = ($page - 1) * $nbrProductsByPage;
+
+        var_dump($nbrPages);
+
+        return array ($page, $nbrProductsByPage, $nbrPages, $debut);
+       
     }
     
     
-                    
+     //paramètre $cat et sous cat viennent de l'url                
     public static function createViewProducts($cat = null, $sousCat = null) 
     {
+
 
 
         $model = new ProductsModel();
         $countProducts= $model->countProducts();
         $categories = self::getCategories();
         $nameCategorie = self::getCategorieName();
-        $categorieUrl = self::getUrlCategories();
+        $pagination = self::pagination();
         
-        
+        $page = $pagination[0];
+        $nbrProductsByPage = $pagination[1];
+        $nbrPages = $pagination[2];
+        $debut = $pagination[3];
+      var_dump($_GET);
         
         //3 fonction pour les produits
         if ($sousCat != null) {
             
+           
+            echo 'bla';
             $products = self::productsBySouscat($sousCat);
-            $nbrProductsByPage = 1;
-            $nbrPages = ceil($countProducts[0]["liste"] / $nbrProductsByPage);
+            // $nbrProductsByPage = 1;
+            // $nbrPages = ceil($countProducts[0]["liste"] / $nbrProductsByPage);
         } else if ($cat != null) {
             
             $nameSousCategorie = self::getSousCategorieName($cat);
@@ -246,28 +259,8 @@ class ProductsController extends Controller
         }
 
         
-
-        // if(isset($categorieUrl))
-        // {
-        //     $page = 1;
-        // }
-      
-
-        // echo "1";
-      
-        // echo "1";
-        // $productsByCategories = self::selectAllProductsCategory();
-        // echo "1";
-        // $sousCategories = self::selectAllSousCategory();
-        // $products = self::selectAllProducts();
-        // $pagination = self::pagination();
-        
-        // $products = $pagination[0];
-        // $nbrPages = $pagination[1];
-
-        // var_dump($products);
        
-        Renderer::render('products/allProducts' , compact('categories', 'categorieUrl','nameCategorie', 'nbrPages', 'sousCategories', 'products', 'nameSousCategorie', 'debut', 'page'));
+        Renderer::render('products/allProducts' , compact('categories','nameCategorie', 'nbrPages', 'sousCategories', 'products', 'nameSousCategorie', 'debut', 'page'));
         // Renderer::render('products/allProducts' , compact('categories', 'products', 'countProducts', 'productsByCat', 'sousCategories', 'productsByCategories', 'categorieUrl','nameCategorie', 
         // 'nbrPages'));
     }
