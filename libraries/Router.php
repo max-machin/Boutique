@@ -102,6 +102,7 @@ class Router
         
             if(!empty($url[1]) && empty($url[2])){
                 if($controllerName == "ProductsController"){
+                    echo 'yaas';
                  $controllerName::seeProduct($url[1]);
                 }            
             }elseif(!empty($url[1]) && !empty($url[2])){

@@ -52,7 +52,7 @@ foreach($products as $product){
         foreach($images as $image){
 
             ?>
-            <img src="Uploads/<?= $image ?>" width="50px">
+            <img src="uploads/<?= $image ?>" width="50px">
             <?php
         }
     ?>

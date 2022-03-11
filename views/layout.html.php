@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?= urlLaura ?>style.css">
-    <script src="<?= urlLaura ?>index.js" charset="utf-8"></script>
+    <BASE href="http://localhost:8080/Boutique/">
+    <link rel="stylesheet" href="style.css">
+    <script src="index.js" charset="utf-8"></script>
     <script src="https://kit.fontawesome.com/81dc42ea59.js" crossorigin="anonymous"></script>
     <link href="image/fontawesome-free-5.15.4-web.zip/css/all.css" rel="stylesheet">
     <title>Everglow | Clean Skincare & Beauty products </title>
@@ -23,11 +24,11 @@
                     <button id="searchbutton" type="submit" name="submit-search"><img src="<?= urlLaura ?>images/utilitaires/search.svg" width="35px"></button>
                 </form>                
 
-                <img src="<?= urlLaura ?>images/utilitaires/Everglow.png" width="120px">
+                <img src="images/utilitaires/Everglow.png" width="120px">
     
     
                 <div class="btn-navigation">
-                <img src="<?= urlLaura ?>images/utilitaires/menu.svg" width="40px">
+                <img src="images/utilitaires/menu.svg" width="40px">
                 </div>
             </div>
       <?php
@@ -73,6 +74,7 @@
                
     <main>
         <div class="container">
+            AAAAAAAAAAAAAAAH
             <?= $content ?>
         </div>  
     </main>
