@@ -34,7 +34,6 @@ class ProductsController extends Controller
      */
     public static function seeProduct($id){
 
-        echo 'je suis dans seeproduct';
         $findUser = "";
         $error_color = "";
 

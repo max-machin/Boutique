@@ -5,11 +5,8 @@ FallbackResource /index.php
 
 # On réécrit l'URL regarder les reecritures apache
 RewriteCond %{REQUEST_URI} !(\.js|\.css|\.png|\.jpg|\.jpeg|\.gif)$ [NC]
-#RewriteRule ^([^/]+)/? index.php?p=$1 [L,QSA]
 RewriteRule ^([a-zA-Z0-9\-\_\/]*)$ index.php?p=$1
 
-# Réécriture pour HTTP HOST donc pas besoin de const
-# RewriteRule %{HTTP_HOST} ^http://localhost:8080/Boutique [NC]
 
 
 

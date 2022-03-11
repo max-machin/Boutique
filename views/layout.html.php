@@ -21,7 +21,7 @@
             <div class="top-before-animation">
                 <form action="" method="post">
                     <input type="text" name="search" placeholder="Search">
-                    <button id="searchbutton" type="submit" name="submit-search"><img src="<?= urlLaura ?>images/utilitaires/search.svg" width="35px"></button>
+                    <button id="searchbutton" type="submit" name="submit-search"><img src="images/utilitaires/search.svg" width="35px"></button>
                 </form>                
 
                 <img src="images/utilitaires/Everglow.png" width="120px">
@@ -37,9 +37,9 @@
         ?>
             <nav>
                 <ul>
-                    <li><a href="<?= urlLaura ?>users/profil"><img src="<?= urlLaura ?>images/utilitaires/user.svg" width="40px"></a></li>
-                    <li><a href="<?= urlLaura ?>users/disconnect"><img src="<?= urlLaura ?>images/utilitaires/power.svg" width="43px"></a></li>
-                    <li><a href="<?= urlLaura ?>bags"><img src="<?= urlLaura ?>images/utilitaires/bag.svg" width="40px"></a></li>
+                    <li><a href="users/profil"><img src="images/utilitaires/user.svg" width="40px"></a></li>
+                    <li><a href="users/disconnect"><img src="images/utilitaires/power.svg" width="43px"></a></li>
+                    <li><a href="bags"><img src="images/utilitaires/bag.svg" width="40px"></a></li>
                 </ul>
             </nav>
         <?php
@@ -47,8 +47,8 @@
         ?>
             <nav>
                 <ul>
-                    <li><a href="<?= urlLaura ?>users/register">Inscription</a></li>
-                    <li><a href="<?= urlLaura ?>users/login">Connexion</a></li>
+                    <li><a href="users/register">Inscription</a></li>
+                    <li><a href="users/login">Connexion</a></li>
                 </ul>
             </nav>
         <?php
@@ -74,7 +74,6 @@
                
     <main>
         <div class="container">
-            AAAAAAAAAAAAAAAH
             <?= $content ?>
         </div>  
     </main>

@@ -1,6 +1,6 @@
 <article>
     <section>
-        <img src="<?= urlLaura ?>images/generalvibe/girls.jpeg">
+        <img src="images/generalvibe/girls.jpeg">
     </section>
     <section>
         

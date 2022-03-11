@@ -56,7 +56,7 @@ foreach($products as $product){
             <?php
         }
     ?>
-    <h2><a href="<?= urlLaura ?>products/<?= $product['id'] ?>"><?= $product['name'] ?></a></h2>
+    <h2><a href="products/<?= $product['id'] ?>"><?= $product['name'] ?></a></h2>
     <h3><?= $product['description'] ?></h3>
     <p><?= $product['price'] ?></p>
 </div>
