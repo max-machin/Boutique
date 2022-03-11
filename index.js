@@ -5,23 +5,21 @@
 
 document.addEventListener('DOMContentLoaded', function loaded() {
 
-    
-    console.log('OK');
     //NAV BURGER
     
-    var buttonBurger = document.getElementsByClassName("btn-navigation");
-    //me retourne un array de tous les objets avec cette classe alors je saisis celui qui m'intéresse ici :
-    var buttonNav = buttonBurger[0];
-    // console.log(buttonNav);
+    var buttonBurger = document.querySelectorAll("div[class^='btn-']");
+    //me retourne un array de tous les objets avec cette classe qui commence par "btn-" alors je saisis celui qui m'intéresse ici :
+    var buttonNav = buttonBurger[1];
+    var buttonSearch = buttonBurger[0];
     
     var nav = document.querySelector('nav');
-    // console.log(nav);
+    var form = document.querySelector('form');
     
     var images = document.querySelectorAll('img');
     var image = images[2];
-    
-    
-    
+    var img = images[0];
+   
+
     buttonNav.addEventListener("click", function(){
         //après avoir récupéré l'image qui m'intéresse plus haut, je lui dis que si je clique dessus, l'image change sinon ça revient à son image initiale
         //en plus de rajouter avec le toggle(propriété qui rajoute et retire) une classe css .open située à ma nav -> c'est cette classe qui a le transform 0% et donc permet de voir le menu
@@ -34,4 +32,15 @@ document.addEventListener('DOMContentLoaded', function loaded() {
         nav.classList.toggle("open");
         // console.log(image);
     });
+
+    buttonSearch.addEventListener("click", function(){
+        if (img.src.match("images/utilitaires/search.svg")) {
+            img.src = "images/utilitaires/cross2.svg";
+        }
+        else {
+            img.src = "images/utilitaires/search.svg";
+        }
+        form.classList.toggle("open");
+    });
+
 });

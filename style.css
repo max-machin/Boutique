@@ -197,11 +197,8 @@ SINON rajouter avant container une autre class/un autre mot donc et apr√®s le d√
     display: flex;
     flex-direction: row;
     align-items: center;
-}
-
-#searchbutton {
-    border: none;
-    background-color: transparent;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .top-header nav{
@@ -239,6 +236,50 @@ SINON rajouter avant container une autre class/un autre mot donc et apr√®s le d√
     z-index: 2;
 }
 
+.top-header form{
+    background-color: rgb(var(--clr-white));
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    z-index: 3;
+    padding: 0 5%;
+
+    transition: transform .6s ease-in-out;
+    -webkit-transition: transform .6s ease-in-out;
+    transform: translateX(-100%);
+    -webkit-transform: translateX(-100%);
+}
+
+.top-header form.open{
+    transform: translateX(0%);
+    -webkit-transform: translateX(0%);
+}
+
+.intern-form{
+    position: absolute;
+    top: 10%;
+    margin-left: 25%;
+}
+
+.intern-form input{
+    border: none;
+    border-bottom: black solid;
+    width: 70%;
+    padding-left: 40%;
+}
+
+.btn-search {
+    z-index: 4;
+}
+
+#searchbutton {
+    border: none;
+    background-color: transparent;
+    z-index: 2;
+}
+
+
 
 .categories ul{
     padding: 0;
@@ -247,37 +288,6 @@ SINON rajouter avant container une autre class/un autre mot donc et apr√®s le d√
     justify-content: space-around;
 }
 
-/* .menu-user{
-    position: fixed;
-    right: 0;
-} */
-
-/* #wrapsearch:not(:target) {
-    transform: translate3d(-335px, 0, 0); 
-  }
-
-#wrapsearch:target {
-    transform: translate3d(0, 0, 0); 
-  }
-
-  #opensearch,
-  #closesearch {
-    height: 44px;
-    text-align: right;
-    display: block;
-    margin-right: -30px;
-  }
-  
-  #wrapsearch:target #opensearch,
-  #wrapsearch:not(:target) #closesearch {
-    display: none;
-  }
-  
-  #wrapsearch:target #opensearch {
-    display: none;
-  } */
-  
-  
 
 
 

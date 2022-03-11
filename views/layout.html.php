@@ -19,18 +19,25 @@
         </div>
         <div class="top-header">
             <div class="top-before-animation">
-                <form action="" method="post">
-                    <input type="text" name="search" placeholder="Search">
-                    <button id="searchbutton" type="submit" name="submit-search"><img src="images/utilitaires/search.svg" width="35px"></button>
-                </form>                
+                <div class="btn-search">
+                    <img src="images/utilitaires/search.svg" width="40px">
+                </div>             
 
                 <a href="accueil"><img src="images/utilitaires/Everglow.png" width="120px"></a>
     
     
                 <div class="btn-navigation">
-                <img src="images/utilitaires/menu.svg" width="40px">
+                    <img src="images/utilitaires/menu.svg" width="40px">
                 </div>
             </div>
+
+            <form action="" method="post">
+                <div class="intern-form">
+                    <input type="text" name="search" placeholder="Search">
+                    <button id="searchbutton" type="submit" name="submit-search"><img src="images/utilitaires/search.svg" width="35px"></button>                    
+                </div>
+
+            </form>   
       <?php
         if ( isset ($_SESSION['user_data'] ) )
         {
@@ -38,8 +45,8 @@
             <nav>
                 <ul>
                     <li><a href="users/profil"><img src="images/utilitaires/user.svg" width="40px"></a></li>
+                    <li><a href="bags"><img src="images/utilitaires/bag.svg" width="40px"></a></li>                    
                     <li><a href="users/disconnect"><img src="images/utilitaires/power.svg" width="43px"></a></li>
-                    <li><a href="bags"><img src="images/utilitaires/bag.svg" width="40px"></a></li>
                 </ul>
             </nav>
         <?php
@@ -47,8 +54,8 @@
         ?>
             <nav>
                 <ul>
-                    <li><a href="users/register">Inscription</a></li>
-                    <li><a href="users/login">Connexion</a></li>
+                    <li><a href="users/register"><img src="images/utilitaires/register.svg" width="45px"></a></li>
+                    <li><a href="users/login"><img src="images/utilitaires/power.svg" width="45px"></a></li>
                 </ul>
             </nav>
         <?php
@@ -59,6 +66,7 @@
         <div class="bottom-header">
         <nav class="categories">
             <ul>
+                <li><a href="<?= urlLaura ?>">All our products</a></li>
                 <li><a href="<?= urlLaura ?>">Skincare</a></li>
                 <li><a href="<?= urlLaura ?>">Make up</a></li>
             </ul>
