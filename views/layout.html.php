@@ -24,7 +24,7 @@
                     <button id="searchbutton" type="submit" name="submit-search"><img src="images/utilitaires/search.svg" width="35px"></button>
                 </form>                
 
-                <img src="images/utilitaires/Everglow.png" width="120px">
+                <a href="accueil"><img src="images/utilitaires/Everglow.png" width="120px"></a>
     
     
                 <div class="btn-navigation">
