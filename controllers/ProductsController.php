@@ -34,6 +34,7 @@ class ProductsController extends Controller
      */
     public static function seeProduct($id){
 
+        echo 'je suis dans seeproduct';
         $findUser = "";
         $error_color = "";
 
@@ -53,7 +54,7 @@ class ProductsController extends Controller
         $product = $productModel->find($id);
 
         // Si le produit n'est pas connu en base de données on redirige vers la liste des produits
-        if ( empty($product))
+        if (empty($product))
         {
             header('location: ../products');
         }
@@ -282,7 +283,7 @@ class ProductsController extends Controller
             }
         }
 
-        if ( isset ( $_SESSION['user_data']))
+        if ( isset ($_SESSION['user_data']))
         {
             Renderer::render('products/seeProduct' , compact('product', 'images', 'allComments', 'errorComment', 'findUser', 'findColors', 'error_color', 'findFav', 'favoritFind'));
         } else {

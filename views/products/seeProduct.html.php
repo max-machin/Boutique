@@ -1,15 +1,16 @@
 <?php
-require_once('libraries/Renderer.php');
+/*require_once('libraries/Renderer.php');*/
+echo 'lol';
 ?>
 <?php
 
-
 if(@$_SERVER['user_data']['id'] == 1)
-{      
+{ 
+    echo 'salut';
         foreach($images as $image){
     ?>
             
-        <img src="<?= url ?>uploads/<?= $image ?>" width="50px">
+        <img src="<?= "http://localhost:8080/Boutique/uploads/" ?>" width="50px">
      <?php
         }
     ?>
@@ -24,9 +25,12 @@ if(@$_SERVER['user_data']['id'] == 1)
 } 
 else
 {
+    echo "coucou";
         foreach($images as $image){
+
         ?>         
-            <img src="<?= url ?>uploads/<?= $image ?>" width="50px">
+
+            <img src="http://localhost:8080/Boutique/uploads/<?= $image ?>" width="50px">
         <?php
         }
     ?>
@@ -72,7 +76,7 @@ else
                 ?>
                     
                     <button class="fav outfav" type="submit" name="addFav">
-                        <img src="<?= url ?>images/utilitaires/heart_fill.png" alt="" width="20px">
+                        <img src="images/utilitaires/heart_fill.png" alt="" width="20px">
                     </button>
 
                 <?php
@@ -81,7 +85,7 @@ else
                 ?>
                     
                     <button class="fav infav" type="submit" name="addFav">
-                        <img src="<?= url ?>images/utilitaires/heart_empty.png" alt="" width="20px">
+                        <img src="<?= urlLaura ?>images/utilitaires/heart_empty.png" alt="" width="20px">
                     </button>
                 <?php
                 }
@@ -160,7 +164,7 @@ else
     <?php
     } else {
     ?>
-        <p>Veuillez vous <a href="<?= url ?>users/register">inscrire</a> / <a href="<?= url ?>users/login">connectez</a> pour ajouter un commentaire</p>
+        <p>Veuillez vous <a href="<?= urlLaura ?>users/register">inscrire</a> / <a href="<?= urlLaura ?>users/login">connectez</a> pour ajouter un commentaire</p>
     <?php 
     }
 }
