@@ -10,6 +10,7 @@ class ProductsController extends Controller
         // foreach($products as $product){
         //     $images = explode(',', $product->url); 
         //  }      
+        
         Renderer::render('products/allProducts' , compact('products'));   
     }
 
@@ -77,7 +78,7 @@ class ProductsController extends Controller
                     {
                         $color = intval($_POST['color']);
                         // On ajoute un produit au panier
-                        $model = new BagsModel();
+                        $model = new BagsModel(); 
                         $productAdded = $model
                             ->setId_user($_SESSION['user_data']['id'])
                             ->setId_product($_POST['id_Product'])

@@ -44,7 +44,6 @@ if(isset($products))
 
 foreach($products as $product){
     $images = explode(',', $product['url']);
-
 ?>
 
 <div class="products">
@@ -52,7 +51,7 @@ foreach($products as $product){
         foreach($images as $image){
 
             ?>
-            <img src="Uploads/<?= $image ?>" width="50px">
+            <img src="<?= url ?>uploads/<?= $image ?>" width="50px">
             <?php
         }
     ?>

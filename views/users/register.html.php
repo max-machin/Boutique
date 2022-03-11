@@ -1,26 +1,38 @@
 
-<form action="" method="post">
-    <label for="email">E-mail *</label></br>
-    <input id="email" type="email" name="email" placeholder="Email"></br>
-    <span><?= $error_email ?></span></br>
+    <form class="form" action="" method="post">
+        <h1>Je crée mon compte</h1>
+        <div class="form-group">
+            <input id="email" type="email" name="email" required>
+            <label for="email">E-mail *</label>
+            <span><?= $error_email ?></span>
+        </div>
+            
+        <div class="form-group">
+            <input id="surname" type="text" name="surname" required>
+            <label for="surname">Prénom *</label>
+            <span><?= $error_surname ?></span>
+        </div>
 
-    <label for="surname">Prénom *</label></br>
-    <input id="surname" type="text" name="surname" placeholder="Prénom"></br>
-    <span><?= $error_surname ?></span></br>
+        <div class="form-group">
+            <input id="name" type="text" name="name" required>
+            <label for="name">Nom *</label>
+            <span><?= $error_name ?></span>
+        </div>
 
-    <label for="name">Nom *</label></br>
-    <input id="name" type="text" name="name" placeholder="Nom"></br>
-    <span><?= $error_name ?></span></br>
+        <div class="form-group">
+            <input id="password" type="password" name="password" required>
+            <label for="password">Mot de passe *</label>
+            <span><?= $error_password ?></span>
+        </div>
+        <div class="form-group">    
+            <input id="validPassword" type="password" name="validPassword" required>
+            <label for="validPassword">Valider mot de passe *</label>
+            <span><?= $error_validPassword ?></span>
+        </div>
+        
+        <input class="submit" type="submit" name="submit" value="Créer un compte">
+        <p class="help">* champs obligatoires</p>
 
-    <label for="password">Mot de passe *</label></br>
-    <input id="password" type="password" name="password" placeholder="Mot de passe"></br>
-    <span><?= $error_password ?></span></br>
+        <p class="sous_texte">Vous avez déjà un compte? <a href="<?= url ?>users/login"> Connectez-vous</a></p>
 
-    <label for="validPassword">Valider mot de passe *</label></br>
-    <input id="validPassword" type="password" name="validPassword" placeholder="Confirmez mot de passe"></br>
-    <span><?= $error_validPassword ?></span></br>
-
-    <input type="submit" name="submit">
-</form>
-
-<p>* champs obligatoires</p>
+    </form>

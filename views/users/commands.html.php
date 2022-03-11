@@ -77,7 +77,53 @@ if ( isset ($_SESSION['user_data'] ))
             <?php
             }
             ?> 
+                <h2>Choisir un mode de livraison</h2>
+                <form action="paiement" method="post">
+                <?php
+                if ( $commandPrice < 50)
+                {
                 
+                    foreach($findDeliveries as $delivery)
+                    {
+                        $delai = explode(".", $delivery['delai']);
+                        $price = str_replace(".", "," , $delivery['price']);
+                        if (isset ( $_POST['deliveryMode']))
+                        {
+                            echo "wow";
+                            
+                        }
+                    ?> 
+                        <input id="delivery<?= $delivery['id'] ?>" type="radio" name="deliveryMode" value="<?= $delivery['mode'] ?>">
+                        <input type="hidden" name="deliveryPrice" value="<?= $delivery['price'] ?>">
+                        <label for="delivery<?= $delivery['id'] ?>">
+                            <p>Livraison : <?= $delivery['mode'] ?></p>
+
+                        <?php 
+                            if (isset ($delai[1]))
+                            {
+                        ?>
+                            <p>Délai : <?= $delai[0] ?> / <?= $delai[1] ?></p>
+                        <?php
+                            } else {
+                        ?>
+                            <p>Délai : <?= $delai[0] ?> </p>
+                        
+                        
+                            <?php
+                            }
+                        ?>
+                            <p>Prix : <?= $price ?>€</p>
+                        <?php
+                    } 
+                } else {   
+                ?>
+                    <p>Frais de livrasion offerts</p>
+                <?php
+                }  
+                ?>
+
+                        </label>
+                <h2>Choisir un mode de livraison</h2>
                 <form action="paiement" method="post">
                     <h3>Infomartions livraison</h3>
                     <label for="adresse">Adresse *</label><br>
@@ -97,6 +143,7 @@ if ( isset ($_SESSION['user_data'] ))
 
                     <input type="text" name="prix" id="prix" value="<?= $commandPrice ?>" readonly><br>
                     <button>Procédez au paiement</button><br>
+                    <p>* Le prix total ne comprend pas le prix de livraison</p>
 
                     <?= $error ?><br>
 
@@ -152,13 +199,44 @@ if ( isset ($_SESSION['user_data'] ))
             }
             ?>
 
-             <form action="" method="post">
-                    <input type="text" name="codePromo" placeholder="CODE PROMO">
-                    <input type="submit" name="promo" value="Appliquez PROMO">
-                </form>
-
-            
+                <h2>Choisir un mode de livraison</h2>
                 <form action="paiement" method="post">
+                <?php
+                    foreach($findDeliveries as $delivery)
+                    {
+                        $delai = explode(".", $delivery['delai']);
+                        $price = str_replace(".", "," , $delivery['price']);
+                        if (isset ( $_POST['deliveryMode']))
+                        {
+                            echo "wow";
+                            
+                        }
+                    ?> 
+                        <input id="delivery<?= $delivery['id'] ?>" type="radio" name="deliveryMode" value="<?= $delivery['mode'] ?>">
+                        <input type="hidden" name="deliveryPrice" value="<?= $delivery['price'] ?>">
+                        <label for="delivery<?= $delivery['id'] ?>">
+                            <p>Livraison : <?= $delivery['mode'] ?></p>
+
+                        <?php 
+                            if (isset ($delai[1]))
+                            {
+                        ?>
+                            <p>Délai : <?= $delai[0] ?> / <?= $delai[1] ?></p>
+                        <?php
+                            } else {
+                        ?>
+                            <p>Délai : <?= $delai[0] ?> </p>
+                        
+                        
+                            <?php
+                            }
+                        ?>
+                            <p>Prix : <?= $price ?> </p>
+                        <?php
+                    }   
+                ?>
+
+                        </label>
                     <h3>Infomartions livraison</h3>
                     <label for="adresse">Adresse *</label><br>
                     <input type="text" name="adresse" id="adresse" placeholder="Adresse"><br>
@@ -176,10 +254,15 @@ if ( isset ($_SESSION['user_data'] ))
                     <h3>Total (<?= $commandQuantity ?> articles) : </h3>
 
                     <input type="text" name="prix" id="prix" value="<?= $commandPrice ?>" readonly><br>
-                    <button>Procédez au paiement</button><br>
+                    <button name="paiement_button">Procédez au paiement</button><br>
+                    <p>* Le prix total ne comprend pas le prix de livraison</p>
 
                     <?= $error ?><br>
 
+                </form>
+                <form action="" method="post">
+                    <input type="text" name="codePromo" placeholder="CODE PROMO">
+                    <input type="submit" name="promo" value="Appliquez PROMO">
                 </form>
 
             <?php

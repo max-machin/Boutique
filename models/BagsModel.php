@@ -180,4 +180,24 @@ class bagsModel extends Model
 
         return $this;
     }
+
+    /**
+     * Get the value of id_product
+     */ 
+    public function getId_product()
+    {
+        return $this->id_product;
+    }
+
+    /**
+     * Set the value of id_product
+     *
+     * @return  self
+     */ 
+    public function setId_product($id_product)
+    {
+        $this->id_product = $id_product;
+
+        return $this;
+    }
 }

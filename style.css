@@ -276,18 +276,6 @@ SINON rajouter avant container une autre class/un autre mot donc et apr√®s le d√
   #wrapsearch:target #opensearch {
     display: none;
   } */
-  
-  
-
-
-
-
-
-
-
-
-
-
 
 .txt-center {
 	text-align: center;
@@ -335,7 +323,117 @@ SINON rajouter avant container une autre class/un autre mot donc et apr√®s le d√
 	  left: 1px;
 	  color: #161616;
 }
+/* ------------------------------------------------
 
+                USER 
+
+--------------------------------------------------- */
+/* FORMULAIRE GENERIQUE*/
+.form-group {
+    position: relative;
+    padding: 20px 0;
+    width: 280px;
+    max-width: 100%;
+}
+
+.form-group input {
+    border: none;
+    border-bottom: 1px solid black;
+    display: block;
+    font-size: 16px;
+    padding: 10px 0;
+    width: 100%;
+}
+
+.form-group label {
+    font-family: "SousTitreouAccent";
+    font-size: 16px;
+    font-weight: 100;
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    transform: translateY(30px);
+    transition: all 0.2s ease-in-out;
+}
+
+.form-group input:valid,
+.form-group input:focus {
+    outline: none;
+}
+
+.form-group input:valid + label,
+.form-group input:focus + label {
+    font-size: 14px;
+    transform: translateY(0);
+}
+
+.submit {
+    font-family: "SousTitreouAccent";
+    padding: 3px 30px;
+    border: none;
+    background-color:  rgb(var(--clr-pink));
+    cursor: pointer;
+}
+
+.submit:hover {
+    background-color: rgba(254, 197, 187, 0.877);
+}
+
+.help {
+    font-family: "loremIpsum";
+    color: gray;
+}
+
+.sous_texte {
+    font-family: "loremIpsum";
+}
+
+.sous_texte a {
+    color: rgb(var(--clr-black));
+    font-weight: bold;
+    text-decoration: underline;
+
+}
+
+.form h1 {
+    font-family: "Titreprincipal";
+    text-transform:uppercase;
+}
+
+
+/* FORMULAIRE CONNEXION*/
+
+.forgot {
+    font-weight: bold;
+}
+
+.login {
+    margin-top: 1%;
+}
+
+.forgot:hover {
+    transition: .2s ease-out;
+    text-decoration: underline;
+}
+
+
+/* ------------------------------------------------
+
+                COMMANDS
+
+--------------------------------------------------- */
+
+.deliveryMode:checked {
+    display: block;
+
+}
+
+/* ------------------------------------------------
+
+                PRODUCT SELF
+
+--------------------------------------------------- */
 .product_color {
 	display: flex;
 }
@@ -372,4 +470,6 @@ i {
 	background-color: transparent;
 	border: none;
 }
+
+
 

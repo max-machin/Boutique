@@ -113,7 +113,7 @@ if ( isset ( $_SESSION['user_data']))
     <?php
     }
 } else {
-    header("Location: ..users/login");
+    header("Location: users/login");
 }
 
 

@@ -44,7 +44,6 @@ if ( empty ( $user)) {
 
     foreach ($userCommands as $userCommand)
     {
-       
         $numCommands = explode(",",$userCommand['id_command']);
         foreach (array_unique($numCommands) as $num)
         {
@@ -94,13 +93,17 @@ if ( empty ( $user)) {
 
         $commandPrice = array_sum($total_prices);
             
-       
+        $deliveryPrice = explode(",",$userCommand['price_livraison']);
+        $price = array_unique($deliveryPrice);
+
+        $deliveryMode = explode(",",$userCommand['mode']);
+        $mode = array_unique($deliveryMode);
 
         $promos = explode(",",$userCommand['promo']);
-
         $calculPromo = intval($promos[0]) / 100;
         $promo = $commandPrice * $calculPromo;
         $commandPricePromo = $commandPrice - $promo;
+
         foreach(array_unique($promos) as $promo)
         {
             
@@ -108,15 +111,19 @@ if ( empty ( $user)) {
             {
                 ?>
                 <p>Prix total : <?= $commandPrice ?>€</p>
-                <p>Pas de promo</p>
+                <p>Pas de PROMO</p>
+                <p>Livraison : <?= $price[0] ?>€ (<?= $mode[0] ?>) </p>
+                <p>Prix total commande : <?= $commandPrice += $price[0] ?>€</p>
                 <?php
 
             } else {
 
                 ?>
-                <p>Prix total : <?= $commandPrice ?>€</p>
-                <p>promo : <?= $promo ?>%</p>
-                <p>Prix total : <?= $commandPricePromo ?>€</p>
+                <p>Prix sans PROMO : <?= $commandPrice ?>€</p>
+                <p>PROMO : <?= $promo ?>%</p>
+                <p>Prix avec PROMO : <?= $commandPricePromo ?>€</p>
+                <p>Livraison : <?= $price[0] ?>€ (<?= $mode[0] ?>) </p>
+                <p>Prix total commande : <?= $commandPrice += $price[0] ?>€</p>
                 <?php
             }
         }

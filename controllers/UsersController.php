@@ -189,7 +189,7 @@ class UsersController extends Controller
     public static function disconnect()
     {
         session_destroy();
-        header('location: ../index');
+        header('location: ../accueil');
     }
 
     /**
@@ -439,8 +439,6 @@ class UsersController extends Controller
      */
     public static function seeCommand()
     {
-
-
         $error = "";
 
         $model = new BagsModel();
@@ -449,6 +447,9 @@ class UsersController extends Controller
         $modelColors = new BagsModel();
         $commandColors = $modelColors->checkBagColors($_SESSION['user_data']['id']);
         
+        $find = new DeliveriesModel();
+        $findDeliveries = $find->findAll();
+
         // Si l'utilisateur n'est pas connecté alors on le redirige vers le login
         if ( empty ( $_SESSION['user_data']) )
         {
@@ -470,15 +471,15 @@ class UsersController extends Controller
                 }
             }
         } 
-
-        // Si les informations de livraisons de sont pas remplis
-        if ( empty ($_POST['adresse']) || empty ($_POST['ville']) || empty ($_POST['codePostale']) || empty ($_POST['facturation']))
+        if ( isset ($_POST['paiement_button']))
         {
-            $error = "Veuillez remplir les informations de livraison";
+            // Si les informations de livraisons de sont pas remplis
+            if ( empty ($_POST['adresse']) || empty ($_POST['ville']) || empty ($_POST['codePostale']) || empty ($_POST['facturation']) || empty ( $_POST['deliveryMode']))
+            {
+                $error = "Veuillez remplir les informations de livraison";
+            }
         }
-        
-        
-        Renderer::render('users/commands', compact('command','commandColors' ,'error'));
+        Renderer::render('users/commands', compact('command','commandColors' ,'error', 'findDeliveries'));
     } 
 
     /**
@@ -496,11 +497,26 @@ class UsersController extends Controller
             $ville = valid_data($_POST['ville']);
             $codePostale = valid_data($_POST['codePostale']);
 
+
             // On concatene 'l'adresse' + 'le code postale' + 'la ville' afin de le rentrer en BDD en tant que colonne unique
             // ex = 13 av de marseille 13000 Marseille 
             $_SESSION['user_data']['livraison'] = $adresse." ".$codePostale." ".$ville;
 
             $_SESSION['user_data']['facturation'] = $_POST['facturation'];
+            
+            if ( isset ($_POST['deliveryMode']) && $_POST['deliveryPrice'])
+            {
+                $_SESSION['user_data']['deliveryMode'] = $_POST['deliveryMode'];
+
+                $_SESSION['user_data']['deliveryPrice'] = $_POST['deliveryPrice'];
+            } else {
+                $_SESSION['user_data']['deliveryMode'] = null;
+
+                $_SESSION['user_data']['deliveryPrice'] = null;
+            }
+
+           
+
 
             // Si un prix est définit / différent de vide = commande vide
             if ( isset ( $_POST['prix']) && !empty ( $_POST['prix']))
@@ -512,7 +528,7 @@ class UsersController extends Controller
                 \Stripe\Stripe::setApiKey('sk_test_51KZXuDJm5576Uzo35LWKkxbWACB19bTEv0cn494ONQLuQqfQd7GHXeCWMp2LxLUbbCikvt6siO7nY5TdBdaMeFcd00Hl7keAL2');
 
                 $intent = \Stripe\PaymentIntent::create([
-                'amount' => $prix*100,
+                'amount' => intval($prix)*100,
                 'currency' => 'eur'
             ]);
             // On redirige vers la page commande car vide
@@ -552,7 +568,7 @@ class UsersController extends Controller
                         $insert = new CommandsModel();
                         $insertCommand = $insert
                             ->setPrice($product['price'])
-                            ->setTotal_price($product['total_price'] * $product['quantity'])
+                            ->setTotal_price($product['price'] * $product['quantity_product'])
                             ->setId_user($_SESSION['user_data']['id'])
                             ->setId_command($numCommand)
                             ->setId_product($product['id'])
@@ -560,7 +576,8 @@ class UsersController extends Controller
                             ->setQuantity_product($product['quantity_product'])
                             ->setAdresse_livraison($_SESSION['user_data']['livraison'])
                             ->setAdresse_facturation($_SESSION['user_data']['facturation'])
-                            ->setId_color($product['id_color']);
+                            ->setPrice_livraison($_SESSION['user_data']['deliveryPrice'])
+                            ->setMode($_SESSION['user_data']['deliveryMode']);
                         $insertCommand->create($insert);
                     }
                 } else {
@@ -568,7 +585,7 @@ class UsersController extends Controller
                     foreach ($command as $product)
                     {
                         $promo = 0;
-
+  
                         $insert = new CommandsModel();
                         $insertCommand = $insert
                             ->setPrice($product['price'])
@@ -580,7 +597,8 @@ class UsersController extends Controller
                             ->setPromo($promo)
                             ->setAdresse_livraison($_SESSION['user_data']['livraison'])
                             ->setAdresse_facturation($_SESSION['user_data']['facturation'])
-                            ->setId_color($product['id_color']);
+                            ->setPrice_livraison($_SESSION['user_data']['deliveryPrice'])
+                            ->setMode($_SESSION['user_data']['deliveryMode']);
                         $insertCommand->create($insert);
                     }
                 }
@@ -600,6 +618,8 @@ class UsersController extends Controller
         $_SESSION['user_data']['promo'] = 0;
         unset($_SESSION['user_data']['livraison']);
         unset($_SESSION['user_data']['facturation']);
+        unset($_SESSION['user_data']['deliveryMode']);
+        unset($_SESSION['user_data']['deliveryPrice']);
 
         Renderer::render('users/successCommand' , compact('command'));
     }
