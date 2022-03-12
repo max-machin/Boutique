@@ -4,9 +4,9 @@ if ( empty ( $user)) {
     header('location: login');
 } else {
 ?>
-    <h2 class="sous-titre">Vos informations personnelles</h2>
+    
     <form action="" method="post">
-        
+        <h2 class="sous-titre">Vos informations personnelles</h2>
         <div class="form-group">
             <input id="email" type="email" name="email" value="<?= $user['email'] ?>" required>
             <label for="email">E-mail * (facturation)</label>
@@ -48,7 +48,7 @@ if ( empty ( $user)) {
         <input class="submit submit-profil" type="submit" name="subNewPassword" value="Modifier password">
     </form>
 
-    <h2 class="sous-titre">Vos dernières commandes</h2>*
+    <h2 class="sous-titre userCommand">Vos dernières commandes</h2>
 
 <?php 
 
@@ -56,155 +56,216 @@ if ( empty ( $user)) {
 
     foreach ($userCommands as $userCommand)
     {
+        // Numéro de commandes
         $numCommands = explode(",",$userCommand['id_command']);
-        foreach (array_unique($numCommands) as $num)
-        {
-        ?>
-            <article class="userCommand">
-                <p>N° de commande : <?= $num ?></p>
-            
-        <?php
-        }
 
-        $names = explode(",",$userCommand['product_name']);
-        foreach ($names as $name)
-        {
-        ?>
-            <div class="nameQuantityPrice">
-                <p><?= $name ?></p>
-        <?php
-        }
-
-        $quantities = explode(",",$userCommand['quantity_product']);
-        foreach ($quantities as $quantity)
-        {
-            $quant[] = $quantity;
-            ?>
-            <p>x <?= $quantity ?></p>
-            <?php
-            
-        }
-        
-        $prices = explode(",",$userCommand['price']);
-        foreach ($prices as $price)
-        {   
-    
-            ?>
-            <p><?= $price ?>€ / u</p>
-            <?php
-        }
-
+        // Prix total pour 1 produit = prix * quantité
         $total_prices = explode(",",$userCommand['total_price']);
-        foreach($total_prices as $total_price)
-        {
-            ?>
-            <p>= <?= $total_price ?>€</p>
-            </div>
-            <?php
-        }
 
+        // Prix brut de la commande ( sans livraison / promos ) = somme des prix totaux 
         $commandPrice = array_sum($total_prices);
-            
+
+        // Promotion
+        $promos = explode(",",$userCommand['promo']);
+
+        // Calcul de la promo
+        $calculPromo = intval($promos[0]) / 100;
+        $promo = $commandPrice * $calculPromo;
+
+        // Soustraction du la promo au prix de la commande
+        $commandPricePromo = $commandPrice - $promo;
+
+        // Nom des produits
+        $names = explode(",",$userCommand['product_name']);
+
+        // Quantité des produits
+        $quantities = explode(",",$userCommand['quantity_product']);
+
+        // Prix des produits
+        $prices = explode(",",$userCommand['price']);
+
+        // Date de commande
+        $dates = explode(",",$userCommand['date']);
+
+        // Adresse de livraison
+        $livraisons = explode(",",$userCommand['adresse_livraison']);
+
+        // Adresse de facturation
+        $facturations = explode(",",$userCommand['adresse_facturation']);
+
+        // Prix de la livraison
         $deliveryPrice = explode(",",$userCommand['price_livraison']);
         $price = array_unique($deliveryPrice);
 
+        // Mode de livraison
         $deliveryMode = explode(",",$userCommand['mode']);
         $mode = array_unique($deliveryMode);
 
-        $promos = explode(",",$userCommand['promo']);
-        $calculPromo = intval($promos[0]) / 100;
-        $promo = $commandPrice * $calculPromo;
-        $commandPricePromo = $commandPrice - $promo;
+        
 
-        foreach(array_unique($promos) as $promo)
+        foreach (array_unique($numCommands) as $num)
         {
+        ?>
+        <fieldset>
+            <article class="userCommand">
+                <p>N° de commande : <i class="bold"><?= $num ?></i></p>
             
-            if ( $promo === "")
+            <?php
+            }
+            foreach(array_unique($promos) as $promo)
             {
-                ?>
-                <p>Prix total : <?= $commandPrice ?>€</p>
-                <p>Pas de PROMO</p>
-                <p>Livraison : <?= $price[0] ?>€ (<?= $mode[0] ?>) </p>
-                <p>Prix total commande : <?= $commandPrice += $price[0] ?>€</p>
-                <?php
+                
+                if ( $promo === "")
+                {
+                    ?>
+                    <p>Montant : <i class="bold"><?= $commandPrice += $price[0] ?>€</i></p>
+                    <?php
 
-            } else {
+                } else {
 
+                    ?>
+                    <p>Montant: <i class="bold"><?= $commandPricePromo += $price[0] ?>€</i></p>
+                    <?php
+                }
+            }
+
+            foreach (array_unique($dates) as $date)
+            {   
                 ?>
-                <p>Prix sans PROMO : <?= $commandPrice ?>€</p>
-                <p>PROMO : <?= $promo ?>%</p>
-                <p>Prix avec PROMO : <?= $commandPricePromo ?>€</p>
-                <p>Livraison : <?= $price[0] ?>€ (<?= $mode[0] ?>) </p>
-                <p>Prix total commande : <?= $commandPrice += $price[0] ?>€</p>
+                <p>Date : <i class="bold"><?= $date ?></i></p>
+                
                 <?php
             }
-        }
 
-
-        $dates = explode(",",$userCommand['date']);
-
-        foreach (array_unique($dates) as $date)
-        {   
-            ?>
-            <p>Commandé le : <?= $date ?></p>
-            </div>
-            <?php
-        }
-        
-        $livraisons = explode(",",$userCommand['adresse_livraison']);
-        foreach ( array_unique($livraisons) as $livraison)
-        {
-            ?>
-            <p>Adresse de livraison : <?= $livraison ?></p>
-            <?php
-        }
-
-
-        $facturations = explode(",",$userCommand['adresse_facturation']);
-        foreach ( array_unique($facturations) as $facturation)
-        {
-            ?>
-            <p>Adresse de facturation : <?= $facturation ?></p>
-            <?php
-        }
-    }
-    ?>
-
-    <h2>Vos commentaires</h2>
-
-    <?php
-
-        foreach( $userComments as $comment) 
-        {
-        
-    ?>
-        <article class="userComment">
-            <a href="<?= url ?>products/<?= $comment['id_product'] ?>"><?= $comment['name'] ?></a>
-            <p><?= $comment['comment'] ?></p>
-        
-        <?php
-            $i = 0;
-            while ( $i < $comment['note'])
+            
+            foreach ( array_unique($livraisons) as $livraison)
             {
-        ?>
-                <label for="">★</label>
-        <?php
-
-            $i++;
+                ?>
+                <!-- <div class="flex"> -->
+                    <div>
+                        <h3>Expédition</h3>
+                        <p>Adresse de livraison : <i class="bold"><?= $livraison ?></i></p>
+                    </div>
+                <?php
             }
-        ?>
-            <i class="fa-solid fa-trash-can"></i>
-            <p>Commenter le : <?= $comment['datefr'] ?> à <?= $comment['heurefr'] ?></p>
 
+
+            
+            foreach ( array_unique($facturations) as $facturation)
+            {
+                ?>
+                    <div>
+                        <h3>Facturation</h3>
+                        <p>Adresse de facturation : <i class="bold"><?= $facturation ?></i></p>
+                    </div>
+                <!-- </div> -->
+                <?php
+            }
+            ?>
+            <article class="grid article-profil">
+            <h3>Produits</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Produit</th>
+                            <th>Prix unitaire</th>
+                            <th>Quantité</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        foreach ( $selectProduct as $product )
+                            {
+                                foreach(array_unique($quantities) as $quantity) 
+                                {                            
+
+                        ?>
+                        <tr>
+                            <td><?= $product[0]['name'] ?></td>
+                            <td><?= $product[0]['price'] ?>€</td>
+                            <td>x <?= $quantity ?></td>
+                            <td class="price"><i class="bold"><?= $product[0]['price'] * $quantity ?>€</i></td>
+                        </tr>
+                        <?php
+                                }
+                            }
+                        ?>
+                    </tbody>
+                </table>
+                
+            </article>
+
+            <?php
+
+            foreach(array_unique($promos) as $promo)
+            {
+                
+                if ( $promo === "")
+                {
+                    ?>
+                    <p>Prix total : <i class="bold"><?= $commandPrice - $price[0] ?>€</i></p>
+                    <p>Pas de PROMO</p>
+                    <p>Livraison : <i class="bold"><?= $price[0] ?>€</i> (<?= $mode[0] ?>)</p>
+                    <p>Prix total commande : <i class="bold"><?= $commandPrice ?>€</i></p>
+                    <?php
+
+                } else {
+
+                    ?>
+                    <p>Prix sans PROMO : <i class="bold"><?= $commandPrice ?>€</i></p>
+                    <p>PROMO : <i class="bold"><?= $promo ?>%</i></p>
+                    <p>Prix avec PROMO : <i class="bold"><?= $commandPricePromo ?>€</i></p>
+                    <p>Livraison : <i class="bold"><?= $price[0] ?>€</i>  (<?= $mode[0] ?>)</p>
+                    <p>Prix total commande : <i class="bold"><?= $commandPrice ?>€</i></p>
+                    <?php
+                }
+            }
+        }
+        ?>
         </article>
-        <form action="" method="post">
-            <input type="hidden" name="id_comment" value="<?= $comment['id']?>">
-            <button type="submit" name="deleteComment"><i class="fa-solid fa-trash"></i></button>
-        </form>
+    </fieldset>
+    <section class="txt-center section-comment">
+        <h2 class="sous-titre">Vos commentaires</h2>
 
-    <?php
-        }
-    ?>
+        <?php
+
+            foreach( $userComments as $comment) 
+            {
+            
+        ?>
+            <article>
+                <a href="<?= url ?>products/<?= $comment['id_product'] ?>"><?= $comment['name'] ?></a>
+                <p class="date"><?= $comment['datefr'] ?></p>
+                <p><?= $comment['comment'] ?></p>
+                 
+            
+            <?php
+                $i = 0;
+            ?>
+                <label for=""> Note :
+            <?php
+                while ( $i < $comment['note'])
+                {
+            ?>
+                    ★</label>
+            <?php
+
+                $i++;
+                }
+            ?>
+               
+
+                <form action="" method="post">
+                    <input type="hidden" name="id_comment" value="<?= $comment['id']?>">
+                    <button type="submit" name="deleteComment"><i class="fa-solid fa-trash"></i></button>
+                </form>
+                <hr>
+            </article>
+        <?php
+            }
+        ?>
+    </section>
 
 <?php
 }

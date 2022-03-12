@@ -404,7 +404,7 @@ SINON rajouter avant container une autre class/un autre mot donc et apr√®s le d√
 
 /* FORMULAIRE CONNEXION*/
 
-.forgot {
+.bold {
     font-weight: bold;
 }
 
@@ -423,12 +423,64 @@ SINON rajouter avant container une autre class/un autre mot donc et apr√®s le d√
 
 --------------------------------------------------- */
 .submit-profil {
-    margin-bottom: 7%;
+    margin-bottom: 3vh;
 }
 
 .sous-titre {
     font-family: "SousTitreouAccent";
-    margin-bottom: 3%;
+    margin-bottom: 3vh;
+}
+.userCommand {
+    margin-top: 2vh;
+    font-family: "loremIpsum";
+    text-align: center;
+}
+
+/* USER PROFIL COMMANDE */
+
+.userCommand .flex {
+    justify-content: space-evenly;
+}
+.name {
+    flex-wrap: flex;
+}
+
+.article-profil {
+    justify-content:center;
+    align-items: center;
+}
+
+article table {
+    margin: auto;
+    box-shadow: 0 5px 10px rgba(216, 216, 216, 0.295);
+}
+
+article table thead {
+    box-shadow: 0 5px 10px rgba(216, 216, 216, 0.295);
+    background-color: rgb(46, 46, 46);
+    color: white;
+}
+
+article table th {
+    /* padding: 1rem 2rem; */
+    padding: .5vh;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    font-size: 0.7rem;
+    font-weight: bold;
+    /* border-collapse: separate; */
+    
+}
+
+article table td {
+    text-align: center;
+    padding: 1vh;
+    /* padding: 1rem 2rem; */
+}
+
+article table tr:nth-child(even)
+{
+    border-top: 1px solid black;
 }
 
 /* ------------------------------------------------
@@ -482,6 +534,43 @@ i {
 	font-size: 3vh;
 	background-color: transparent;
 	border: none;
+}
+
+.section-comment {
+    margin-top: 4vh;
+}
+
+.section-comment article {
+    font-family: "SousTitreouAccent";
+    margin:2% 8%;
+    flex-wrap: wrap;
+    border-radius: 4px;
+    line-height: 2vh;
+}
+
+.section-comment article:nth-child(odd) {
+    text-align: right;
+}
+
+.section-comment article:nth-child(even) {
+    text-align: left;
+}
+
+.section-comment a {
+    font-size: 1.5em;
+    color: #ffbcb0;
+    font-weight: bold;
+}
+
+.date {
+    font-family: "loremIpsum";
+    color: rgb(204, 204, 204);
+}
+
+.section-comment form button {
+    margin-top: 2vh;
+    background-color:transparent;
+    border: none;
 }
 
 

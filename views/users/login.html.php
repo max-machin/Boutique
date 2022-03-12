@@ -14,7 +14,7 @@
         <span><?= $error_password ?></span>
     </div>
 
-    <a class="help forgot" href="forgotPassword">Mot de passe oublié ?</a><br>
+    <a class="help bold" href="forgotPassword">Mot de passe oublié ?</a><br>
 
     <input class="submit login" type="submit" name="submit" value="Connexion">
 

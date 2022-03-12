@@ -356,6 +356,17 @@ class UsersController extends Controller
         $model = new CommandsModel();
         $userCommands = $model->findCommand($_SESSION['user_data']['id']);
 
+        foreach ($userCommands as $userCommand)
+        {
+            $id_products = explode(',', $userCommand['id_product']);
+            foreach ($id_products as $id_product)
+            {
+                $select = new ProductsModel();
+                $selectProduct[] = $select->findBy(['id' => $id_product]);
+            }
+            
+        }
+
         $comments = new CommentsModel();
         $userComments = $comments->userComments($_SESSION['user_data']['id']);
 
@@ -367,7 +378,7 @@ class UsersController extends Controller
         }
         
 
-        Renderer::render('users/profil' , compact('user', 'error_new_password', 'error_validPassword', 'error_old_password', 'display1' , 'display2', 'userCommands', 'userComments'));
+        Renderer::render('users/profil' , compact('user', 'error_new_password', 'error_validPassword', 'error_old_password', 'display1' , 'display2', 'userCommands', 'selectProduct' ,'userComments'));
     }
 
     /**
