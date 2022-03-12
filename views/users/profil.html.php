@@ -185,7 +185,7 @@ if ( empty ( $user)) {
                             <td><?= $product[0]['name'] ?></td>
                             <td><?= $product[0]['price'] ?>€</td>
                             <td>x <?= $quantity ?></td>
-                            <td class="price"><i class="bold"><?= $product[0]['price'] * $quantity ?>€</i></td>
+                            <td><i class="bold"><?= $product[0]['price'] * $quantity ?>€</i></td>
                         </tr>
                         <?php
                                 }

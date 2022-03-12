@@ -37,7 +37,7 @@
                 <ul>
                     <li><a href="<?= url ?>users/profil"><img src="images/utilitaires/user.svg" width="40px"></a></li>
                     <li><a href="<?= url ?>users/disconnect"><img src="images/utilitaires/power.svg" width="43px"></a></li>
-                    <li><a href="<?= url ?>users/bags"><img src="images/utilitaires/bag.svg" width="40px"></a></li>
+                    <li><a href="<?= url ?>bags"><img src="images/utilitaires/bag.svg" width="40px"></a></li>
                 </ul>
             </nav>
         <?php
