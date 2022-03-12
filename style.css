@@ -6,22 +6,22 @@
 
 @font-face {
     font-family: Titreprincipal;
-    src: url(Fonts/EloquentJFCaptionPro.ttf);
+    src: url(fonts/EloquentJFCaptionPro.ttf);
 }
 
 @font-face {
     font-family: AccentFont;
-    src: url(Fonts/Cooper\ Black.ttf);
+    src: url(fonts/Cooper\ Black.ttf);
 }
 
 @font-face {
     font-family: SousTitreouAccent;
-    src: url(Fonts/Butler_Medium.otf);
+    src: url(fonts/Butler_Medium.otf);
 }
 
 @font-face {
     font-family: LoremIpsum;
-    src: url(Fonts/Butler_Regular.otf);
+    src: url(fonts/Butler_Regular.otf);
 }
 
 
@@ -187,6 +187,14 @@ SINON rajouter avant container une autre class/un autre mot donc et apr√®s le d√
 
 /* mobile first */
 
+.container_promo p {
+    background-color: rgb(var(--clr-black));
+    color: rgb(var(--clr-white));
+    margin: 0;
+    font-family: LoremIpsum;
+    text-align: center;
+}
+
 .top-header{
     display: flex;
     flex-direction: row;
@@ -279,8 +287,6 @@ SINON rajouter avant container une autre class/un autre mot donc et apr√®s le d√
     z-index: 2;
 }
 
-
-
 .categories ul{
     padding: 0;
     display: flex;
@@ -288,6 +294,10 @@ SINON rajouter avant container une autre class/un autre mot donc et apr√®s le d√
     justify-content: space-around;
 }
 
+.categories a{
+    color: rgb(var(--clr-black));
+    font-family: SousTitreouAccent;
+}
 
 
 

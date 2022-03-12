@@ -38,47 +38,42 @@
                 </div>
 
             </form>   
-      <?php
-        if ( isset ($_SESSION['user_data'] ) )
-        {
-        ?>
-            <nav>
-                <ul>
-                    <li><a href="users/profil"><img src="images/utilitaires/user.svg" width="40px"></a></li>
-                    <li><a href="bags"><img src="images/utilitaires/bag.svg" width="40px"></a></li>                    
-                    <li><a href="users/disconnect"><img src="images/utilitaires/power.svg" width="43px"></a></li>
-                </ul>
-            </nav>
         <?php
-        } else {
-        ?>
-            <nav>
-                <ul>
-                    <li><a href="users/register"><img src="images/utilitaires/register.svg" width="45px"></a></li>
-                    <li><a href="users/login"><img src="images/utilitaires/power.svg" width="45px"></a></li>
-                </ul>
-            </nav>
-        <?php
-        }
-        ?>           
-        </div>
+            if ( isset ($_SESSION['user_data'] ) )
+            {
+            ?>
+                <nav>
+                    <ul>
+                        <li><a href="users/profil"><img src="images/utilitaires/user.svg" width="40px"></a></li>
+                        <li><a href="bags"><img src="images/utilitaires/bag.svg" width="40px"></a></li>                    
+                        <li><a href="users/disconnect"><img src="images/utilitaires/power.svg" width="43px"></a></li>
+                    </ul>
+                </nav>
+            <?php
+            } else {
+            ?>
+                <nav>
+                    <ul>
+                        <li><a href="users/register"><img src="images/utilitaires/register.svg" width="45px"></a></li>
+                        <li><a href="users/login"><img src="images/utilitaires/power.svg" width="45px"></a></li>
+                    </ul>
+                </nav>
+            <?php
+            }
+            ?>           
+            </div>
 
-        <div class="bottom-header">
-        <nav class="categories">
-            <ul>
-                <li><a href="<?= urlLaura ?>">All our products</a></li>
-                <li><a href="<?= urlLaura ?>">Skincare</a></li>
-                <li><a href="<?= urlLaura ?>">Make up</a></li>
-            </ul>
-        </nav>
-        </div> 
-</header>
-
-
-</header>
-<body>
-    
-
+            <div class="bottom-header">
+                <nav class="categories">
+                    <ul>
+                        <li><a href="<?= urlLaura ?>">Our products</a></li>
+                        <li><a href="<?= urlLaura ?>">Skincare</a></li>
+                        <li><a href="<?= urlLaura ?>">Make up</a></li>
+                        <li><a href="<?= urlLaura ?>">Discover your skin</a></li>
+                    </ul>
+                </nav>
+            </div> 
+    </header>
                
     <main>
         <div class="container">
@@ -89,7 +84,6 @@
     <footer>
         ici le footer
     </footer>
-
-    
+  
 </body>
 </html>
