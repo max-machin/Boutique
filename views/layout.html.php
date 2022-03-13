@@ -59,8 +59,8 @@
         <div class="bottom-header">
         <nav class="categories">
             <ul>
-                <li><a href="<?= urlLaura ?>">Skincare</a></li>
-                <li><a href="<?= urlLaura ?>">Make up</a></li>
+                <li><a href="<?= urlmac ?>">Skincare</a></li>
+                <li><a href="<?= urlmac ?>">Make up</a></li>
             </ul>
         </nav>
         </div> 
