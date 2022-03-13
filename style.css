@@ -7,6 +7,7 @@
 - LAYOUT
     - HEADER
     - FOOTER 
+- ACCUEIL
     
 */
 
@@ -374,6 +375,63 @@ footer {
     flex-direction: row;
     justify-content: space-around;
 }
+
+
+/* ------------------------------------------------
+
+                    ACCUEIL
+
+--------------------------------------------------- */
+
+.pop-up {
+    background-color: rgb(var(--clr-white));
+    width: 100%;
+    border: 2px solid rgb(var(--clr-lightgrey));
+    padding: 5%;
+    border-radius: 7%;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    z-index: 5;
+    display: none;
+}
+
+.pop-up img {
+    margin-left: 15%;
+}
+
+.pop-up h2 {
+    font-family: SousTitreouAccent;
+    text-align: center;
+}
+
+.pop-up p {
+    text-align: justify;
+}
+
+.pop-up input {
+    border: none;
+    border-bottom: 1px solid black;
+}
+
+#subscribe-noir {
+    border: none;
+    background-color: transparent;
+}
+
+#close {
+    border: none;
+    background-color: transparent;
+}
+
+
+
+
+
+
+
 
 
 

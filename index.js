@@ -3,6 +3,9 @@
 // }
 // );
 
+
+//pour la nav bar en mobile/ipad
+
 document.addEventListener('DOMContentLoaded', function loaded() {
 
     //NAV BURGER
@@ -18,7 +21,9 @@ document.addEventListener('DOMContentLoaded', function loaded() {
     var images = document.querySelectorAll('img');
     var image = images[2];
     var img = images[0];
-   
+
+
+
 
     buttonNav.addEventListener("click", function(){
         //après avoir récupéré l'image qui m'intéresse plus haut, je lui dis que si je clique dessus, l'image change sinon ça revient à son image initiale
@@ -43,4 +48,19 @@ document.addEventListener('DOMContentLoaded', function loaded() {
         form.classList.toggle("open");
     });
 
+//pour le pop up à l'accueil
+   var close = document.getElementById('close');
+
+   window.addEventListener('load', function(){
+    setTimeout(
+        function open(event){
+            document.querySelector('.pop-up').style.display = 'block';
+        },
+        900
+    )
+   });
+    close.addEventListener("click", function(){
+        document.querySelector('.pop-up').style.display = 'none';
+    });
 });
+
