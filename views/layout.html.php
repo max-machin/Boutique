@@ -36,60 +36,85 @@
                     <input type="text" name="search" placeholder="Search">
                     <button id="searchbutton" type="submit" name="submit-search"><img src="images/utilitaires/search.svg" width="35px"></button>                    
                 </div>
-
             </form>   
-      <?php
-        if ( isset ($_SESSION['user_data'] ) )
-        {
-        ?>
-            <nav>
-                <ul>
-                    <li><a href="users/profil"><img src="images/utilitaires/user.svg" width="40px"></a></li>
-                    <li><a href="bags"><img src="images/utilitaires/bag.svg" width="40px"></a></li>                    
-                    <li><a href="users/disconnect"><img src="images/utilitaires/power.svg" width="43px"></a></li>
-                </ul>
-            </nav>
         <?php
-        } else {
-        ?>
-            <nav>
-                <ul>
-                    <li><a href="users/register"><img src="images/utilitaires/register.svg" width="45px"></a></li>
-                    <li><a href="users/login"><img src="images/utilitaires/power.svg" width="45px"></a></li>
-                </ul>
-            </nav>
-        <?php
-        }
-        ?>           
-        </div>
+            if ( isset ($_SESSION['user_data'] ) )
+            {
+            ?>
+                <nav>
+                    <ul>
+                        <li><a href="users/profil"><img src="images/utilitaires/user.svg" width="40px"></a></li>
+                        <li><a href="bags"><img src="images/utilitaires/bag.svg" width="40px"></a></li>                    
+                        <li><a href="users/disconnect"><img src="images/utilitaires/power.svg" width="43px"></a></li>
+                    </ul>
+                </nav>
+            <?php
+            } else {
+            ?>
+                <nav>
+                    <ul>
+                        <li><a href="users/register"><img src="images/utilitaires/register.svg" width="45px"></a></li>
+                        <li><a href="users/login"><img src="images/utilitaires/power.svg" width="45px"></a></li>
+                    </ul>
+                </nav>
+            <?php
+            }
+            ?>           
+            </div>
 
-        <div class="bottom-header">
-        <nav class="categories">
-            <ul>
-                <li><a href="<?= urlLaura ?>">All our products</a></li>
-                <li><a href="<?= urlLaura ?>">Skincare</a></li>
-                <li><a href="<?= urlLaura ?>">Make up</a></li>
-            </ul>
-        </nav>
-        </div> 
-</header>
+            <div class="bottom-header">
+                <nav class="categories">
+                    <ul>
+                        <li><a href="<?= urlLaura ?>">Our products</a></li>
+                        <li><a href="<?= urlLaura ?>">Skincare</a></li>
+                        <li><a href="<?= urlLaura ?>">Make up</a></li>
+                        <li><a href="<?= urlLaura ?>">Discover your skin</a></li>
+                    </ul>
+                </nav>
+            </div> 
+    </header>
 
+    <div class="flex-wrapper">            
+        <main>
+            <div class="container">
+                <?= $content ?>
+            </div>  
+        </main>
 
-</header>
-<body>
-    
+        <footer>
+            <div class="social-media">
+                <p>@everglow.brand</p>
+                <img src="images/utilitaires/instagram-brands.svg" width="15px" class="filter-white">
+                <img src="images/utilitaires/twitter-brands.svg" width="15px" class="filter-white">
+                <img src="images/utilitaires/facebook-brands.svg" width="15px" class="filter-white">
+                <img src="images/utilitaires/tiktok-brands.svg" width="15px" class="filter-white">
+            </div>
+            <div class="footer-up">
+                <div id="sign-up">
+                <h3>Sign up to our newsletter</h3>
+                <form action="" method="post">
+                    <input type="text" name="subscribe" placeholder="Subscribe">
+                    <button id="subscribe" type="submit" name="submit-subscription"><img src="images/utilitaires/flechedroite.svg" width="10px" class="filter-white"></button>                    
+                </form>  
+                </div> 
 
-               
-    <main>
-        <div class="container">
-            <?= $content ?>
-        </div>  
-    </main>
+                <div id="contact-us">
+                <h3>Contact us</h3>
+                <p>email@email.com</p> 
+                <p>telephone number</p>
+                <p>Monday - Friday 9a - 5p EST</p>   
+                </div>
+            </div>
+           
+            <div class="bordure-horizontale"></div>
+           
+            <div id="footer-down">
+                <h3>About us</h3>
+                <h3>Customer service</h3>
+                <h3>Help & FaQ</h3>
+            </div>
 
-    <footer>
-        ici le footer
-    </footer>
-
-    
+        </footer>
+    </div>
 </body>
 </html>

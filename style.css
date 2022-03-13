@@ -1,3 +1,16 @@
+/* SOMMAIRE 
+
+- Fonts
+- Custom properties (colors)
+- RESET (clean canva)
+- UTILITY CLASSES (classes r√©utilisables)
+- LAYOUT
+    - HEADER
+    - FOOTER 
+- ACCUEIL
+    
+*/
+
 /* ------------------------------------------------
 
                     Fonts
@@ -6,22 +19,22 @@
 
 @font-face {
     font-family: Titreprincipal;
-    src: url(Fonts/EloquentJFCaptionPro.ttf);
+    src: url(fonts/EloquentJFCaptionPro.ttf);
 }
 
 @font-face {
     font-family: AccentFont;
-    src: url(Fonts/Cooper\ Black.ttf);
+    src: url(fonts/Cooper\ Black.ttf);
 }
 
 @font-face {
     font-family: SousTitreouAccent;
-    src: url(Fonts/Butler_Medium.otf);
+    src: url(fonts/Butler_Medium.otf);
 }
 
 @font-face {
     font-family: LoremIpsum;
-    src: url(Fonts/Butler_Regular.otf);
+    src: url(fonts/Butler_Regular.otf);
 }
 
 
@@ -84,6 +97,15 @@ body {
     line-height: 1.5;
     min-height: 100vh;
 }
+
+/* Keeps the footer at the very bottom */
+
+.flex-wrapper {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 
 /* Make images easier to work with (si dieu le veut) */
 
@@ -185,7 +207,19 @@ SINON rajouter avant container une autre class/un autre mot donc et apr√®s le d√
 
 --------------------------------------------------- */
 
+/* 
+                HEADER
+*/
+
 /* mobile first */
+
+.container_promo p {
+    background-color: rgb(var(--clr-black));
+    color: rgb(var(--clr-white));
+    margin: 0;
+    font-family: LoremIpsum;
+    text-align: center;
+}
 
 .top-header{
     display: flex;
@@ -279,8 +313,6 @@ SINON rajouter avant container une autre class/un autre mot donc et apr√®s le d√
     z-index: 2;
 }
 
-
-
 .categories ul{
     padding: 0;
     display: flex;
@@ -288,6 +320,111 @@ SINON rajouter avant container une autre class/un autre mot donc et apr√®s le d√
     justify-content: space-around;
 }
 
+.categories a{
+    color: rgb(var(--clr-black));
+    font-family: SousTitreouAccent;
+}
+
+
+/* 
+                FOOTER
+*/
+
+/* mobile first */
+
+footer {
+    background-color: rgb(var(--clr-black));
+    color: rgb(var(--clr-white));
+    padding: 5%;
+    /* height: 20vh; */
+}
+
+.bordure-horizontale {
+    border-bottom: 1px solid white;
+}
+
+#subscribe{
+    border: none;
+    background-color: transparent;
+}
+
+.filter-white {
+    filter: invert(99%) sepia(99%) saturate(0%) hue-rotate(264deg) brightness(105%) contrast(100%);
+}
+
+.social-media {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.footer-up {
+    display: flex;
+    flex-direction: row;
+}
+
+.footer-up input {
+    background-color: #000;
+    border: none;
+    border-bottom: 1px solid white;
+    width: 70%;
+}
+
+#footer-down {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+
+/* ------------------------------------------------
+
+                    ACCUEIL
+
+--------------------------------------------------- */
+
+.pop-up {
+    background-color: rgb(var(--clr-white));
+    width: 100%;
+    border: 2px solid rgb(var(--clr-lightgrey));
+    padding: 5%;
+    border-radius: 7%;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    z-index: 5;
+    display: none;
+}
+
+.pop-up img {
+    margin-left: 15%;
+}
+
+.pop-up h2 {
+    font-family: SousTitreouAccent;
+    text-align: center;
+}
+
+.pop-up p {
+    text-align: justify;
+}
+
+.pop-up input {
+    border: none;
+    border-bottom: 1px solid black;
+}
+
+#subscribe-noir {
+    border: none;
+    background-color: transparent;
+}
+
+#close {
+    border: none;
+    background-color: transparent;
+}
 
 
 
