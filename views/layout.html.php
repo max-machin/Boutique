@@ -36,7 +36,6 @@
                     <input type="text" name="search" placeholder="Search">
                     <button id="searchbutton" type="submit" name="submit-search"><img src="images/utilitaires/search.svg" width="35px"></button>                    
                 </div>
-
             </form>   
         <?php
             if ( isset ($_SESSION['user_data'] ) )
@@ -74,16 +73,48 @@
                 </nav>
             </div> 
     </header>
-               
-    <main>
-        <div class="container">
-            <?= $content ?>
-        </div>  
-    </main>
 
-    <footer>
-        ici le footer
-    </footer>
-  
+    <div class="flex-wrapper">            
+        <main>
+            <div class="container">
+                <?= $content ?>
+            </div>  
+        </main>
+
+        <footer>
+            <div class="social-media">
+                <p>@everglow.brand</p>
+                <img src="images/utilitaires/instagram-brands.svg" width="15px" class="filter-white">
+                <img src="images/utilitaires/twitter-brands.svg" width="15px" class="filter-white">
+                <img src="images/utilitaires/facebook-brands.svg" width="15px" class="filter-white">
+                <img src="images/utilitaires/tiktok-brands.svg" width="15px" class="filter-white">
+            </div>
+            <div class="footer-up">
+                <div id="sign-up">
+                <h3>Sign up to our newsletter</h3>
+                <form action="" method="post">
+                    <input type="text" name="subscribe" placeholder="Subscribe">
+                    <button id="subscribe" type="submit" name="submit-subscription"><img src="images/utilitaires/flechedroite.svg" width="10px" class="filter-white"></button>                    
+                </form>  
+                </div> 
+
+                <div id="contact-us">
+                <h3>Contact us</h3>
+                <p>email@email.com</p> 
+                <p>telephone number</p>
+                <p>Monday - Friday 9a - 5p EST</p>   
+                </div>
+            </div>
+           
+            <div class="bordure-horizontale"></div>
+           
+            <div id="footer-down">
+                <h3>About us</h3>
+                <h3>Customer service</h3>
+                <h3>Help & FaQ</h3>
+            </div>
+
+        </footer>
+    </div>
 </body>
 </html>

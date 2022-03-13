@@ -1,3 +1,15 @@
+/* SOMMAIRE 
+
+- Fonts
+- Custom properties (colors)
+- RESET (clean canva)
+- UTILITY CLASSES (classes r√©utilisables)
+- LAYOUT
+    - HEADER
+    - FOOTER 
+    
+*/
+
 /* ------------------------------------------------
 
                     Fonts
@@ -84,6 +96,15 @@ body {
     line-height: 1.5;
     min-height: 100vh;
 }
+
+/* Keeps the footer at the very bottom */
+
+.flex-wrapper {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 
 /* Make images easier to work with (si dieu le veut) */
 
@@ -184,6 +205,10 @@ SINON rajouter avant container une autre class/un autre mot donc et apr√®s le d√
                 LAYOUT
 
 --------------------------------------------------- */
+
+/* 
+                HEADER
+*/
 
 /* mobile first */
 
@@ -300,11 +325,55 @@ SINON rajouter avant container une autre class/un autre mot donc et apr√®s le d√
 }
 
 
+/* 
+                FOOTER
+*/
 
+/* mobile first */
 
+footer {
+    background-color: rgb(var(--clr-black));
+    color: rgb(var(--clr-white));
+    padding: 5%;
+    /* height: 20vh; */
+}
 
+.bordure-horizontale {
+    border-bottom: 1px solid white;
+}
 
+#subscribe{
+    border: none;
+    background-color: transparent;
+}
 
+.filter-white {
+    filter: invert(99%) sepia(99%) saturate(0%) hue-rotate(264deg) brightness(105%) contrast(100%);
+}
+
+.social-media {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.footer-up {
+    display: flex;
+    flex-direction: row;
+}
+
+.footer-up input {
+    background-color: #000;
+    border: none;
+    border-bottom: 1px solid white;
+    width: 70%;
+}
+
+#footer-down {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
 
 
 
