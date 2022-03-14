@@ -1,4 +1,4 @@
-<h1>Validez votre commande</h1>
+<h1 class="txt-center sous-titre">Validez votre commande</h1>
 <?php
 
 if ( isset ($_SESSION['user_data'] ))
@@ -34,15 +34,16 @@ if ( isset ($_SESSION['user_data'] ))
                 $commandQuantity += $productColors['quantity_product'];
 
             ?>
+            <section class="command txt-center">
 
-                <article class="product">
+                <h3 class="sous-titre"><?= $productColors['name'] ?></h3>
+                <label for="color" name="color" class="color" style="background-color: #<?= $productColors['code'] ?>"> </label>
+
+                <article class="produit flex txt-center">
                     <p><?= $productColors['name'] ?></p>
                     <p> <?= $productColors['price'] ?>€/u</p>
-                    <h3><?= $productPrice ?>€ (quantité : <?= $productColors['quantity_product'] ?>)</h3>
-
-                    <label for="color" name="color" class="color" style="background-color: #<?= $productColors['code'] ?>">
-    
-                    </label>
+                    <p>x <?= $productColors['quantity_product'] ?></p>
+                    <h3><?= $productPrice ?>€</h3>
                 </article>
             <?php
             }
@@ -68,17 +69,20 @@ if ( isset ($_SESSION['user_data'] ))
                 $commandQuantity += $product['quantity_product'];
 
             ?>
-                <article class="product">
-                    <p><?= $product['name'] ?></p>
+                <h3 class="sous-titre"><?= $product['name'] ?></h3>
+                <article class="produit flex">
+                    
                     <p> <?= $product['price'] ?>€/u</p>
-                    <h3><?= $productPrice ?>€ (quantité : <?= $product['quantity_product'] ?>)</h3>
+                    <p>x <?= $product['quantity_product'] ?></p>
+                    <h3><?= $productPrice ?>€</h3>
                 </article>
 
             <?php
             }
             ?> 
-                <h2>Choisir un mode de livraison</h2>
-                <form action="paiement" method="post">
+                
+                <form class="form" action="paiement" method="post">
+                <h2 class="sous-titre">Choisir un mode de livraison</h2>
                 <?php
                 if ( $commandPrice < 50)
                 {
@@ -118,32 +122,41 @@ if ( isset ($_SESSION['user_data'] ))
                 ?>
 
                         </label>
-                <h2>Choisir un mode de livraison</h2>
-                <form action="paiement" method="post">
-                    <h3>Infomartions livraison</h3>
-                    <label for="adresse">Adresse *</label><br>
-                    <input type="text" name="adresse" id="adresse" placeholder="Adresse"><br>
+                
+                <form class="form" action="paiement" method="post">
+                <h2 class="sous-titre">Choisir un mode de livraison</h2>
+                    <h3>Informations livraison</h3>
+                    <div class="form-group">
+                        <input type="text" name="adresse" id="adresse" placeholder="Adresse">
+                        <label for="adresse">Adresse *</label>
+                    </div>
 
-                    <label for="codePostale">Code postale *</label><br>
-                    <input type="text" name="codePostale" id="codePostale" placeholder="Code postale"><br>
+                    <div class="form-group">
+                        <input type="text" name="codePostale" id="codePostale" placeholder="Code postale">
+                        <label for="codePostale">Code postale *</label>
+                    </div>
 
-                    <label for="ville">Ville *</label><br>
-                    <input type="text" name="ville" id="ville" placeholder="Ville"><br>
+                    <div class="form-group">                      
+                        <input type="text" name="ville" id="ville" placeholder="Ville">
+                        <label for="ville">Ville *</label>
+                    </div>
                     
-                    <label for="facturation">Email de facturation *</label><br>
-                    <input type="text" name="facturation" id="facturation" value="<?= $_SESSION['user_data']['email'] ?>"><br>
+                    <div class="form-group">    
+                        <input type="text" name="facturation" id="facturation" value="<?= $_SESSION['user_data']['email'] ?>">
+                        <label for="facturation">Email de facturation *</label>
+                    </div>
                     
 
-                    <h3>Total (<?= $commandQuantity ?> articles) : </h3>
+                    <h2>Total (<?= $commandQuantity ?> articles) : </h2>
 
-                    <input type="text" name="prix" id="prix" value="<?= $commandPrice ?>" readonly><br>
-                    <button>Procédez au paiement</button><br>
-                    <p>* Le prix total ne comprend pas le prix de livraison</p>
+                    <input type="text" name="prix" id="prix" value="<?= $commandPrice ?>€" readonly><br>
+                    <button class="submit"name="paiement_button">Procédez au paiement</button><br>
+                    <p class="help">* Le prix total ne comprend pas le prix de livraison</p>
 
                     <?= $error ?><br>
 
                 </form>
-                
+            </section>
             <?php
         // Si aucun code PROMO n'est entré
         } else {
@@ -160,14 +173,15 @@ if ( isset ($_SESSION['user_data'] ))
                 $commandQuantity += $productColor['quantity_product'];
 
             ?>
+            <section class="command txt-center">
 
-                <article>
-                    <p><?= $productColor['name'] ?></p>
+                <h3 class="sous-titre"><?= $productColor['name'] ?></h3>
+                <label for="color" name="color" class="color" style="background-color: #<?= $productColor['code'] ?>"> </label>
+
+                <article class="produit flex">
                     <p> <?= $productColor['price'] ?>€/u</p>
-                    <h3><?= $productPrice ?>€ (quantité : <?= $productColor['quantity_product'] ?>)</h3>
-                    <label for="color" name="color" class="color" style="background-color: #<?= $productColor['code'] ?>">
-
-                    </label>
+                    <p>x <?= $productColor['quantity_product'] ?></p>
+                    <h3><?= $productPrice ?>€</h3>
                 </article>   
 
             <?php
@@ -184,18 +198,20 @@ if ( isset ($_SESSION['user_data'] ))
                 $commandPrice += $productPrice;
                 $commandQuantity += $product['quantity_product'];
             ?>
-                <article>
-                    <p><?= $product['name'] ?></p>
+                <h3 class="sous-titre"><?= $product['name'] ?></h3>
+                <article class="produit flex">
                     <p> <?= $product['price'] ?>€/u</p>
-                    <h3><?= $productPrice ?>€ (quantité : <?= $product['quantity_product'] ?>)</h3>
+                    <p>x <?= $product['quantity_product'] ?></p>
+                    <h3><?= $productPrice ?>€</h3>
                 </article>  
 
             <?php
             }
             ?>
 
-                <h2>Choisir un mode de livraison</h2>
-                <form action="paiement" method="post">
+                
+                <form class="form" action="paiement" method="post">
+                <h2 class="sous-titre">Choisir un mode de livraison</h2>
                 <?php
                 if ( $commandPrice < 50)
                 {
@@ -227,31 +243,40 @@ if ( isset ($_SESSION['user_data'] ))
                     }   
                 } else {
                     ?>
-                        <p>Frais de livrasion offerts</p>
+                        <p class="help">Frais de livrasion offerts</p>
                     <?php
                 }
                 ?>
 
                         </label>
-                    <h3>Infomartions livraison</h3>
-                    <label for="adresse">Adresse *</label><br>
-                    <input type="text" name="adresse" id="adresse" placeholder="Adresse"><br>
+                <h3>Informations livraison</h3>
 
-                    <label for="codePostale">Code postale *</label><br>
-                    <input type="text" name="codePostale" id="codePostale" placeholder="Code postale"><br>
+                <div class="form-group">
+                    <input type="text" name="adresse" id="adresse" required>
+                    <label for="adresse">Adresse *</label>
+                </div>
 
-                    <label for="ville">Ville *</label><br>
-                    <input type="text" name="ville" id="ville" placeholder="Ville"><br>
+                <div class="form-group">
+                    <input type="text" name="codePostale" id="codePostale" required>
+                    <label for="codePostale">Code postale *</label>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" name="ville" id="ville" required>
+                    <label for="ville">Ville *</label>
+                </div>    
+                
+                <div class="form-group">
                     
-                    <label for="facturation">Email de facturation *</label><br>
-                    <input type="text" name="facturation" id="facturation" value="<?= $_SESSION['user_data']['email'] ?>"><br>
-                    
+                    <input type="text" name="facturation" id="facturation" value="<?= $_SESSION['user_data']['email'] ?>" required>
+                    <label for="facturation">Email de facturation *</label>
+                </div>
 
-                    <h3>Total (<?= $commandQuantity ?> articles) : </h3>
+                    <h2>Total (<?= $commandQuantity ?> articles) : </h2>
 
-                    <input type="text" name="prix" id="prix" value="<?= $commandPrice ?>" readonly><br>
-                    <button name="paiement_button">Procédez au paiement</button><br>
-                    <p>* Le prix total ne comprend pas le prix de livraison</p>
+                    <input type="text" name="prix" id="prix" value="<?= $commandPrice ?>€" readonly><br>
+                    <button class="submit"name="paiement_button">Procédez au paiement</button><br>
+                    <p class="help">* Le prix total ne comprend pas le prix de livraison</p>
 
                     <?= $error ?><br>
 
@@ -260,7 +285,7 @@ if ( isset ($_SESSION['user_data'] ))
                     <input type="text" name="codePromo" placeholder="CODE PROMO">
                     <input type="submit" name="promo" value="Appliquez PROMO">
                 </form>
-
+            </section>
             <?php
         } 
     // Si aucun produit n'est ajouté en panier 

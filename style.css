@@ -560,9 +560,41 @@ SINON rajouter avant container une autre class/un autre mot donc et apr√®s le d√
 
 --------------------------------------------------- */
 
-.deliveryMode:checked {
+/* .deliveryMode:checked {
     display: block;
 
+} */
+.produit {
+    font-family: "SousTitreouAccent";
+    align-items: center;
+    justify-content:space-evenly;
+}
+
+.command {
+    font-family: "loremIpsum";
+}
+
+#prix {
+    text-align: center;
+    font-weight: 900;
+    margin-bottom: 2vh;
+}
+
+/* ------------------------------------------------
+
+                PAIEMENTS
+
+--------------------------------------------------- */
+#card-elements {
+    margin-bottom: 2vh;
+}
+.success a {
+    font-weight: 900;
+    color: black;
+}
+
+.success a:hover {
+    text-decoration: underline;
 }
 
 /* ------------------------------------------------
