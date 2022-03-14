@@ -30,16 +30,13 @@
                 
 
                 <form action="" method="post">
-
-                    <div>
-                            <label class="color" for="<?= $bagProduct['color_name'] ?>" style="background-color: #<?= $bagProduct['code'] ?>">
-                                
-                            </label>
-                    </div>
                     <div class="flex">
+                        <label class="color" for="<?= $bagProduct['color_name'] ?>" style="background-color: #<?= $bagProduct['code'] ?>">
+                                
+                        </label>
                         <p> <?= $bagProduct['price'] ?>€/u</p>
                         <select name="quantityColors" id="">
-                            <option value="<?= $bagProduct['quantity_product']?>" selected > Quantité : <?= $bagProduct['quantity_product']?></option>
+                            <option value="<?= $bagProduct['quantity_product']?>" selected > x <?= $bagProduct['quantity_product']?></option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
