@@ -446,41 +446,9 @@ SINON rajouter avant container une autre class/un autre mot donc et apr√®s le d√
 }
 
 .article-profil {
-    justify-content:center;
-    align-items: center;
-}
-
-article table {
-    margin: auto;
-    box-shadow: 0 5px 10px rgba(216, 216, 216, 0.295);
-}
-
-article table thead {
-    box-shadow: 0 5px 10px rgba(216, 216, 216, 0.295);
-    background-color: rgb(46, 46, 46);
-    color: white;
-}
-
-article table th {
-    /* padding: 1rem 2rem; */
-    padding: .5vh;
-    text-transform: uppercase;
-    letter-spacing: 0.1rem;
-    font-size: 0.7rem;
-    font-weight: bold;
-    /* border-collapse: separate; */
-    
-}
-
-article table td {
-    text-align: center;
-    padding: 1vh;
-    /* padding: 1rem 2rem; */
-}
-
-article table tr:nth-child(even)
-{
-    border-top: 1px solid black;
+    grid-template-columns: repeat(5, 1fr);
+    align-self: center;
+    justify-self: center;
 }
 
 /* USER PROFIL COMMENT */
@@ -548,8 +516,9 @@ article table tr:nth-child(even)
 .bagProduct .flex button, .bagProduct .flex input {
     background-color:transparent;
     border: none;
-    font-weight: bold;
+    font-weight: 900;
     color: rgb(145, 145, 145);
+    font-size: 2.5vh;
 }
 
 .bagPrice {

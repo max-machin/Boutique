@@ -57,8 +57,20 @@ if ( empty ( $user)) {
     foreach ($userCommands as $userCommand)
     {
         // Numéro de commandes
-        $numCommands = explode(",",$userCommand['id_command']);
+        $numCommands = explode(",", $userCommand['id_command']);
 
+        // Nom des produits
+        $names = explode(",",$userCommand['product_name']);
+
+
+        $colors = explode(",",$userCommand['product_color']);
+
+        // Quantité des produits
+        $quantities = explode(",",$userCommand['quantity_product']);
+
+        // Prix des produits
+        $prices = explode(",",$userCommand['price']);
+    
         // Prix total pour 1 produit = prix * quantité
         $total_prices = explode(",",$userCommand['total_price']);
 
@@ -74,16 +86,7 @@ if ( empty ( $user)) {
 
         // Soustraction du la promo au prix de la commande
         $commandPricePromo = $commandPrice - $promo;
-
-        // Nom des produits
-        $names = explode(",",$userCommand['product_name']);
-
-        // Quantité des produits
-        $quantities = explode(",",$userCommand['quantity_product']);
-
-        // Prix des produits
-        $prices = explode(",",$userCommand['price']);
-
+    
         // Date de commande
         $dates = explode(",",$userCommand['date']);
 
@@ -94,8 +97,8 @@ if ( empty ( $user)) {
         $facturations = explode(",",$userCommand['adresse_facturation']);
 
         // Prix de la livraison
-        $deliveryPrice = explode(",",$userCommand['price_livraison']);
-        $price = array_unique($deliveryPrice);
+        $deliveryPrices = explode(",",$userCommand['price_livraison']);
+        $deliveryPrice = array_unique($deliveryPrices);
 
         // Mode de livraison
         $deliveryMode = explode(",",$userCommand['mode']);
@@ -111,20 +114,26 @@ if ( empty ( $user)) {
                 <p>N° de commande : <i class="bold"><?= $num ?></i></p>
             
             <?php
-            }
+        }
             foreach(array_unique($promos) as $promo)
             {
-                
+                if ( $deliveryPrice[0] === '')
+                {
+                    $deliveryPrice[0] = 0;
+                }
+                $commandPrice = $commandPrice += $deliveryPrice[0];
+
                 if ( $promo === "")
                 {
+                    
                     ?>
-                    <p>Montant : <i class="bold"><?= $commandPrice += $price[0] ?>€</i></p>
+                    <p>Montant : <i class="bold"><?= $commandPrice ?>€</i></p>
                     <?php
 
                 } else {
-
+                $commandPricePromo = $commandPricePromo += $deliveryPrice[0];
                     ?>
-                    <p>Montant: <i class="bold"><?= $commandPricePromo += $price[0] ?>€</i></p>
+                    <p>Montant: <i class="bold"><?= $commandPricePromo ?>€</i></p>
                     <?php
                 }
             }
@@ -161,38 +170,67 @@ if ( empty ( $user)) {
                 <!-- </div> -->
                 <?php
             }
+            
             ?>
             <article class="grid article-profil">
-            <h3>Produits</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Produit</th>
-                            <th>Prix unitaire</th>
-                            <th>Quantité</th>
-                            <th>Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        foreach ( $selectProduct as $product )
-                            {
-                                foreach(array_unique($quantities) as $quantity) 
-                                {                            
-
+                <div>
+                   <h4>Produits</h4> 
+                    <?php
+                        foreach($names as $name)
+                        {
                         ?>
-                        <tr>
-                            <td><?= $product[0]['name'] ?></td>
-                            <td><?= $product[0]['price'] ?>€</td>
-                            <td>x <?= $quantity ?></td>
-                            <td><i class="bold"><?= $product[0]['price'] * $quantity ?>€</i></td>
-                        </tr>
+                            <p><?= $name ?></p>
                         <?php
-                                }
-                            }
+                        }
+                    ?>
+                </div>
+                <div>
+                   <h4>Couleurs</h4> 
+                    <?php
+                        foreach($colors as $color)
+                        {
+                            $model = new ColorsModel();
+                            $find = $model->find(intval($color));
+                            ?>
+                                <p><?= $find['name'] ?></p>
+                            <?php
+                        }
+                    ?>
+                </div>
+                <div>
+                    <h4>Prix</h4>
+                    <?php
+                        foreach($prices as $price)
+                        {
                         ?>
-                    </tbody>
-                </table>
+                            <p><?= $price ?>€</p>
+                        <?php
+                        }
+                    ?>
+                </div>
+                <div>
+                    <h4>Quantité</h4>
+                    <?php
+                        foreach($quantities as $quantity)
+                        {
+                        ?>
+                            <p><?= $quantity ?></p>
+                        <?php
+                        }
+                    ?>
+                </div>
+                
+                <div>
+                    <h4>Prix</h4>
+                    <?php
+                        foreach($total_prices as $total_price)
+                        {
+                            ?>
+                                <p><?= $total_price ?>€</p>
+                            <?php
+                        }
+                    ?>
+                </div>
                 
             </article>
 
@@ -203,10 +241,12 @@ if ( empty ( $user)) {
                 
                 if ( $promo === "")
                 {
+                    $totalPrice = $commandPrice - $deliveryPrice[0];
+                
                     ?>
-                    <p>Prix total : <i class="bold"><?= $commandPrice - $price[0] ?>€</i></p>
+                    <p>Prix total : <i class="bold"><?= $totalPrice ?>€</i></p>
                     <p>Pas de PROMO</p>
-                    <p>Livraison : <i class="bold"><?= $price[0] ?>€</i> (<?= $mode[0] ?>)</p>
+                    <p>Livraison : <i class="bold"><?= $deliveryPrice[0] ?>€</i> (<?= $mode[0] ?>)</p>
                     <p>Prix total commande : <i class="bold"><?= $commandPrice ?>€</i></p>
                     <?php
 
@@ -221,10 +261,13 @@ if ( empty ( $user)) {
                     <?php
                 }
             }
+            ?>
+            </article>
+        </fieldset>
+        <?php
         }
         ?>
-        </article>
-    </fieldset>
+       
     <section class="txt-center section-comment">
         <h2 class="sous-titre">Vos commentaires</h2>
 

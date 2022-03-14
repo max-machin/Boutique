@@ -41,7 +41,7 @@ if ( isset ($_SESSION['user_data'] ))
                     <h3><?= $productPrice ?>€ (quantité : <?= $productColors['quantity_product'] ?>)</h3>
 
                     <label for="color" name="color" class="color" style="background-color: #<?= $productColors['code'] ?>">
-                        <input type="radio">
+    
                     </label>
                 </article>
             <?php
@@ -87,14 +87,9 @@ if ( isset ($_SESSION['user_data'] ))
                     {
                         $delai = explode(".", $delivery['delai']);
                         $price = str_replace(".", "," , $delivery['price']);
-                        if (isset ( $_POST['deliveryMode']))
-                        {
-                            echo "wow";
-                            
-                        }
+                        
                     ?> 
-                        <input id="delivery<?= $delivery['id'] ?>" type="radio" name="deliveryMode" value="<?= $delivery['mode'] ?>">
-                        <input type="hidden" name="deliveryPrice" value="<?= $delivery['price'] ?>">
+                        <input id="delivery<?= $delivery['id'] ?>" type="radio" name="mode" value="<?= $delivery['mode']?>">
                         <label for="delivery<?= $delivery['id'] ?>">
                             <p>Livraison : <?= $delivery['mode'] ?></p>
 
@@ -171,7 +166,7 @@ if ( isset ($_SESSION['user_data'] ))
                     <p> <?= $productColor['price'] ?>€/u</p>
                     <h3><?= $productPrice ?>€ (quantité : <?= $productColor['quantity_product'] ?>)</h3>
                     <label for="color" name="color" class="color" style="background-color: #<?= $productColor['code'] ?>">
-                        <input type="radio">
+
                     </label>
                 </article>   
 
@@ -202,18 +197,14 @@ if ( isset ($_SESSION['user_data'] ))
                 <h2>Choisir un mode de livraison</h2>
                 <form action="paiement" method="post">
                 <?php
+                if ( $commandPrice < 50)
+                {
                     foreach($findDeliveries as $delivery)
                     {
                         $delai = explode(".", $delivery['delai']);
                         $price = str_replace(".", "," , $delivery['price']);
-                        if (isset ( $_POST['deliveryMode']))
-                        {
-                            echo "wow";
-                            
-                        }
                     ?> 
-                        <input id="delivery<?= $delivery['id'] ?>" type="radio" name="deliveryMode" value="<?= $delivery['mode'] ?>">
-                        <input type="hidden" name="deliveryPrice" value="<?= $delivery['price'] ?>">
+                        <input id="delivery<?= $delivery['id'] ?>" type="radio" name="mode" value="<?= $delivery['mode']?>">
                         <label for="delivery<?= $delivery['id'] ?>">
                             <p>Livraison : <?= $delivery['mode'] ?></p>
 
@@ -234,6 +225,11 @@ if ( isset ($_SESSION['user_data'] ))
                             <p>Prix : <?= $price ?> </p>
                         <?php
                     }   
+                } else {
+                    ?>
+                        <p>Frais de livrasion offerts</p>
+                    <?php
+                }
                 ?>
 
                         </label>

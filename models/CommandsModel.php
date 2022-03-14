@@ -7,6 +7,7 @@ class CommandsModel extends Model
     protected $id_user;
     protected $id_product;
     protected $quantity_product;
+    protected $id_color;
     protected $price;
     protected $total_price;
     protected $promo;
@@ -314,7 +315,7 @@ class CommandsModel extends Model
      */
     public function findCommand($id_user)
     {
-        return $this->requete("SELECT DISTINCT GROUP_CONCAT(c.id) as id,GROUP_CONCAT(id_command) as id_command, GROUP_CONCAT(c.id_product) as id_product,GROUP_CONCAT(quantity_product) as quantity_product,GROUP_CONCAT(c.price) as price, GROUP_CONCAT(total_price) as total_price ,GROUP_CONCAT(date) as date,GROUP_CONCAT(promo) as promo ,GROUP_CONCAT(adresse_livraison) as adresse_livraison ,GROUP_CONCAT(adresse_facturation) as adresse_facturation , GROUP_CONCAT(p.name) as product_name, GROUP_CONCAT(c.price_livraison) as price_livraison, GROUP_CONCAT(c.mode) as mode FROM {$this->table} as c INNER JOIN products as p ON c.id_product = p.id WHERE id_user = ? GROUP BY id_command", array($id_user))->fetchAll();
+        return $this->requete("SELECT DISTINCT GROUP_CONCAT(c.id) as id,GROUP_CONCAT(id_command) as id_command,GROUP_CONCAT(quantity_product) as quantity_product, GROUP_CONCAT(p.name) as product_name ,GROUP_CONCAT(c.id_color) as product_color,GROUP_CONCAT(c.price) as price, GROUP_CONCAT(total_price) as total_price ,GROUP_CONCAT(date) as date,GROUP_CONCAT(promo) as promo ,GROUP_CONCAT(adresse_livraison) as adresse_livraison ,GROUP_CONCAT(adresse_facturation) as adresse_facturation , GROUP_CONCAT(p.name) as product_name, GROUP_CONCAT(c.price_livraison) as price_livraison, GROUP_CONCAT(c.mode) as mode FROM {$this->table} as c INNER JOIN products as p ON c.id_product = p.id WHERE id_user = ? GROUP BY id_command", array($id_user))->fetchAll();
     }
 
     /**

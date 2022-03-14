@@ -356,17 +356,6 @@ class UsersController extends Controller
         $model = new CommandsModel();
         $userCommands = $model->findCommand($_SESSION['user_data']['id']);
 
-        foreach ($userCommands as $userCommand)
-        {
-            $id_products = explode(',', $userCommand['id_product']);
-            foreach ($id_products as $id_product)
-            {
-                $select = new ProductsModel();
-                $selectProduct[] = $select->findBy(['id' => $id_product]);
-            }
-            
-        }
-
         $comments = new CommentsModel();
         $userComments = $comments->userComments($_SESSION['user_data']['id']);
 
@@ -378,7 +367,7 @@ class UsersController extends Controller
         }
         
 
-        Renderer::render('users/profil' , compact('user', 'error_new_password', 'error_validPassword', 'error_old_password', 'display1' , 'display2', 'userCommands', 'selectProduct' ,'userComments'));
+        Renderer::render('users/profil' , compact('user', 'error_new_password', 'error_validPassword', 'error_old_password', 'display1' , 'display2', 'userCommands','userComments'));
     }
 
     /**
@@ -485,7 +474,7 @@ class UsersController extends Controller
         if ( isset ($_POST['paiement_button']))
         {
             // Si les informations de livraisons de sont pas remplis
-            if ( empty ($_POST['adresse']) || empty ($_POST['ville']) || empty ($_POST['codePostale']) || empty ($_POST['facturation']) || empty ( $_POST['deliveryMode']))
+            if ( empty ($_POST['adresse']) || empty ($_POST['ville']) || empty ($_POST['codePostale']) || empty ($_POST['facturation']) || empty ( $_POST['mode']))
             {
                 $error = "Veuillez remplir les informations de livraison";
             }
@@ -515,19 +504,21 @@ class UsersController extends Controller
 
             $_SESSION['user_data']['facturation'] = $_POST['facturation'];
             
-            if ( isset ($_POST['deliveryMode']) && $_POST['deliveryPrice'])
+            if ( isset($_POST['mode']))
             {
-                $_SESSION['user_data']['deliveryMode'] = $_POST['deliveryMode'];
+                $model = new DeliveriesModel();
 
-                $_SESSION['user_data']['deliveryPrice'] = $_POST['deliveryPrice'];
+                $find = $model->findBy(['mode' => $_POST['mode']]);
+
+                $_SESSION['user_data']['deliveryMode'] = $_POST['mode'];
+
+                $_SESSION['user_data']['deliveryPrice'] = $find[0]['price'];
+                
             } else {
                 $_SESSION['user_data']['deliveryMode'] = null;
 
                 $_SESSION['user_data']['deliveryPrice'] = null;
             }
-
-           
-
 
             // Si un prix est définit / différent de vide = commande vide
             if ( isset ( $_POST['prix']) && !empty ( $_POST['prix']))
@@ -583,6 +574,7 @@ class UsersController extends Controller
                             ->setId_user($_SESSION['user_data']['id'])
                             ->setId_command($numCommand)
                             ->setId_product($product['id'])
+                            ->setId_color($product['id_color'])
                             ->setPromo($promo)
                             ->setQuantity_product($product['quantity_product'])
                             ->setAdresse_livraison($_SESSION['user_data']['livraison'])
@@ -604,6 +596,7 @@ class UsersController extends Controller
                             ->setId_user($_SESSION['user_data']['id'])
                             ->setId_command($numCommand)
                             ->setId_product($product['id'])
+                            ->setId_color($product['id_color'])
                             ->setQuantity_product($product['quantity_product'])
                             ->setPromo($promo)
                             ->setAdresse_livraison($_SESSION['user_data']['livraison'])

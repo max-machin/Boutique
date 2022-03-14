@@ -1,6 +1,7 @@
 <?php
     if( isset ($_SESSION['user_data']) )
     {
+
 ?>
     <form method="post" action="">
         <div id="errors"></div>

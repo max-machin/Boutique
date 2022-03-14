@@ -91,4 +91,9 @@ class ColorsModel extends Model
 
         return $this;
     }
+
+    public function findColors($id_color)
+    {
+        return $this->requete("SELECT DISTINCT name FROM colors INNER JOIN commands on colors.id = commands.id_color")->fetch();
+    }
 }

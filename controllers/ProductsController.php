@@ -196,7 +196,6 @@ class ProductsController extends Controller
                         ->setId_user($_SESSION['user_data']['id'])
                         ->setId_product($_POST['id_Product'])
                         ->setQuantity_product($_POST['product_quantity']);
-                       
                         $productAdded->create($model);  
 
                     // Sinon on l'update
