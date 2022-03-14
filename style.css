@@ -329,11 +329,13 @@ SINON rajouter avant container une autre class/un autre mot donc et apr√®s le d√
 
 --------------------------------------------------- */
 /* FORMULAIRE GENERIQUE*/
+
 .form-group {
     position: relative;
     padding: 20px 0;
-    width: 280px;
+    width: 70%;
     max-width: 100%;
+    margin: auto;
 }
 
 .form-group input {
@@ -396,6 +398,10 @@ SINON rajouter avant container une autre class/un autre mot donc et apr√®s le d√
 
 }
 
+.form {
+    text-align: center;
+}
+
 .form h1 {
     font-family: "Titreprincipal";
     text-transform:uppercase;
@@ -416,6 +422,8 @@ SINON rajouter avant container une autre class/un autre mot donc et apr√®s le d√
     transition: .2s ease-out;
     text-decoration: underline;
 }
+
+
 
 /* ------------------------------------------------
 
