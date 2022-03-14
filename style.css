@@ -329,6 +329,10 @@ SINON rajouter avant container une autre class/un autre mot donc et apr√®s le d√
 
 --------------------------------------------------- */
 /* FORMULAIRE GENERIQUE*/
+.form {
+    text-align: center;
+}
+
 
 .form-group {
     position: relative;
@@ -398,9 +402,6 @@ SINON rajouter avant container une autre class/un autre mot donc et apr√®s le d√
 
 }
 
-.form {
-    text-align: center;
-}
 
 .form h1 {
     font-family: "Titreprincipal";

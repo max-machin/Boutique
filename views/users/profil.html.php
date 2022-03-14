@@ -5,7 +5,7 @@ if ( empty ( $user)) {
 } else {
 ?>
     
-    <form action="" method="post">
+    <form class="form" action="" method="post">
         <h2 class="sous-titre">Vos informations personnelles</h2>
         <div class="form-group">
             <input id="email" type="email" name="email" value="<?= $user['email'] ?>" required>
@@ -23,7 +23,7 @@ if ( empty ( $user)) {
     </form>
 
     
-    <form action="" method="post" style="display: <?= $display1 ?>">
+    <form class="form" action="" method="post" style="display: <?= $display1 ?>">
     <h3>Mot de passe</h3>
         <div class="form-group">
             <input id="oldPassword" type="password" name="oldPassword" required>
@@ -33,7 +33,7 @@ if ( empty ( $user)) {
         <input class="submit submit-profil" type="submit" name="subPassword" value="Confirmer password">
     </form>
 
-    <form action="" method="post" style="display: <?= $display2 ?>">
+    <form class="form" action="" method="post" style="display: <?= $display2 ?>">
     <h3>Mot de passe</h3>
         <div class="form-group">
             <input id="newPassword" type="password" name="newPassword" required>
