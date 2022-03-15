@@ -189,6 +189,15 @@ class ProductsController extends Controller
 
     }
 
+    public static function productsBySousCategories($nameCategorie)
+    {
+        $model = new ProductsModel();
+        $productsSousCat = $model->productsBySousCategories($nameCategorie);
+
+        return $productsSousCat;
+
+    }
+
     
     // public static function getUrlCategories()
     // {
@@ -225,49 +234,56 @@ class ProductsController extends Controller
      //paramètre $cat et sous cat viennent de l'url                
     public static function createViewProducts($cat = null, $sousCat = null) 
     {
-
-
-
         $model = new ProductsModel();
         $countProducts= $model->countProducts();
         $categories = self::getCategories();
         $nameCategorie = self::getCategorieName();
         $pagination = self::pagination();
+        $nameSousCategorie = self::getSousCategorieName($cat);
         
         $page = $pagination[0];
         $nbrProductsByPage = $pagination[1];
         $nbrPages = $pagination[2];
         $debut = $pagination[3];
-      var_dump($_GET);
+
+    //   var_dump($_GET['sous_categorie']);
         
         //3 fonction pour les produits
-        if ($sousCat != null) {
-            
-           
-            echo 'bla';
-            $products = self::productsBySouscat($sousCat);
-            // $nbrProductsByPage = 1;
-            // $nbrPages = ceil($countProducts[0]["liste"] / $nbrProductsByPage);
-        } else if ($cat != null) {
+        // if ($sousCat != null) {
+         
+        //     $products = self::productsBySouscat($sousCat);
+        //     $pagination = self::pagination();
+
+        // } else 
+        if(isset($_GET['sous_categorie']))
+        {
+           $products = $model->productsBySousCategories();
+           $pagination = self::pagination();
+        }
+        if ($cat != null) {
             
             $nameSousCategorie = self::getSousCategorieName($cat);
             $sousCategories = self::getSousCategories($cat);
             $products = self::productsByCategories($cat);
+            $pagination = self::pagination();
+            
+
         } else {
 
             $products = self::allProducts();
+            $pagination = self::pagination();
         }
 
         
        
         Renderer::render('products/allProducts' , compact('categories','nameCategorie', 'nbrPages', 'sousCategories', 'products', 'nameSousCategorie', 'debut', 'page'));
-        // Renderer::render('products/allProducts' , compact('categories', 'products', 'countProducts', 'productsByCat', 'sousCategories', 'productsByCategories', 'categorieUrl','nameCategorie', 
-        // 'nbrPages'));
+       
     }
     
-    public static function createMakeupView() 
+    public static function createSousCatView() 
     {
 
+        Renderer::render('products/' , compact('categories','nameCategorie', 'nbrPages', 'sousCategories', 'products', 'nameSousCategorie', 'debut', 'page'));
     }
 }
     

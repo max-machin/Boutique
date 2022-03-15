@@ -214,17 +214,20 @@ class ProductsModel extends Model
     
     
 
-    public function productsBySousCategories($nameSousCategorie,$debut )
+    public function productsBySousCategories($nameSousCategorie
+    // ,$debut 
+    )
     {
         $query = $this->database->requete("SELECT products.*, GROUP_CONCAT(images.url_image SEPARATOR ',') as url FROM `products` 
         INNER JOIN images ON products.id = images.id_product
         INNER JOIN sous_categories
         ON sous_categories.id = products.id_sous_categorie 
         WHERE sous_categories.name = :nameSousCategorie 
-        LIMIT :debut");
+        -- LIMIT :debut
+        ");
         $query->execute([
             'nameSousCategorie' => $nameSousCategorie,
-            'debut' => $debut
+            // 'debut' => $debut
         ]);
         $result = $query->fetchAll();
     }

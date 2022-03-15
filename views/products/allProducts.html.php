@@ -1,8 +1,11 @@
+
 <h1>Liste de nos produits</h1>
+
 <form action="" method="GET">
-    <select name="categorie">
+    <select name="sous_categorie">
         <?php foreach ($sousCategories as $sousCategorie) { ?>
             <option value="<?php echo $sousCategorie['name']; ?> "><?php echo $sousCategorie['name']; ?> </option>
+            
         <?php } ?> 
     </select>
     <input type='hidden' name='page' value='1'>
@@ -10,6 +13,13 @@
 </form>
 
 <?php 
+var_dump($_GET['sous_categorie']);
+
+if(isset($_GET['sous_categorie']) && isset($_GET['submit']))
+{
+    
+    ProductsController::productsBySousCategories($nameSousCategorie);
+}
 
 //  }
     // var_dump($nameCategorie);
@@ -17,21 +27,15 @@
     // echo 'heloooo';
     // var_dump($_GET);
     // echo 'heloooo';
-    // var_dump($sousCategories);
+
+//   print_r($sousCategories);
 
 // if (isset($nameCategorie)) {
     
 //  $page_categorie = $nameCategorie;
 
-// for ($i = 1; $i <= $nbrPages; $i++) {
-       
-//     echo "<a href =''>$i</a> ";
-//     // var_dump($nbrPages);
-//     if ($page != $i)
-//             echo "<a class='page' href='?page=$i&categorie=$page_categorie'>$i</a>&nbsp";
-//         else
-//             echo "<a class='page'>$i</a>&nbsp";
-//     }
+
+
 
 // }
 
@@ -46,12 +50,12 @@
 // }
 
 // else {
-//     for ($i = 1; $i <= $nbr_page; $i++) {
-//         if ($page != $i)
-//             echo "<a class='page' href='?page=$i'>$i</a>";
-//         else
-//             echo "<a class='page'>$i</a>";
-//     }
+    for ($i = 1; $i <= $nbrPages; $i++) {
+        if ($page != $i)
+            echo "<a class='page'href='?page=$i'>$i</a>";
+        else
+            echo "<a class='page'>$i</a>";
+    }
 // }
 
 

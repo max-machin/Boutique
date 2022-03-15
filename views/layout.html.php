@@ -12,12 +12,8 @@
 
 <body>
 
-    <form action="" method="GET">
-    <input type='hidden' name='page' value='1'>
-    <button type='submit' name="submit" class="formButton">Valider</button>
-</form>
 <?php
-
+    // var_dump($_GET);
     if ( isset ($_SESSION['user_data'] ) )
     {
     ?>

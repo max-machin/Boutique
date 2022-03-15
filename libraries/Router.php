@@ -5,7 +5,8 @@ class Router
     public static function process() 
     {
         // ce qu'on va inclure comme fichier en fonction des différentes actions de l'utilisateur
-        if(!empty($_GET['p'])){
+        if(!empty($_GET['p']))
+        {
         // le filter va filtrer ce qu'on a dans le get afin donc de sécuriser, le nom du filtre suit
             $url = explode('/', filter_var($_GET['p'], FILTER_SANITIZE_URL));
             
@@ -72,47 +73,42 @@ class Router
             }
 
             // var_dump($url);
-        //!virer le if 
-            if(!empty($url[1]) && empty($url[2])){
+
+   //in array me cherche une clé ds un tableau ici le retour des noms, ma méthode générant 
+   //ma view prend la clé en paramètre 
+            if(!empty($url[1]) && empty($url[2]))
+            {
                 if($controllerName == "ProductsController"){
-                    // if(($url[1] == 'makeup'|| $url[1] == 'skincare'))
-                    // {
-                    //     $controllerName::createViewProducts();
-                        
-                    // }else{
-                   
-                    // $controllerName::seeProduct($url[1]);
-                    // }
 
-                    if (in_array($url[1], $controllerName::getCategorieName())) {
-
+                    if (in_array($url[1], $controllerName::getCategorieName())){
                         $controllerName::createViewProducts($url[1]);
-                    } else {
+                    }
+                    elseif(in_array($url[1], $controllerName::getCategorieName())){
+                        $controllerName::createViewProducts($url[1]);
+                    }            
+                }
+                elseif(!empty($url[1]) && !empty($url[2])){
 
-                        echo 'tata';
-                    }
-                }            
-            }elseif(!empty($url[1]) && !empty($url[2])){
-                if($controllerName == "ProductsController"){
-                    
-                    if($url[2] == 'update'){
-                        $controllerName::seeUpdateProduct($url[1]);
+                    if($controllerName == "ProductsController"){
+                        if($url[2] == 'update'){
+                            $controllerName::seeUpdateProduct($url[1]);
+                            }
                         }
+                }elseif($controllerName == "ProductsController"){
+
+                    $controllerName::createViewProducts();
                     }
-            }elseif($controllerName == "ProductsController"){
-                // echo"test";
-                $controllerName::createViewProducts();
+
+                if(@$url[1] == 'delete'){
+                    if ($controllerName == "BagsController") {
+                    $controllerName::showBag();
+                    $controllerName::deleteFromBag();
+                    }
+                }elseif ($controllerName == "BagsController"){
+                    $controllerName::showBag();
+                    $controllerName::quantityBag(); 
                 }
-            if(@$url[1] == 'delete'){
-            if ($controllerName == "BagsController") {
-                $controllerName::showBag();
-                $controllerName::deleteFromBag();
-                }
-            }elseif ($controllerName == "BagsController"){
-                $controllerName::showBag();
-                $controllerName::quantityBag(); 
-            }
-            
+                
 
             if ($controllerName == "AdminController"){
                 // Renderer::render('admin/backoffice');
@@ -128,7 +124,7 @@ class Router
                     }
                 }
             }
-
+        }
 
         }      
     }   
