@@ -417,11 +417,6 @@ SINON rajouter avant container une autre class/un autre mot donc et apr√®s le d√
 }
 
 
-
-
-
-
-
 /* 
                 FOOTER
 */
@@ -522,8 +517,53 @@ footer {
     background-color: transparent;
 }
 
+.img-accueil {
+    width: 450px;
+    margin-left: 10px;
+}
 
+.images-accueil {
+    display: flex;
+    flex-direction: row;
+    padding: 3% 0;
+}
 
+#accueil-text {
+    position: absolute;
+    right: 10%;
+    top: 50%;
+    width: 20vw;
+}
+
+#accueil-text h1 {
+    font-family: Titreprincipal;
+    font-size: 5em;
+}
+
+#accueil-text p {
+    font-family: LoremIpsum;
+    font-size: 1.2em;
+    margin-left: 9%;
+}
+
+#accueil-text button {
+    margin-left: 20%;
+    font-size: 1.3em;
+    background-color: rgb(var(--clr-black));
+    color: rgb(var(--clr-white));
+    border-radius: 2%;
+    border: 1px solid black;
+}
+
+.accueil-bestsellers {
+    padding: 10% 0;
+}
+.accueil-bestsellers h2 {
+    padding-top: 3%;
+    font-family: SousTitreouAccent;
+    display: flex;
+    justify-content: center;
+}
 
 
 

@@ -15,10 +15,21 @@
 
 
 <article>
-    <section>
-        <img src="images/generalvibe/girls.jpeg">
+    <section class="images-accueil">
+        <img class="img-accueil" src="images/generalvibe/imgvibe2.jpeg">
+        <img class="img-accueil" src="images/generalvibe/skincare.jpeg">
+
+        <div id="accueil-text">
+            <h1>Embrace your skin</h1>
+            <p>Channel a new type of glow, one that will never fade out with our newest products.
+                Join Everglow.
+            </p>
+            <button>Join the movement</button>
+        </div>
     </section>
-    <section>
+    <section class="accueil-bestsellers">
+        <hr>
+        <h2>Our Bestsellers</h2>
         
     </section>
     <section>
