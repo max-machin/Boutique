@@ -4,25 +4,41 @@
 // );
 
 
-//pour la nav bar en mobile/ipad
+// //pour la nav bar en mobile/ipad
+
+
+// window.addEventListener('resize', function() {
+// 	// viewport and full window dimensions will change, resize will help me detect the change in width
+// 	var viewport_width = window.innerWidth;
+
+//     if(viewport_width > 820)
+//     {
+//         var burger = document.getElementById('menu');
+//         burger.style.visibility = 'hidden';
+//     }
+//     else 
+//     {
+//         burger.style.visibility = 'visible';
+//     }
+// });
+
 
 document.addEventListener('DOMContentLoaded', function loaded() {
-
-    //NAV BURGER
+            //NAV BURGER
     
-    var buttonBurger = document.querySelectorAll("div[class^='btn-']");
-    //me retourne un array de tous les objets avec cette classe qui commence par "btn-" alors je saisis celui qui m'intéresse ici :
-    var buttonNav = buttonBurger[1];
-    var buttonSearch = buttonBurger[0];
-    
-    var nav = document.querySelector('nav');
-    var form = document.querySelector('form');
-    
-    var images = document.querySelectorAll('img');
-    var image = images[2];
-    var img = images[0];
+        var buttonBurger = document.querySelectorAll("div[class^='btn-']");
+        //me retourne un array de tous les objets avec cette classe qui commence par "btn-" alors je saisis celui qui m'intéresse ici :
 
-
+        console.log(buttonBurger);
+        var buttonNav = buttonBurger[1];
+        var buttonSearch = buttonBurger[0];
+        
+        var nav = document.querySelector('nav');
+        var form = document.querySelector('form');
+        
+        var images = document.querySelectorAll('img');
+        var image = images[2];
+        var img = images[0];
 
 
     buttonNav.addEventListener("click", function(){

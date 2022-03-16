@@ -27,7 +27,7 @@
     
     
                 <div class="btn-navigation">
-                    <img src="images/utilitaires/menu.svg" width="40px">
+                    <img id='menu' src="images/utilitaires/menu.svg" width="40px">
                 </div>
             </div>
 
@@ -60,18 +60,18 @@
             <?php
             }
             ?>           
-            </div>
+        </div>
 
-            <div class="bottom-header">
-                <nav class="categories">
-                    <ul>
-                        <li><a href="<?= urlLaura ?>">Our products</a></li>
-                        <li><a href="<?= urlLaura ?>">Skincare</a></li>
-                        <li><a href="<?= urlLaura ?>">Make up</a></li>
-                        <li><a href="<?= urlLaura ?>">Discover your skin</a></li>
-                    </ul>
-                </nav>
-            </div> 
+        <div class="bottom-header">
+            <nav class="categories">
+                <ul>
+                    <li><a href="<?= urlLaura ?>">Our products</a></li>
+                    <li><a href="<?= urlLaura ?>">Skincare</a></li>
+                    <li><a href="<?= urlLaura ?>">Make up</a></li>
+                    <li><a href="<?= urlLaura ?>">Discover your skin</a></li>
+                </ul>
+            </nav>
+        </div> 
     </header>
 
     <div class="flex-wrapper">            
