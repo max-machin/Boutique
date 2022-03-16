@@ -314,6 +314,7 @@ SINON rajouter avant container une autre class/un autre mot donc et apr√®s le d√
         background-color: transparent;
         z-index: 2;
     }
+}
 
     .categories ul{
         padding: 0;
@@ -326,8 +327,6 @@ SINON rajouter avant container une autre class/un autre mot donc et apr√®s le d√
         color: rgb(var(--clr-black));
         font-family: SousTitreouAccent;
     }
-
-}
 
 
 /* desktop */
@@ -377,15 +376,22 @@ SINON rajouter avant container une autre class/un autre mot donc et apr√®s le d√
     .top-header {
         display: flex;
         flex-direction: row;
-        height: 20vh;
+        justify-content: space-around;
+        align-items: center;
+        height: 30vh;
         background-color: rgb(var(--clr-lightpink));
+        padding-top: 5%;
     }
+
     .top-header nav ul{
         display: flex;
         flex-direction: row;
-        position: absolute;
-        right: 0;
-        top: 10%;
+    }
+
+    .top-header form input {
+        border: none;
+        border-bottom: black solid;
+        background-color: transparent;
     }
 
     .btn-navigation
@@ -398,11 +404,16 @@ SINON rajouter avant container une autre class/un autre mot donc et apr√®s le d√
         display: none;
     }
 
-    /* .intern-form
-    {
-        position: absolute;
-        top: 10%;
-    } */
+    #searchbutton {
+        border: none;
+        background-color: transparent;
+    }
+
+    #everglow {
+        width: 190px;
+        margin-left: -35px;
+    }
+
 }
 
 

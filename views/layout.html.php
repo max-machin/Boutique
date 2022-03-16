@@ -17,13 +17,19 @@
         <div class="container_promo">
             <p>15% de réduction en profitant du code : <?= codePromo ?></p>
         </div>
-        <div class="top-header">
+        <div class="top-header">           
+            <form action="" method="post">
+                <div class="intern-form">
+                    <input type="text" name="search" placeholder="Search">
+                    <button id="searchbutton" type="submit" name="submit-search"><img src="images/utilitaires/search.svg" width="35px"></button>                    
+                </div>
+            </form>  
             <div class="top-before-animation">
                 <div class="btn-search">
                     <img src="images/utilitaires/search.svg" width="40px">
                 </div>             
 
-                <a href="accueil"><img src="images/utilitaires/Everglow.png" width="120px"></a>
+                <a href="accueil"><img src="images/utilitaires/Everglow.png" id='everglow' width="120px"></a>
     
     
                 <div class="btn-navigation">
@@ -31,12 +37,7 @@
                 </div>
             </div>
 
-            <form action="" method="post">
-                <div class="intern-form">
-                    <input type="text" name="search" placeholder="Search">
-                    <button id="searchbutton" type="submit" name="submit-search"><img src="images/utilitaires/search.svg" width="35px"></button>                    
-                </div>
-            </form>   
+ 
         <?php
             if ( isset ($_SESSION['user_data'] ) )
             {

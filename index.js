@@ -2,28 +2,8 @@
 //     alert('hey');
 // }
 // );
-
-
-// //pour la nav bar en mobile/ipad
-
-
-// window.addEventListener('resize', function() {
-// 	// viewport and full window dimensions will change, resize will help me detect the change in width
-// 	var viewport_width = window.innerWidth;
-
-//     if(viewport_width > 820)
-//     {
-//         var burger = document.getElementById('menu');
-//         burger.style.visibility = 'hidden';
-//     }
-//     else 
-//     {
-//         burger.style.visibility = 'visible';
-//     }
-// });
-
-
 document.addEventListener('DOMContentLoaded', function loaded() {
+
             //NAV BURGER
     
         var buttonBurger = document.querySelectorAll("div[class^='btn-']");
@@ -37,10 +17,13 @@ document.addEventListener('DOMContentLoaded', function loaded() {
         var form = document.querySelector('form');
         
         var images = document.querySelectorAll('img');
-        var image = images[2];
+        var image = images[3];
         var img = images[0];
+        // console.log(images);
 
+        var buttonForm = document.getElementById("searchbutton");
 
+        //BOUTONS LAYOUT MOBILE
     buttonNav.addEventListener("click", function(){
         //après avoir récupéré l'image qui m'intéresse plus haut, je lui dis que si je clique dessus, l'image change sinon ça revient à son image initiale
         //en plus de rajouter avec le toggle(propriété qui rajoute et retire) une classe css .open située à ma nav -> c'est cette classe qui a le transform 0% et donc permet de voir le menu
@@ -63,6 +46,7 @@ document.addEventListener('DOMContentLoaded', function loaded() {
         }
         form.classList.toggle("open");
     });
+
 
 //pour le pop up à l'accueil
    var close = document.getElementById('close');

@@ -45,8 +45,8 @@ class ImagesController extends Controller
     {
         if(isset($_POST['submit']))
         {
-                var_dump($_POST['id_image']);
-                var_dump($_FILES['productImg']);
+            // var_dump($_POST['id_image']);
+            // var_dump($_FILES['productImg']);
             $file=$_FILES['productImg'];
             $fileName=$_FILES['productImg']['name'];
             $fileType=$_FILES['productImg']['type'];
