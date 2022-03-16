@@ -70,7 +70,7 @@ class Router
                     elseif ($url[1] == "profil")
                     {
                         // Si une session user existe on affiche sinon redirection
-                        if (!empty ($_SESSION['user_data']))
+                        if (isset ($_SESSION['user_data']))
                         {
                             $controllerName::updateProfil();
                         } else {
@@ -193,6 +193,9 @@ class Router
                             ImagesController::uploadImage();
                         }
                     }
+                }
+                if ( $controllerName == "ConcoursController"){
+                    $controllerName::concoursRegister();
                 }
             }
         }      

@@ -1,10 +1,13 @@
 <?php 
 
 if ( empty ( $user)) {
+    
     header('location: login');
 } else {
 ?>
-    
+    <script type="text/javascript">
+        console.log("ok")
+    </script>
     <form class="form" action="" method="post">
         <h2 class="sous-titre">Vos informations personnelles</h2>
         <div class="form-group">

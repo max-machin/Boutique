@@ -6,7 +6,7 @@
         <input type="email" name="email"required>
         <label for="email">Email *</label>
     </div>
-
+    <p><?= $errorMail ?></p>
     <button class="submit" type="submit" name="sendPassword">Récupérer mot de passe</button>
         
 </form>

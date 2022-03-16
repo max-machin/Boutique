@@ -377,6 +377,7 @@ class UsersController extends Controller
      */
     public static function forgotPassword()
     {
+        $errorMail = "";
         // Envoi du formulaire
         if ( isset ( $_POST['sendPassword'] ) )
         {
@@ -419,17 +420,17 @@ class UsersController extends Controller
             
                 if(!$mail->Send())
                 {
-                    echo "Il y a eu une erreur lors de l'envoi de l'email.";
+                    $errorMail =  "Il y a eu une erreur lors de l'envoi de l'email.";
                     echo 'Mailer error: ' . $mail->ErrorInfo;
                 }
                 else
                 {
-                    echo 'Le mail a été envoyer avec succés. Consultez vos courriels indésirables';
+                    $errorMail = 'Le mail a été envoyer avec succés. Consultez vos courriels indésirables';
                 }
 
             }
         }
-        Renderer::render('users/forgotPassword');
+        Renderer::render('users/forgotPassword', compact('errorMail'));
     }
     /**
      * Fonction d'affichage de la commande user en fonction du panier user 
