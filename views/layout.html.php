@@ -17,26 +17,27 @@
         <div class="container_promo">
             <p>15% de réduction en profitant du code : <?= codePromo ?></p>
         </div>
-        <div class="top-header">
-            <div class="top-before-animation">
-                <div class="btn-search">
-                    <img src="images/utilitaires/search.svg" width="40px">
-                </div>             
-
-                <a href="accueil"><img src="images/utilitaires/Everglow.png" width="120px"></a>
-    
-    
-                <div class="btn-navigation">
-                    <img src="images/utilitaires/menu.svg" width="40px">
-                </div>
-            </div>
-
+        <div class="top-header">           
             <form action="" method="post">
                 <div class="intern-form">
                     <input type="text" name="search" placeholder="Search">
                     <button id="searchbutton" type="submit" name="submit-search"><img src="images/utilitaires/search.svg" width="35px"></button>                    
                 </div>
-            </form>   
+            </form>  
+            <div class="top-before-animation">
+                <div class="btn-search">
+                    <img src="images/utilitaires/search.svg" width="40px">
+                </div>             
+
+                <a href="accueil"><img src="images/utilitaires/Everglow.png" id='everglow' width="120px"></a>
+    
+    
+                <div class="btn-navigation">
+                    <img id='menu' src="images/utilitaires/menu.svg" width="40px">
+                </div>
+            </div>
+
+ 
         <?php
             if ( isset ($_SESSION['user_data'] ) )
             {
@@ -60,18 +61,18 @@
             <?php
             }
             ?>           
-            </div>
+        </div>
 
-            <div class="bottom-header">
-                <nav class="categories">
-                    <ul>
-                        <li><a href="<?= urlLaura ?>">Our products</a></li>
-                        <li><a href="<?= urlLaura ?>">Skincare</a></li>
-                        <li><a href="<?= urlLaura ?>">Make up</a></li>
-                        <li><a href="<?= urlLaura ?>">Discover your skin</a></li>
-                    </ul>
-                </nav>
-            </div> 
+        <div class="bottom-header">
+            <nav class="categories">
+                <ul>
+                    <li><a href="<?= urlLaura ?>">Our products</a></li>
+                    <li><a href="<?= urlLaura ?>">Skincare</a></li>
+                    <li><a href="<?= urlLaura ?>">Make up</a></li>
+                    <li><a href="<?= urlLaura ?>">Discover your skin</a></li>
+                </ul>
+            </nav>
+        </div> 
     </header>
 
     <div class="flex-wrapper">            
