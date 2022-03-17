@@ -32,7 +32,9 @@
         <h2>Our Bestsellers</h2>
         
     </section>
-    <section>
+    <section class="accueil-instagram">
+        <hr>
+        <h2>Instagram with you <img src="images/utilitaires/like.png" width="20px"></h2>
         
     </section>
 </article>
