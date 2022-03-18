@@ -571,10 +571,26 @@ hr {
     border: 0;
     height: 0;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3); 
 }
 
 
+.titre-instagram {
+    display: flex;
+    flex-direction: row;
+    justify-content: center; 
+    padding-top: 3%;
+    font-family: SousTitreouAccent;
+}
+
+.titre-instagram img {
+    margin-left: 10px;
+    margin-top: 8px;
+    height: 20px;
+}
+
+
+/* SELECT commands.id_product, products.id, products.name, products.price, images.url_image FROM `commands` INNER JOIN products ON products.id = commands.id_product INNER JOIN images ON products.id = images.id_product GROUP BY `id_product` ORDER BY COUNT(*) DESC LIMIT 6; */
 
 
 

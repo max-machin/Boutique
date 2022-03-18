@@ -26,6 +26,7 @@
             </p>
             <button>Join the movement</button>
         </div>
+        
     </section>
     <section class="accueil-bestsellers">
         <hr>
@@ -34,7 +35,7 @@
     </section>
     <section class="accueil-instagram">
         <hr>
-        <h2>Instagram with you <img src="images/utilitaires/like.png" width="20px"></h2>
+        <div class='titre-instagram'><h2>Instagram with you</h2> <img src="images/utilitaires/like.png"></div>
         
     </section>
 </article>
