@@ -27,36 +27,43 @@
             
             ?>
 
-            <article class="bagProduct">
-                <div class="cont">
-                    <p><a class="href" href="<?= url ?>products/<?= $bagProduct['id'] ?>"><?= $bagProduct['name'] ?></a></p>
-                    <img src="<?= url ?>Uploads/<?= $imagesColor[0] ?>" alt="" width="200px" height="260px">
+            <article class="bagProduct">   
                     <form action="" method="post">
-                        <div class="flex">
-            
-                            <label class="color" for="<?= $bagProduct['color_name'] ?>" style="background-color: #<?= $bagProduct['code'] ?>">
-                                    
-                            </label>
-                            <p> <?= $bagProduct['price'] ?>€/u</p>
-                            <select name="quantityColors" id="">
-                                <option value="<?= $bagProduct['quantity_product']?>" selected > x<?= $bagProduct['quantity_product']?></option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select>
-                            <input type="hidden" name="id_color" value="<?= $bagProduct['id_color'] ?>">
-                            <input type="hidden" name="idProductColors" value=" <?= $bagProduct['id'] ?>">
-                            <input type="submit" name="submitQuantityColors" value="⟳">
+                        <div class="flex productbag">
+                            <img src="<?= url ?>Uploads/<?= $imagesColor[0] ?>" alt="" width="120px" height="150px">
 
-                        <h3><?= $productsPrice ?>€</h3>
-                        
-                            <input type="hidden" name="idProductColors" value="<?= $bagProduct['id'] ?>"/>           
-                            <button class="#" type="submit" name="deleteFromBagColors">&#x2715</button>
+                            <div>
+                                <div class="flex intproductbag">
+                                    <p><a  href="<?= url ?>products/<?= $bagProduct['id'] ?>"><?= $bagProduct['name'] ?></a></p>
+                                    <label class="color" for="<?= $bagProduct['color_name'] ?>" style="background-color: #<?= $bagProduct['code'] ?>">
+                                            
+                                    </label>
+                                </div>
+                                <div class="flex intproductbag">
+                                    
+                                    <select name="quantityColors" id="">
+                                        <option value="<?= $bagProduct['quantity_product']?>" selected > x<?= $bagProduct['quantity_product']?></option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                    <input type="hidden" name="id_color" value="<?= $bagProduct['id_color'] ?>">
+                                    <input type="hidden" name="idProductColors" value=" <?= $bagProduct['id'] ?>">
+                                    <input type="submit" name="submitQuantityColors" value="⟳">
+                                    <input type="hidden" name="idProductColors" value="<?= $bagProduct['id'] ?>"/>           
+                                    <button class="#" type="submit" name="deleteFromBagColors">&#x2715</button>
+                                
+                                    <div>
+                                        <p> <?= $bagProduct['price'] ?>€</p>
+                                        <h4><?= $productsPrice ?>€</h4>
+                                    </div>
+                                    
+                                </div>
+                            </div>
                         </div>
                     </form>
-                </div>
             </article>
         
             <?php
@@ -76,31 +83,42 @@
             ?>
 
             <article class="bagProduct">
-                <div class="cont">
-                    <p><a class="href" href="<?= url ?>products/<?= $product['id'] ?>"><?= $product['name'] ?></a></p>
-                    <img src="<?= url ?>Uploads/<?= $images[0] ?>" alt="" width="200px" height="260px" >
+                    
+                    
                     <form action="" method="post">
-                        <div class="flex">
-                           
-                            <p> <?= $product['price'] ?>€/u</p>
-                            <select name="quantity" id="">
-                                <option value="<?= $product['quantity_product']?>" selected > x : <?= $product['quantity_product']?></option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select>
-                            <input type="hidden" name="idProduct" value=" <?= $product['id'] ?>">
-                            <input type="submit" name="submitQuantity" value="⟳">
-                        
-                            <h3><?= $productsPrice ?>€</h3>
+                        <div class="flex productbag">
+                       
+                            <img src="<?= url ?>Uploads/<?= $images[0] ?>" alt="" width="120px" height="150px" >
+                            <div>
+                                <div class="flex intproductbag">
+                                    <p><a href="<?= url ?>products/<?= $product['id'] ?>"><?= $product['name'] ?></a></p>
+                                </div>
 
-                            <input type="hidden" name="idProduct" value="<?= $product['id'] ?>"/>           
-                            <button class="#" type="submit" name="deleteFromBag">&#x2715</button>
+                                <div class="flex intproductbag">
+                                    
+                                    <select name="quantity" id="">
+                                    <option value="<?= $product['quantity_product']?>" selected > x<?= $product['quantity_product']?></option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                    <input type="hidden" name="idProduct" value=" <?= $product['id'] ?>">
+                                    <input type="submit" name="submitQuantity" value="⟳">
+
+                                    <input type="hidden" name="idProduct" value="<?= $product['id'] ?>"/>           
+                                    <button class="#" type="submit" name="deleteFromBag">&#x2715</button>
+                                    <div>
+                                        <p> <?= $product['price'] ?>€</p>
+                                        <h4><?= $productsPrice ?>€</h4>  
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            
                         </div>
                     </form>
-                </div>
             </article>
             
             <?php

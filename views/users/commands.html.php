@@ -37,17 +37,24 @@ if ( isset ($_SESSION['user_data'] ))
 
             ?>
             <section class="command txt-center">
-                <div class="cont">
-                    <h3 class="sous-titre"><?= $productColors['name'] ?></h3>
-                    <img src="<?= url ?>Uploads/<?= $imagesColor[0] ?>" alt="" width="200px" height="260px">
+                <article class="flex commandproduct">
+                    <img src="<?= url ?>Uploads/<?= $imagesColor[0] ?>" alt="" width="120px" height="150px">
 
-                    <article class="produit flex txt-center">
-                        <label for="color" name="color" class="color" style="background-color: #<?= $productColors['code'] ?>"> </label>
-                        <p> <?= $productColors['price'] ?>€/u</p>
-                        <p>x <?= $productColors['quantity_product'] ?></p>
-                        <h3><?= $productPrice ?>€</h3>
-                    </article>
-                </div>
+                    <div>
+                        <div class="flex intcommandPorduct">
+                            <p><a href="products/<?= $productColors['id'] ?>" ><?= $productColors['name'] ?></a></p>
+                            <label for="color" name="color" class="color" style="background-color: #<?= $productColors['code'] ?>"> </label>
+                        </div>
+                        
+                        
+                        <article class="produit flex txt-center">
+                            
+                            <p> <?= $productColors['price'] ?>€/u</p>
+                            <p>x <?= $productColors['quantity_product'] ?></p>
+                            <h3><?= $productPrice ?>€</h3>
+                        </article>
+                    </div>
+                </article>
             <?php
             }
             // affichage des produits sans couleur
@@ -72,15 +79,20 @@ if ( isset ($_SESSION['user_data'] ))
                 $commandQuantity += $product['quantity_product'];
 
             ?>
-                <div class="cont">
-                    <h3 class="sous-titre"><?= $product['name'] ?></h3>
-                    <img src="<?= url ?>Uploads/<?= $images[0] ?>" alt="" width="200px" height="260px">
+            <article class="flex commandproduct">
+                <img src="<?= url ?>Uploads/<?= $images[0] ?>" alt="" width="120px" height="150px">
+                <div>
+                    <div class="flex intcommandPorduct">
+                       <p><a href="products/<?= $product['id'] ?>"><?= $product['name'] ?></a></p>
+                    </div>
+                    
                     <article class="produit flex">
                         <p> <?= $product['price'] ?>€/u</p>
                         <p>x <?= $product['quantity_product'] ?></p>
                         <h3><?= $productPrice ?>€</h3>
                     </article>
                 </div>
+            </article>
             <?php
             }
             ?> 
@@ -150,7 +162,7 @@ if ( isset ($_SESSION['user_data'] ))
                     </div>
                     
 
-                    <h2>Total (<?= $commandQuantity ?> articles) : </h2>
+                    <h2>Total <i class="help">(<?= $commandQuantity ?> articles)</i> : </h2>
 
                     <input type="text" name="prix" id="prix" value="<?= $commandPrice ?>€" readonly><br>
                     <button class="submit"name="paiement_button">Procédez au paiement</button><br>
@@ -166,7 +178,7 @@ if ( isset ($_SESSION['user_data'] ))
             // affichage des produits avec couleur
             foreach ($commandColors as $productColor)
             { 
-                $images = explode(",",$productColor['url_image']);
+                $imagesColor = explode(",",$imagesColors['url_image']);
                 /**
                  * On calcule le prix total pour un produit : prix unitaire * quantité
                  * On additione tous les prix totaux au total de la commandes
@@ -178,24 +190,26 @@ if ( isset ($_SESSION['user_data'] ))
 
             ?>
             <section class="command txt-center">
-                <div class="cont">
-                    <h3 class="sous-titre"><?= $productColor['name'] ?></h3>
-                    <img src="<?= url ?>Uploads/<?= $images[0] ?>" alt="" width="200px" height="260px">
-                    
-
-                    <article class="produit flex">
-                        <label for="color" name="color" class="color" style="background-color: #<?= $productColor['code'] ?>"> </label>
-                        <p> <?= $productColor['price'] ?>€/u</p>
-                        <p>x <?= $productColor['quantity_product'] ?></p>
-                        <h3><?= $productPrice ?>€</h3>
-                    </article>   
-                </div>
+                <article class="flex commandproduct">
+                        <img src="<?= url ?>Uploads/<?= $imagesColor[0] ?>" alt="" width="120px" height="150px">
+                        <div>
+                            <div class="flex intcommandPorduct">
+                               <p><a href="products/<?= $productColor['id']?>"><?= $productColor['name'] ?></a></p>
+                                <label for="color" name="color" class="color" style="background-color: #<?= $productColor['code'] ?>"> </label>
+                            </div>
+                            <article class="produit flex">
+                                <p> <?= $productColor['price'] ?>€</p>
+                                <p>x <?= $productColor['quantity_product'] ?></p>
+                                <h3><?= $productPrice ?>€</h3>
+                            </article>  
+                        </div> 
+                </article>
             <?php
             }
             // Affichage des produits sans COULEUR
             foreach ($command as $product)
             { 
-                $images = explode(",",$product['url_image']);
+                $images = explode(",",$images['url_image']);
                 /**
                  * On calcule le prix total pour un produit : prix unitaire * quantité
                  * On additione tous les prix totaux au total de la commandes
@@ -205,15 +219,21 @@ if ( isset ($_SESSION['user_data'] ))
                 $commandPrice += $productPrice;
                 $commandQuantity += $product['quantity_product'];
             ?>
-            <div class="cont">
-                <h3 class="sous-titre"><?= $product['name'] ?></h3>
-                <img src="<?= url ?>Uploads/<?= $images[0] ?>" alt="" width="200px" height="260px">
-                <article class="produit flex">
-                    <p> <?= $product['price'] ?>€/u</p>
-                    <p>x <?= $product['quantity_product'] ?></p>
-                    <h3><?= $productPrice ?>€</h3>
-                </article>  
-            </div>
+            <article class=" flex commandproduct">
+                <img src="<?= url ?>Uploads/<?= $images[0] ?>" alt="" width="120px" height="150px">
+                <div>
+                    <div class="flex intcommandPorduct">
+                       <p><a href="products/<?= $product['id'] ?>"><?= $product['name'] ?></a></p>
+                    </div>
+                    
+                    
+                    <article class="produit flex">
+                        <p> <?= $product['price'] ?>€</p>
+                        <p>x <?= $product['quantity_product'] ?></p>
+                        <h3><?= $productPrice ?>€</h3>
+                    </article> 
+                </div> 
+            </article>
             <?php
             }
             ?>
@@ -281,7 +301,7 @@ if ( isset ($_SESSION['user_data'] ))
                     <label for="facturation">Email de facturation *</label>
                 </div>
 
-                    <h2>Total (<?= $commandQuantity ?> articles) : </h2>
+                    <h2>Total <i class="help">(<?= $commandQuantity ?> articles) </i> : </h2>
 
                     <input type="text" name="prix" id="prix" value="<?= $commandPrice ?>€" readonly><br>
                     <button class="submit"name="paiement_button">Procédez au paiement</button><br>
