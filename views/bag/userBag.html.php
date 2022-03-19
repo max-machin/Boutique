@@ -1,4 +1,4 @@
-<section class="bag txt-center">
+<section class="bag">
     <h1 class="sous-titre">Mon panier</h1>
     <?php
 
@@ -30,9 +30,9 @@
             <article class="bagProduct">   
                     <form action="" method="post">
                         <div class="flex productbag">
-                            <img src="<?= url ?>Uploads/<?= $imagesColor[0] ?>" alt="" width="120px" height="150px">
+                            <img src="<?= url ?>Uploads/<?= $imagesColor[0] ?>" alt="">
 
-                            <div>
+                            <div class="inbag">
                                 <div class="flex intproductbag">
                                     <p><a  href="<?= url ?>products/<?= $bagProduct['id'] ?>"><?= $bagProduct['name'] ?></a></p>
                                     <label class="color" for="<?= $bagProduct['color_name'] ?>" style="background-color: #<?= $bagProduct['code'] ?>">
@@ -55,7 +55,7 @@
                                     <input type="hidden" name="idProductColors" value="<?= $bagProduct['id'] ?>"/>           
                                     <button class="#" type="submit" name="deleteFromBagColors">&#x2715</button>
                                 
-                                    <div>
+                                    <div class="bagprice">
                                         <p> <?= $bagProduct['price'] ?>€</p>
                                         <h4><?= $productsPrice ?>€</h4>
                                     </div>
@@ -88,8 +88,8 @@
                     <form action="" method="post">
                         <div class="flex productbag">
                        
-                            <img src="<?= url ?>Uploads/<?= $images[0] ?>" alt="" width="120px" height="150px" >
-                            <div>
+                            <img src="<?= url ?>Uploads/<?= $images[0] ?>" alt="">
+                            <div class="inbag">
                                 <div class="flex intproductbag">
                                     <p><a href="<?= url ?>products/<?= $product['id'] ?>"><?= $product['name'] ?></a></p>
                                 </div>
@@ -135,7 +135,7 @@
             </article>
             
             <form action="" method="post">
-                <input class="submit" type="submit" name="command" value="Passez commande">
+                <input class="submit submitbag" type="submit" name="command" value="Passez commande">
             </form>
 
         <?php

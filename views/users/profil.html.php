@@ -5,49 +5,51 @@ if ( empty ( $user)) {
     header('location: login');
 } else {
 ?>
-    <form class="form" action="" method="post">
-        <h2 class="sous-titre">Vos informations personnelles</h2>
-        <div class="form-group">
-            <input id="email" type="email" name="email" value="<?= $user['email'] ?>" required>
-            <label for="email">E-mail * (facturation)</label>
-        </div>
-        <div class="form-group">
-            <input id="surname" type="text" name="surname" value="<?= $user['prenom'] ?>" required>
-            <label for="surname">Prénom *</label>
-        </div>
-        <div class="form-group">
-            <input id="name" type="text" name="name" value="<?= $user['nom'] ?>" required>
-            <label for="name">Nom *</label>
-        </div>
-        <input class="submit submit-profil" type="submit" name="submit" value="Modifier infos">
-    </form>
+    <h2 class="txt-center sous-titre">Vos informations personnelles</h2>
+    <article class="articleProfil">
+        <form class="form" action="" method="post">
+            
+            <div class="form-group">
+                <input id="email" type="email" name="email" value="<?= $user['email'] ?>" required>
+                <label for="email">E-mail * (facturation)</label>
+            </div>
+            <div class="form-group">
+                <input id="surname" type="text" name="surname" value="<?= $user['prenom'] ?>" required>
+                <label for="surname">Prénom *</label>
+            </div>
+            <div class="form-group">
+                <input id="name" type="text" name="name" value="<?= $user['nom'] ?>" required>
+                <label for="name">Nom *</label>
+            </div>
+            <input class="submit submit-profil" type="submit" name="submit" value="Modifier infos">
+        </form>
 
-    
-    <form class="form" action="" method="post" style="display: <?= $display1 ?>">
-    <h3>Mot de passe</h3>
-        <div class="form-group">
-            <input id="oldPassword" type="password" name="oldPassword" required>
-            <label for="oldPassword">Ancien mot de passe *</label>
-            <span><?= $error_old_password ?></span>
-        </div>
-        <input class="submit submit-profil" type="submit" name="subPassword" value="Confirmer password">
-    </form>
+        
+        <form class="form" action="" method="post" style="display: <?= $display1 ?>">
+        <h3>Mot de passe</h3>
+            <div class="form-group">
+                <input id="oldPassword" type="password" name="oldPassword" required>
+                <label for="oldPassword">Ancien mot de passe *</label>
+                <span><?= $error_old_password ?></span>
+            </div>
+            <input class="submit submit-profil" type="submit" name="subPassword" value="Confirmer password">
+        </form>
 
-    <form class="form" action="" method="post" style="display: <?= $display2 ?>">
-    <h3>Mot de passe</h3>
-        <div class="form-group">
-            <input id="newPassword" type="password" name="newPassword" required>
-            <label for="newPassword">Nouveau mot de passe *</label>
-            <span><?= $error_new_password ?></span>
-        </div>
-        <div class="form-group">
-            <input id="validPassword" type="password" name="validPassword" required>
-            <label for="validPassword">Valider mot de passe *</label>
-            <span><?= $error_validPassword ?></span>
-        </div>
-        <input class="submit submit-profil" type="submit" name="subNewPassword" value="Modifier password">
-    </form>
-
+        <form class="form" action="" method="post" style="display: <?= $display2 ?>">
+        <h3>Mot de passe</h3>
+            <div class="form-group">
+                <input id="newPassword" type="password" name="newPassword" required>
+                <label for="newPassword">Nouveau mot de passe *</label>
+                <span><?= $error_new_password ?></span>
+            </div>
+            <div class="form-group">
+                <input id="validPassword" type="password" name="validPassword" required>
+                <label for="validPassword">Valider mot de passe *</label>
+                <span><?= $error_validPassword ?></span>
+            </div>
+            <input class="submit submit-profil" type="submit" name="subNewPassword" value="Modifier password">
+        </form>
+    </article>
     <h2 class="sous-titre userCommand">Vos dernières commandes</h2>
 
 <?php 

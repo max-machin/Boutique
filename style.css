@@ -91,6 +91,12 @@ picture {
     padding: 0;
 }
 
+html {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
 /* Set up the body */
 
 body {
@@ -479,6 +485,8 @@ footer {
 
 --------------------------------------------------- */
 
+    
+
 .pop-up {
     background-color: rgb(var(--clr-white));
     width: 100%;
@@ -494,17 +502,39 @@ footer {
     display: none;
 }
 
-.pop-up img {
-    margin-left: 15%;
+.pop-up article{
+    justify-content: center;
+}
+
+.pop-up article h3 {
+    margin-top: 3vh;
+    font-family: "SousTitreouAccent";
 }
 
 .pop-up h2 {
-    font-family: SousTitreouAccent;
+    font-family: "SousTitreouAccent";
     text-align: center;
+    margin-bottom:3vh;
 }
 
 .pop-up p {
-    text-align: justify;
+    font-family: "loremIpsum";
+    font-weight: 500;
+    /* text-align: justify; */
+}
+
+.pop-up p i {
+    font-family: "loremIpsum";
+    font-weight: 900;
+    text-decoration: underline;
+}
+
+.pop-up img {
+    height: 200px;
+}
+
+.pop-up .txt-center img {
+    margin: auto;
 }
 
 .pop-up input {
@@ -521,15 +551,6 @@ footer {
     border: none;
     background-color: transparent;
 }
-
-
-
-
-
-
-
-
-
 
 
 .txt-center {
@@ -594,6 +615,7 @@ footer {
     padding: 20px 0;
     width: 75%;
     max-width: 100%;
+    justify-content: center;
     margin: auto;
 }
 
@@ -773,13 +795,17 @@ footer {
 --------------------------------------------------- */
 .bag h1 {
     font-size: 2em;
+    text-align: center;
 }
 
 .bagProduct  {
     font-family: "SousTitreouAccent";
 }
 
-
+.bagProduct img {
+    height: 150px;
+    width: 120px;
+}
 .bagProduct .productbag{
     justify-content: space-between;
     /* margin: 0; */
@@ -819,11 +845,12 @@ footer {
 }
 
 .bagPrice {
-    justify-content: center;
+    justify-content: right;
     align-items: center;
 }
 
 .bagPrice div{
+    justify-content: right;
     font-size: 2vh;
     font-family: "SousTitreouAccent";
     font-weight: 600;
@@ -840,6 +867,12 @@ footer {
     font-family: "loremIpsum";
     font-weight: lighter;
     color: rgb(145, 145, 145);
+}
+
+.bag .submitbag {
+    position: relative;
+    float: right;
+    margin-bottom: 5vh;
 }
 
 
@@ -963,5 +996,95 @@ i {
 	border: none;
 }
 
+@media (min-width: 821px) {
 
+    
+/* ------------------------------------------------
+
+                FORMULAIRES
+
+--------------------------------------------------- */
+
+    .form {
+        text-align: center;
+    }
+    .form-group input{
+        text-align: center;
+        display:initial;
+    }
+
+    .form-group label {
+        left: 36%;
+    }
+
+/* ------------------------------------------------
+
+                USER PROFIL
+
+--------------------------------------------------- */
+    .articleProfil {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .articleProfil .form {
+        max-width: 50vh;
+        width: 100%;
+    }
+
+    .articleProfil .form label {
+        left: 0;
+    }
+
+    .articleProfil .form h3 {
+        font-family: "SousTitreouAccent";
+    }
+
+    /* ------------------------------------------------
+
+                BAG
+
+--------------------------------------------------- */
+
+    .inbag{
+        display: flex;
+        align-items: center;
+        gap: 10vh;
+    }
+
+    .intproductbag {
+        font-size: 2.7vh;
+        gap: 10vh;
+    }
+
+    .intproductbag a {
+        font-size: 2.3vh;
+    }
+
+    .intproductbag a:hover {
+        text-decoration: underline;
+    }
+
+    .bagProduct .flex button, .bagProduct .flex input {
+        font-size: 3vh; 
+    }
+
+    .intproductbag:nth-child(1) {
+        margin: 0;
+    }
+
+    .bagPrice div {
+        font-size: 3vh;
+    }
+
+    .price {
+        font-size: 4vh;
+    }
+
+    .bagProduct img {
+        height:220px;
+        width: 180px;
+    }
+}
 
