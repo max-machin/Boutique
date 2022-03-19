@@ -5,9 +5,6 @@ if ( empty ( $user)) {
     header('location: login');
 } else {
 ?>
-    <script type="text/javascript">
-        console.log("ok")
-    </script>
     <form class="form" action="" method="post">
         <h2 class="sous-titre">Vos informations personnelles</h2>
         <div class="form-group">
@@ -270,6 +267,24 @@ if ( empty ( $user)) {
         <?php
         }
         ?>
+
+    <section  class="txt-center section-favoris">
+        <h2 class="sous-titre">Vos produits favoris</h2>
+        <?php
+            foreach($userProducts as $userProduct)
+            {
+                $images = explode(",", $userProduct['url_image']);
+        ?>
+            <article class="text-center produits-favoris">
+                <a class="href" href="<?= url ?>products/<?= $userProduct['id_product'] ?>"><?= $userProduct['product_name'] ?></a>
+                <img src="<?= url?>uploads/<?=$images[0]?>" alt="" width="200px" height="250px" style="margin: auto">
+                
+            </article>
+        <?php
+            }
+        ?>
+        
+    </section>
        
     <section class="txt-center section-comment">
         <h2 class="sous-titre">Vos commentaires</h2>

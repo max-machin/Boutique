@@ -337,7 +337,7 @@ SINON rajouter avant container une autre class/un autre mot donc et apr√®s le d√
 .form-group {
     position: relative;
     padding: 20px 0;
-    width: 70%;
+    width: 75%;
     max-width: 100%;
     margin: auto;
 }
@@ -349,6 +349,7 @@ SINON rajouter avant container une autre class/un autre mot donc et apr√®s le d√
     font-size: 16px;
     padding: 10px 0;
     width: 100%;
+    max-width: 40vh;
 }
 
 .form-group label {
@@ -460,6 +461,18 @@ SINON rajouter avant container une autre class/un autre mot donc et apr√®s le d√
     justify-self: center;
 }
 
+/* USER PROFIL PRODUCTS */
+.section-favoris {
+    margin-top: 3vh;
+}
+
+.href {
+    color: black;
+    font-family: "SousTitreouAccent";
+    font-weight:800;
+    text-decoration: underline;
+}
+
 /* USER PROFIL COMMENT */
 
 .section-comment {
@@ -507,15 +520,23 @@ SINON rajouter avant container une autre class/un autre mot donc et apr√®s le d√
     font-size: 2em;
 }
 
-.bagProduct {
+.bagProduct  {
     font-family: "SousTitreouAccent";
 }
 
-.bagProduct a {
+.bagProduct img {
+    margin: 0 auto;
+}
+
+.bagProduct label {
+    margin: 0;
+}
+
+/* .bagProduct a {
     font-size: 2.7vh;
     font-weight: 600;
     color: rgb(var(--clr-black));
-}
+} */
 
 .bagProduct .flex {
     justify-content: center;
@@ -540,6 +561,7 @@ SINON rajouter avant container une autre class/un autre mot donc et apr√®s le d√
     font-family: "SousTitreouAccent";
     font-weight: 600;
     line-height: .7vh;
+    margin: 0;
 }
 
 .price {
@@ -564,14 +586,41 @@ SINON rajouter avant container une autre class/un autre mot donc et apr√®s le d√
     display: block;
 
 } */
+
+.command {
+    font-family: "loremIpsum";
+}
+
 .produit {
     font-family: "SousTitreouAccent";
     align-items: center;
     justify-content:space-evenly;
 }
 
-.command {
-    font-family: "loremIpsum";
+.produit label {
+    margin: 0;
+}
+
+.command img {
+    margin: auto;
+}
+
+.command h2 {
+    margin-top: 5vh;
+}
+
+.command .sous-titre {
+    text-decoration: underline;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+}
+
+.cont{
+    margin: 1vh 0;
+    padding: 1vh;
+    border-radius: 6px;
+    background-color:#f0f0f056;
+    color: black;
 }
 
 #prix {

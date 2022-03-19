@@ -26,7 +26,8 @@ class Router
             if(!empty($url[0]))
             {
                 if($url[0] == 'accueil'){ 
-                    Renderer::render('accueil');  
+                    Renderer::render('accueil'); 
+                    
                 }  
             }
             // Si on a un élément en url

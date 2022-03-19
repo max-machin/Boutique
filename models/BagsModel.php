@@ -106,7 +106,7 @@ class bagsModel extends Model
 
         $this->database = DataBase::getPdo(); 
 
-        $bag=$this->database -> prepare('SELECT products.id, products.name, products.price, bags.quantity_product, bags.id_color  FROM `products` INNER JOIN bags ON products.id= id_product WHERE id_user=:id_user AND bags.id_color IS null');
+        $bag=$this->database -> prepare('SELECT products.id, products.name, products.price, bags.quantity_product, bags.id_color FROM `products` INNER JOIN bags ON products.id= id_product WHERE id_user=:id_user AND bags.id_color IS null');
         $bag-> execute(['id_user'=>$id_user]);
         $resultBag=$bag->fetchAll();
 
@@ -158,6 +158,10 @@ class bagsModel extends Model
 
         return($resultBag);
         // var_dump($result);
+    }
+
+    public function findImages($id_user, $id_product){
+        return $this->requete("SELECT GROUP_CONCAT(images.url_image) AS url_image FROM bags INNER JOIN images on bags.id_product = images.id_product WHERE id_user = ? AND images.id_product = ?", array($id_user, $id_product))->fetch();
     }
     
 

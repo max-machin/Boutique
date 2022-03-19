@@ -1,4 +1,5 @@
 <h1 class="txt-center sous-titre">Validez votre commande</h1>
+<section class="content">
 <?php
 
 if ( isset ($_SESSION['user_data'] ))
@@ -16,6 +17,7 @@ if ( isset ($_SESSION['user_data'] ))
             // Affichage des produits avec COULEUR
             foreach ( $commandColors as $productColors)
             {
+                $imagesColor = explode(",", $imagesColors['url_image']);
 
                 // Prix total de chaque produit
                 $productPrice = $productColors['price'] * $productColors['quantity_product'];
@@ -35,22 +37,23 @@ if ( isset ($_SESSION['user_data'] ))
 
             ?>
             <section class="command txt-center">
+                <div class="cont">
+                    <h3 class="sous-titre"><?= $productColors['name'] ?></h3>
+                    <img src="<?= url ?>Uploads/<?= $imagesColor[0] ?>" alt="" width="200px" height="260px">
 
-                <h3 class="sous-titre"><?= $productColors['name'] ?></h3>
-                <label for="color" name="color" class="color" style="background-color: #<?= $productColors['code'] ?>"> </label>
-
-                <article class="produit flex txt-center">
-                    <p><?= $productColors['name'] ?></p>
-                    <p> <?= $productColors['price'] ?>€/u</p>
-                    <p>x <?= $productColors['quantity_product'] ?></p>
-                    <h3><?= $productPrice ?>€</h3>
-                </article>
+                    <article class="produit flex txt-center">
+                        <label for="color" name="color" class="color" style="background-color: #<?= $productColors['code'] ?>"> </label>
+                        <p> <?= $productColors['price'] ?>€/u</p>
+                        <p>x <?= $productColors['quantity_product'] ?></p>
+                        <h3><?= $productPrice ?>€</h3>
+                    </article>
+                </div>
             <?php
             }
             // affichage des produits sans couleur
             foreach ( $command as $product)
             {
-
+                $images = explode(",", $images['url_image']);
                 // Prix total de chaque produit
                 $productPrice = $product['price'] * $product['quantity_product'];
 
@@ -69,20 +72,21 @@ if ( isset ($_SESSION['user_data'] ))
                 $commandQuantity += $product['quantity_product'];
 
             ?>
-                <h3 class="sous-titre"><?= $product['name'] ?></h3>
-                <article class="produit flex">
-                    
-                    <p> <?= $product['price'] ?>€/u</p>
-                    <p>x <?= $product['quantity_product'] ?></p>
-                    <h3><?= $productPrice ?>€</h3>
-                </article>
-
+                <div class="cont">
+                    <h3 class="sous-titre"><?= $product['name'] ?></h3>
+                    <img src="<?= url ?>Uploads/<?= $images[0] ?>" alt="" width="200px" height="260px">
+                    <article class="produit flex">
+                        <p> <?= $product['price'] ?>€/u</p>
+                        <p>x <?= $product['quantity_product'] ?></p>
+                        <h3><?= $productPrice ?>€</h3>
+                    </article>
+                </div>
             <?php
             }
             ?> 
                 
                 <form class="form" action="paiement" method="post">
-                <h2 class="sous-titre">Choisir un mode de livraison</h2>
+                <h2 >Livraison</h2>
                 <?php
                 if ( $commandPrice < 50)
                 {
@@ -124,7 +128,6 @@ if ( isset ($_SESSION['user_data'] ))
                         </label>
                 
                 <form class="form" action="paiement" method="post">
-                <h2 class="sous-titre">Choisir un mode de livraison</h2>
                     <h3>Informations livraison</h3>
                     <div class="form-group">
                         <input type="text" name="adresse" id="adresse" placeholder="Adresse">
@@ -163,6 +166,7 @@ if ( isset ($_SESSION['user_data'] ))
             // affichage des produits avec couleur
             foreach ($commandColors as $productColor)
             { 
+                $images = explode(",",$productColor['url_image']);
                 /**
                  * On calcule le prix total pour un produit : prix unitaire * quantité
                  * On additione tous les prix totaux au total de la commandes
@@ -174,21 +178,24 @@ if ( isset ($_SESSION['user_data'] ))
 
             ?>
             <section class="command txt-center">
+                <div class="cont">
+                    <h3 class="sous-titre"><?= $productColor['name'] ?></h3>
+                    <img src="<?= url ?>Uploads/<?= $images[0] ?>" alt="" width="200px" height="260px">
+                    
 
-                <h3 class="sous-titre"><?= $productColor['name'] ?></h3>
-                <label for="color" name="color" class="color" style="background-color: #<?= $productColor['code'] ?>"> </label>
-
-                <article class="produit flex">
-                    <p> <?= $productColor['price'] ?>€/u</p>
-                    <p>x <?= $productColor['quantity_product'] ?></p>
-                    <h3><?= $productPrice ?>€</h3>
-                </article>   
-
+                    <article class="produit flex">
+                        <label for="color" name="color" class="color" style="background-color: #<?= $productColor['code'] ?>"> </label>
+                        <p> <?= $productColor['price'] ?>€/u</p>
+                        <p>x <?= $productColor['quantity_product'] ?></p>
+                        <h3><?= $productPrice ?>€</h3>
+                    </article>   
+                </div>
             <?php
             }
             // Affichage des produits sans COULEUR
             foreach ($command as $product)
             { 
+                $images = explode(",",$product['url_image']);
                 /**
                  * On calcule le prix total pour un produit : prix unitaire * quantité
                  * On additione tous les prix totaux au total de la commandes
@@ -198,20 +205,22 @@ if ( isset ($_SESSION['user_data'] ))
                 $commandPrice += $productPrice;
                 $commandQuantity += $product['quantity_product'];
             ?>
+            <div class="cont">
                 <h3 class="sous-titre"><?= $product['name'] ?></h3>
+                <img src="<?= url ?>Uploads/<?= $images[0] ?>" alt="" width="200px" height="260px">
                 <article class="produit flex">
                     <p> <?= $product['price'] ?>€/u</p>
                     <p>x <?= $product['quantity_product'] ?></p>
                     <h3><?= $productPrice ?>€</h3>
                 </article>  
-
+            </div>
             <?php
             }
             ?>
 
                 
                 <form class="form" action="paiement" method="post">
-                <h2 class="sous-titre">Choisir un mode de livraison</h2>
+                <h2>Livraison</h2>
                 <?php
                 if ( $commandPrice < 50)
                 {
@@ -291,6 +300,7 @@ if ( isset ($_SESSION['user_data'] ))
     // Si aucun produit n'est ajouté en panier 
     } else {
 ?>
+</section>
 
     <article>
         <p>Ajouter des produits pour procédez à une commande</p>

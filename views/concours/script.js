@@ -4,7 +4,7 @@ function compte_a_rebours()
     var compte_a_rebours = document.getElementById("compte_a_rebours");
 
     var date_actuelle = new Date();
-    var date_evenement = new Date("Mar 17 21:09:00 2022");
+    var date_evenement = new Date("Mar 18 21:09:00 2022");
     var total_secondes = (date_evenement - date_actuelle) / 1000;
 
     var prefixe = "Tirage au sort dans :  ";

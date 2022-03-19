@@ -76,7 +76,7 @@ class ConcoursController extends Controller
 
         // Date Anglaise donc prévoir une heure avant , doit être égale à l'heure de JS
         // ! SUR PLESK PAS BESOIN DE METTRE UNE HEURE DE MOINS
-        $dateDebut = new DateTime("16-03-2022 20:08:00");
+        $dateDebut = new DateTime("17-03-2022 20:08:00");
         $dateActuelle = new DateTime(date("d-m-Y H:i:s"));
 
         if($dateDebut < $dateActuelle){

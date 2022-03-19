@@ -270,23 +270,6 @@ class UsersController extends Controller
 
                 $_SESSION['user_data']['nom'] = $nom;
             }
-
-            // Même fonctionnement que pour l'E-mail
-            if ( !empty ( $_POST['adresse']))
-            {
-                // Sécurisation des données
-                $adresse = valid_data($_POST['adresse']);
-
-                $users = $model
-
-                    ->setId($_SESSION['user_data']['id'])
-                    ->setAdresse($adresse);
-
-                    
-                $users->Update($model);
-
-                $_SESSION['user_data']['adresse'] = $adresse;
-            }
         }
         // FORMULAIRE NOUVEAU MOT DE PASSE
         elseif ( isset ( $_POST['subPassword'])) 
@@ -356,6 +339,9 @@ class UsersController extends Controller
         $model = new CommandsModel();
         $userCommands = $model->findCommand($_SESSION['user_data']['id']);
 
+        $products = new FavorisModel();
+        $userProducts = $products->userFavoris($_SESSION['user_data']['id']);
+
         $comments = new CommentsModel();
         $userComments = $comments->userComments($_SESSION['user_data']['id']);
 
@@ -367,7 +353,7 @@ class UsersController extends Controller
         }
         
 
-        Renderer::render('users/profil' , compact('user', 'error_new_password', 'error_validPassword', 'error_old_password', 'display1' , 'display2', 'userCommands','userComments'));
+        Renderer::render('users/profil' , compact('user', 'error_new_password', 'error_validPassword', 'error_old_password', 'display1' , 'display2', 'userCommands', 'userProducts','userComments'));
     }
 
     /**
@@ -429,7 +415,7 @@ class UsersController extends Controller
                 }
 
             }
-        }
+        } 
         Renderer::render('users/forgotPassword', compact('errorMail'));
     }
     /**
@@ -445,8 +431,19 @@ class UsersController extends Controller
         $model = new BagsModel();
         $command = $model->checkBag($_SESSION['user_data']['id']);
 
+        foreach ($command as $table){
+            $model = new BagsModel();
+            $images = $model->findImages($_SESSION['user_data']['id'], $table['id']);
+        }
+
         $modelColors = new BagsModel();
         $commandColors = $modelColors->checkBagColors($_SESSION['user_data']['id']);
+
+        foreach ($commandColors as $tables){
+            $model = new BagsModel();
+            $imagesColors = $model->findImages($_SESSION['user_data']['id'], $tables['id']);
+          
+        }
         
         $find = new DeliveriesModel();
         $findDeliveries = $find->findAll();
@@ -480,7 +477,7 @@ class UsersController extends Controller
                 $error = "Veuillez remplir les informations de livraison";
             }
         }
-        Renderer::render('users/commands', compact('command','commandColors' ,'error', 'findDeliveries'));
+        Renderer::render('users/commands', compact('command','commandColors' ,'error', 'findDeliveries', 'images', 'imagesColors'));
     } 
 
     /**
