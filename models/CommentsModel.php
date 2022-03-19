@@ -134,6 +134,11 @@ class Commentsmodel extends Model
         return $this;
     }
 
+    public function findProductNote( $id_product)
+    {
+        return $this->requete("SELECT AVG(note) from comments INNER JOIN products ON comments.id_product = products.id WHERE comments.id_product = ?" , array($id_product))->fetchAll();
+    }
+
     /**
      * Requête de récupération des données des commentaires relatifs au produit
      *
@@ -153,6 +158,6 @@ class Commentsmodel extends Model
      */
     public function userComments($id_user)
     {
-        return $this->requete("SELECT products.id as id_product ,products.name, comments.comment, comments.note, comments.id, DATE_FORMAT(date, '%d/%m/%Y') AS 'datefr' , DATE_FORMAT(date, '%H:%i:%s') AS 'heurefr' FROM `comments` INNER JOIN `products` ON comments.id_product = products.id AND comments.id_user = $id_user ORDER BY date DESC")->fetchAll();
+        return $this->requete("SELECT products.id as id_product ,products.name, comments.comment, comments.note, comments.id, DATE_FORMAT(date, '%M/%d/%Y') AS 'datefr' , DATE_FORMAT(date, '%H:%i:%s') AS 'heurefr' FROM `comments` INNER JOIN `products` ON comments.id_product = products.id AND comments.id_user = $id_user ORDER BY date DESC")->fetchAll();
     }
 }

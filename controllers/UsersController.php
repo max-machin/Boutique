@@ -189,7 +189,7 @@ class UsersController extends Controller
     public static function disconnect()
     {
         session_destroy();
-        header('location: ../index');
+        header('location: ../accueil');
     }
 
     /**
@@ -270,23 +270,6 @@ class UsersController extends Controller
 
                 $_SESSION['user_data']['nom'] = $nom;
             }
-
-            // Même fonctionnement que pour l'E-mail
-            if ( !empty ( $_POST['adresse']))
-            {
-                // Sécurisation des données
-                $adresse = valid_data($_POST['adresse']);
-
-                $users = $model
-
-                    ->setId($_SESSION['user_data']['id'])
-                    ->setAdresse($adresse);
-
-                    
-                $users->Update($model);
-
-                $_SESSION['user_data']['adresse'] = $adresse;
-            }
         }
         // FORMULAIRE NOUVEAU MOT DE PASSE
         elseif ( isset ( $_POST['subPassword'])) 
@@ -356,6 +339,9 @@ class UsersController extends Controller
         $model = new CommandsModel();
         $userCommands = $model->findCommand($_SESSION['user_data']['id']);
 
+        $products = new FavorisModel();
+        $userProducts = $products->userFavoris($_SESSION['user_data']['id']);
+
         $comments = new CommentsModel();
         $userComments = $comments->userComments($_SESSION['user_data']['id']);
 
@@ -367,7 +353,7 @@ class UsersController extends Controller
         }
         
 
-        Renderer::render('users/profil' , compact('user', 'error_new_password', 'error_validPassword', 'error_old_password', 'display1' , 'display2', 'userCommands', 'userComments'));
+        Renderer::render('users/profil' , compact('user', 'error_new_password', 'error_validPassword', 'error_old_password', 'display1' , 'display2', 'userCommands', 'userProducts','userComments'));
     }
 
     /**
@@ -377,6 +363,7 @@ class UsersController extends Controller
      */
     public static function forgotPassword()
     {
+        $errorMail = "";
         // Envoi du formulaire
         if ( isset ( $_POST['sendPassword'] ) )
         {
@@ -419,17 +406,17 @@ class UsersController extends Controller
             
                 if(!$mail->Send())
                 {
-                    echo "Il y a eu une erreur lors de l'envoi de l'email.";
+                    $errorMail =  "Il y a eu une erreur lors de l'envoi de l'email.";
                     echo 'Mailer error: ' . $mail->ErrorInfo;
                 }
                 else
                 {
-                    echo 'Le mail a été envoyer avec succés. Consultez vos courriels indésirables';
+                    $errorMail = 'Le mail a été envoyer avec succés. Consultez vos courriels indésirables';
                 }
 
             }
-        }
-        Renderer::render('users/forgotPassword');
+        } 
+        Renderer::render('users/forgotPassword', compact('errorMail'));
     }
     /**
      * Fonction d'affichage de la commande user en fonction du panier user 
@@ -439,16 +426,28 @@ class UsersController extends Controller
      */
     public static function seeCommand()
     {
-
-
         $error = "";
 
         $model = new BagsModel();
         $command = $model->checkBag($_SESSION['user_data']['id']);
 
+        foreach ($command as $table){
+            $model = new BagsModel();
+            $images = $model->findImages($_SESSION['user_data']['id'], $table['id']);
+        }
+
         $modelColors = new BagsModel();
         $commandColors = $modelColors->checkBagColors($_SESSION['user_data']['id']);
+
+        foreach ($commandColors as $tables){
+            $model = new BagsModel();
+            $imagesColors = $model->findImages($_SESSION['user_data']['id'], $tables['id']);
+          
+        }
         
+        $find = new DeliveriesModel();
+        $findDeliveries = $find->findAll();
+
         // Si l'utilisateur n'est pas connecté alors on le redirige vers le login
         if ( empty ( $_SESSION['user_data']) )
         {
@@ -470,15 +469,15 @@ class UsersController extends Controller
                 }
             }
         } 
-
-        // Si les informations de livraisons de sont pas remplis
-        if ( empty ($_POST['adresse']) || empty ($_POST['ville']) || empty ($_POST['codePostale']) || empty ($_POST['facturation']))
+        if ( isset ($_POST['paiement_button']))
         {
-            $error = "Veuillez remplir les informations de livraison";
+            // Si les informations de livraisons de sont pas remplis
+            if ( empty ($_POST['adresse']) || empty ($_POST['ville']) || empty ($_POST['codePostale']) || empty ($_POST['facturation']) || empty ( $_POST['mode']))
+            {
+                $error = "Veuillez remplir les informations de livraison";
+            }
         }
-        
-        
-        Renderer::render('users/commands', compact('command','commandColors' ,'error'));
+        Renderer::render('users/commands', compact('command','commandColors' ,'error', 'findDeliveries', 'images', 'imagesColors'));
     } 
 
     /**
@@ -496,11 +495,28 @@ class UsersController extends Controller
             $ville = valid_data($_POST['ville']);
             $codePostale = valid_data($_POST['codePostale']);
 
+
             // On concatene 'l'adresse' + 'le code postale' + 'la ville' afin de le rentrer en BDD en tant que colonne unique
             // ex = 13 av de marseille 13000 Marseille 
             $_SESSION['user_data']['livraison'] = $adresse." ".$codePostale." ".$ville;
 
             $_SESSION['user_data']['facturation'] = $_POST['facturation'];
+            
+            if ( isset($_POST['mode']))
+            {
+                $model = new DeliveriesModel();
+
+                $find = $model->findBy(['mode' => $_POST['mode']]);
+
+                $_SESSION['user_data']['deliveryMode'] = $_POST['mode'];
+
+                $_SESSION['user_data']['deliveryPrice'] = $find[0]['price'];
+                
+            } else {
+                $_SESSION['user_data']['deliveryMode'] = null;
+
+                $_SESSION['user_data']['deliveryPrice'] = null;
+            }
 
             // Si un prix est définit / différent de vide = commande vide
             if ( isset ( $_POST['prix']) && !empty ( $_POST['prix']))
@@ -512,7 +528,7 @@ class UsersController extends Controller
                 \Stripe\Stripe::setApiKey('sk_test_51KZXuDJm5576Uzo35LWKkxbWACB19bTEv0cn494ONQLuQqfQd7GHXeCWMp2LxLUbbCikvt6siO7nY5TdBdaMeFcd00Hl7keAL2');
 
                 $intent = \Stripe\PaymentIntent::create([
-                'amount' => $prix*100,
+                'amount' => intval($prix)*100,
                 'currency' => 'eur'
             ]);
             // On redirige vers la page commande car vide
@@ -552,15 +568,17 @@ class UsersController extends Controller
                         $insert = new CommandsModel();
                         $insertCommand = $insert
                             ->setPrice($product['price'])
-                            ->setTotal_price($product['total_price'] * $product['quantity'])
+                            ->setTotal_price($product['price'] * $product['quantity_product'])
                             ->setId_user($_SESSION['user_data']['id'])
                             ->setId_command($numCommand)
                             ->setId_product($product['id'])
+                            ->setId_color($product['id_color'])
                             ->setPromo($promo)
                             ->setQuantity_product($product['quantity_product'])
                             ->setAdresse_livraison($_SESSION['user_data']['livraison'])
                             ->setAdresse_facturation($_SESSION['user_data']['facturation'])
-                            ->setId_color($product['id_color']);
+                            ->setPrice_livraison($_SESSION['user_data']['deliveryPrice'])
+                            ->setMode($_SESSION['user_data']['deliveryMode']);
                         $insertCommand->create($insert);
                     }
                 } else {
@@ -568,7 +586,7 @@ class UsersController extends Controller
                     foreach ($command as $product)
                     {
                         $promo = 0;
-
+  
                         $insert = new CommandsModel();
                         $insertCommand = $insert
                             ->setPrice($product['price'])
@@ -576,11 +594,13 @@ class UsersController extends Controller
                             ->setId_user($_SESSION['user_data']['id'])
                             ->setId_command($numCommand)
                             ->setId_product($product['id'])
+                            ->setId_color($product['id_color'])
                             ->setQuantity_product($product['quantity_product'])
                             ->setPromo($promo)
                             ->setAdresse_livraison($_SESSION['user_data']['livraison'])
                             ->setAdresse_facturation($_SESSION['user_data']['facturation'])
-                            ->setId_color($product['id_color']);
+                            ->setPrice_livraison($_SESSION['user_data']['deliveryPrice'])
+                            ->setMode($_SESSION['user_data']['deliveryMode']);
                         $insertCommand->create($insert);
                     }
                 }
@@ -600,6 +620,8 @@ class UsersController extends Controller
         $_SESSION['user_data']['promo'] = 0;
         unset($_SESSION['user_data']['livraison']);
         unset($_SESSION['user_data']['facturation']);
+        unset($_SESSION['user_data']['deliveryMode']);
+        unset($_SESSION['user_data']['deliveryPrice']);
 
         Renderer::render('users/successCommand' , compact('command'));
     }

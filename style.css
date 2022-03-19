@@ -578,14 +578,342 @@ footer {
 	  left: 1px;
 	  color: #161616;
 }
+/* ------------------------------------------------
 
+                USER 
+
+--------------------------------------------------- */
+/* FORMULAIRE GENERIQUE*/
+.form {
+    text-align: center;
+}
+
+
+.form-group {
+    position: relative;
+    padding: 20px 0;
+    width: 75%;
+    max-width: 100%;
+    margin: auto;
+}
+
+.form-group input {
+    border: none;
+    border-bottom: 1px solid black;
+    display: block;
+    font-size: 16px;
+    padding: 10px 0;
+    width: 100%;
+    max-width: 40vh;
+}
+
+.form-group label {
+    font-family: "SousTitreouAccent";
+    font-size: 16px;
+    font-weight: 100;
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    transform: translateY(30px);
+    transition: all 0.2s ease-in-out;
+}
+
+.form-group input:valid,
+.form-group input:focus {
+    outline: none;
+}
+
+.form-group input:valid + label,
+.form-group input:focus + label {
+    font-size: 14px;
+    transform: translateY(0);
+}
+
+.submit {
+    font-family: "SousTitreouAccent";
+    padding: 3px 30px;
+    border: none;
+    background-color:  rgb(var(--clr-pink));
+    cursor: pointer;
+}
+
+.submit:hover {
+    background-color: rgba(254, 197, 187, 0.877);
+}
+
+.help {
+    font-family: "loremIpsum";
+    color: gray;
+}
+
+.sous_texte {
+    font-family: "loremIpsum";
+}
+
+.sous_texte a {
+    color: rgb(var(--clr-black));
+    font-weight: bold;
+    text-decoration: underline;
+
+}
+
+
+.form h1 {
+    font-family: "Titreprincipal";
+    text-transform:uppercase;
+}
+
+
+/* FORMULAIRE CONNEXION*/
+
+.bold {
+    font-weight: bold;
+}
+
+.login {
+    margin-top: 1%;
+}
+
+.forgot:hover {
+    transition: .2s ease-out;
+    text-decoration: underline;
+}
+
+
+
+/* ------------------------------------------------
+
+                USER PROFIL
+
+--------------------------------------------------- */
+.submit-profil {
+    margin-bottom: 3vh;
+}
+
+.sous-titre {
+    font-family: "SousTitreouAccent";
+    margin-bottom: 3vh;
+}
+.userCommand {
+    margin-top: 2vh;
+    font-family: "loremIpsum";
+    text-align: center;
+}
+
+/* USER PROFIL COMMANDE */
+
+.userCommand .flex {
+    justify-content: space-evenly;
+}
+.name {
+    flex-wrap: flex;
+}
+
+.article-profil {
+    grid-template-columns: repeat(5, 1fr);
+    align-self: center;
+    justify-self: center;
+}
+
+/* USER PROFIL PRODUCTS */
+.section-favoris {
+    margin-top: 3vh;
+}
+
+.href {
+    color: black;
+    font-family: "SousTitreouAccent";
+    font-weight:800;
+    text-decoration: underline;
+}
+
+/* USER PROFIL COMMENT */
+
+.section-comment {
+    margin-top: 4vh;
+}
+
+.section-comment article {
+    font-family: "SousTitreouAccent";
+    margin:2% 8%;
+    flex-wrap: wrap;
+    border-radius: 4px;
+    line-height: 2vh;
+}
+
+.section-comment article:nth-child(odd) {
+    text-align: right;
+}
+
+.section-comment article:nth-child(even) {
+    text-align: left;
+}
+
+.section-comment a {
+    font-size: 1.5em;
+    color: #ffbcb0;
+    font-weight: bold;
+}
+
+.date {
+    font-family: "loremIpsum";
+    color: rgb(204, 204, 204);
+}
+
+.section-comment form button {
+    margin-top: 2vh;
+    background-color:transparent;
+    border: none;
+}
+/* ------------------------------------------------
+
+                BAGS
+
+--------------------------------------------------- */
+.bag h1 {
+    font-size: 2em;
+}
+
+.bagProduct  {
+    font-family: "SousTitreouAccent";
+}
+
+.bagProduct img {
+    margin: 0 auto;
+}
+
+.bagProduct label {
+    margin: 0;
+}
+
+/* .bagProduct a {
+    font-size: 2.7vh;
+    font-weight: 600;
+    color: rgb(var(--clr-black));
+} */
+
+.bagProduct .flex {
+    justify-content: center;
+    align-items: center;
+}
+
+.bagProduct .flex button, .bagProduct .flex input {
+    background-color:transparent;
+    border: none;
+    font-weight: 900;
+    color: rgb(145, 145, 145);
+    font-size: 2.5vh;
+}
+
+.bagPrice {
+    justify-content: center;
+    align-items: center;
+}
+
+.bagPrice div{
+    font-size: 2.3vh;
+    font-family: "SousTitreouAccent";
+    font-weight: 600;
+    line-height: .7vh;
+    margin: 0;
+}
+
+.price {
+    font-weight: 900;
+    font-size: 3.4vh;
+}
+
+.bagPrice div p:nth-child(0n+2){
+    font-family: "loremIpsum";
+    font-weight: lighter;
+    color: rgb(145, 145, 145);
+}
+
+
+/* ------------------------------------------------
+
+                COMMANDS
+
+--------------------------------------------------- */
+
+/* .deliveryMode:checked {
+    display: block;
+
+} */
+
+.command {
+    font-family: "loremIpsum";
+}
+
+.produit {
+    font-family: "SousTitreouAccent";
+    align-items: center;
+    justify-content:space-evenly;
+}
+
+.produit label {
+    margin: 0;
+}
+
+.command img {
+    margin: auto;
+}
+
+.command h2 {
+    margin-top: 5vh;
+}
+
+.command .sous-titre {
+    text-decoration: underline;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+}
+
+.cont{
+    margin: 1vh 0;
+    padding: 1vh;
+    border-radius: 6px;
+    background-color:#f0f0f056;
+    color: black;
+}
+
+#prix {
+    text-align: center;
+    font-weight: 900;
+    margin-bottom: 2vh;
+}
+
+/* ------------------------------------------------
+
+                PAIEMENTS
+
+--------------------------------------------------- */
+#card-elements {
+    margin-bottom: 2vh;
+}
+.success a {
+    font-weight: 900;
+    color: black;
+}
+
+.success a:hover {
+    text-decoration: underline;
+}
+
+/* ------------------------------------------------
+
+                PRODUCT SELF
+
+--------------------------------------------------- */
 .product_color {
+
 	display: flex;
 }
 .color {
 	border-radius: 100%;
 	height: 40px;
-	margin: 0 10px;
+	margin: auto;
 	width:40px;
 	display:block;
 	text-align: center;
@@ -615,4 +943,6 @@ i {
 	background-color: transparent;
 	border: none;
 }
+
+
 

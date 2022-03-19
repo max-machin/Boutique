@@ -19,6 +19,11 @@ class BagsController extends Controller
         $model = new BagsModel();
         $bagProductsColors = $model->checkBagColors($_SESSION['user_data']['id']);
 
+        foreach ($bagProductsColors as $table){
+            $model = new BagsModel();
+            $imagesColors = $model->findImages($_SESSION['user_data']['id'], $table['id']);
+        }
+
         // Boucle pour récupérer les couleurs des produits 
         foreach($bagProductsColors as $product)
         {
@@ -30,7 +35,10 @@ class BagsController extends Controller
         $bagModel = new BagsModel();
         $bagProducts = $bagModel->checkBag($_SESSION['user_data']['id']);
 
-        
+        foreach ($bagProducts as $table){
+            $model = new BagsModel();
+            $images = $model->findImages($_SESSION['user_data']['id'], $table['id']);
+        }
             
         // Update de la quantité produit avec COULEUR
         if ( isset ( $_POST['submitQuantityColors']))
@@ -45,7 +53,7 @@ class BagsController extends Controller
             $id_product = $_POST['idProductColors'];
             $model = new BagsModel();
             $deleteBag = $model->deleteBy(['id_product' => $id_product, 'id_user' => $_SESSION['user_data']['id'], 'id_color' => $_POST['id_color']]);
-            header('refresh: 0');
+            header('refresh: 0'); 
             echo "Produit supprimé avec succés";
         } 
         // Update de la quantité produit sans COULEUR
@@ -64,12 +72,13 @@ class BagsController extends Controller
             header('refresh: 0');
             echo "Produit supprimé avec succés";
         }
+
         // Validation du panier pour passer commande
         elseif ( isset ( $_POST['command']))
         {
             header('location: users/commands');
         }
-        Renderer::render('bag/userBag', compact('bagProductsColors','bagProducts', 'findColors'));
+        Renderer::render('bag/userBag', compact('bagProductsColors','bagProducts', 'findColors', 'imagesColors','images'));
     }
 }
 

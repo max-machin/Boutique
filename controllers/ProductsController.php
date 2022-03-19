@@ -10,6 +10,7 @@ class ProductsController extends Controller
         // foreach($products as $product){
         //     $images = explode(',', $product->url); 
         //  }      
+        
         Renderer::render('products/allProducts' , compact('products'));   
     }
 
@@ -77,7 +78,7 @@ class ProductsController extends Controller
                     {
                         $color = intval($_POST['color']);
                         // On ajoute un produit au panier
-                        $model = new BagsModel();
+                        $model = new BagsModel(); 
                         $productAdded = $model
                             ->setId_user($_SESSION['user_data']['id'])
                             ->setId_product($_POST['id_Product'])
@@ -195,7 +196,6 @@ class ProductsController extends Controller
                         ->setId_user($_SESSION['user_data']['id'])
                         ->setId_product($_POST['id_Product'])
                         ->setQuantity_product($_POST['product_quantity']);
-                       
                         $productAdded->create($model);  
 
                     // Sinon on l'update
@@ -245,7 +245,7 @@ class ProductsController extends Controller
         
         // Requête de vérification d'existence du produit en favoris pour l'user
         $fav = new favorisModel();
-        $findFav = $fav->findFavoris( $_SESSION['user_data']['id'],$id);
+        $findFav = $fav->findFavoris( $_SESSION['user_data']['id'],$id); 
 
         // Requête pour l'affichage du bouton add/delete favoris en fonction du résultat
         $find = new favorisModel();

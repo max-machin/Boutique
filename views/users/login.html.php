@@ -1,15 +1,23 @@
-<form action="" method="post">
+<form class="form" action="" method="post">
+    <h1>Je me connecte</h1>
     <?= $error ?><br/>
 
-    <label for="email">E-mail *</label></br>
-    <input id="email" type="email" name="email" placeholder="Email"></br>
-    <span><?= $error_email ?></span></br>
+    <div class="form-group">
+        <input id="email" type="email" name="email" required>
+        <label for="email">E-mail *</label>
+        <span><?= $error_email ?></span>
+    </div>
 
-    <label for="password">Mot de passe *</label></br>
-    <input id="password" type="password" name="password" placeholder="Mot de passe"></br>
-    <span><?= $error_password ?></span></br>
+    <div class="form-group">
+        <input id="password" type="password" name="password" required>
+        <label for="password">Mot de passe *</label>
+        <span><?= $error_password ?></span>
+    </div>
 
-    <a href="forgotPassword">Mot de passe oublié?</a><br>
+    <a class="help bold" href="forgotPassword">Mot de passe oublié ?</a><br>
 
-    <input type="submit" name="submit">
+    <input class="submit login" type="submit" name="submit" value="Connexion">
+
+    <p class="sous_texte">Pas encore inscrit? <a href="<?= url ?>users/register"> Rejoignez-vous</a></p>
 </form>
+

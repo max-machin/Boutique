@@ -115,4 +115,9 @@ class FavorisModel extends Model
     {
         return $this->requete("SELECT * FROM favoris WHERE id_user = ? AND id_product = ? AND fav = 1", array($id_user, $id_product))->fetch();
     }
+
+    public function userFavoris($id_user)
+    {
+        return $this->requete("SELECT p.id as id_product, p.name as product_name, GROUP_CONCAT(i.url_image) as url_image FROM favoris as f INNER JOIN products as p on f.id_product = p.id INNER JOIN images as i on p.id = i.id_product WHERE id_user = ? GROUP BY p.id", array($id_user))->fetchAll();
+    }
 }

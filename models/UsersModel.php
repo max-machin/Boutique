@@ -145,7 +145,7 @@ class UsersModel extends Model
     *
     * @param [type] $password
     * @param [type] $email
-    * @return void
+    * @return void 
     */
    public function emailPassword($password, $email)
    {

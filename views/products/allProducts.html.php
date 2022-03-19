@@ -44,7 +44,6 @@ if(isset($products))
 
 foreach($products as $product){
     $images = explode(',', $product['url']);
-
 ?>
 
 <div class="products">
