@@ -320,8 +320,8 @@ class CommandsModel extends Model
     {
         $this->database = DataBase::getPdo();
 
-        $bag=$this->database -> prepare('SELECT commands.id_product, products.* GROUP_CONCAT(DISTINCT CONCAT(images.url_image,",", images.id ) SEPARATOR ";") as url FROM `commands` INNER JOIN products ON products.id = commands.id_product INNER JOIN images ON products.id = images.id_product GROUP BY `id_product` ORDER BY COUNT(*) DESC LIMIT 6');
-        $bag-> execute(['id_user'=>$id_user]);
+        $bag=$this->database -> prepare('SELECT commands.id_product, products.id, products.name, products.price, images.url_image FROM `commands` INNER JOIN products ON products.id = commands.id_product INNER JOIN images ON products.id = images.id_product GROUP BY `id_product` ORDER BY COUNT(*) DESC LIMIT 6');
+        $bag-> execute();
         $resultBag=$bag->fetchAll();
 
         return($resultBag);

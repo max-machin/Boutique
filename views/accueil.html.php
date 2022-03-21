@@ -31,7 +31,24 @@
     <section class="accueil-bestsellers">
         <hr>
         <h2>Our Bestsellers</h2>
-        
+
+        <div class='wrapper'>
+        <?php
+            foreach($bestsellers as $bestseller)
+            {
+                ?>
+                <div class='bestsellers-products'>
+                    <img src='uploads/<?= $bestseller['url_image'] ?>'/>
+                    <div class='intern-case'>
+                        <h3><a href='products/<?= $bestseller['id'] ?>'><?= $bestseller['name'] ?></a></h3>
+                        <button><p id=''>Add  -  $<?= $bestseller['price'] ?></p></button>                         
+                    </div>
+                       
+                </div> 
+                <?php
+            }
+        ?>
+        </div>
     </section>
     <section class="accueil-instagram">
         <hr>

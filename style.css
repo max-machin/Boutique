@@ -567,6 +567,47 @@ footer {
     justify-content: center;
 }
 
+.wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+.bestsellers-products {
+    display: flex;
+    flex-direction: column;
+    margin-left: 5%;
+    margin-top: 3%;
+    border: 1px solid rgb(var(--clr-lightgrey));
+}
+
+.intern-case {
+    padding: 2%;
+}
+
+.bestsellers-products img {
+    width: 230px;
+}
+
+.bestsellers-products h3 {
+    text-align: center;
+    margin-top: 15%;
+    font-family: LoremIpsum;
+}
+
+.bestsellers-products a {
+    color: #000;
+}
+
+.bestsellers-products button {
+    background-color: #000;
+    color: white;
+    border: none;
+    width: 100%;
+    border-radius: 5%;
+    font-family: LoremIpsum;
+}
+
+
 hr {
     border: 0;
     height: 0;
@@ -590,7 +631,7 @@ hr {
 }
 
 
-/* SELECT commands.id_product, products.id, products.name, products.price, images.url_image FROM `commands` INNER JOIN products ON products.id = commands.id_product INNER JOIN images ON products.id = images.id_product GROUP BY `id_product` ORDER BY COUNT(*) DESC LIMIT 6; */
+
 
 
 
