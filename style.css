@@ -417,11 +417,6 @@ SINON rajouter avant container une autre class/un autre mot donc et apr√®s le d√
 }
 
 
-
-
-
-
-
 /* 
                 FOOTER
 */
@@ -522,7 +517,118 @@ footer {
     background-color: transparent;
 }
 
+.img-accueil {
+    width: 450px;
+    margin-left: 10px;
+}
 
+.images-accueil {
+    display: flex;
+    flex-direction: row;
+    padding: 3% 0;
+}
+
+#accueil-text {
+    position: absolute;
+    right: 10%;
+    top: 50%;
+    width: 20vw;
+}
+
+#accueil-text h1 {
+    font-family: Titreprincipal;
+    font-size: 5em;
+}
+
+#accueil-text p {
+    font-family: LoremIpsum;
+    font-size: 1.2em;
+    margin-left: 9%;
+}
+
+#accueil-text button {
+    margin-left: 20%;
+    font-size: 1.1em;
+    background-color: rgb(var(--clr-black));
+    color: rgb(var(--clr-white));
+    border-radius: 2%;
+    border: 1px solid black;
+    padding: 2%;
+}
+
+.accueil-bestsellers {
+    padding: 10% 0;
+}
+
+.accueil-bestsellers h2 {
+    padding-top: 3%;
+    font-family: SousTitreouAccent;
+    display: flex;
+    justify-content: center;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+.bestsellers-products {
+    display: flex;
+    flex-direction: column;
+    margin-left: 5%;
+    margin-top: 3%;
+    border: 1px solid rgb(var(--clr-lightgrey));
+}
+
+.intern-case {
+    padding: 2%;
+}
+
+.bestsellers-products img {
+    width: 230px;
+}
+
+.bestsellers-products h3 {
+    text-align: center;
+    margin-top: 15%;
+    font-family: LoremIpsum;
+}
+
+.bestsellers-products a {
+    color: #000;
+}
+
+.bestsellers-products button {
+    background-color: #000;
+    color: white;
+    border: none;
+    width: 100%;
+    border-radius: 5%;
+    font-family: LoremIpsum;
+}
+
+
+hr {
+    border: 0;
+    height: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3); 
+}
+
+
+.titre-instagram {
+    display: flex;
+    flex-direction: row;
+    justify-content: center; 
+    padding-top: 3%;
+    font-family: SousTitreouAccent;
+}
+
+.titre-instagram img {
+    margin-left: 10px;
+    margin-top: 8px;
+    height: 20px;
+}
 
 
 

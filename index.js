@@ -51,16 +51,16 @@ document.addEventListener('DOMContentLoaded', function loaded() {
 //pour le pop up à l'accueil
    var close = document.getElementById('close');
 
-   window.addEventListener('load', function(){
-    setTimeout(
-        function open(event){
-            document.querySelector('.pop-up').style.display = 'block';
-        },
-        900
-    )
-   });
-    close.addEventListener("click", function(){
-        document.querySelector('.pop-up').style.display = 'none';
-    });
+//    window.addEventListener('load', function(){
+//     setTimeout(
+//         function open(event){
+//             document.querySelector('.pop-up').style.display = 'block';
+//         },
+//         900
+//     )
+//    });
+//     close.addEventListener("click", function(){
+//         document.querySelector('.pop-up').style.display = 'none';
+//     });
 });
 
