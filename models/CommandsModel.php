@@ -320,7 +320,7 @@ class CommandsModel extends Model
     {
         $this->database = DataBase::getPdo();
 
-        $bag=$this->database -> prepare('SELECT commands.id_product, products.id, products.name, products.price, images.url_image FROM `commands` INNER JOIN products ON products.id = commands.id_product INNER JOIN images ON products.id = images.id_product GROUP BY `id_product` ORDER BY COUNT(*) DESC LIMIT 6');
+        $bag=$this->database -> prepare('SELECT commands.id_product, products.id, products.name, products.price, images.url_image FROM `commands` INNER JOIN products ON products.id = commands.id_product INNER JOIN images ON products.id = images.id_product GROUP BY `id_product` ORDER BY COUNT(*) DESC LIMIT 4');
         $bag-> execute();
         $resultBag=$bag->fetchAll();
 
