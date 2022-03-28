@@ -35,14 +35,14 @@
             //les images
                 foreach($images as $image){
                 ?>         
-                    <img src="http://localhost:8080/Boutique/uploads/<?= $image ?>" width="50px">
+                    <img src="http://localhost:8080/Boutique/uploads/<?= $image ?>" width="50px" class = "img_slider">
                 <?php
                 }
             ?> 
-            <button>previous</button>
-            <button>next</button>  
-        </div>
         
+                <img src="images/utilitaires/previous.svg" id="previous">
+                <img src="images/utilitaires/next.svg" id="next"> 
+        </div>                 
         <section class='text-product'>
             <div class='titre_product'>
                 <h1><?= $product['name'] ?></h1>
@@ -50,8 +50,7 @@
                     <?php
                         if( isset($findFav) && $favoritFind == true )
                         {
-                        ?>
-                            
+                        ?>  
                             <button class="fav outfav" type="submit" name="addFav">
                                 <img src="images/utilitaires/heart_fill.png" alt="" width="20px">
                             </button>
@@ -59,7 +58,7 @@
                         <?php
                         } elseif ( $favoritFind == false ) {   
                         ?>
-                            
+
                             <button class="fav infav" type="submit" name="addFav">
                                 <img src="<?= urlLaura ?>images/utilitaires/heart_empty.png" alt="" width="20px">
                             </button>
@@ -157,7 +156,6 @@
                     if ( isset ( $_SESSION['user_data']))
                 {    
             ?>
-
                 <div class='post_comment'>
                     <form action="" method="post">
                         <!-- notation du produit -->
