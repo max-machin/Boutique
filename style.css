@@ -704,6 +704,7 @@ hr {
 
 .product_color {
     display: flex;
+    margin: 5% 0;
 }
 
 .color {
@@ -725,8 +726,18 @@ hr {
 	opacity: 0.01;
 }
 
-.colors {
-	opacity: 0;
+.add_quantity {
+    margin-left: 5%;
+}
+
+.addBag {
+    margin-left: 5%;
+    width: 25%;
+    font-size: 1.1em;
+    background-color: rgb(var(--clr-black));
+    color: rgb(var(--clr-white));
+    border-radius: 2%;
+    border: 1px solid black;
 }
 
 .rating {
@@ -764,11 +775,49 @@ hr {
 	  color: #161616;
 }
 
-
 i {
 	font-style: normal;
     font-family: FontAwesome;
 }
+
+
+.sectionComments
+{
+    margin: 10% 0;
+    background-color: rgb(var(--clr-lightgrey), 0.2);
+    padding: 3%;
+}
+
+.comments {
+    background-color: rgb(var(--clr-white));
+    width: 95%;
+    border: 1px solid rgb(var(--clr-lightgrey));
+    margin: auto;
+    margin-bottom: 3%;
+    padding: 3%;
+}
+
+.comments p {
+    text-align: justify;
+}
+
+.info_commentaire {
+    font-size: 0.8rem;
+}
+
+.post_comment {
+    margin: 0 20%;
+}
+
+.post_comment input {
+    margin-left: 25%;
+    font-size: 1.1em;
+    background-color: rgb(var(--clr-black));
+    color: rgb(var(--clr-white));
+    border-radius: 2%;
+    border: 1px solid black;
+}
+
 
 
 

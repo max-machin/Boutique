@@ -5,12 +5,12 @@
 <article class='seeproduct'>
     <?php
 
+    //si admin
     if(@$_SERVER['user_data']['id'] == 1)
     { 
-        echo 'salut';
-            foreach($images as $image){
-        ?>
-                
+        //les images
+        foreach($images as $image){
+        ?>     
             <img src="<?= "http://localhost:8080/Boutique/uploads/" ?>" width="50px">
         <?php
             }
@@ -25,13 +25,15 @@
     <?php
 
     } 
+    //sinon le user
     else
     {
         ?>
+        <!-- le slide -->
         <div class='slider'>
             <?php
+            //les images
                 foreach($images as $image){
-
                 ?>         
                     <img src="http://localhost:8080/Boutique/uploads/<?= $image ?>" width="50px">
                 <?php
@@ -42,48 +44,46 @@
         </div>
         
         <section class='text-product'>
+            <div class='titre_product'>
+                <h1><?= $product['name'] ?></h1>
+                <!-- le coeur favoris -->
+                    <?php
+                        if( isset($findFav) && $favoritFind == true )
+                        {
+                        ?>
+                            
+                            <button class="fav outfav" type="submit" name="addFav">
+                                <img src="images/utilitaires/heart_fill.png" alt="" width="20px">
+                            </button>
 
-        <div class='titre_product'>
-           <h1><?= $product['name'] ?></h1>
-
-            <?php
-                if( isset($findFav) && $favoritFind == true )
-                {
-                ?>
-                    
-                    <button class="fav outfav" type="submit" name="addFav">
-                        <img src="images/utilitaires/heart_fill.png" alt="" width="20px">
-                    </button>
-
-                <?php
-                } elseif ( $favoritFind == false ) {
-                    
-                ?>
-                    
-                    <button class="fav infav" type="submit" name="addFav">
-                        <img src="<?= urlLaura ?>images/utilitaires/heart_empty.png" alt="" width="20px">
-                    </button>
-                <?php
-                }
-            ?>
-        </div>
- 
+                        <?php
+                        } elseif ( $favoritFind == false ) {   
+                        ?>
+                            
+                            <button class="fav infav" type="submit" name="addFav">
+                                <img src="<?= urlLaura ?>images/utilitaires/heart_empty.png" alt="" width="20px">
+                            </button>
+                        <?php
+                        }
+                    ?>
+            </div>
+                        
+            <!-- description du produit -->
             <p><?= $product['description'] ?></p>
 
-
+            <!-- si l'utilisateur est là -->
             <?php
             if ( isset ( $_SESSION['user_data']))
             {
-                
             ?>
                 <form action="" method="post">  
 
+                    <!-- couleurs -->
                     <div class="product_color">
-
                         <?php
                             foreach( $findColors as $color)
                             {
-                        ?>
+                        ?> 
                             <label class="color" for="<?= $color['name'] ?>" style="background-color: #<?= $color['code'] ?>">
                                 <input id="<?= $color['name'] ?>" type="radio" name="color" value="<?= $color['id'] ?>">
                             </label>
@@ -93,26 +93,29 @@
                         ?>
                     </div>
 
-                    
+                    <!-- quantité du produit -->
+                    <div class="add_quantity">
+                        <select name="product_quantity" id="product_quantity">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
 
-                    <select name="product_quantity" id="product_quantity">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-
-                    
-                    <input type="hidden" name="id_Product" value="<?= $product['id'] ?>">
-                    <button class="#" type="submit" name="addBag">Add</button>
-
+                        <!-- add bouton -->
+                        <input type="hidden" name="id_Product" value="<?= $product['id'] ?>">
+                        <button class="addBag" type="submit" name="addBag">Add</button>                        
+                    </div>
                 </form>
             <?php
-            } else {
+            } 
+
+            // sinon si pas de user
+            else 
+            {
             ?>
                 <article class="product_color">
-
             <?php
                     foreach( $findColors as $color)
                     {
@@ -127,16 +130,14 @@
             <?php
             }
             ?>
+
+            <!-- commentaires pour users -->
         <section class="sectionComments"> 
-            
             <?php
                 foreach ( $allComments as $comment)
                 {
             ?>
-                <article>
-                    <p>Posté par : <?= $comment['prenom'] ?> le : <?= $comment['datefr'] ?> à <?= $comment['heurefr'] ?></p>
-                    <p><?= $comment['comment'] ?></p>
-
+                <div class="comments">
                     <?php
                     $i = 0;
                     while ( $i < $comment['note']){
@@ -147,39 +148,46 @@
                     $i++;
                     }
                     ?>
-
-                </article>
+                    <p><?= $comment['comment'] ?></p>
+                    <p class="info_commentaire">Posté par : <?= $comment['prenom'] ?> le : <?= $comment['datefr'] ?> à <?= $comment['heurefr'] ?></p>
+                </div>
             <?php
                 }
+                // si il y a user alors il peut poster un commentaire et noter le produit
                     if ( isset ( $_SESSION['user_data']))
                 {    
             ?>
 
-            <form action="" method="post">
-                
-                <textarea name="comment" id="comment" cols="30" rows="10" placeholder="Add a comment"></textarea><br>
-                <input type="hidden" value="<?= $product['id'] ?>" name="id_product">
-                <?= $errorComment ?><br>
+                <div class='post_comment'>
+                    <form action="" method="post">
+                        <!-- notation du produit -->
+                        <div class="rating">
+                            <input id="star5" name="star" type="radio" value="5" class="radio-btn hide" />
+                            <label for="star5" >☆</label>
+                            <input id="star4" name="star" type="radio" value="4" class="radio-btn hide" />
+                            <label for="star4" >☆</label>
+                            <input id="star3" name="star" type="radio" value="3" class="radio-btn hide" />
+                            <label for="star3" >☆</label>
+                            <input id="star2" name="star" type="radio" value="2" class="radio-btn hide" />
+                            <label for="star2" >☆</label>
+                            <input id="star1" name="star" type="radio" value="1" class="radio-btn hide" />
+                            <label for="star1" >☆</label>
+                        </div>
 
-                <span>Notez le produit</span>
-                <div class="rating">
-                    <input id="star5" name="star" type="radio" value="5" class="radio-btn hide" />
-                    <label for="star5" >☆</label>
-                    <input id="star4" name="star" type="radio" value="4" class="radio-btn hide" />
-                    <label for="star4" >☆</label>
-                    <input id="star3" name="star" type="radio" value="3" class="radio-btn hide" />
-                    <label for="star3" >☆</label>
-                    <input id="star2" name="star" type="radio" value="2" class="radio-btn hide" />
-                    <label for="star2" >☆</label>
-                    <input id="star1" name="star" type="radio" value="1" class="radio-btn hide" />
-                    <label for="star1" >☆</label>
+                        <textarea name="comment" id="comment" cols="30" rows="3" placeholder="Add a comment"></textarea><br>
+                        <input type="hidden" value="<?= $product['id'] ?>" name="id_product">
+                        <?= $errorComment ?><br>
+
+                        <input type="submit" name="addComment" id="addComment" value="Add a comment">
+                    </form>
                 </div>
 
-                <input type="submit" name="addComment" id="addComment" value="Comment">
-            </form>
             </section>
             <?php
-            } else {
+            } 
+            // sinon il faut se connecter
+            else
+             {
             ?>
                 <p>Veuillez vous <a href="<?= urlLaura ?>users/register">inscrire</a> / <a href="<?= urlLaura ?>users/login">connectez</a> pour ajouter un commentaire</p>
             <?php 
