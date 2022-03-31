@@ -1,11 +1,10 @@
 <?php
 
-if(@$_SESSION['user_data']['id'] !== 1)
+if(@$_SESSION['user_data']['id'] !== "1")
 {
     header('Location:../index');
 }
 
-var_dump($_SESSION['user_data'])
 ?>
 
 <form action="<?=urlLaura ?>admin/create" method="post">
