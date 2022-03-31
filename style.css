@@ -9,7 +9,8 @@
     - FOOTER 
 - ACCUEIL
 - SEEPRODUCT
-    
+- ABOUT
+
 */
 
 /* ------------------------------------------------
@@ -844,6 +845,53 @@ i {
     border-radius: 2%;
     border: 1px solid black;
 }
+
+
+/* ------------------------------------------------
+
+                    ABOUT
+
+--------------------------------------------------- */
+
+.about {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.container_about {
+    padding-left: 15%;
+}
+
+.container_about h2 {
+    font-family: SousTitreouAccent;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.about img {
+    width: 400px;
+}
+
+.who {
+    margin-top: 5%;
+}
+
+.who p {
+    font-family: LoremIpsumV2;
+    text-align: justify;
+    width: 70%;
+}
+
+.brand p {
+    font-family: LoremIpsumV2;
+    text-align: justify;
+    width: 70%;
+}
+
+
 
 
 
