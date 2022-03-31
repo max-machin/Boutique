@@ -28,7 +28,9 @@ class Router
                 if($url[0] == 'accueil'){ 
                     CommandsController::selectBestsellers();
                     // Renderer::render('accueil');  
-                }  
+                } elseif ($url[0] == 'about') {
+                    Renderer::render('about'); 
+                }
             }
             // Si on a un élément en url
 
