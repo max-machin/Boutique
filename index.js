@@ -1,7 +1,3 @@
-// window.addEventListener('load', function(){
-//     alert('hey');
-// }
-// );
 document.addEventListener('DOMContentLoaded', function loaded() {
 
             //NAV BURGER
@@ -72,8 +68,22 @@ document.addEventListener('DOMContentLoaded', function loaded() {
 
     suivant.addEventListener('click', function(){
         etape++;
+        if(etape >= nb_img){
+            etape = 0;
+        }
         enleverActiveImages();
         // console.log(img_slider[etape]);
+        img_slider[etape].classList.add('active');
+    })
+
+    precedent.addEventListener('click', function(){
+        etape--;
+
+        if(etape < 0){
+            etape = nb_img - 1;
+        }
+
+        enleverActiveImages();
         img_slider[etape].classList.add('active');
     })
 
