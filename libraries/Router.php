@@ -169,7 +169,7 @@ class Router
  
             if ( $controllerName == "BagsController")
             {
-                if ( $url[0] == "bags")
+                if ($url[0] == "bags")
                 {
                     $controllerName::showBag();
                 }
