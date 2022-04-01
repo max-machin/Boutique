@@ -198,33 +198,61 @@ class ProductsController extends Controller
 
     }
 
+    public static function queryToArray($qry)
+    {
+            $result = array();
+     
+             if(strpos($qry,'?')!==false) {
+               $q = parse_url($qry);
+               $qry = $q['query'];
+              }
+            else {
+                    return false;
+            }
+
+            foreach (explode('&', $qry) as $couple) {
+                    list ($key, $val) = explode('=', $couple);
+                    $result[$key] = $val;
+            }
+
+            return $result;
+    }
+
     
-    // public static function getUrlCategories()
-    // {
+    public static function getUrlCategories()
+    {
 
-    //     $categorieUrl = self::getCategorieName();
+        $categorieUrl = self::getCategorieName();
 
-    //     $url = explode("/", filter_var($_GET['p'], FILTER_SANITIZE_URL));
-    //     // var_dump($url);
-    //     // if($url[1] === $categorieUrl){
-    //     // }
-
+        $url = explode("/", filter_var($_GET['p'], FILTER_SANITIZE_URL));
+        // var_dump($url);
+        return $url;
         
-      
-    // }
+    }
 
     //pagination va prendre en paramètre des countsrproducts all , cat et sous cat. Il va également recevoir en paramètre le resultat de la requete select...
     public static function pagination()
     {
         $model = new ProductsModel();
         $countProducts = $model->countProducts();
+        // $url = self::getUrlCategories();
+        // $var = explode('?', $_SERVER['REQUEST_URI']);
+        // var_dump($var);
+        $page = "";
+        if(isset($_GET['page']))
+        {
+        $page = $_GET["page"];
+        }
 
+        if (empty($page)) {
         $page = 1;
+        }
+
         $nbrProductsByPage = 1;
         $nbrPages = ceil($countProducts[0]["liste"] / $nbrProductsByPage);
         $debut = ($page - 1) * $nbrProductsByPage;
 
-        var_dump($nbrPages);
+        // var_dump($nbrPages);
 
         return array ($page, $nbrProductsByPage, $nbrPages, $debut);
        
@@ -241,25 +269,25 @@ class ProductsController extends Controller
         $pagination = self::pagination();
         $nameSousCategorie = self::getSousCategorieName($cat);
         
+        var_dump($sousCat);
+        
+        
         $page = $pagination[0];
+        $productSousCat = self::productsBySousCategories($sousCat);
         $nbrProductsByPage = $pagination[1];
         $nbrPages = $pagination[2];
         $debut = $pagination[3];
 
-    //   var_dump($_GET['sous_categorie']);
-        
+      
         //3 fonction pour les produits
         // if ($sousCat != null) {
          
-        //     $products = self::productsBySouscat($sousCat);
+        //     $products = self::productsBySousCategories($sousCat);
+        //     var_dump($products);
         //     $pagination = self::pagination();
 
-        // } else 
-        if(isset($_GET['sous_categorie']))
-        {
-           $products = $model->productsBySousCategories();
-           $pagination = self::pagination();
-        }
+        // } 
+        // else 
         if ($cat != null) {
             
             $nameSousCategorie = self::getSousCategorieName($cat);
@@ -269,22 +297,21 @@ class ProductsController extends Controller
             
 
         } else {
-
+          
             $products = self::allProducts();
             $pagination = self::pagination();
         }
 
-        
+       //faire un split sur ma requete serveur uri 
+       //routeur reecrire 1-split, tableau clé/valeur. 
+       //après je le déclare au $_get
+       //que si la méthode est en get
        
         Renderer::render('products/allProducts' , compact('categories','nameCategorie', 'nbrPages', 'sousCategories', 'products', 'nameSousCategorie', 'debut', 'page'));
        
     }
     
-    public static function createSousCatView() 
-    {
-
-        Renderer::render('products/' , compact('categories','nameCategorie', 'nbrPages', 'sousCategories', 'products', 'nameSousCategorie', 'debut', 'page'));
-    }
+    
 }
     
 //! faire une fonction pour make up et une func pour skincare avec deux renderer différents 

@@ -1,20 +1,59 @@
 
 <h1>Liste de nos produits</h1>
 
-<form action="" method="GET">
+<nav>
+    <ul>
+    <?php foreach ($sousCategories as $sousCategorie) { ?>
+            <li><?php echo $sousCategorie['name']; ?></li>
+            
+    <?php } ?> 
+        
+    </ul>
+</nav>
+
+<!-- <form action="" method="GET">
     <select name="sous_categorie">
         <?php foreach ($sousCategories as $sousCategorie) { ?>
-            <option value="<?php echo $sousCategorie['name']; ?> "><?php echo $sousCategorie['name']; ?> </option>
+            <option value="<?php echo $sousCategorie['name'];?>"><?php echo $sousCategorie['name']; ?> </option>
             
         <?php } ?> 
     </select>
     <input type='hidden' name='page' value='1'>
-    <button type='submit' name="submit" class="formButton">Valider</button>
+    <button type='submit' name="submit" class="formButton">Valider</button> -->
 </form>
 
 <?php 
-var_dump($_GET['sous_categorie']);
 
+// if(isset($_GET['page'])){
+
+// }
+// var_dump($_GET);
+// var_dump();
+$urlSousCat = $_SERVER["REQUEST_URI"];
+$_GET = $urlSousCat  ;
+// var_dump($_GET);
+// $urlSousCat = (parse_url($urlSousCat, PHP_URL_QUERY));
+// print_r($urlSousCat);
+$urlExplode = ProductsController::queryToArray($urlSousCat);
+
+// var_dump($urlExplode['sous_categorie']);
+
+
+// if (in_array($urlExplode['sous_categorie'], $nameSousCategorie )){
+//     var_dump($nameCategorie); var_dump($nameSousCategorie);
+    // echo 'testststst';
+// ProductsController::createViewProducts($nameCategorie, $nameSousCategorie);
+
+// }
+
+
+
+if(isset($_GET['submit']))
+{
+    $url = $_GET['p'];
+    echo $_GET[$url];
+    // var_dump($_GET); 
+}
 if(isset($_GET['sous_categorie']) && isset($_GET['submit']))
 {
     

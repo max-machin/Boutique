@@ -214,22 +214,42 @@ class ProductsModel extends Model
     
     
 
-    public function productsBySousCategories($nameSousCategorie
-    // ,$debut 
-    )
+    public function productsBySousCategories($nameSousCategorie)
     {
-        $query = $this->database->requete("SELECT products.*, GROUP_CONCAT(images.url_image SEPARATOR ',') as url FROM `products` 
-        INNER JOIN images ON products.id = images.id_product
-        INNER JOIN sous_categories
-        ON sous_categories.id = products.id_sous_categorie 
-        WHERE sous_categories.name = :nameSousCategorie 
-        -- LIMIT :debut
-        ");
+        $this->database = DataBase::getPdo();
+
+        $query = $this->database->prepare("SELECT id FROM sous_categories WHERE name=:nameSousCategorie");
         $query->execute([
-            'nameSousCategorie' => $nameSousCategorie,
-            // 'debut' => $debut
+            'nameSousCategorie' => $nameSousCategorie
         ]);
-        $result = $query->fetchAll();
+        
+       $result = $query->fetch();
+
+        // var_dump($result);
+
+        // $query1 = $this->requete("SELECT id FROM sous_categories WHERE name = :nameSousCategorie");
+        // var_dump($query1);
+        // $query1->execute([
+        //     'nameSousCategorie' => $nameSousCategorie
+        // ]);
+        // $result1 = $query1->fetchAll();
+       
+
+        // $query = $this->requete("SELECT products.*, GROUP_CONCAT(images.url_image SEPARATOR ',') as url FROM `products` 
+        // INNER JOIN images ON products.id = images.id_product 
+        // INNER JOIN sous_categories ON sous_categories.id = products.id_sous_categorie 
+        // INNER JOIN categories ON categories.id = products.id_categorie 
+        // WHERE sous_categories.id = :correspondanceId 
+        // GROUP BY products.id");
+        
+        // $query->execute([
+        //     'correspondanceId' => $result1
+        // ]);
+        // $result = $query->fetchAll();
+
+        //pas oublié le returned
+
+        return array();
     }
    
 
