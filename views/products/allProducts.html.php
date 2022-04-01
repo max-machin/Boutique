@@ -4,12 +4,16 @@
 <nav>
     <ul>
     <?php foreach ($sousCategories as $sousCategorie) { ?>
-            <li><?php echo $sousCategorie['name']; ?></li>
+            <li>
+            <a href="<?=$sousCategorie['name']?>"><?php echo $sousCategorie['name']; ?></a>
+        </li>
             
     <?php } ?> 
         
     </ul>
 </nav>
+
+<!-- <a href="'.urlmac.'products/'.$categorie['name'].'">'.$categorie['name'].'</a> -->
 
 <!-- <form action="" method="GET">
     <select name="sous_categorie">
