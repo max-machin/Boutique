@@ -263,7 +263,7 @@ if ( empty ( $user)) {
                             <p>Prix sans PROMO : <i class="bold"><?= $commandPrice ?>€</i></p>
                             <p>PROMO : <i class="bold"><?= $promo ?>%</i></p>
                             <p>Prix avec PROMO : <i class="bold"><?= $commandPricePromo ?>€</i></p>
-                            <p>Livraison : <i class="bold"><?= $price[0] ?>€</i>  (<?= $mode[0] ?>)</p>
+                            <p>Livraison : <i class="bold"><?= $deliveryPrice[0] ?>€</i>  (<?= $mode[0] ?>)</p>
                             <p>Prix total commande : <i class="bold"><?= $commandPricePromo + $price[0]  ?>€</i></p>
                             <?php
                         }

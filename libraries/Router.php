@@ -26,9 +26,11 @@ class Router
             if(!empty($url[0]))
             {
                 if($url[0] == 'accueil'){ 
-                    Renderer::render('accueil'); 
-                    
-                }  
+                    CommandsController::selectBestsellers();
+                    // Renderer::render('accueil');  
+                } elseif ($url[0] == 'about') {
+                    Renderer::render('about'); 
+                }
             }
             // Si on a un élément en url
 
@@ -167,7 +169,7 @@ class Router
  
             if ( $controllerName == "BagsController")
             {
-                if ( $url[0] == "bags")
+                if ($url[0] == "bags")
                 {
                     $controllerName::showBag();
                 }
@@ -176,7 +178,7 @@ class Router
 
 
                 if ($controllerName == "AdminController"){
-                    if(empty($url[1]) && empty($url[2])){
+                    if(empty($url[1]) && empty($url[2]) && $url[0] == 'admin'){
                         Renderer::render('admin/backoffice');
                     }
                     elseif(!empty($url[1]) && empty($url[2])){

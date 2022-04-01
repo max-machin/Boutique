@@ -1,6 +1,6 @@
 <div class="successCommand">
     <p class="textcommand success txt-center">Bravo <?= $_SESSION['user_data']['prenom'] ?> <i class="fa-solid fa-thumbs-up"></i>. <br/> 
-    Un récapitulatif de votre commande est disponible depuis votre <a href="profil">profil</a>. <br/>
+    Un récapitulatif de votre commande est disponible depuis votre <a href="users/profil">profil</a>. <br/>
     Une facture vous a également été envoyé par mail.</p>
 </div>
 

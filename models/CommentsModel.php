@@ -147,7 +147,7 @@ class Commentsmodel extends Model
      */
     public function productComment($id)
     {
-        return $this->requete("SELECT users.prenom, comments.comment, comments.note, DATE_FORMAT(date, '%d/%m/%Y') AS 'datefr' , DATE_FORMAT(date, '%H:%i:%s') AS 'heurefr' FROM `comments` INNER JOIN `users` WHERE comments.id_user = users.id AND comments.id_product = $id")->fetchAll();
+        return $this->requete("SELECT users.prenom, comments.comment, comments.note, DATE_FORMAT(date, '%d/%m/%Y') AS 'datefr' , DATE_FORMAT(date, '%H:%i:%s') AS 'heurefr' FROM `comments` INNER JOIN `users` WHERE comments.id_user = users.id AND comments.id_product = $id ORDER BY date DESC")->fetchAll();
     }
 
     /**

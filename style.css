@@ -8,7 +8,11 @@
     - HEADER
     - FOOTER 
 - ACCUEIL
-    
+- SEEPRODUCT
+- ABOUT
+- ADMIN
+    - BACKOFFICE
+
 */
 
 /* ------------------------------------------------
@@ -35,6 +39,11 @@
 @font-face {
     font-family: LoremIpsum;
     src: url(fonts/Butler_Regular.otf);
+}
+
+@font-face {
+    font-family: LoremIpsumV2;
+    src: url(fonts/apercu_regular_pro.otf);
 }
 
 
@@ -530,7 +539,7 @@ footer {
     display: none;
 }
 
-.pop-up button:hover {
+.pop-up a button:hover {
     background-color: rgb(80, 80, 80);
 }
 
@@ -539,7 +548,16 @@ footer {
     background-color: rgb(216, 216, 216);
 }
 
+.pop-up button {
+    background-color:transparent;
+    border: none;
+}
+
 .mobilepopup button {
+    background-color: none;
+}
+
+.mobilepopup a button {
     margin: auto;
     font-size: 1.7vh;
     background-color: rgb(var(--clr-black));
@@ -586,35 +604,319 @@ footer {
 .pop-up .txt-center img {
     margin: 0 auto;
 }
+/* mobile */
 
-.pop-up input {
-    border: none;
-    border-bottom: 1px solid black;
+@media (max-width: 390px) {
+
+    .img-accueil {
+        width: 140px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #accueil-img {
+        display: flex;
+        flex-direction: row;
+        padding: 3% 0;
+    }
+
+    #accueil-text h1 {
+        text-align: center;
+        font-size: 2rem;
+    }
+
+    #accueil-text p {
+        text-align: center;
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #accueil-text button {
+        margin-left: 30%;
+    }
 }
 
-#subscribe-noir {
-    border: none;
-    background-color: transparent;
+/* ipad  */
+
+@media (min-width: 820px) {
+
+    .img-accueil {
+        width: 350px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #accueil-img {
+        display: flex;
+        flex-direction: row;
+        padding: 3% 0;
+    }
+
+    #accueil-text h1 {
+        font-size: 5em;
+    }
+
+    #accueil-text {
+        text-align: center;
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 
-#close {
+@media (min-width: 1224px){
+
+    #accueil-text h1 {
+        font-size: 5em;
+        text-align: left;
+    }
+
+    .img-accueil {
+        width: 450px;
+        margin-left: 10px;
+    }
+
+    .images-accueil {
+        display: flex;
+        flex-direction: row;
+        padding: 3% 0;
+    }
+
+    #accueil-text {
+        position: absolute;
+        right: 10%;
+        top: 50%;
+        width: 20vw;
+    }
+    
+    #accueil-text button {
+        margin-left: 20%;
+    }
+}
+
+#accueil-text h1 {
+    font-family: Titreprincipal;
+}
+
+#accueil-text p {
+    font-family: LoremIpsum;
+    font-size: 1.2em;
+    margin-left: 9%;
+}
+
+#accueil-text button {
+    font-size: 1.1em;
+    background-color: rgb(var(--clr-black));
+    color: rgb(var(--clr-white));
+    border-radius: 2%;
+    border: 1px solid black;
+    padding: 2%;
+}
+
+.accueil-bestsellers {
+    padding: 10% 0;
+}
+
+.accueil-bestsellers h2 {
+    padding-top: 3%;
+    font-family: SousTitreouAccent;
+    display: flex;
+    justify-content: center;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+.bestsellers-products {
+    display: flex;
+    flex-direction: column;
+    margin-left: 5%;
+    margin-top: 3%;
+    border: 1px solid rgb(var(--clr-lightgrey));
+}
+
+.intern-case {
+    padding: 2%;
+}
+
+.bestsellers-products img {
+    width: 230px;
+}
+
+.bestsellers-products h3 {
+    text-align: center;
+    margin-top: 15%;
+    font-family: LoremIpsum;
+}
+
+.bestsellers-products a {
+    color: #000;
+}
+
+.bestsellers-products button {
+    background-color: #000;
+    color: white;
     border: none;
-    background-color: transparent;
+    width: 100%;
+    border-radius: 5%;
+    font-family: LoremIpsum;
+}
+
+hr {
+    border: 0;
+    height: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3); 
+}
+
+.titre-instagram {
+    display: flex;
+    flex-direction: row;
+    justify-content: center; 
+    padding-top: 3%;
+    font-family: SousTitreouAccent;
+}
+
+.titre-instagram img {
+    margin-left: 10px;
+    margin-top: 8px;
+    height: 20px;
 }
 
 
-.txt-center {
+
+/* ------------------------------------------------
+
+                    SEEPRODUCT
+
+--------------------------------------------------- */
+
+.seeproduct {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+
+.slider {
+    width: 30vw;
+    height: 60vh;
+    position: sticky;
+    position: -webkit-sticky;
+    top: 5%;
+    margin: 5%;
+}
+
+.slider img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    opacity: 0;
+    transition: opacity .5s;
+}
+
+.slider img.active {
+    opacity: 1;
+}
+
+#previous, 
+#next {
+    position: absolute;
+    top: 50%; 
+    transform: translateY(-50%);
+    z-index: 4;
+}
+
+#previous {
+    height: auto;
+    width: 30px;
+    left: 1rem;
+    opacity: 1;
+}
+
+#next {
+    height: auto;
+    width: 30px;
+    right: 1rem;
+    opacity: 1;
+} 
+
+.text-product {
+    display: flex;
+    flex-direction: column;
+}
+
+.text-product h1 {
+    margin-top: 5%;
+    text-transform: uppercase;
+    font-family: SousTitreouAccent;
+    font-size: 1.5rem;
+    margin-right: 5%;
+}
+
+.titre_product {
+    display: flex;
+    flex-direction: row;
+}
+
+.titre_product button {
+    padding-top: 3%;
+}
+
+.fav {
+	font-size: 3vh;
+	background-color: transparent;
+	border: none;
+}
+
+.text-product p {
+    text-align: justify;
+    font-family: LoremIpsumV2;
+}
+
+.product_color {
+    display: flex;
+    margin: 5% 0;
+}
+
+.color {
+	border-radius: 100%;
+	height: 20px;
+	margin: 0 10px;
+	width:20px;
+	display:block;
 	text-align: center;
 }
-.hide {
-	display: none;
+
+.color input:checked {
+	border: 1px solid black;
+	opacity: 1;
 }
-  
-.clear {
-	float: none;
-	clear: both;
+
+.color input {
+	margin-top: 5%;
+	opacity: 0.01;
 }
-  
+
+.add_quantity {
+    margin-left: 5%;
+}
+
+.addBag {
+    margin-left: 5%;
+    width: 25%;
+    font-size: 1.1em;
+    background-color: rgb(var(--clr-black));
+    color: rgb(var(--clr-white));
+    border-radius: 2%;
+    border: 1px solid black;
+}
+
 .rating {
 	  width: 90px;
 	  /* unicode-bidi: bidi-override; */
@@ -779,7 +1081,7 @@ fieldset {
 }
 .userCommand {
     margin-top: 2vh;
-    font-family: "loremIpsum";
+    font-family: "LoremIpsumV2";
     text-align: center;
 }
 
@@ -1231,30 +1533,96 @@ fieldset {
 	display:block;
 	text-align: center;
 }
-
-.color input:checked {
-	border: 1px solid black;
-	opacity: 1;
-}
-
-.color input {
-	margin-top: 5%;
-	opacity: 0.01;
-}
-
-.colors {
-	opacity: 0;
-}
-
 i {
 	font-style: normal;
     font-family: FontAwesome;
 }
 
-.fav {
-	font-size: 3vh;
-	background-color: transparent;
-	border: none;
+
+.sectionComments
+{
+    margin: 10% 0;
+    background-color: rgb(var(--clr-lightgrey), 0.2);
+    padding: 3%;
+}
+
+.comments {
+    background-color: rgb(var(--clr-white));
+    width: 95%;
+    border: 1px solid rgb(var(--clr-lightgrey));
+    margin: auto;
+    margin-bottom: 3%;
+    padding: 3%;
+}
+
+.comments p {
+    text-align: justify;
+}
+
+.info_commentaire {
+    font-size: 0.8rem;
+}
+
+.post_comment {
+    margin: 0 20%;
+}
+
+.post_comment input {
+    margin-left: 25%;
+    font-size: 1.1em;
+    background-color: rgb(var(--clr-black));
+    color: rgb(var(--clr-white));
+    border-radius: 2%;
+    border: 1px solid black;
+}
+
+
+
+
+/* ------------------------------------------------
+
+                    ABOUT
+
+--------------------------------------------------- */
+
+
+@media (max-width: 820px) {
+    .about img {
+        display: none;
+    }
+
+    .container_about h2 {
+        font-size: 40px;
+    }
+
+}
+
+@media (min-width: 821px) {
+    .about img {
+        width: 400px;
+    }
+    
+    .container_about {
+        padding-left: 15%;
+    }
+
+    .container_about h2 {
+        font-size: 2rem;
+        text-align: center;
+    }   
+
+}
+
+.about {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.container_about h2 {
+    font-family: SousTitreouAccent;
 }
 
 
@@ -1268,7 +1636,7 @@ i {
         padding: 5vh;
     }
 
-    .pop-up button{
+    .pop-up a button{
         margin: right;
         color: white;
         background-color: black;
@@ -1643,4 +2011,52 @@ i {
         display: block;
     }
 }
+.who {
+    margin-top: 5%;
+}
+
+.who p {
+    font-family: LoremIpsumV2;
+    text-align: justify;
+    width: 70%;
+}
+
+.brand p {
+    font-family: LoremIpsumV2;
+    text-align: justify;
+    width: 70%;
+}
+
+
+
+/* ------------------------------------------------
+
+                    ADMIN
+
+--------------------------------------------------- */
+
+
+/* 
+                BACKOFFICE
+*/
+
+
+
+
+
+
+
+.txt-center {
+	text-align: center;
+}
+.hide {
+	display: none;
+}
+  
+.clear {
+	float: none;
+	clear: both;
+}
+  
+
 
