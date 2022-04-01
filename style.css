@@ -423,11 +423,6 @@ SINON rajouter avant container une autre class/un autre mot donc et apr√®s le d√
 }
 
 
-
-
-
-
-
 /* 
                 FOOTER
 */
@@ -485,29 +480,84 @@ footer {
 
 --------------------------------------------------- */
 
-    
+.error-msg {
+    margin-right: 1vh;
+    padding: 4px 2vh;
+    text-align: center;
+    font-weight: 500;
+    font-family: "SousTitreouAccent";
+}
+
+.error-msg {
+    color: #D8000C;
+}
+
+.success {
+    background-color: #DFF2BF;
+    margin-right: 1vh;
+    padding: 4px 1vh;
+    width: auto;
+    text-align: center;
+    font-weight: 500;
+    font-family: "SousTitreouAccent";
+    color: #4F8A10;
+}
+
+.success-msg {
+    margin-right: 1vh;
+    padding: 4px 1vh;
+    width: auto;
+    text-align: center;
+    font-weight: 500;
+    font-family: "SousTitreouAccent";
+}
+
+.success-msg {
+    color: #4F8A10;;
+}
 
 .pop-up {
     background-color: rgb(var(--clr-white));
-    width: 100%;
+    width: 90%;
     border: 2px solid rgb(var(--clr-lightgrey));
-    padding: 5%;
-    border-radius: 7%;
     position: absolute;
     margin-left: auto;
     margin-right: auto;
+    top: 15vh;
     left: 0;
     right: 0;
     z-index: 5;
     display: none;
 }
 
-.pop-up article{
+.pop-up button:hover {
+    background-color: rgb(80, 80, 80);
+}
+
+.mobilepopup {
+    justify-content: flex-end;
+    background-color: rgb(216, 216, 216);
+}
+
+.mobilepopup button {
+    margin: auto;
+    font-size: 1.7vh;
+    background-color: rgb(var(--clr-black));
+    color: white;
+    padding: 1vh 1vh;
+    text-transform: uppercase;
+}
+
+.desktopAccueil {
+    display: none;
+}
+
+.pop-up article:nth-child(1){
     justify-content: center;
 }
 
 .pop-up article h3 {
-    margin-top: 3vh;
+    margin-top: 1vh;
     font-family: "SousTitreouAccent";
 }
 
@@ -519,7 +569,7 @@ footer {
 
 .pop-up p {
     font-family: "loremIpsum";
-    font-weight: 500;
+    font-weight: 600;
     /* text-align: justify; */
 }
 
@@ -529,12 +579,12 @@ footer {
     text-decoration: underline;
 }
 
-.pop-up img {
+.pop-up .flex img, .pop-up .txt-center img {
     height: 200px;
 }
 
 .pop-up .txt-center img {
-    margin: auto;
+    margin: 0 auto;
 }
 
 .pop-up input {
@@ -607,6 +657,7 @@ footer {
 /* FORMULAIRE GENERIQUE*/
 .form {
     text-align: center;
+    margin-bottom: 3vh;
 }
 
 
@@ -623,7 +674,7 @@ footer {
     border: none;
     border-bottom: 1px solid black;
     display: block;
-    font-size: 16px;
+    font-size: 18px;
     padding: 10px 0;
     width: 100%;
     max-width: 40vh;
@@ -631,7 +682,7 @@ footer {
 
 .form-group label {
     font-family: "SousTitreouAccent";
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 100;
     position: absolute;
     top: 0;
@@ -648,13 +699,15 @@ footer {
 
 .form-group input:valid + label,
 .form-group input:focus + label {
-    font-size: 14px;
+    font-size: 15px;
     transform: translateY(0);
 }
 
 .submit {
     font-family: "SousTitreouAccent";
-    padding: 3px 30px;
+    padding: 1vh 30px;
+    text-transform: uppercase;
+    font-weight: 600;
     border: none;
     background-color:  rgb(var(--clr-pink));
     cursor: pointer;
@@ -709,10 +762,17 @@ footer {
                 USER PROFIL
 
 --------------------------------------------------- */
+fieldset {
+    margin-bottom: 2vh;
+}
+
 .submit-profil {
     margin-bottom: 3vh;
 }
 
+.articleProfil img {
+    display: none;
+}
 .sous-titre {
     font-family: "SousTitreouAccent";
     margin-bottom: 3vh;
@@ -725,17 +785,14 @@ footer {
 
 /* USER PROFIL COMMANDE */
 
-.userCommand .flex {
-    justify-content: space-evenly;
-}
 .name {
     flex-wrap: flex;
 }
 
 .article-profil {
     grid-template-columns: repeat(5, 1fr);
-    align-self: center;
-    justify-self: center;
+    /* align-self: center;
+    justify-self: center; */
 }
 
 /* USER PROFIL PRODUCTS */
@@ -760,15 +817,16 @@ footer {
     font-family: "SousTitreouAccent";
     margin:2% 8%;
     flex-wrap: wrap;
-    border-radius: 4px;
     line-height: 2vh;
 }
 
-.section-comment article:nth-child(odd) {
+@media (max-width: 820px) {}
+
+.section-comment article:nth-child(even) {
     text-align: right;
 }
 
-.section-comment article:nth-child(even) {
+.section-comment article:nth-child(odd) {
     text-align: left;
 }
 
@@ -787,6 +845,7 @@ footer {
     margin-top: 2vh;
     background-color:transparent;
     border: none;
+    cursor: pointer;
 }
 /* ------------------------------------------------
 
@@ -807,7 +866,7 @@ footer {
     width: 120px;
 }
 .bagProduct .productbag{
-    justify-content: space-between;
+    /* justify-content: space-between; */
     /* margin: 0; */
     height: content;
     margin-bottom: 1vh;
@@ -828,20 +887,30 @@ footer {
     margin: 0;
     
 }
-
-.intproductbag a {
-    font-size: 1.6vh;
-    color: rgb(27, 27, 27);
+.intproductbag p::first-letter {
     text-transform: uppercase;
+}
+
+.intproductbag p a {
+    font-size: 2.7vh;
+    color: rgb(27, 27, 27);
     font-weight: 700;
+}
+
+.bagProduct .flex button {
+    color: rgb(212, 0, 0);
+
 }
 
 .bagProduct .flex button, .bagProduct .flex input {
     background-color:transparent;
     border: none;
     font-weight: 900;
-    color: rgb(145, 145, 145);
     font-size: 2vh;
+}
+
+.delete1 {
+    display: none;
 }
 
 .bagPrice {
@@ -875,6 +944,27 @@ footer {
     margin-bottom: 5vh;
 }
 
+.emptyBag {
+    margin-bottom: 5vh;
+}
+
+.emptyBag i {
+    font-size: 7vh;
+}
+
+.emptyBag p {
+    font-size: 2.4vh;
+    font-family: "loremIpsum";
+}
+
+.emptyBag a {
+    color: black;
+}
+
+.emptyBagcontainer {
+    display: none;
+}
+
 
 /* ------------------------------------------------
 
@@ -889,6 +979,7 @@ footer {
 
 .command {
     font-family: "loremIpsum";
+    margin-bottom: 5vh;
 }
 
 .commandproduct {
@@ -930,6 +1021,30 @@ footer {
     font-size: 2.2vh;
 }
 
+.delivery-mode {
+    margin-bottom: 5vh;
+    margin-top: 5vh;
+}
+
+.delivery-mode div {
+    margin-bottom: 5vh;
+    margin-top: 5vh;
+    font-size: 2.4vh;
+    padding: 3vh 5vh;
+    border: 1px solid #d8d8d8;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.delivery-mode div p i{
+    font-family: "SousTitreouAccent";
+    font-weight: 600;
+}
+
+.delivery-form {
+    margin-bottom: 5vh;
+    margin-top: 5vh;
+}
+
 
 #prix {
     text-align: center;
@@ -942,16 +1057,162 @@ footer {
                 PAIEMENTS
 
 --------------------------------------------------- */
-#card-elements {
-    margin-bottom: 2vh;
+#card-elements{
+    width: 40vh;
+    margin: auto;
+    padding: 1.4vh;
+    background: #efefef;
+    margin-bottom: 4vh;
 }
-.success a {
-    font-weight: 900;
+
+.paiement {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10vh;
+}
+
+.paiement img {
+    height: 50vh;
+}
+
+.paiement form {
+    border: 1px solid #d8d8d8;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    width: 60vh;
+    text-align: center;
+}
+
+.paiement .sous-titre {
+
+    margin: 5vh 0 0 0;
+}
+
+.row span {
+    position: relative;
+    display: inline-block;
+    margin: 30px 10px;
+}
+
+.basic-slide {
+    display: inline-block;
+    width: 30vh;
+    padding: 1vh 30px;
+    font-family: "Open Sans", sans;
+    font-weight: 400;
+    color: black;
+    background: #efefef;
+    border: 0;
+    border-radius: 3px;
+    outline: 0;
+    text-indent: 70px;
+    transition: all 0.3s ease-in-out;
+  }
+  .basic-slide::-webkit-input-placeholder {
+    color: #efefef;
+    text-indent: 0;
+    font-weight: 300;
+  }
+  .basic-slide + label {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 1vh 15px;
+    text-shadow: 0 1px 0 rgba(19, 74, 70, 0.4);
+    background: rgb(var(--clr-pink));
+    transition: all 0.3s ease-in-out;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+  }
+  .basic-slide:focus, .basic-slide:active {
+    color: black;
+    text-indent: 0;
+    background-color: #f8f8f8d8;
+    padding: 1vh 30px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  .basic-slide:focus::-webkit-input-placeholder, .basic-slide:active::-webkit-input-placeholder {
+    color: #aaa;
+    background-color: #f8f8f8d8;
+    padding: 1vh 30px;
+  }
+  .basic-slide:focus + label, .basic-slide:active + label {
+    transform: translateX(-80%);
+  }
+  
+
+/* ------------------------------------------------
+
+               SUCCESS COMMAND
+
+--------------------------------------------------- */
+
+.successCommand {
+    width: 80%;
+    margin: auto;
+}
+
+.successCommand p {
+    padding: 4vh;
+}
+
+.successCommand p a {
+    font-weight: bold;
+    color: rgb(11, 97, 19);
+}
+
+.successCommand p a:hover {
+    text-decoration: underline;
+}
+
+.commandImageSuccess {
+     display: none;
+}
+
+.commandImage {
+    left: 0;
+    display: flex;
+    justify-content: center;
+    margin: 10vh;
+}
+
+.commandImage .content {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    text-align: center;
+    background-color: rgb(245, 245, 245);
+}
+
+.commandImage .content h3 {
+    padding: 0 3vh;
+    margin-top: 6vh;
+    font-family: "SousTitreouAccent";
+}
+
+.commandImage .content button {
+    margin: auto;
+    font-size: 2.3vh;
+    background-color: rgb(var(--clr-black));
+    color: white;
+    padding: 1vh 1vh;
+    text-transform: uppercase;
+}
+
+.commandImage .content button:hover {
+    background-color: rgb(80, 80, 80);
+}
+
+.commandImage .content p {
+    font-size: 2.4vh;
+    font-family: "loremIpsum";
+}
+
+.commandImage .content a {
     color: black;
 }
 
-.success a:hover {
-    text-decoration: underline;
+.commandImage img {
+    height: 30vh;
 }
 
 /* ------------------------------------------------
@@ -996,25 +1257,112 @@ i {
 	border: none;
 }
 
+
+
+
+
 @media (min-width: 821px) {
 
-    
+    .pop-up {
+        width: 60%;
+        padding: 5vh;
+    }
+
+    .pop-up button{
+        margin: right;
+        color: white;
+        background-color: black;
+    }
+
+    .pop-up .flex {
+        display: none;
+    }
+
+    .pop-up h1 {
+        font-family: "Titreprincipal";
+        font-size: 5vh;
+    } 
+
+    .desktopAccueil {
+        display: block;
+    }
+
+    .pop-up article {
+        justify-content: space-between;
+    }
+
+    .desktopAccueil {
+        display: block;
+        background-color: rgb(216, 216, 216);
+        padding: 0;
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .desktopAccueil img {
+        right : 0;
+    }
+
+    .desktopAccueil div {
+        margin: 0 auto;
+        text-align: center;
+
+    }
 /* ------------------------------------------------
 
                 FORMULAIRES
 
 --------------------------------------------------- */
+    h1 {
+        margin-top: 3vh;
+        margin-bottom: 3vh;
+        font-family: "Titreprincipal";
+    }
 
     .form {
         text-align: center;
+        margin-bottom: 5vh;
     }
+
     .form-group input{
-        text-align: center;
+        padding: 10px 1vh;
+        text-align: left;
         display:initial;
+        font-size: 15px;
     }
 
     .form-group label {
-        left: 36%;
+        left: 35%;
+    }
+
+    .form-group label { 
+        font-size: 17px;
+    }
+
+    .form-group input:valid + label,
+    .form-group input:focus + label {
+    color: rgb(var(--clr-pink));
+    font-size: 15px;
+    transform: translateY(0);
+    }
+
+    .logreg .submit {
+        margin-top: 2vh;
+    }
+
+    .reg .help {
+        margin-top: 3vh;
+    }
+
+    .submit {
+        text-align: center;
+        padding: 1vh 6vh;
+        font-weight: 700;
+    }
+
+    .sous_texte {
+        font-size:2.5vh;
     }
 
 /* ------------------------------------------------
@@ -1022,15 +1370,24 @@ i {
                 USER PROFIL
 
 --------------------------------------------------- */
+    .titre-profil {
+        margin-bottom: 7vh;
+    }
     .articleProfil {
         display: flex;
         justify-content: space-around;
         align-items: center;
+        margin-bottom: 7vh;
     }
 
     .articleProfil .form {
         max-width: 50vh;
         width: 100%;
+    }
+
+    .articleProfil img {
+        height: 420px;
+        display: block;
     }
 
     .articleProfil .form label {
@@ -1040,6 +1397,53 @@ i {
     .articleProfil .form h3 {
         font-family: "SousTitreouAccent";
     }
+    .userCommand .inCommandUser 
+    {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .section-favoris {
+        margin-top: 6vh;
+        margin-bottom: 7vh;
+    }
+
+    .section-comment {
+        margin-top: 7vh;
+        margin-bottom: 7vh;
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+    }
+
+    .section-comment article:nth-child(even) {
+        padding-top: 2vh;
+        padding-bottom: 2vh;
+        text-align: center;
+        border: 1px solid #d8d8d8;
+    }
+
+    .section-comment article:nth-child(odd) {
+        padding-top: 2vh;
+        padding-bottom: 2vh;
+        text-align: center;
+        border: 1px solid #d8d8d8;
+    }
+
+    .section-comment a:hover {
+        margin-top: 1vh;
+        text-decoration: underline;
+    }
+
+    .section-comment form button:hover {
+        color: #575757;
+        
+    }
+
+    .section-comment hr {
+        display: none;
+    }
+
 
     /* ------------------------------------------------
 
@@ -1047,19 +1451,23 @@ i {
 
 --------------------------------------------------- */
 
+    .productbag {
+        justify-content: center;
+    }
+
     .inbag{
         display: flex;
         align-items: center;
-        gap: 10vh;
+        gap: 30vh;
     }
 
     .intproductbag {
-        font-size: 2.7vh;
+        font-size: 2.5vh;
         gap: 10vh;
     }
 
     .intproductbag a {
-        font-size: 2.3vh;
+        font-size: 2.1vh;
     }
 
     .intproductbag a:hover {
@@ -1067,7 +1475,16 @@ i {
     }
 
     .bagProduct .flex button, .bagProduct .flex input {
-        font-size: 3vh; 
+        font-size: 2.6vh; 
+        cursor: pointer;
+    }
+
+    .delete1 {
+        display: block;
+    }
+
+    .delete2 {
+        display : none;
     }
 
     .intproductbag:nth-child(1) {
@@ -1075,16 +1492,155 @@ i {
     }
 
     .bagPrice div {
-        font-size: 3vh;
+        font-size: 2.7vh;
     }
 
     .price {
-        font-size: 4vh;
+        font-size: 3.6vh;
     }
 
     .bagProduct img {
-        height:220px;
-        width: 180px;
+        height:170px;
+        width: 140px;
+    }
+
+    .emptyBagcontainer {
+        display: flex;
+        justify-content: center;
+    }
+    
+    .emptyBagcontainer div {
+        padding: 0 7vh;
+        text-align: center;
+        background-color: rgb(245, 245, 245);
+    }
+    
+    .emptyBagcontainer div h3 {
+        margin-top: 6vh;
+        font-size: 3vh;
+        font-family: "SousTitreouAccent";
+    }
+    
+    .emptyBagcontainer div p:nth-child(2){
+        font-family: "loremIpsum";
+        font-weight: 600;
+        color: #1a1a1a;
+    }
+    
+    .emptyBagcontainer div button {
+        background-color: rgb(var(--clr-black));
+        color: white;
+        padding: 1vh 4vh;
+        text-transform: uppercase;
+    }
+    
+    .emptyBagcontainer div button:hover {
+        background-color: rgb(117, 117, 117);
+    }
+
+    .emptyBag {
+        margin-top: 5vh;
+    }
+    
+
+    .emptyBag p {
+        font-size: 3vh;
+    }
+
+    .emptyBag button {
+        width: 45vh;
+        font-weight: 700;
+    }
+
+    /* ------------------------------------------------
+
+                COMMANDS
+
+--------------------------------------------------- */
+    .incommand {
+        left: 0;
+    }
+
+    .commandproduct {
+        display: flex;
+      
+        justify-content: center;
+    }
+
+    .incommand {
+        align-items: center;
+        display: flex;
+        /* justify-content: space-between; */
+        font-size: 2.5vh;
+        
+    }
+
+    .incommand a {
+        font-family: SousTitreouAccent;
+        text-transform: lowercase;
+        font-size: 2.7vh;
+        font-weight: 600;
+    }
+
+    .incommand div p::first-letter {
+        text-transform: uppercase;
+    }
+
+    .incommand a:hover {
+        text-decoration: underline;
+    }
+
+    .incommand .flex {
+        gap: 15vh;
+        justify-content: space-between;
+    }
+
+    .intcommandPorduct {
+        margin: 0 15vh;
+    }
+
+    .produit div p {
+        margin: 0;
+    }
+
+    .command form h2 {
+        font-size: 4vh;
+        margin-bottom: 0;
+        font-family: "SousTitreouAccent";
+    }
+
+    .command .form h3:nth-child(2){
+        font-family:  "SousTitreouAccent";
+        font-size: 4vh;
+    }
+
+    .delivery-mode {
+        margin-top: 0;
+        margin-bottom: 3vh;
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    .delivery-mode div {
+        font-size: 2.4vh;
+        padding: 3vh 15vh;
+        border: 1px solid #d8d8d8;
+        background-color: rgb(var(--clr-mint), 0.25);
+
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    }
+
+    
+
+}
+
+@media (min-width: 1000px){
+    .successCommand {
+        width: 50%;
+    }
+
+    .commandImageSuccess {
+        display: block;
     }
 }
 

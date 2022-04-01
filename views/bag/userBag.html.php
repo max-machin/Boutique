@@ -30,6 +30,7 @@
             <article class="bagProduct">   
                     <form action="" method="post">
                         <div class="flex productbag">
+                            <button class="# delete1" type="submit" name="deleteFromBagColors">&#x2715</button>
                             <img src="<?= url ?>Uploads/<?= $imagesColor[0] ?>" alt="">
 
                             <div class="inbag">
@@ -52,8 +53,9 @@
                                     <input type="hidden" name="id_color" value="<?= $bagProduct['id_color'] ?>">
                                     <input type="hidden" name="idProductColors" value=" <?= $bagProduct['id'] ?>">
                                     <input type="submit" name="submitQuantityColors" value="⟳">
-                                    <input type="hidden" name="idProductColors" value="<?= $bagProduct['id'] ?>"/>           
-                                    <button class="#" type="submit" name="deleteFromBagColors">&#x2715</button>
+                                    <input type="hidden" name="idProductColors" value="<?= $bagProduct['id'] ?>"/>
+                                    <button class="# delete2" type="submit" name="deleteFromBagColors">&#x2715</button>           
+                                    
                                 
                                     <div class="bagprice">
                                         <p> <?= $bagProduct['price'] ?>€</p>
@@ -87,11 +89,12 @@
                     
                     <form action="" method="post">
                         <div class="flex productbag">
-                       
+                            <button class="# delete1" type="submit" name="deleteFromBag">&#x2715</button>
                             <img src="<?= url ?>Uploads/<?= $images[0] ?>" alt="">
                             <div class="inbag">
                                 <div class="flex intproductbag">
                                     <p><a href="<?= url ?>products/<?= $product['id'] ?>"><?= $product['name'] ?></a></p>
+                                    <label class="color"></label>
                                 </div>
 
                                 <div class="flex intproductbag">
@@ -108,7 +111,7 @@
                                     <input type="submit" name="submitQuantity" value="⟳">
 
                                     <input type="hidden" name="idProduct" value="<?= $product['id'] ?>"/>           
-                                    <button class="#" type="submit" name="deleteFromBag">&#x2715</button>
+                                    <button class="# delete2" type="submit" name="deleteFromBag">&#x2715</button>
                                     <div>
                                         <p> <?= $product['price'] ?>€</p>
                                         <h4><?= $productsPrice ?>€</h4>  
@@ -143,8 +146,22 @@
             else 
         {
         ?>
-            <p>Votre panier est vide</p>
 
+        <article class="emptyBagcontainer">
+            <img src="images/generalvibe/collection1(1).jpeg" alt="" height="270px">
+            <div>
+                <h3>Parceque la beauté n'a pas de prix..</h3>
+                <p>Livraison offerte à partir de 50€</p>
+                <a href="products"><button class="submit">J'en profite</button></a>
+                <p class="help">Offre appliquable seulement pour le territoire Français*</p>
+            </div>
+        </article>
+
+        <article class="emptyBag txt-center">
+            <i class="fa-solid fa-tag"></i>
+            <p>Votre panier est vide</p>
+            <a href="products"><button class="submit">Commencer le shopping</button></a>
+        </article>
         <?php
         }
     } else {

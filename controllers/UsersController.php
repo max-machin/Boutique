@@ -166,16 +166,16 @@ class UsersController extends Controller
                             header ('location: profil');
 
                         } else {
-                            $error = "Login/Mot de passe incorrect";
+                            $error = "<i class='fa fa-times-circle'> </i> Login/Mot de passe incorrect";
                         }
                     } else {
-                        $error = "Login/Mot de passe incorrect";
+                        $error = "<i class='fa fa-times-circle'> </i> Login/Mot de passe incorrect";
                     }
                 } else {
-                    $error_password = "Veuillez insérer un password";
+                    $error_password = "<i class='fa fa-times-circle'> </i> Veuillez insérer un password";
                 }
             } else {
-                $error_email = "Veuillez insérer un E-mail";
+                $error_email = "<i class='fa fa-times-circle'> </i> Veuillez insérer un E-mail";
             }
         }
         Renderer::render('users/login' , compact('error_email' , 'error_password' , 'error'));
@@ -210,6 +210,8 @@ class UsersController extends Controller
         $display1 = "";
         $display2 = "none";
 
+        $success = "";
+
         // Création du model user 
         $model = new UsersModel();
         
@@ -234,8 +236,8 @@ class UsersController extends Controller
                 $users->Update($model);
 
                 $_SESSION['user_data']['email'] = $email;
-
                 header('refresh: 0');
+                
             }
 
             // Même fonctionnement que pour l'E-mail
@@ -253,6 +255,7 @@ class UsersController extends Controller
 
                 $_SESSION['user_data']['prenom'] = $prenom;
                 header('refresh: 0');
+                
             } 
             
             // Même fonctionnement que pour l'E-mail
@@ -311,13 +314,12 @@ class UsersController extends Controller
 
                     if ( $newPassword == $validPassword )
                     {
-                        var_dump($_POST);
                         $hash = password_hash( $newPassword, PASSWORD_DEFAULT );
 
                         $users = $model
                             ->setId($_SESSION['user_data']['id'])
                             ->setPassword($hash);
-                        
+                        $success = '<div class="success"> <i class="fa-solid fa-thumbs-up"></i> Mot de passe modifié avec succés </div>';
                         $users->Update($model);
                     } else {
                         $error_validPassword = "Validation de mot de passe échouée";
@@ -353,7 +355,7 @@ class UsersController extends Controller
         }
         
 
-        Renderer::render('users/profil' , compact('user', 'error_new_password', 'error_validPassword', 'error_old_password', 'display1' , 'display2', 'userCommands', 'userProducts','userComments'));
+        Renderer::render('users/profil' , compact('user', 'error_new_password', 'error_validPassword', 'error_old_password', 'display1' , 'display2', 'userCommands', 'userProducts','userComments', 'success'));
     }
 
     /**
@@ -422,7 +424,7 @@ class UsersController extends Controller
      * Fonction d'affichage de la commande user en fonction du panier user 
      * Possibilité dans cette fonction pour l'user d'ajouter un code PROMO sur sa commande afin de bénficier d'une réduction
      *
-     * @return void
+     * @return void 
      */
     public static function seeCommand()
     {
@@ -477,7 +479,18 @@ class UsersController extends Controller
                 $error = "Veuillez remplir les informations de livraison";
             }
         }
-        Renderer::render('users/commands', compact('command','commandColors' ,'error', 'findDeliveries', 'images', 'imagesColors'));
+
+        if ( isset ($imagesColors)){
+            Renderer::render('users/commands', compact('command','commandColors' ,'error', 'findDeliveries','imagesColors'));
+        }
+        elseif ( isset ($images)){
+            Renderer::render('users/commands', compact('command','commandColors' ,'error', 'findDeliveries', 'images'));
+        } elseif ( isset($images) && isset($imagesColors)){
+            Renderer::render('users/commands', compact('command','commandColors' ,'error', 'findDeliveries', 'images', 'imagesColors'));
+        } else {
+            Renderer::render('users/commands', compact('command','commandColors' ,'error', 'findDeliveries'));
+        }
+        
     } 
 
     /**

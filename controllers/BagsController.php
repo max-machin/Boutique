@@ -78,7 +78,19 @@ class BagsController extends Controller
         {
             header('location: users/commands');
         }
-        Renderer::render('bag/userBag', compact('bagProductsColors','bagProducts', 'findColors', 'imagesColors','images'));
+
+        if ( isset ($imagesColors)){
+            Renderer::render('bag/userBag', compact('bagProductsColors','bagProducts', 'findColors', 'imagesColors'));
+        }
+        elseif ( isset ($images)){
+            Renderer::render('bag/userBag', compact('bagProductsColors','bagProducts', 'findColors','images'));
+        }
+        elseif ( isset($images) && isset($imagesColors)) {
+            Renderer::render('bag/userBag', compact('bagProductsColors','bagProducts', 'findColors', 'imagesColors','images')); 
+        } else {
+            Renderer::render('bag/userBag', compact('bagProductsColors','bagProducts', 'findColors'));
+        }
+        
     }
 }
 

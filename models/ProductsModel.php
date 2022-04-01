@@ -9,6 +9,7 @@ class ProductsModel extends Model
     protected $id_categorie;
     protected $id_sous_categorie;
 
+
     /**
      * Fonction construct indique la table concernée par le modele
      */
@@ -248,6 +249,11 @@ class ProductsModel extends Model
         $query = $this->requete("SELECT * FROM `sous_categories` WHERE id_categorie = 1");
      
         return $query->fetchAll();
+    }
+
+    public function findRelatedproduct($tags)
+    {
+        return $this->requete("SELECT p.id as id_product, p.name as product_name, i.url_image as url_image FROM products as p INNER JOIN images as i on p.id = i.id_product ");
     }
 
     

@@ -5,10 +5,11 @@ if ( empty ( $user)) {
     header('location: login');
 } else {
 ?>
-    <h2 class="txt-center sous-titre">Vos informations personnelles</h2>
+    <h1 class="txt-center titre-profil">Votre profil</h1>
+   
     <article class="articleProfil">
         <form class="form" action="" method="post">
-            
+            <h2 class="sous-titre">Informations personnelles</h3>
             <div class="form-group">
                 <input id="email" type="email" name="email" value="<?= $user['email'] ?>" required>
                 <label for="email">E-mail * (facturation)</label>
@@ -23,34 +24,36 @@ if ( empty ( $user)) {
             </div>
             <input class="submit submit-profil" type="submit" name="submit" value="Modifier infos">
         </form>
-
         
+        <img src="images/generalvibe/general1.jpeg" alt="">
         <form class="form" action="" method="post" style="display: <?= $display1 ?>">
-        <h3>Mot de passe</h3>
+        <h2 class="sous-titre">Mot de passe</h3>
+            <?= $success ?>
             <div class="form-group">
                 <input id="oldPassword" type="password" name="oldPassword" required>
                 <label for="oldPassword">Ancien mot de passe *</label>
-                <span><?= $error_old_password ?></span>
+                <div class="error-msg"><?= $error_old_password ?></div>
             </div>
             <input class="submit submit-profil" type="submit" name="subPassword" value="Confirmer password">
         </form>
 
         <form class="form" action="" method="post" style="display: <?= $display2 ?>">
-        <h3>Mot de passe</h3>
+        <h2 class="sous-titre">Mot de passe</h3>
             <div class="form-group">
                 <input id="newPassword" type="password" name="newPassword" required>
                 <label for="newPassword">Nouveau mot de passe *</label>
-                <span><?= $error_new_password ?></span>
+                <div class="error-msg"><?= $error_new_password ?></div>
             </div>
             <div class="form-group">
                 <input id="validPassword" type="password" name="validPassword" required>
                 <label for="validPassword">Valider mot de passe *</label>
-                <span><?= $error_validPassword ?></span>
+                <div class="error-msg"><?= $error_validPassword ?></div>
             </div>
             <input class="submit submit-profil" type="submit" name="subNewPassword" value="Modifier password">
         </form>
+    
     </article>
-    <h2 class="sous-titre userCommand">Vos dernières commandes</h2>
+    <h2 class="sous-titre txt-center">Vos dernières commandes</h2>
 
 <?php 
 
@@ -113,158 +116,161 @@ if ( empty ( $user)) {
         ?>
         <fieldset>
             <article class="userCommand">
-                <p>N° de commande : <i class="bold"><?= $num ?></i></p>
+                <div class="inCommandUser">
+                    <article>
+                        <p>N° de commande : <i class="bold"><?= $num ?></i></p>
             
             <?php
         }
-            foreach(array_unique($promos) as $promo)
-            {
-                if ( $deliveryPrice[0] === '')
+                foreach(array_unique($promos) as $promo)
                 {
-                    $deliveryPrice[0] = 0;
-                }
-                $commandPrice = $commandPrice += $deliveryPrice[0];
+                    if ( $deliveryPrice[0] === '')
+                    {
+                        $deliveryPrice[0] = 0;
+                    }
+                    $commandPrice = $commandPrice += $deliveryPrice[0];
 
-                if ( $promo === "")
-                {
+                    if ( $promo === "")
+                    {
                     
-                    ?>
-                    <p>Montant : <i class="bold"><?= $commandPrice ?>€</i></p>
-                    <?php
+                        ?>
+                        <p>Montant : <i class="bold"><?= $commandPrice ?>€</i></p>
+                        <?php
 
-                } else {
-                $commandPricePromo = $commandPricePromo += $deliveryPrice[0];
+                    } else {
+                    $commandPricePromo = $commandPricePromo += $deliveryPrice[0];
+                        ?>
+                        <p>Montant: <i class="bold"><?= $commandPricePromo ?>€</i></p>
+                        <?php
+                    }
+                }
+
+                foreach (array_unique($dates) as $date)
+                {   
                     ?>
-                    <p>Montant: <i class="bold"><?= $commandPricePromo ?>€</i></p>
+                    <p>Date : <i class="bold"><?= $date ?></i></p>
+                    
                     <?php
                 }
-            }
 
-            foreach (array_unique($dates) as $date)
-            {   
-                ?>
-                <p>Date : <i class="bold"><?= $date ?></i></p>
                 
-                <?php
-            }
-
-            
-            foreach ( array_unique($livraisons) as $livraison)
-            {
-                ?>
-                <!-- <div class="flex"> -->
-                    <div>
-                        <h3>Expédition</h3>
-                        <p>Adresse de livraison : <i class="bold"><?= $livraison ?></i></p>
-                    </div>
-                <?php
-            }
-
-
-            
-            foreach ( array_unique($facturations) as $facturation)
-            {
-                ?>
-                    <div>
-                        <h3>Facturation</h3>
-                        <p>Adresse de facturation : <i class="bold"><?= $facturation ?></i></p>
-                    </div>
-                <!-- </div> -->
-                <?php
-            }
-            
-            ?>
-            <article class="grid article-profil">
-                <div>
-                   <h4>Produits</h4> 
-                    <?php
-                        foreach($names as $name)
-                        {
-                        ?>
-                            <p><?= $name ?></p>
-                        <?php
-                        }
-                    ?>
-                </div>
-                <div>
-                   <h4>Couleurs</h4> 
-                    <?php
-                        foreach($colors as $color)
-                        {
-                            $model = new ColorsModel();
-                            $find = $model->find(intval($color));
-                            ?>
-                                <p><?= $find['name'] ?></p>
-                            <?php
-                        }
-                    ?>
-                </div>
-                <div>
-                    <h4>Prix</h4>
-                    <?php
-                        foreach($prices as $price)
-                        {
-                        ?>
-                            <p><?= $price ?>€</p>
-                        <?php
-                        }
-                    ?>
-                </div>
-                <div>
-                    <h4>Quantité</h4>
-                    <?php
-                        foreach($quantities as $quantity)
-                        {
-                        ?>
-                            <p><?= $quantity ?></p>
-                        <?php
-                        }
-                    ?>
-                </div>
-                
-                <div>
-                    <h4>Prix</h4>
-                    <?php
-                        foreach($total_prices as $total_price)
-                        {
-                            ?>
-                                <p><?= $total_price ?>€</p>
-                            <?php
-                        }
-                    ?>
-                </div>
-                
-            </article>
-
-            <?php
-
-            foreach(array_unique($promos) as $promo)
-            {
-                
-                if ( $promo === "")
+                foreach ( array_unique($livraisons) as $livraison)
                 {
-                    $totalPrice = $commandPrice - $deliveryPrice[0];
-                
                     ?>
-                    <p>Prix total : <i class="bold"><?= $totalPrice ?>€</i></p>
-                    <p>Pas de PROMO</p>
-                    <p>Livraison : <i class="bold"><?= $deliveryPrice[0] ?>€</i> (<?= $mode[0] ?>)</p>
-                    <p>Prix total commande : <i class="bold"><?= $commandPrice ?>€</i></p>
-                    <?php
-
-                } else {
-
-                    ?>
-                    <p>Prix sans PROMO : <i class="bold"><?= $commandPrice ?>€</i></p>
-                    <p>PROMO : <i class="bold"><?= $promo ?>%</i></p>
-                    <p>Prix avec PROMO : <i class="bold"><?= $commandPricePromo ?>€</i></p>
-                    <p>Livraison : <i class="bold"><?= $price[0] ?>€</i>  (<?= $mode[0] ?>)</p>
-                    <p>Prix total commande : <i class="bold"><?= $commandPrice ?>€</i></p>
+                        <div>
+                            <h3>Expédition</h3>
+                            <p>Adresse de livraison : <i class="bold"><?= $livraison ?></i></p>
+                        </div>
                     <?php
                 }
-            }
-            ?>
-            </article>
+
+
+            
+                foreach ( array_unique($facturations) as $facturation)
+                {
+                    ?>
+                        <div>
+                            <h3>Facturation</h3>
+                            <p>Adresse de facturation : <i class="bold"><?= $facturation ?></i></p>
+                        </div>
+                    <?php
+                }
+                
+                ?>
+                </article>
+                <section class="containerCommandUser">
+                    <article class="grid article-profil">
+                        <div>
+                            <h4>Produits</h4> 
+                            <?php
+                                foreach($names as $name)
+                                {
+                                ?>
+                                    <p><?= $name ?></p>
+                                <?php
+                                }
+                            ?>
+                        </div>
+                        <div>
+                        <h4>Couleurs</h4> 
+                            <?php
+                                foreach($colors as $color)
+                                {
+                                    $model = new ColorsModel();
+                                    $find = $model->find(intval($color));
+                                    ?>
+                                        <p><?= $find['name'] ?></p>
+                                    <?php
+                                }
+                            ?>
+                        </div>
+                        <div>
+                            <h4>Prix</h4>
+                            <?php
+                                foreach($prices as $price)
+                                {
+                                ?>
+                                    <p><?= $price ?>€</p>
+                                <?php
+                                }
+                            ?>
+                        </div>
+                        <div>
+                            <h4>Quantité</h4>
+                            <?php
+                                foreach($quantities as $quantity)
+                                {
+                                ?>
+                                    <p><?= $quantity ?></p>
+                                <?php
+                                }
+                            ?>
+                        </div>
+                        
+                        <div>
+                            <h4>Prix</h4>
+                            <?php
+                                foreach($total_prices as $total_price)
+                                {
+                                    ?>
+                                        <p><?= $total_price ?>€</p>
+                                    <?php
+                                }
+                            ?>
+                        </div>
+                        
+                    </article>
+                </div>
+                    <?php
+
+                    foreach(array_unique($promos) as $promo)
+                    {
+                        
+                        if ( $promo === "")
+                        {
+                            $totalPrice = $commandPrice - $deliveryPrice[0];
+                        
+                            ?>
+                            <p>Prix total : <i class="bold"><?= $totalPrice ?>€</i></p>
+                            <p>Pas de PROMO</p>
+                            <p>Livraison : <i class="bold"><?= $deliveryPrice[0] ?>€</i> (<?= $mode[0] ?>)</p>
+                            <p>Prix total commande : <i class="bold"><?= $commandPrice ?>€</i></p>
+                            <?php
+
+                        } else {
+
+                            ?>
+                            <p>Prix sans PROMO : <i class="bold"><?= $commandPrice ?>€</i></p>
+                            <p>PROMO : <i class="bold"><?= $promo ?>%</i></p>
+                            <p>Prix avec PROMO : <i class="bold"><?= $commandPricePromo ?>€</i></p>
+                            <p>Livraison : <i class="bold"><?= $price[0] ?>€</i>  (<?= $mode[0] ?>)</p>
+                            <p>Prix total commande : <i class="bold"><?= $commandPricePromo + $price[0]  ?>€</i></p>
+                            <?php
+                        }
+                    }
+                    ?>
+                </article>
+            </section>
         </fieldset>
         <?php
         }
@@ -287,9 +293,9 @@ if ( empty ( $user)) {
         ?>
         
     </section>
-       
+    <h2 class="sous-titre txt-center">Vos commentaires</h2>
     <section class="txt-center section-comment">
-        <h2 class="sous-titre">Vos commentaires</h2>
+       
 
         <?php
 
