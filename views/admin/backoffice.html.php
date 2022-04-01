@@ -7,21 +7,23 @@ if(@$_SESSION['user_data']['id'] !== "1")
 
 ?>
 
-<form action="<?=urlLaura ?>admin/create" method="post">
-    <button type="submit" name="goCreate">Create a new product</button>   
-</form>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</head>
 
-<form action="<?=urlLaura ?>admin/update" method="post">
-    <button type="submit" name="goUpdate">Update a product</button>   
-</form>
 
-<!--  
-    
-    - update product va directement emmener sur une page qui recense tous les produits existants puis chaque produit -> next to it, un bouton update qui ramène à l'update(déjà fait).
-    Y aura aussi un bouton update d'images à côté de chaque produit, qui lui emmènera à une page qui recense toutes les images (update via l'id)
+<article>
+    <h1>Backoffice</h1>
 
-    - voir tous les users ?
+    <p>What do you want to do?</p>
 
-    - voir toutes les commandes ou lien vers les chiffres d'affaire
+    <form action="admin/create" method="post">
+        <button type="submit" class="btn btn-outline-dark" name="goCreate">Create a new product</button>
+    </form>
 
--->
+    <form action="admin/update" method="post">
+        <button type="submit" class="btn btn-outline-dark" name="goUpdate">Update a product</button> 
+    </form>
+</article>
+

@@ -1,3 +1,8 @@
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</head>
+
 <?php
 
 if(@$_SESSION['user_data']['id'] !== "1")
@@ -39,19 +44,19 @@ if(@$_SESSION['user_data']['id'] !== "1")
 ?>
 
         <form action="" method="post">
-        <label for="name">Name of the product</label>
-        <input type="text" name="name" id="name"/> 
+        <label class="form-label" for="name">Name of the product</label>
+        <input type="text" name="name" id="name" class="form-control"/> 
 
-        <label for="description">Description</label>
-        <textarea id="description" name="description"
-          rows="5" cols="33">
+        <label class="form-label" for="description">Description</label>
+        <textarea class="form-control" id="description" name="description"
+          rows="3" cols="33">
         </textarea>
 
         <label for="price">Price of the product</label>
         <input type="text" name="price" id="price"/>
 
         <label for="category-select">Choose a category:</label>
-        <select name="category" id="category-select">
+        <select class="form-select" name="category" id="category-select">
             <option value="skincare">Skincare</option>
             <option value="makeup">Make-up</option>
         </select>
@@ -63,7 +68,7 @@ if(@$_SESSION['user_data']['id'] !== "1")
         ?>
 
         <label for="subcategory-select">Choose a sub-category:</label>
-        <select name="subcategory" id="subcategory-select">
+        <select class="form-select" name="subcategory" id="subcategory-select">
             <option value="cleansers">Cleansers</option>
             <option value="lotions">Lotions</option>
             <option value="serums">Serums</option>
@@ -76,7 +81,7 @@ if(@$_SESSION['user_data']['id'] !== "1")
             {
         ?>
         <label for="subcategory-select">Choose a sub-category:</label>
-        <select name="subcategory" id="subcategory-select">
+        <select class="form-select" name="subcategory" id="subcategory-select">
             <option value="eyes">Eyes</option>
             <option value="face">Face</option>
             <option value="lips">Lips</option>
@@ -84,11 +89,11 @@ if(@$_SESSION['user_data']['id'] !== "1")
         <?php
         }
         ?>
-<button type="submit" name="getTheSubCate">Get the subcategories</button>
+<button class="btn btn-outline-dark" type="submit" name="getTheSubCate">Get the subcategories</button>
 <?php
     if(isset($_POST['getTheSubCate'])){
 ?>
-<button type="submit" name="createProduct">Add the product</button>
+<button class="btn btn-outline-dark" type="submit" name="createProduct">Add the product</button>
 <?php
     }
 ?>
