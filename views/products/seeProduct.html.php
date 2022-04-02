@@ -200,5 +200,5 @@
 
 </article>
        
-<script type="text/javascript" src="http://localhost/Boutique/views/products/js/script.js"></script>
+<script type="text/javascript" src="views/products/js/script.js"></script>
          
