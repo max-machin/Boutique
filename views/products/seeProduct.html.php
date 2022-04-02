@@ -11,7 +11,7 @@
         //les images
         foreach($images as $image){
         ?>     
-            <img src="<?= "uploads/ <?= $image ?>" ?>" width="50px">
+            <img src="uploads/<?= $image ?>" width="50px">
         <?php
             }
         ?>
@@ -20,7 +20,7 @@
 
         <form action="<?= $product['id'] ?>/update" method="post">  
             <input type="hidden" name="id" value="<?= $product['id'] ?>"/>          
-            <button class="#" type="submit" name="updateProduct">Update</button>
+            <button class="addBag" type="submit" name="updateProduct">Update</button>
         </form>
     <?php
 
