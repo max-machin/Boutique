@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : jeu. 10 mars 2022 à 13:33
+-- Généré le : sam. 02 avr. 2022 à 13:23
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -35,7 +35,14 @@ CREATE TABLE IF NOT EXISTS `bags` (
   `quantity_product` int(11) NOT NULL DEFAULT '1',
   `id_color` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `bags`
+--
+
+INSERT INTO `bags` (`id`, `id_user`, `id_product`, `quantity_product`, `id_color`) VALUES
+(7, 18, 2, 2, 3);
 
 -- --------------------------------------------------------
 
@@ -79,10 +86,10 @@ CREATE TABLE IF NOT EXISTS `colors` (
 
 INSERT INTO `colors` (`id`, `id_product`, `name`, `code`) VALUES
 (4, 2, 'marron', '582900 '),
-(2, 2, 'red', 'BB0B0B'),
+(2, 2, 'rouge', 'BB0B0B'),
 (3, 2, 'bordeaux', '6d071a '),
 (5, 2, 'violet', '723E64'),
-(7, 2, 'darkred', '8B0000');
+(7, 2, 'grenat', '8B0000');
 
 -- --------------------------------------------------------
 
@@ -97,32 +104,32 @@ CREATE TABLE IF NOT EXISTS `commands` (
   `id_user` int(11) NOT NULL,
   `id_product` int(11) NOT NULL,
   `quantity_product` int(11) NOT NULL,
+  `id_color` int(11) DEFAULT NULL,
   `price` float NOT NULL,
   `total_price` int(11) NOT NULL,
-  `date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `promo` int(11) DEFAULT NULL,
   `adresse_livraison` varchar(255) NOT NULL,
   `adresse_facturation` varchar(255) NOT NULL,
-  `id_color` int(11) DEFAULT NULL,
+  `price_livraison` float DEFAULT NULL,
+  `mode` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `commands`
 --
 
-INSERT INTO `commands` (`id`, `id_command`, `id_user`, `id_product`, `quantity_product`, `price`, `total_price`, `date`, `promo`, `adresse_livraison`, `adresse_facturation`, `id_color`) VALUES
-(1, 1, 13, 2, 2, 15, 30, '2022-03-05 15:25:58', NULL, '', '', NULL),
-(2, 1, 13, 3, 4, 40, 160, '2022-03-05 15:25:58', NULL, '', '', NULL),
-(33, 4, 13, 3, 1, 40, 40, '2022-03-05 17:08:24', NULL, '', '', NULL),
-(34, 4, 13, 2, 3, 15, 45, '2022-03-05 17:08:24', NULL, '', '', NULL),
-(51, 5, 13, 2, 4, 15, 60, '2022-03-09 20:30:16', 15, '10 Rue Beauvau 13001 Marseille', 'Cooker_13@outlook.fr', 5),
-(52, 5, 13, 3, 1, 40, 40, '2022-03-09 20:30:16', 15, '10 Rue Beauvau 13001 Marseille', 'Cooker_13@outlook.fr', NULL),
-(53, 5, 13, 2, 5, 15, 75, '2022-03-09 20:30:16', 15, '10 Rue Beauvau 13001 Marseille', 'Cooker_13@outlook.fr', 7),
-(54, 6, 13, 2, 4, 15, 60, '2022-03-09 21:39:20', NULL, '10 Rue Beauvau 13001 Marseille', 'Cooker_13@outlook.fr', 5),
-(55, 6, 13, 3, 4, 40, 160, '2022-03-09 21:39:20', NULL, '10 Rue Beauvau 13001 Marseille', 'Cooker_13@outlook.fr', NULL),
-(56, 7, 1, 2, 1, 15, 15, '2022-03-10 10:46:25', NULL, '10 Rue Beauvau 13001 Marseille', 'Cooker_13@outlook.fr', 2),
-(57, 7, 1, 3, 1, 40, 40, '2022-03-10 10:46:26', NULL, '10 Rue Beauvau 13001 Marseille', 'Cooker_13@outlook.fr', NULL);
+INSERT INTO `commands` (`id`, `id_command`, `id_user`, `id_product`, `quantity_product`, `id_color`, `price`, `total_price`, `date`, `promo`, `adresse_livraison`, `adresse_facturation`, `price_livraison`, `mode`) VALUES
+(72, 1, 13, 3, 1, NULL, 40, 40, '2022-03-13 22:31:20', NULL, '10 Rue Beauvau 13001 Marseille', 'Cooker_13@outlook.fr', 7.99, 'express'),
+(73, 2, 13, 2, 2, 3, 15, 30, '2022-03-13 23:01:55', NULL, '10 Rue Beauvau 13001 Marseille', 'Cooker_13@outlook.fr', NULL, NULL),
+(74, 2, 13, 2, 4, 5, 15, 60, '2022-03-13 23:01:55', NULL, '10 Rue Beauvau 13001 Marseille', 'Cooker_13@outlook.fr', NULL, NULL),
+(75, 2, 13, 2, 2, 4, 15, 30, '2022-03-13 23:01:55', NULL, '10 Rue Beauvau 13001 Marseille', 'Cooker_13@outlook.fr', NULL, NULL),
+(76, 3, 13, 2, 3, 2, 15, 45, '2022-03-14 20:38:58', 15, '10 Rue Beauvau 13001 Marseille', 'Cooker_13@outlook.fr', NULL, NULL),
+(77, 3, 13, 3, 1, NULL, 40, 40, '2022-03-14 20:38:58', 15, '10 Rue Beauvau 13001 Marseille', 'Cooker_13@outlook.fr', NULL, NULL),
+(78, 4, 13, 2, 1, 4, 15, 15, '2022-04-01 15:19:27', NULL, '10 rue beauvau 13001 Marseille', 'b@a.com', 7.99, 'express'),
+(79, 4, 13, 2, 1, 2, 15, 15, '2022-04-01 15:19:27', NULL, '10 rue beauvau 13001 Marseille', 'b@a.com', 7.99, 'express'),
+(80, 5, 13, 2, 5, 2, 15, 75, '2022-04-01 17:38:56', 15, '10 rue beauvau 13001 Marseille', 'b@a.com', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -137,11 +144,11 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `id_product` int(11) NOT NULL,
   `comment` text NOT NULL,
   `note` int(11) NOT NULL,
-  `date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `relation_comment_product` (`id_product`),
   KEY `relation_user_comment` (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `comments`
@@ -152,7 +159,33 @@ INSERT INTO `comments` (`id`, `id_user`, `id_product`, `comment`, `note`, `date`
 (8, 13, 2, 'Sa marche ou quoi?\r\n', 5, '2022-02-28 11:56:10'),
 (30, 14, 2, 'Je suis l\'admin et je commente des choses parceque je suis l\'admin', 5, '2022-02-28 15:43:07'),
 (32, 17, 4, 'Ca bavouille', 4, '2022-03-02 11:11:29'),
-(34, 13, 2, 'izerfnerigherg', 1, '2022-03-08 15:47:12');
+(35, 13, 2, 'Test de note', 3, '2022-03-10 16:13:35'),
+(36, 18, 2, 'ok', 4, '2022-04-01 14:08:57'),
+(37, 13, 3, 'Je commente', 4, '2022-04-02 11:38:05');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `concours`
+--
+
+DROP TABLE IF EXISTS `concours`;
+CREATE TABLE IF NOT EXISTS `concours` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) NOT NULL,
+  `prenom` varchar(255) NOT NULL,
+  `adresse` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `concours`
+--
+
+INSERT INTO `concours` (`id`, `email`, `prenom`, `adresse`) VALUES
+(1, 'b@a.com', 'aze', 'aze aze aze'),
+(11, 'max.machin@laplateforme.io', 'max', '10 rue beauvau 13001 Marseille'),
+(10, 'aze@o.com', 'a', 'a a a');
 
 -- --------------------------------------------------------
 
@@ -163,11 +196,20 @@ INSERT INTO `comments` (`id`, `id_user`, `id_product`, `comment`, `note`, `date`
 DROP TABLE IF EXISTS `deliveries`;
 CREATE TABLE IF NOT EXISTS `deliveries` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_user` int(11) NOT NULL,
-  `id_commande` int(11) NOT NULL,
-  `address_delevery` varchar(255) NOT NULL,
+  `mode` varchar(255) NOT NULL,
+  `delai` varchar(80) NOT NULL,
+  `price` float NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `deliveries`
+--
+
+INSERT INTO `deliveries` (`id`, `mode`, `delai`, `price`) VALUES
+(3, 'domicile', '7.14 jours', 4.99),
+(4, 'express', '24.48 H', 7.99),
+(5, 'relais-colis', '14 jours', 2.99);
 
 -- --------------------------------------------------------
 
@@ -182,15 +224,14 @@ CREATE TABLE IF NOT EXISTS `favoris` (
   `id_user` int(11) NOT NULL,
   `fav` varchar(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=89 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=167 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `favoris`
 --
 
 INSERT INTO `favoris` (`id`, `id_product`, `id_user`, `fav`) VALUES
-(88, 2, 13, '1'),
-(85, 3, 13, '1');
+(165, 2, 13, '1');
 
 -- --------------------------------------------------------
 
@@ -205,17 +246,19 @@ CREATE TABLE IF NOT EXISTS `images` (
   `url_image` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `relation_img_product` (`id_product`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `images`
 --
 
 INSERT INTO `images` (`id`, `id_product`, `url_image`) VALUES
-(1, 2, 'balm.jpeg'),
-(2, 2, 'balm_.jpeg'),
+(1, 2, 'lipgloss4.jpeg'),
+(2, 2, 'lipgloss3.jpeg'),
 (3, 3, 'cream1.jpeg'),
-(4, 3, 'cream2.jpeg');
+(4, 3, 'cream2.jpeg'),
+(5, 5, 'lotion3.jpeg'),
+(6, 5, 'lotion5.jpeg');
 
 -- --------------------------------------------------------
 
@@ -235,7 +278,7 @@ CREATE TABLE IF NOT EXISTS `products` (
   PRIMARY KEY (`id`),
   KEY `relation_product_cat` (`id_categorie`),
   KEY `relation_product_sous_cat` (`id_sous_categorie`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `products`
@@ -244,7 +287,8 @@ CREATE TABLE IF NOT EXISTS `products` (
 INSERT INTO `products` (`id`, `name`, `description`, `price`, `id_categorie`, `id_sous_categorie`, `tags`) VALUES
 (2, 'lipgloss', 'glossy glossy', 15, 1, 7, 'gloss,sparkle, lips, dewy'),
 (3, 'cream', 'like a \"cream fouettée\"', 40, 2, 1, 'shower,face,primer, moisturizer, moisturizing'),
-(4, 'snail saliva', 'bave d\'escargot', 33, 2, 2, 'hydrate, hydrating, dewy, face, serum');
+(4, 'snail saliva', 'bave d\'escargot', 33, 2, 2, 'hydrate, hydrating, dewy, face, serum'),
+(5, 'lotion tonique', 'Sa vend des lotions pour payer les cautions', 25, 2, 3, 'face, lotion, daronne à l\'abri ');
 
 -- --------------------------------------------------------
 
@@ -288,7 +332,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `nom` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `users`
@@ -296,11 +340,12 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id`, `email`, `prenom`, `nom`, `password`) VALUES
 (1, 'admin@gmail.com', 'admin', 'admin', '$2y$10$Y761JaL5y.o6n0KAZKLPU.SLABNfAcSWEliCNDHFEQ4rF8i503UY6'),
-(13, 'b@a.com', 'Max', 'Machin', '$2y$10$LpmzxRasxvRHBuv2P5vH9uNcPEEw3smd6XBc32by4rSALYcmknH1m'),
+(13, 'b@a.com', 'Max', 'Machin', '$2y$10$YaB7vgszSzxM/ibC7UAxb.cFwIv0/w5/m6UaflH1DQf8uLKf81sE2'),
 (14, 'a@a.com', 'Laura', 'Laura', '$2y$10$uMHlkNCyPyQLaPfAqVMidOOFs51VHDD9i26Z6O2mXXuQ5Pw/KJGL6'),
 (15, 'Cooker_13@outlook.fr', 'max', 'max', '$2y$10$NzwEl64Xo/UgsfHRQOSnIOlxxu9iODLfM/hzRBoeskoVpDNcjllxa'),
-(16, 'max.machin@laplateforme.io', 'max', 'max', '$2y$10$v3ciHfPyXuWtXO/rNd/lR.5nXnYHH48dqecyD8CVARl.df6ABYlZy'),
-(17, 'laura.savickaite@laplateforme.io', 'laura', 'laura', '$2y$10$FOvApXNg9OmENOm73OSpb.m7SKVXWcQjsuUQ6kMUZF1MK0IjU6BgC');
+(16, 'max.machin@laplateforme.io', 'max', 'max', '$2y$10$7Dxahhl6qQ2f7ue5QZMt0eGW7jMABNtKZrefoFIM49LLlJGVofLHy'),
+(17, 'laura.savickaite@laplateforme.io', 'laura', 'laura', '$2y$10$FOvApXNg9OmENOm73OSpb.m7SKVXWcQjsuUQ6kMUZF1MK0IjU6BgC'),
+(18, 'a@gmail.com', 'aze', 'Machin', '$2y$10$PevD5.6PjdVQ9qwGDK0XzuUnlkFQ8hJruN9kd7.Lm/G.ox2Rtg4ES');
 
 --
 -- Contraintes pour les tables déchargées
