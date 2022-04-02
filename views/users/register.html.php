@@ -33,6 +33,6 @@
         <input class="submit" type="submit" name="submit" value="Créer un compte">
         <p class="help">* champs obligatoires</p>
 
-        <p class="sous_texte">Vous avez déjà un compte? <a href="<?= url ?>users/login"> Connectez-vous</a></p>
+        <p class="sous_texte">Vous avez déjà un compte ? <a href="<?= url ?>users/login"> Connectez-vous</a></p>
 
     </form>

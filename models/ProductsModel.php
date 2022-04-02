@@ -251,9 +251,9 @@ class ProductsModel extends Model
         return $query->fetchAll();
     }
 
-    public function findRelatedproduct($tags)
+    public function findRelatedproduct($id_categorie,$id)
     {
-        return $this->requete("SELECT p.id as id_product, p.name as product_name, i.url_image as url_image FROM products as p INNER JOIN images as i on p.id = i.id_product ");
+        return $this->requete("SELECT p.id as id_product, p.name as product_name FROM products as p WHERE p.id_categorie = ? AND p.id != ? ORDER BY RAND() LIMIT 4", array($id_categorie, $id))->fetchAll();
     }
 
     

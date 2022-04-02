@@ -118,6 +118,6 @@ class FavorisModel extends Model
 
     public function userFavoris($id_user)
     {
-        return $this->requete("SELECT p.id as id_product, p.name as product_name, GROUP_CONCAT(i.url_image) as url_image FROM favoris as f INNER JOIN products as p on f.id_product = p.id INNER JOIN images as i on p.id = i.id_product WHERE id_user = ? GROUP BY p.id", array($id_user))->fetchAll();
+        return $this->requete("SELECT p.price as product_price, p.id as id_product, p.name as product_name, GROUP_CONCAT(i.url_image) as url_image FROM favoris as f INNER JOIN products as p on f.id_product = p.id INNER JOIN images as i on p.id = i.id_product WHERE id_user = ? GROUP BY p.id", array($id_user))->fetchAll();
     }
 }

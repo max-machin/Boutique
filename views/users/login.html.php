@@ -18,9 +18,9 @@
         </div>
     </div>
 
-    <a class="help bold" href="forgotPassword">Mot de passe oublié ?</a><br>
+    <a class="help bold" href="users/forgotPassword">Mot de passe oublié ?</a><br>
 
     <input class="submit login" type="submit" name="submit" value="Connexion">
-    <p class="sous_texte">Pas encore inscrit? <a href="<?= url ?>users/register"> Rejoignez-nous</a></p>
+    <p class="sous_texte">Pas encore inscrit ? <a href="<?= url ?>users/register"> Rejoignez-nous</a></p>
 </form>
 

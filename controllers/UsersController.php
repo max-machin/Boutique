@@ -400,6 +400,7 @@ class UsersController extends Controller
                 $mail->Password =  "Everglow13";
                 $mail->Port  =  "587";
                 $mail->SMTPSecure = 'tls';
+                $mail->CharSet = 'UTF-8';
             
                 $mail->Subject = "Nouveau mot de passe";
                 $mail->Body = " Suite à votre demande de récupération de mot de passe.
@@ -413,7 +414,7 @@ class UsersController extends Controller
                 }
                 else
                 {
-                    $errorMail = 'Le mail a été envoyer avec succés. Consultez vos courriels indésirables';
+                    $errorMail = '<div class="success" style="width: 50%; margin: auto"> <i class="fa-solid fa-thumbs-up"></i> Le mail a été envoyer avec succés. Consultez vos courriels indésirables </div>';
                 }
 
             }

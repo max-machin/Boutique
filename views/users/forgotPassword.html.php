@@ -9,4 +9,4 @@
     <p><?= $errorMail ?></p>
     <button class="submit" type="submit" name="sendPassword">Récupérer mot de passe</button>
         
-</form>
+</form> 

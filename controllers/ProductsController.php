@@ -246,7 +246,7 @@ class ProductsController extends Controller
         // Requête de vérification d'existence du produit en favoris pour l'user
         $fav = new favorisModel();
         $findFav = $fav->findFavoris( $_SESSION['user_data']['id'],$id); 
-
+ 
         // Requête pour l'affichage du bouton add/delete favoris en fonction du résultat
         $find = new favorisModel();
         $favoritFind = $find->findFavorisUser($_SESSION['user_data']['id'],$id);
@@ -281,6 +281,14 @@ class ProductsController extends Controller
                 $errorComment = "Veuillez remplir le champ";
             }
         }
+
+         /**
+         * AFFICHAGE DES PRODUITS EN COMMUN
+         */
+        $model = new ProductsModel();
+        $findRelated = $model->findRelatedproduct($product['id_categorie'], $id);
+        var_dump($findRelated);
+
 
         if ( isset ($_SESSION['user_data']))
         {

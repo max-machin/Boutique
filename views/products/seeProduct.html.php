@@ -27,7 +27,7 @@
     } 
     //sinon le user
     else
-    {
+    { 
         ?>
         <!-- le slide -->
         <div class='slider'>

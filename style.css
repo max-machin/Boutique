@@ -494,7 +494,7 @@ footer {
     padding: 4px 2vh;
     text-align: center;
     font-weight: 500;
-    font-family: "SousTitreouAccent";
+    font-family: "LoremIpsumV2";
 }
 
 .error-msg {
@@ -508,7 +508,7 @@ footer {
     width: auto;
     text-align: center;
     font-weight: 500;
-    font-family: "SousTitreouAccent";
+    font-family: "LoremIpsumV2";
     color: #4F8A10;
 }
 
@@ -518,7 +518,7 @@ footer {
     width: auto;
     text-align: center;
     font-weight: 500;
-    font-family: "SousTitreouAccent";
+    font-family: "LoremIpsumV2";
 }
 
 .success-msg {
@@ -586,13 +586,13 @@ footer {
 }
 
 .pop-up p {
-    font-family: "loremIpsum";
+    font-family: "LoremIpsumV2";
     font-weight: 600;
     /* text-align: justify; */
 }
 
 .pop-up p i {
-    font-family: "loremIpsum";
+    font-family: "LoremIpsumV2";
     font-weight: 900;
     text-decoration: underline;
 }
@@ -973,6 +973,7 @@ hr {
 }
 
 .form-group input {
+    font-family: LoremIpsumV2;
     border: none;
     border-bottom: 1px solid black;
     display: block;
@@ -983,7 +984,7 @@ hr {
 }
 
 .form-group label {
-    font-family: "SousTitreouAccent";
+    font-family: "LoremIpsumV2";
     font-size: 18px;
     font-weight: 100;
     position: absolute;
@@ -1020,12 +1021,12 @@ hr {
 }
 
 .help {
-    font-family: "loremIpsum";
+    font-family: "LoremIpsumV2";
     color: gray;
 }
 
 .sous_texte {
-    font-family: "loremIpsum";
+    font-family: "LoremIpsumV2";
 }
 
 .sous_texte a {
@@ -1085,6 +1086,16 @@ fieldset {
     text-align: center;
 }
 
+.userCommand p {
+    color: grey;
+}
+
+.userCommand i {
+    color: black;
+    font-weight: bold;
+    font-family: "LoremIpsumV2";
+}
+
 /* USER PROFIL COMMANDE */
 
 .name {
@@ -1139,7 +1150,7 @@ fieldset {
 }
 
 .date {
-    font-family: "loremIpsum";
+    font-family: "LoremIpsumV2";
     color: rgb(204, 204, 204);
 }
 
@@ -1235,7 +1246,7 @@ fieldset {
 }
 
 .bagPrice div p:nth-child(0n+2){
-    font-family: "loremIpsum";
+    font-family: "LoremIpsumV2";
     font-weight: lighter;
     color: rgb(145, 145, 145);
 }
@@ -1256,7 +1267,7 @@ fieldset {
 
 .emptyBag p {
     font-size: 2.4vh;
-    font-family: "loremIpsum";
+    font-family: "LoremIpsumV2";
 }
 
 .emptyBag a {
@@ -1280,7 +1291,7 @@ fieldset {
 } */
 
 .command {
-    font-family: "loremIpsum";
+    font-family: "LoremIpsumV2";
     margin-bottom: 5vh;
 }
 
@@ -1506,7 +1517,7 @@ fieldset {
 
 .commandImage .content p {
     font-size: 2.4vh;
-    font-family: "loremIpsum";
+    font-family: "LoremIpsumV2";
 }
 
 .commandImage .content a {
@@ -1739,13 +1750,13 @@ i {
 
 --------------------------------------------------- */
     .titre-profil {
-        margin-bottom: 7vh;
+        margin-bottom: 10vh;
     }
     .articleProfil {
         display: flex;
         justify-content: space-around;
         align-items: center;
-        margin-bottom: 7vh;
+        margin-bottom: 10vh;
     }
 
     .articleProfil .form {
@@ -1772,14 +1783,29 @@ i {
         align-items: center;
     }
 
+    .userCommand p {
+        color: grey;
+    }
+
+    .userCommand h3 {
+        text-transform: uppercase;
+        text-decoration: underline;
+    }
+
+
+    .userCommand i {
+        color: black;
+        font-family: 'loremIpsumV2';
+    }
+
     .section-favoris {
-        margin-top: 6vh;
-        margin-bottom: 7vh;
+        margin-top: 10vh;
+        margin-bottom: 10vh;
     }
 
     .section-comment {
-        margin-top: 7vh;
-        margin-bottom: 7vh;
+        margin-top: 10vh;
+        margin-bottom: 10vh;
         display: grid;
         grid-template-columns: repeat(3,1fr);
     }
@@ -1890,7 +1916,7 @@ i {
     }
     
     .emptyBagcontainer div p:nth-child(2){
-        font-family: "loremIpsum";
+        font-family: "LoremIpsumV2";
         font-weight: 600;
         color: #1a1a1a;
     }

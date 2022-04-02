@@ -49,10 +49,10 @@
             </p>
             <button>Join the movement</button>
         </div>
-        
+         
     </section>
     <section class="accueil-bestsellers">
-        <hr>
+        <hr> 
         <h2>Our Bestsellers</h2>
 
         <div class='wrapper'>

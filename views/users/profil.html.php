@@ -53,6 +53,7 @@ if ( empty ( $user)) {
         </form>
     
     </article>
+    <hr>
     <h2 class="sous-titre txt-center">Vos dernières commandes</h2>
 
 <?php 
@@ -248,24 +249,45 @@ if ( empty ( $user)) {
                         
                         if ( $promo === "")
                         {
-                            $totalPrice = $commandPrice - $deliveryPrice[0];
-                        
-                            ?>
-                            <p>Prix total : <i class="bold"><?= $totalPrice ?>€</i></p>
-                            <p>Pas de PROMO</p>
-                            <p>Livraison : <i class="bold"><?= $deliveryPrice[0] ?>€</i> (<?= $mode[0] ?>)</p>
-                            <p>Prix total commande : <i class="bold"><?= $commandPrice ?>€</i></p>
-                            <?php
-
+                            if ( $commandPrice < 50)
+                            {
+                                $totalPrice = $commandPrice - $deliveryPrice[0];
+                            
+                                ?>
+                                <p>Prix total : <i class="bold"><?= $totalPrice ?>€</i></p>
+                                <p>Pas de PROMO</p>
+                                <p>Livraison : <i class="bold"><?= $deliveryPrice[0] ?>€</i> (<?= $mode[0] ?>)</p>
+                                <p>Prix total commande : <i class="bold"><?= $commandPrice ?>€</i></p>
+                                <?php
+                            } else {
+                                $totalPrice = $commandPrice
+                                ?>
+                                    <p>Prix total : <i class="bold"><?= $totalPrice ?>€</i></p>
+                                    <p>Pas de PROMO</p>
+                                    <p>Livraison offerte</p>
+                                    <p>Prix total commande : <i class="bold"><?= $commandPrice ?>€</i></p>
+                                <?php
+                            }
                         } else {
 
+                            if ( $commandPrice < 50)
+                            {
+                                ?>
+                                <p>Prix sans PROMO : <i class="bold"><?= $commandPrice ?>€</i></p>
+                                <p>PROMO : <i class="bold"><?= $promo ?>%</i></p>
+                                <p>Prix avec PROMO : <i class="bold"><?= $commandPricePromo ?>€</i></p>
+                                <p>Livraison : <i class="bold"><?= $deliveryPrice[0] ?>€</i>  (<?= $mode[0] ?>)</p>
+                                <p>Prix total commande : <i class="bold"><?= $commandPricePromo ?>€</i></p>
+                                <?php
+                            } else {
                             ?>
-                            <p>Prix sans PROMO : <i class="bold"><?= $commandPrice ?>€</i></p>
-                            <p>PROMO : <i class="bold"><?= $promo ?>%</i></p>
-                            <p>Prix avec PROMO : <i class="bold"><?= $commandPricePromo ?>€</i></p>
-                            <p>Livraison : <i class="bold"><?= $deliveryPrice[0] ?>€</i>  (<?= $mode[0] ?>)</p>
-                            <p>Prix total commande : <i class="bold"><?= $commandPricePromo + $price[0]  ?>€</i></p>
+                                <p>Prix sans PROMO : <i class="bold"><?= $commandPrice ?>€</i></p>
+                                <p>PROMO : <i class="bold"><?= $promo ?>%</i></p>
+                                <p>Prix avec PROMO : <i class="bold"><?= $commandPricePromo ?>€</i></p>
+                                <p>Livraison offerte</p>
+                                <p>Prix total commande : <i class="bold"><?= $commandPricePromo ?>€</i></p>
                             <?php
+                            }
                         }
                     }
                     ?>
@@ -277,22 +299,28 @@ if ( empty ( $user)) {
         ?>
 
     <section  class="txt-center section-favoris">
+        <hr>
         <h2 class="sous-titre">Vos produits favoris</h2>
+        <div class="wrapper">
         <?php
             foreach($userProducts as $userProduct)
             {
                 $images = explode(",", $userProduct['url_image']);
         ?>
-            <article class="text-center produits-favoris">
-                <a class="href" href="<?= url ?>products/<?= $userProduct['id_product'] ?>"><?= $userProduct['product_name'] ?></a>
-                <img src="<?= url?>uploads/<?=$images[0]?>" alt="" width="200px" height="250px" style="margin: auto">
-                
-            </article>
+            <div class='bestsellers-products'>
+                <img src="uploads/<?=$images[0]?>">
+                <div class='intern-case'>
+                    <h3><a href="products/<?= $userProduct['id_product'] ?>"><?= $userProduct['product_name'] ?></a></h3>
+                    <button><p id=''>Add  -  $<?= $userProduct['product_price'] ?></p></button>  
+                </div>
+            </div>
         <?php
             }
         ?>
+        </div>
         
     </section>
+    <hr>
     <h2 class="sous-titre txt-center">Vos commentaires</h2>
     <section class="txt-center section-comment">
        
