@@ -15,7 +15,8 @@
 <body>
     <header>
         <div class="container_promo">
-            <p>15% de réduction en profitant du code : <?= codePromo ?></p>
+            <p>15% de réduction en profitant du code : <?= codePromo ?>          Livraison gratuite à partir de 75euros</p>
+            <!-- voir comment rajouter un deuxième -->
         </div>
         <div class="top-header">           
             <form action="" method="post">

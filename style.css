@@ -841,7 +841,8 @@ i {
 {
     margin: 10% 0;
     background-color: rgb(var(--clr-lightgrey), 0.2);
-    padding: 3%;
+    padding: 5%;
+    width: 350px;
 }
 
 .comments {
@@ -866,7 +867,7 @@ i {
 }
 
 .post_comment input {
-    margin-left: 25%;
+    margin-left: 18%;
     font-size: 1.1em;
     background-color: rgb(var(--clr-black));
     color: rgb(var(--clr-white));
