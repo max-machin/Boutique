@@ -11,7 +11,7 @@
         //les images
         foreach($images as $image){
         ?>     
-            <img src="<?= "http://localhost/Boutique/uploads/" ?>" width="50px">
+            <img src="<?= "uploads/ <?= $image ?>" ?>" width="50px">
         <?php
             }
         ?>
@@ -35,7 +35,7 @@
             //les images
                 foreach($images as $image){
                 ?>         
-                    <img src="uploads/<?= $image ?>" width="50px" class="img_slider" alt="">
+                    <img src="uploads/<?= $image ?>" width="50px" class = "img_slider">
                 <?php
                 }
             ?> 
@@ -176,7 +176,7 @@
                             <label for="star1" >☆</label>
                         </div>
 
-                        <textarea name="comment" id="comment" cols="30" rows="3" placeholder="Add a comment"></textarea><br>
+                        <textarea name="comment" id="comment" cols="20" rows="3" placeholder="Add a comment"></textarea><br>
                         <input type="hidden" value="<?= $product['id'] ?>" name="id_product">
                         <?= $errorComment ?><br>
 
@@ -191,7 +191,7 @@
             else
              {
             ?>
-                <p>Veuillez vous <a href="<?= urlLaura ?>users/register">inscrire</a> / <a href="<?= urlLaura ?>users/login">connectez</a> pour ajouter un commentaire</p>
+                <p>Veuillez vous <a href="users/register">inscrire</a> / <a href="users/login">connectez</a> pour ajouter un commentaire</p>
             <?php 
             }
         }

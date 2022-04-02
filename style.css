@@ -10,8 +10,7 @@
 - ACCUEIL
 - SEEPRODUCT
 - ABOUT
-- ADMIN
-    - BACKOFFICE
+
 
 */
 
@@ -951,6 +950,25 @@ hr {
 	  left: 1px;
 	  color: #161616;
 }
+
+
+.sectionComments
+{
+    margin: 10% 0;
+    background-color: rgb(var(--clr-lightgrey), 0.2);
+    padding: 5%;
+    width: 350px;
+}
+
+.post_comment input {
+    margin-left: 18%;
+    font-size: 1.1em;
+    background-color: rgb(var(--clr-black));
+    color: rgb(var(--clr-white));
+    border-radius: 2%;
+    border: 1px solid black;
+}
+
 /* ------------------------------------------------
 
                 USER 
@@ -2028,17 +2046,6 @@ i {
 }
 
 
-
-/* ------------------------------------------------
-
-                    ADMIN
-
---------------------------------------------------- */
-
-
-/* 
-                BACKOFFICE
-*/
 
 
 
