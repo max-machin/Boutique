@@ -951,6 +951,11 @@ hr {
 	  color: #161616;
 }
 
+i {
+	font-style: normal;
+    font-family: FontAwesome;
+}
+
 
 .sectionComments
 {
@@ -958,6 +963,27 @@ hr {
     background-color: rgb(var(--clr-lightgrey), 0.2);
     padding: 5%;
     width: 350px;
+}
+
+.comments {
+    background-color: rgb(var(--clr-white));
+    width: 95%;
+    border: 1px solid rgb(var(--clr-lightgrey));
+    margin: auto;
+    margin-bottom: 3%;
+    padding: 3%;
+}
+
+.comments p {
+    text-align: justify;
+}
+
+.info_commentaire {
+    font-size: 0.8rem;
+}
+
+.post_comment {
+    margin: 0 20%;
 }
 
 .post_comment input {
@@ -968,6 +994,8 @@ hr {
     border-radius: 2%;
     border: 1px solid black;
 }
+
+
 
 /* ------------------------------------------------
 
