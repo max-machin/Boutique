@@ -30,7 +30,10 @@ class Router
                     // Renderer::render('accueil');  
                 } elseif ($url[0] == 'about') {
                     Renderer::render('about'); 
+                } elseif ($url[0] == 'quizz') {
+                    Renderer::render('quizz'); 
                 }
+
             }
             // Si on a un élément en url
 

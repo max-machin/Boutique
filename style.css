@@ -10,8 +10,7 @@
 - ACCUEIL
 - SEEPRODUCT
 - ABOUT
-- ADMIN
-    - BACKOFFICE
+
 
 */
 
@@ -862,6 +861,7 @@ hr {
 .titre_product {
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 
 .titre_product button {
@@ -951,6 +951,53 @@ hr {
 	  left: 1px;
 	  color: #161616;
 }
+
+i {
+	font-style: normal;
+    font-family: FontAwesome;
+}
+
+
+.sectionComments
+{
+    margin: 10% 0;
+    background-color: rgb(var(--clr-lightgrey), 0.2);
+    padding: 5%;
+    width: 350px;
+}
+
+.comments {
+    background-color: rgb(var(--clr-white));
+    width: 95%;
+    border: 1px solid rgb(var(--clr-lightgrey));
+    margin: auto;
+    margin-bottom: 3%;
+    padding: 3%;
+}
+
+.comments p {
+    text-align: justify;
+}
+
+.info_commentaire {
+    font-size: 0.8rem;
+}
+
+.post_comment {
+    margin: 0 20%;
+}
+
+.post_comment input {
+    margin-left: 18%;
+    font-size: 1.1em;
+    background-color: rgb(var(--clr-black));
+    color: rgb(var(--clr-white));
+    border-radius: 2%;
+    border: 1px solid black;
+}
+
+
+
 /* ------------------------------------------------
 
                 USER 
@@ -2054,17 +2101,6 @@ i {
 }
 
 
-
-/* ------------------------------------------------
-
-                    ADMIN
-
---------------------------------------------------- */
-
-
-/* 
-                BACKOFFICE
-*/
 
 
 
