@@ -1,7 +1,3 @@
-
-
-
-
 <div class="pop-up">
     <button id="close" type="submit" name="submit-subscription"><img src="images/utilitaires/cross.svg" width="30px"></button>
     <h1 class="txt-center">Jeux concours</h1>
@@ -71,6 +67,17 @@
                 <?php
             }
         ?>
+        </div>
+    </section>
+    <section class="accueil-banderole">
+        <hr>
+        <div class="banderole">
+            <img src="images/generalvibe/imgvibe3.jpeg" width="400px">
+            <div class="text-banderole">
+                <p class="accroche-banderole">Shipping is free from 50 dollars and above!</p>
+                <p class="p-banderole">So what are you waiting for?</p>
+            </div>
+            <img src="images/generalvibe/vibe.jpeg" width="400px">
         </div>
     </section>
     <section class="accueil-instagram">
