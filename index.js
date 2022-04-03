@@ -24,9 +24,11 @@ document.addEventListener('DOMContentLoaded', function loaded() {
         console.log(buttonBurger);
         var buttonNav = buttonBurger[1];
         var buttonSearch = buttonBurger[0];
+
         
         var nav = document.querySelector('nav');
         var form = document.querySelector('form');
+        console.log(nav)
         
         var images = document.querySelectorAll('img');
         var image = images[3];
@@ -45,8 +47,8 @@ document.addEventListener('DOMContentLoaded', function loaded() {
         else {
             image.src = "images/utilitaires/menu.svg";
         }
-        nav.classList.toggle("open");
-        // console.log(image);
+        nav.classList.toggle("openNav");
+
     });
 
     buttonSearch.addEventListener("click", function(){
@@ -57,6 +59,7 @@ document.addEventListener('DOMContentLoaded', function loaded() {
             img.src = "images/utilitaires/search.svg";
         }
         form.classList.toggle("open");
+
     });
 
 
