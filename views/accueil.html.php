@@ -57,7 +57,9 @@
             {
                 ?>
                 <div class='bestsellers-products'>
-                    <img src='uploads/<?= $bestseller['url_image'] ?>'/>
+                    <div class="bestsellers-img">
+                      <img src='uploads/<?= $bestseller['url_image'] ?>'/>  
+                    </div>
                     <div class='intern-case'>
                         <h3><a href='products/<?= $bestseller['id'] ?>'><?= $bestseller['name'] ?></a></h3>
                         <button><p id=''>Add  -  $<?= $bestseller['price'] ?></p></button>                         

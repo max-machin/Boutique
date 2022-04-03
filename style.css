@@ -737,13 +737,26 @@ footer {
     border: 1px solid rgb(var(--clr-lightgrey));
 }
 
+.bestsellers-img {
+    width: 230px;
+    height: 80%;
+}
+
+.bestsellers-img img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    /* position: absolute;
+    top: 0; */
+}
+
 .intern-case {
     padding: 2%;
 }
 
-.bestsellers-products img {
+/* .bestsellers-products img {
     width: 230px;
-}
+} */
 
 .bestsellers-products h3 {
     text-align: center;
