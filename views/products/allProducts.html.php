@@ -1,11 +1,16 @@
 
 <h1>Liste de nos produits</h1>
+<?php 
 
+$urlExplode = ProductsController::getUrlCategories();
+var_dump($urlExplode[1]);
+
+?>
 <nav>
     <ul>
     <?php foreach ($sousCategories as $sousCategorie) { ?>
             <li>
-            <a href="<?=$sousCategorie['name']?>"><?php echo $sousCategorie['name']; ?></a>
+            <a href="<?=urlmac.'products/'.$urlExplode[1].'/'.$sousCategorie['name']?>"><?php echo $sousCategorie['name']; ?></a>
         </li>
             
     <?php } ?> 
@@ -13,56 +18,42 @@
     </ul>
 </nav>
 
-<!-- <a href="'.urlmac.'products/'.$categorie['name'].'">'.$categorie['name'].'</a> -->
-
-<!-- <form action="" method="GET">
-    <select name="sous_categorie">
-        <?php foreach ($sousCategories as $sousCategorie) { ?>
-            <option value="<?php echo $sousCategorie['name'];?>"><?php echo $sousCategorie['name']; ?> </option>
-            
-        <?php } ?> 
-    </select>
-    <input type='hidden' name='page' value='1'>
-    <button type='submit' name="submit" class="formButton">Valider</button> -->
-</form>
-
 <?php 
-
-// if(isset($_GET['page'])){
-
-// }
 // var_dump($_GET);
-// var_dump();
+
+//get page pour pagination 
+
 $urlSousCat = $_SERVER["REQUEST_URI"];
-$_GET = $urlSousCat  ;
-// var_dump($_GET);
+var_dump($_SERVER["REQUEST_URI"]);
 // $urlSousCat = (parse_url($urlSousCat, PHP_URL_QUERY));
-// print_r($urlSousCat);
-$urlExplode = ProductsController::queryToArray($urlSousCat);
+// // // print_r($urlSousCat);
+// var_dump($urlSousCat);
 
-// var_dump($urlExplode['sous_categorie']);
+echo('ttysyd');
+
+// var_dump($nameCategorie); 
+// var_dump($nameSousCategorie);
 
 
 // if (in_array($urlExplode['sous_categorie'], $nameSousCategorie )){
-//     var_dump($nameCategorie); var_dump($nameSousCategorie);
-    // echo 'testststst';
+//     echo 'testststst';
 // ProductsController::createViewProducts($nameCategorie, $nameSousCategorie);
 
 // }
 
 
 
-if(isset($_GET['submit']))
-{
-    $url = $_GET['p'];
-    echo $_GET[$url];
-    // var_dump($_GET); 
-}
-if(isset($_GET['sous_categorie']) && isset($_GET['submit']))
-{
+// if(isset($_GET['submit']))
+// {
+//     $url = $_GET['p'];
+//     echo $_GET[$url];
+//     // var_dump($_GET); 
+// }
+// if(isset($_GET['sous_categorie']) && isset($_GET['submit']))
+// {
     
-    ProductsController::productsBySousCategories($nameSousCategorie);
-}
+//     ProductsController::productsBySousCategories($nameSousCategorie);
+// }
 
 //  }
     // var_dump($nameCategorie);
@@ -101,13 +92,14 @@ if(isset($_GET['sous_categorie']) && isset($_GET['submit']))
     }
 // }
 
+// if(isset())
 
 if(isset($products))
 {
 
     foreach($products as $product)
     {
-        // var_dump($product);
+        var_dump($product);
         $images = explode(',', $product['url']);
         // var_dump($images);
         

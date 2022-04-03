@@ -198,7 +198,7 @@ class ProductsController extends Controller
 
     }
 
-    public static function queryToArray($qry)
+    public static function getUrl($qry)
     {
             $result = array();
      
@@ -269,26 +269,25 @@ class ProductsController extends Controller
         $pagination = self::pagination();
         $nameSousCategorie = self::getSousCategorieName($cat);
         
-        var_dump($sousCat);
+        // var_dump($sousCat);
         
         
         $page = $pagination[0];
-        $productSousCat = self::productsBySousCategories($sousCat);
+        // $productSousCat = self::productsBySousCategories($sousCat);
         $nbrProductsByPage = $pagination[1];
         $nbrPages = $pagination[2];
         $debut = $pagination[3];
 
       
         //3 fonction pour les produits
-        // if ($sousCat != null) {
+        if ($sousCat != null) {
          
-        //     $products = self::productsBySousCategories($sousCat);
-        //     var_dump($products);
-        //     $pagination = self::pagination();
+            $products = self::productsBySousCategories($sousCat);
+            var_dump($products);
+            $pagination = self::pagination();
 
-        // } 
-        // else 
-        if ($cat != null) {
+        } 
+        else if ($cat != null) {
             
             $nameSousCategorie = self::getSousCategorieName($cat);
             $sousCategories = self::getSousCategories($cat);

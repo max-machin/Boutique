@@ -73,13 +73,15 @@ class Router
                 } 
             }
 
-            // var_dump($url[1]);
+            var_dump($url[1]);
+            var_dump($url[2]);
+           
 
    //in array me cherche une clé ds un tableau ici le retour des noms, ma méthode générant 
    //ma view prend la clé en paramètre 
    //parcourir le get et comparer avc in_array la var
    //qui contient mes noms de sous catégories
-//    var_dump($url);
+
             if(!empty($url[1]))
             {
                 if($controllerName == "ProductsController"){
@@ -87,22 +89,22 @@ class Router
                     if(!empty($url[2])){
                         
                         if(in_array($url[2], $controllerName::getSousCategorieName($url[1]))){
-                            $controllerName::createViewProducts($url[1], $url[2]);
+                            $controllerName::createViewProducts($url[1],$url[2]);
                         }   
                         if($url[2] == 'update'){
-                            $controllerName::seeUpdateProduct($url[1]);
+                            $controllerName::seeUpdateProduct($url[2]);
                         }
                     }
-                    else if (in_array($url[1], $controllerName::getCategorieName())){
+                    elseif(in_array($url[2], $controllerName::getSousCategorieName($url[2]))){
+                        $controllerName::createViewProducts($url[2]);
+                    }            
+                    elseif (in_array($url[1], $controllerName::getCategorieName($url[1]))){
                         $controllerName::createViewProducts($url[1]);
                     }
-                    // elseif(in_array($url[2], $controllerName::getSousCategorieName())){
-                    //     $controllerName::createViewProducts($url[2]);
-                    // }            
-                    elseif($controllerName == "ProductsController"){
+                    // elseif($controllerName == "ProductsController"){
                         
-                        $controllerName::createViewProducts();
-                    }
+                    //     $controllerName::createViewProducts();
+                    // }
                 }
                     
                     if(@$url[1] == 'delete'){
