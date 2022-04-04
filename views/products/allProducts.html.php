@@ -84,15 +84,15 @@ var_dump($_SERVER["REQUEST_URI"]);
 // }
 
 // else {
-    // for ($i = 1; $i <= $nbrPages; $i++) {
-    //     if ($page != $i)
-    //         echo "<a class='page'href='?page=$i'>$i</a>";
-    //     else
-    //         echo "<a class='page'>$i</a>";
-    // }
+    for ($i = 1; $i <= $nbrPages; $i++) {
+        if ($page != $i)
+            echo "<a class='page'href='?page=$i'>$i</a>";
+        else
+            echo "<a class='page'>$i</a>";
+    }
 // }
 
-
+//? pointer events: none sur css
 
 if(isset($products))
 {

@@ -238,17 +238,15 @@ class ProductsController extends Controller
         // $url = self::getUrlCategories();
         // $var = explode('?', $_SERVER['REQUEST_URI']);
         // var_dump($var);
-        $page = "";
+        $page = 1;
+
         if(isset($_GET['page']))
         {
         $page = $_GET["page"];
         }
 
-        if (empty($page)) {
-        $page = 1;
-        }
 
-        $nbrProductsByPage = 1;
+        $nbrProductsByPage = 5;
         $nbrPages = ceil($countProducts[0]["liste"] / $nbrProductsByPage);
         $debut = ($page - 1) * $nbrProductsByPage;
 
@@ -272,31 +270,19 @@ class ProductsController extends Controller
         
         $sousCat = $recupSousCat[2];
         
-        var_dump($sousCat);
 
         
         
         $page = $pagination[0];
-        // $productSousCat = self::productsBySousCategories($sousCat);
         $nbrProductsByPage = $pagination[1];
         $nbrPages = $pagination[2];
         $debut = $pagination[3];
 
-        /*
-            SELECT products.*, GROUP_CONCAT(images.url_image SEPARATOR ',') as url FROM `products` 
-INNER JOIN images ON products.id = images.id_product
-INNER JOIN sous_categories ON products.id_sous_categorie = sous_categories.id 
-WHERE sous_categories.name = 'eyes' 
-GROUP BY products.id;
-        */
       
         //3 fonction pour les produits
         if (!empty($sousCat) ) {
          
             $products = self::productsBySousCategories($sousCat);
-            // var_dump($products);
-            // echo('fonction souscat');
-            // $products = self::productsByCategories($cat,$sousCat);
             $pagination = self::pagination();
             $nameSousCategorie = self::getSousCategorieName($cat);
             $sousCategories = self::getSousCategories($cat);
@@ -317,10 +303,6 @@ GROUP BY products.id;
             $pagination = self::pagination();
         }
 
-       //faire un split sur ma requete serveur uri 
-       //routeur reecrire 1-split, tableau clé/valeur. 
-       //après je le déclare au $_get
-       //que si la méthode est en get
        
         Renderer::render('products/allProducts' , compact('categories','nameCategorie', 'nbrPages', 'sousCategories', 'products', 'nameSousCategorie', 'debut', 'page'));
        
