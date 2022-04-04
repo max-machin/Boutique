@@ -3,7 +3,7 @@
 <?php 
 
 $urlExplode = ProductsController::getUrlCategories();
-var_dump($urlExplode[2]);
+// var_dump($urlExplode[2]);
 
 ?>
 <nav>
@@ -64,33 +64,15 @@ var_dump($_SERVER["REQUEST_URI"]);
 
 //   print_r($sousCategories);
 
-// if (isset($nameCategorie)) {
-    
-//  $page_categorie = $nameCategorie;
 
 
-
-
-// }
-
-// for ($i=0;$i<count($products);$i++)
-// {
-//     echo $products[$i];
-// }
-// var_dump($products[$i]);
-
-// foreach ($products as $product) {
-//     var_dump($product);
-// }
-
-// else {
     for ($i = 1; $i <= $nbrPages; $i++) {
         if ($page != $i)
             echo "<a class='page'href='?page=$i'>$i</a>";
         else
             echo "<a class='page'>$i</a>";
     }
-// }
+
 
 //? pointer events: none sur css
 
@@ -99,7 +81,7 @@ if(isset($products))
 
     foreach($products as $product)
     {
-        var_dump($product);
+        // var_dump($product);
         $images = explode(',', $product['url']);
         // var_dump($images);
         

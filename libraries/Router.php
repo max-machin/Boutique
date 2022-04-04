@@ -73,8 +73,8 @@ class Router
                 } 
             }
 
-            var_dump($url[1]);
-            var_dump($url[2]);
+            // var_dump($url[1]);
+            // var_dump($url[2]);
            
 
    //in array me cherche une clé ds un tableau ici le retour des noms, ma méthode générant 
@@ -96,7 +96,7 @@ class Router
                         }
                     }
 
-                    elseif(in_array($url[2], $controllerName::getSousCategorieName($url[2]))){
+                    elseif(in_array(@$url[2], $controllerName::getSousCategorieName(@$url[2]))){
                         $controllerName::createViewProducts($url[2]);
                     }            
                     elseif (in_array($url[1], $controllerName::getCategorieName($url[1]))){

@@ -200,7 +200,7 @@ class ProductsModel extends Model
     {
         $this->database = DataBase::getPdo();
 
-        $findProduct = $this->database->prepare("SELECT products.*, GROUP_CONCAT(images.url_image SEPARATOR ',') as url FROM `products` 
+        $findProduct = $this->database->prepare("SELECT products.*, GROUP_CONCAT(images.url_image SEPARATOR ',') as url FROM {$this->table}  
         INNER JOIN images ON products.id = images.id_product 
         INNER JOIN categories ON products.id_categorie = categories.id
         WHERE categories.name = :nameCategorie
@@ -211,8 +211,38 @@ class ProductsModel extends Model
 
         return($resultProduct);
     }
-    
-    
+   
+    public function productByPage(){
+        $this->database = DataBase::getPdo();
+
+        $query = $this->database->prepare("SELECT name FROM sous_categories WHERE name=:nameSousCategorie");
+        $query->execute([
+            'nameSousCategorie' => $nameSousCategorie
+        ]);
+        
+        $resultNames = $query->fetch();
+      
+
+        $nameEnCours = $resultNames['name'];
+        var_dump($nameEnCours); 
+        
+        $query = $this->database->prepare("SELECT products.*, GROUP_CONCAT(images.url_image SEPARATOR ',') as url FROM `products` 
+        INNER JOIN images ON products.id = images.id_product 
+        INNER JOIN sous_categories ON sous_categories.id = products.id_sous_categorie 
+        INNER JOIN categories ON categories.id = products.id_categorie 
+        WHERE sous_categories.name = :correspondanceName 
+        GROUP BY products.id
+        ORDER BY id LIMIT 5");
+        
+        $query->execute([
+            'correspondanceName' => $nameEnCours
+        ]);
+        $result = $query->fetchAll();
+
+        // var_dump($result);
+
+        return $result;
+    }
 
     public function productsBySousCategories($nameSousCategorie)
     {
@@ -234,7 +264,8 @@ class ProductsModel extends Model
         INNER JOIN sous_categories ON sous_categories.id = products.id_sous_categorie 
         INNER JOIN categories ON categories.id = products.id_categorie 
         WHERE sous_categories.name = :correspondanceName 
-        GROUP BY products.id");
+        GROUP BY products.id
+        ");
         
         $query->execute([
             'correspondanceName' => $nameEnCours

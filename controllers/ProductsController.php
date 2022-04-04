@@ -230,29 +230,36 @@ class ProductsController extends Controller
         
     }
 
+
     //pagination va prendre en paramètre des countsrproducts all , cat et sous cat. Il va également recevoir en paramètre le resultat de la requete select...
     public static function pagination()
     {
         $model = new ProductsModel();
         $countProducts = $model->countProducts();
+        // $nameSousCategorie = self::getSousCategorieName($cat);
+        // $products = $model->productsBySousCategories($nameSousCategorie);
+        
         // $url = self::getUrlCategories();
         // $var = explode('?', $_SERVER['REQUEST_URI']);
         // var_dump($var);
-        $page = 1;
-
-        if(isset($_GET['page']))
-        {
-        $page = $_GET["page"];
-        }
-
-
+        
         $nbrProductsByPage = 5;
-        $nbrPages = ceil($countProducts[0]["liste"] / $nbrProductsByPage);
+        $pages = ceil($countProducts[0]["liste"] / $nbrProductsByPage);
         $debut = ($page - 1) * $nbrProductsByPage;
 
-        // var_dump($nbrPages);
+		if(!isset($_GET['page']) || intval($_GET['page']) == 0) {
+			$page = 1;
+		} else if (intval($_GET['page']) > $countProducts) {
+			$page = $pages;
+		} else {
+			$page = intval($_GET['page']);
+		}
 
-        return array ($page, $nbrProductsByPage, $nbrPages, $debut);
+        
+ 
+        // return $pager;
+        
+        return array ($page, $nbrProductsByPage, $nbrPages, $debut, $pages);
        
     }
     
@@ -268,7 +275,7 @@ class ProductsController extends Controller
         $nameSousCategorie = self::getSousCategorieName($cat);
         $recupSousCat = self::getUrlCategories();
         
-        $sousCat = $recupSousCat[2];
+        $sousCat = @$recupSousCat[2];
         
 
         
