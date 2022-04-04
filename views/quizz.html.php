@@ -1,9 +1,3 @@
-<?php
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {	
-        var_dump($_POST);	
-    }
-?>
-
 
 <form action="" method="post">
     <b>What would be your skintype?</b><br>
@@ -25,3 +19,5 @@
 
         <input id='submit' type="submit" name="answer" value="Show Result"> 
 </form>
+
+<script type="text/javascript" src="views/quizz.js"></script>
