@@ -529,5 +529,6 @@ class ProductsController extends Controller
         // var_dump($productsByCategories);
         Renderer::render('products/allProducts' , compact('categories', 'products', 'productsByCategories', 'sousCategories', 'page', 'categorieName'));
     }             
+
 }
     

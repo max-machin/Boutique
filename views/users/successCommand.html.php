@@ -1,3 +1,7 @@
+<?php
+if ( $_SESSION['user_data']['existCommand'] == true){
+    $_SESSION['user_data']['existCommand'] = false;
+?>
 <div class="successCommand">
     <p class="textcommand success txt-center">Bravo <?= $_SESSION['user_data']['prenom'] ?> <i class="fa-solid fa-thumbs-up"></i>. <br/> 
     Un récapitulatif de votre commande est disponible depuis votre <a href="users/profil">profil</a>. <br/>
@@ -13,7 +17,9 @@
         </div>
         <img src="images/generalvibe/baniere2.jpg" alt="">
     </div>
-</section>
+</section> 
 <?php
-
+} else {
+    header('location: ../bags');
+}
 ?>

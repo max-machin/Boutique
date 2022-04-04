@@ -4,7 +4,7 @@ function compte_a_rebours()
     var compte_a_rebours = document.getElementById("compte_a_rebours");
 
     var date_actuelle = new Date();
-    var date_evenement = new Date("Mar 21 21:09:00 2022");
+    var date_evenement = new Date("April 3 10:20:00 2022");
     var total_secondes = (date_evenement - date_actuelle) / 1000;
 
     var prefixe = "Tirage au sort dans :  ";
@@ -15,6 +15,8 @@ function compte_a_rebours()
     }
     if (total_secondes > 0)
     {
+        var winner = document.getElementById("winner").style.display = "none";
+        
         var jours = Math.floor(total_secondes / (60 * 60 * 24));
         var heures = Math.floor((total_secondes - (jours * 60 * 60 * 24)) / (60 * 60));
         minutes = Math.floor((total_secondes - ((jours * 60 * 60 * 24 + heures * 60 * 60))) / 60);
@@ -79,8 +81,17 @@ function compte_a_rebours()
         compte_a_rebours.innerHTML = 'Tirage au sort terminé.';
 
         var formDisplay = document.getElementById("concours-form").style.display = "none";
+
+        var winner = document.getElementById("winner").style.display = "block";
+        
     }
 
     var actualisation = setTimeout("compte_a_rebours();", 1000);
 }
 compte_a_rebours();
+
+
+
+
+
+

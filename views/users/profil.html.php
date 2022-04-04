@@ -195,13 +195,22 @@ if ( empty ( $user)) {
                         <div>
                         <h4>Couleurs</h4> 
                             <?php
+
                                 foreach($colors as $color)
                                 {
                                     $model = new ColorsModel();
                                     $find = $model->find(intval($color));
+                                    if (!empty ($find)){
+                                        $colorName = $find['name'];
                                     ?>
-                                        <p><?= $find['name'] ?></p>
+                                        <p><?= $colorName ?></p>
                                     <?php
+                                    } else  {
+                                        $colorName = '';
+                                        ?>
+                                        <p><?= $colorName ?></p>
+                                        <?php
+                                    }
                                 }
                             ?>
                         </div>
