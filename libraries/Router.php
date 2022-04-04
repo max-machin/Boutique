@@ -89,22 +89,23 @@ class Router
                     if(!empty($url[2])){
                         
                         if(in_array($url[2], $controllerName::getSousCategorieName($url[1]))){
-                            $controllerName::createViewProducts($url[1],$url[2]);
+                            $controllerName::createViewProducts($url[2]);
                         }   
                         if($url[2] == 'update'){
                             $controllerName::seeUpdateProduct($url[2]);
                         }
                     }
+
                     elseif(in_array($url[2], $controllerName::getSousCategorieName($url[2]))){
                         $controllerName::createViewProducts($url[2]);
                     }            
                     elseif (in_array($url[1], $controllerName::getCategorieName($url[1]))){
                         $controllerName::createViewProducts($url[1]);
                     }
-                    // elseif($controllerName == "ProductsController"){
+                    elseif($controllerName == "ProductsController"){
                         
-                    //     $controllerName::createViewProducts();
-                    // }
+                        $controllerName::createViewProducts();
+                    }
                 }
                     
                     if(@$url[1] == 'delete'){

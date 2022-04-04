@@ -3,7 +3,7 @@
 <?php 
 
 $urlExplode = ProductsController::getUrlCategories();
-var_dump($urlExplode[1]);
+var_dump($urlExplode[2]);
 
 ?>
 <nav>
@@ -29,7 +29,7 @@ var_dump($_SERVER["REQUEST_URI"]);
 // // // print_r($urlSousCat);
 // var_dump($urlSousCat);
 
-echo('ttysyd');
+
 
 // var_dump($nameCategorie); 
 // var_dump($nameSousCategorie);
@@ -84,15 +84,15 @@ echo('ttysyd');
 // }
 
 // else {
-    for ($i = 1; $i <= $nbrPages; $i++) {
-        if ($page != $i)
-            echo "<a class='page'href='?page=$i'>$i</a>";
-        else
-            echo "<a class='page'>$i</a>";
-    }
+    // for ($i = 1; $i <= $nbrPages; $i++) {
+    //     if ($page != $i)
+    //         echo "<a class='page'href='?page=$i'>$i</a>";
+    //     else
+    //         echo "<a class='page'>$i</a>";
+    // }
 // }
 
-// if(isset())
+
 
 if(isset($products))
 {

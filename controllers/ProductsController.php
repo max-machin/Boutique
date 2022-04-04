@@ -268,8 +268,12 @@ class ProductsController extends Controller
         $nameCategorie = self::getCategorieName();
         $pagination = self::pagination();
         $nameSousCategorie = self::getSousCategorieName($cat);
+        $recupSousCat = self::getUrlCategories();
         
-        // var_dump($sousCat);
+        $sousCat = $recupSousCat[2];
+        
+        var_dump($sousCat);
+
         
         
         $page = $pagination[0];
@@ -278,13 +282,25 @@ class ProductsController extends Controller
         $nbrPages = $pagination[2];
         $debut = $pagination[3];
 
+        /*
+            SELECT products.*, GROUP_CONCAT(images.url_image SEPARATOR ',') as url FROM `products` 
+INNER JOIN images ON products.id = images.id_product
+INNER JOIN sous_categories ON products.id_sous_categorie = sous_categories.id 
+WHERE sous_categories.name = 'eyes' 
+GROUP BY products.id;
+        */
       
         //3 fonction pour les produits
-        if ($sousCat != null) {
+        if (!empty($sousCat) ) {
          
             $products = self::productsBySousCategories($sousCat);
-            var_dump($products);
+            // var_dump($products);
+            // echo('fonction souscat');
+            // $products = self::productsByCategories($cat,$sousCat);
             $pagination = self::pagination();
+            $nameSousCategorie = self::getSousCategorieName($cat);
+            $sousCategories = self::getSousCategories($cat);
+            
 
         } 
         else if ($cat != null) {

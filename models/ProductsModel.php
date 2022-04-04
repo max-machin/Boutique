@@ -192,7 +192,7 @@ class ProductsModel extends Model
         INNER JOIN `categories` 
         ON categories.id = products.id_categorie 
         WHERE categories.name = :nameCategorie");
-        $query-> execute(['nameCategorie' => $nameCategorie]);
+        $query->execute(['nameCategorie' => $nameCategorie]);
         return $query->fetchAll();
     }
 
@@ -205,8 +205,8 @@ class ProductsModel extends Model
         INNER JOIN categories ON products.id_categorie = categories.id
         WHERE categories.name = :nameCategorie
         GROUP BY products.id");        
-        $findProduct -> execute(['nameCategorie' => $nameCategorie]);
-        $resultProduct = $findProduct -> fetchAll();
+        $findProduct->execute(['nameCategorie' => $nameCategorie]);
+        $resultProduct = $findProduct->fetchAll();
 
 
         return($resultProduct);
@@ -218,38 +218,32 @@ class ProductsModel extends Model
     {
         $this->database = DataBase::getPdo();
 
-        $query = $this->database->prepare("SELECT id FROM sous_categories WHERE name=:nameSousCategorie");
+        $query = $this->database->prepare("SELECT name FROM sous_categories WHERE name=:nameSousCategorie");
         $query->execute([
             'nameSousCategorie' => $nameSousCategorie
         ]);
         
-       $result = $query->fetch();
+        $resultNames = $query->fetch();
+      
+
+        $nameEnCours = $resultNames['name'];
+        var_dump($nameEnCours);
+        
+        $query = $this->database->prepare("SELECT products.*, GROUP_CONCAT(images.url_image SEPARATOR ',') as url FROM `products` 
+        INNER JOIN images ON products.id = images.id_product 
+        INNER JOIN sous_categories ON sous_categories.id = products.id_sous_categorie 
+        INNER JOIN categories ON categories.id = products.id_categorie 
+        WHERE sous_categories.name = :correspondanceName 
+        GROUP BY products.id");
+        
+        $query->execute([
+            'correspondanceName' => $nameEnCours
+        ]);
+        $result = $query->fetchAll();
 
         // var_dump($result);
 
-        // $query1 = $this->requete("SELECT id FROM sous_categories WHERE name = :nameSousCategorie");
-        // var_dump($query1);
-        // $query1->execute([
-        //     'nameSousCategorie' => $nameSousCategorie
-        // ]);
-        // $result1 = $query1->fetchAll();
-       
-
-        // $query = $this->requete("SELECT products.*, GROUP_CONCAT(images.url_image SEPARATOR ',') as url FROM `products` 
-        // INNER JOIN images ON products.id = images.id_product 
-        // INNER JOIN sous_categories ON sous_categories.id = products.id_sous_categorie 
-        // INNER JOIN categories ON categories.id = products.id_categorie 
-        // WHERE sous_categories.id = :correspondanceId 
-        // GROUP BY products.id");
-        
-        // $query->execute([
-        //     'correspondanceId' => $result1
-        // ]);
-        // $result = $query->fetchAll();
-
-        //pas oublié le returned
-
-        return array();
+        return $result;
     }
    
 
