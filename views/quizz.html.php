@@ -20,4 +20,14 @@
         <input id='submit' type="submit" name="answer" value="Show Result"> 
 </form>
 
+<div class='suggestedProducts'>
+    <!-- <div class="bestsellers-img">
+        <img src='uploads/<?= $bestseller['url_image'] ?>'/>  
+    </div>
+    <div class='intern-case'>
+        <h3></h3>
+        <button><p></p></button>                         
+    </div> -->
+</div>
+
 <script type="text/javascript" src="views/quizz.js"></script>

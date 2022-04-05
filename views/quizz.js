@@ -1,12 +1,9 @@
 document.addEventListener('DOMContentLoaded', function loaded() {
 
-// window.addEventListener("load", function() {
-//     alert('hey');
-// })
-
-
-
 var submitAnswers = document.getElementById('submit');
+
+var divS = document.getElementsByClassName('suggestedProducts')
+var divSuggested = divS[0]
 
 submitAnswers.addEventListener("click", function(event){
 
@@ -61,7 +58,20 @@ submitAnswers.addEventListener("click", function(event){
         fetch('models/dry.php')
         .then ((response) => response.json())
         .then((response) => {
-            console.log(response)
+            response.forEach(element => {
+                console.log(element.name)
+                var productID = element.id
+                var productName = element.name
+                var productPrice = element.price
+                const h2 = document.createElement("h2")
+                h2.className = "h2product"
+                h2.innerHTML = productName
+                divSuggested.appendChild(h2)
+                h2.addEventListener('click', function() {
+                    location.href = 'products/'.concat(productID)
+                }, false);
+                console.log(h2)
+            });
           })
         .catch((error) => console.log(error)) 
     } 
@@ -75,16 +85,7 @@ submitAnswers.addEventListener("click", function(event){
         .catch((error) => console.log(error)) 
     }
 
-    fetch('models/test.php', {
-    method: 'POST',
-    body: JSON.stringify({scoreFinal: score})
     })
-    .then ((response) => response.json())
-    .then(data => {
-        console.log(data.name)
-      })
-    .catch((error) => console.log(error)) 
-})
 
 })
 
