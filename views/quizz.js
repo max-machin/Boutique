@@ -52,7 +52,6 @@ submitAnswers.addEventListener("click", function(event){
                     console.log(element.name)
                     var productID = element.id
                     var productName = element.name
-                    var productPrice = element.price
                     const h2 = document.createElement("h2")
                     h2.className = "h2product"
                     h2.innerHTML = productName
@@ -93,7 +92,7 @@ submitAnswers.addEventListener("click", function(event){
         fetch('models/normal.php')
         .then ((response) => response.json())
         .then((response) => {
-            response.forEach(element => {
+                response.forEach(element => {
                 console.log(element.name)
                 var productID = element.id
                 var productName = element.name

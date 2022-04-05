@@ -13,11 +13,6 @@ class ImagesModel extends Model
         $this->table = "images";
     }
 
-    public function __construct()
-    {
-       $this->table = 'images';
-    }
-
     /**
      * Get the value of id
      */ 

@@ -5,7 +5,7 @@ require_once('../libraries/Database.php');
 
     $content = trim(file_get_contents("php://input"));
 
-        $oilyProducts= $database -> prepare('SELECT * FROM `products` WHERE `id_quizz`= 1');
+        $oilyProducts= $database -> prepare('SELECT products.*, GROUP_CONCAT(images.url_image SEPARATOR ",") as url FROM `products` INNER JOIN images ON products.id = images.id_product WHERE `id_quizz`= 1');
         $oilyProducts -> execute();
         $resultOily = $oilyProducts->fetchAll(PDO::FETCH_ASSOC);
 
