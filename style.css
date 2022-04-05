@@ -2139,10 +2139,29 @@ i {
     width: 70%;
 }
 
+/* ------------------------------------------------
 
+                QUIZZ
 
+--------------------------------------------------- */
 
+.quizz {
+    font-family: LoremIpsumV2;
+}
 
+#submit {
+    font-size: 1.1em;
+    background-color: rgb(var(--clr-black));
+    color: rgb(var(--clr-white));
+    border-radius: 2%;
+    border: 1px solid black;
+    margin-bottom: 5%;
+    margin-top: 5%;
+}
+
+.suggestedProducts {
+    margin: auto;
+}
 
 
 
