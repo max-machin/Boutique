@@ -7,7 +7,10 @@ require_once('../libraries/Database.php');
 
         $dryProducts= $database -> prepare('SELECT * FROM `products` WHERE `id_quizz`= 2');
         $dryProducts -> execute();
-        $resultDry = $dryProducts->fetch(PDO::FETCH_ASSOC);
+        $resultDry = $dryProducts->fetchAll(PDO::FETCH_ASSOC);
 
+        // var_dump($resultDry);
+
+        // echo 'hey';
     echo json_encode($resultDry);
 ?>

@@ -4,42 +4,46 @@ document.addEventListener('DOMContentLoaded', function loaded() {
 //     alert('hey');
 // })
 
-var score = 0
+
 
 var submitAnswers = document.getElementById('submit');
 
+submitAnswers.addEventListener("click", function(event){
 
-submitAnswers.addEventListener("click", function(){
+    var score = 0
+    //permet de prevent le bouton à ce qu'il se refresh pour me permettre de debug
+    event.preventDefault();
+
     var q1 = document.querySelector('input[name="q1"]:checked').value; 
     var q2 = document.querySelector('input[name="q2"]:checked').value;
     var q3 = document.querySelector('input[name="q3"]:checked').value;
     
     if(q1 === "oily"){
-        var score = 1;
+        score = 1;
     } else if (q1 === "dry") {
-        var score = 20;
+        score = 20;
     } else if (q1 === "normal") {
-        var score = 30;
+        score = 30;
     } else {
-        var score = 4;
+        score = 4;
     }
 
     if(q2 === "acne"){
-        var score = score + 1;
+        score = score + 1;
     } else if (q2 === "red") {
-        var score = score + 4;
+        score = score + 4;
     } else if (q3 === "wrinkle") {
-        var score = score + 5;
+        score = score + 5;
     } else {
-        var score = score + 2;
+        score = score + 2;
     }
 
     if(q3 === "dry"){
-        var score = score + 2
+        score = score + 2
     } else if (q3 === "oily"){
-        var score = score + 1
+        score = score + 1
     } else {
-        var score = score + 0
+        score = score + 0
     }
 
     if(score <= 20) 

@@ -7,7 +7,7 @@ require_once('../libraries/Database.php');
 
         $normalProducts= $database -> prepare('SELECT * FROM `products` WHERE `id_quizz`= 3');
         $normalProducts -> execute();
-        $resultNormal = $normalProducts->fetch(PDO::FETCH_ASSOC);
+        $resultNormal = $normalProducts->fetchAll(PDO::FETCH_ASSOC);
 
     echo json_encode($resultNormal);
 ?>

@@ -7,7 +7,7 @@ require_once('../libraries/Database.php');
 
         $oilyProducts= $database -> prepare('SELECT * FROM `products` WHERE `id_quizz`= 1');
         $oilyProducts -> execute();
-        $resultOily = $oilyProducts->fetch(PDO::FETCH_ASSOC);
+        $resultOily = $oilyProducts->fetchAll(PDO::FETCH_ASSOC);
 
     echo json_encode($resultOily);
 ?>
