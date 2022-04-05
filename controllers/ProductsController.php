@@ -244,11 +244,11 @@ class ProductsController extends Controller
             }
         
         // Requête de vérification d'existence du produit en favoris pour l'user
-        $fav = new favorisModel();
+        $fav = new FavorisModel();
         $findFav = $fav->findFavoris( $_SESSION['user_data']['id'],$id); 
  
         // Requête pour l'affichage du bouton add/delete favoris en fonction du résultat
-        $find = new favorisModel();
+        $find = new FavorisModel();
         $favoritFind = $find->findFavorisUser($_SESSION['user_data']['id'],$id);
 
         }
