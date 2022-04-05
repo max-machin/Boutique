@@ -85,8 +85,10 @@ class Router
             if(!empty($url[1]))
             {
                 if($controllerName == "ProductsController"){
-
-                    if(!empty($url[2])){
+                    
+                    if (in_array($url[1], $controllerName::getCategorieName($url[1]))){
+                        $controllerName::createViewProducts($url[1]);
+                        if(!empty($url[2])){
                         
                         if(in_array($url[2], $controllerName::getSousCategorieName($url[1]))){
                             $controllerName::createViewProducts($url[2]);
@@ -95,13 +97,9 @@ class Router
                             $controllerName::seeUpdateProduct($url[2]);
                         }
                     }
-
-                    elseif(in_array(@$url[2], $controllerName::getSousCategorieName(@$url[2]))){
-                        $controllerName::createViewProducts($url[2]);
-                    }            
-                    elseif (in_array($url[1], $controllerName::getCategorieName($url[1]))){
-                        $controllerName::createViewProducts($url[1]);
                     }
+                               
+                    
                     elseif($controllerName == "ProductsController"){
                         
                         $controllerName::createViewProducts();

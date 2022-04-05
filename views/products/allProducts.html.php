@@ -10,7 +10,7 @@ $urlExplode = ProductsController::getUrlCategories();
     <ul>
     <?php foreach ($sousCategories as $sousCategorie) { ?>
             <li>
-            <a href="<?=urlmac.'products/'.$urlExplode[1].'/'.$sousCategorie['name']?>"><?php echo $sousCategorie['name']; ?></a>
+            <a href="<?=urlmac.'products/'.$urlExplode[1].'/'.$sousCategorie['name'].'?page=1'?>"><?php echo $sousCategorie['name']; ?></a>
         </li>
             
     <?php } ?> 
@@ -24,14 +24,14 @@ $urlExplode = ProductsController::getUrlCategories();
 //get page pour pagination 
 
 $urlSousCat = $_SERVER["REQUEST_URI"];
-var_dump($_SERVER["REQUEST_URI"]);
+// var_dump($_SERVER["REQUEST_URI"]);
 // $urlSousCat = (parse_url($urlSousCat, PHP_URL_QUERY));
 // // // print_r($urlSousCat);
 // var_dump($urlSousCat);
 
 
 
-// var_dump($nameCategorie); 
+// var_dump($nbrProductsByPage); 
 // var_dump($nameSousCategorie);
 
 
@@ -62,31 +62,65 @@ var_dump($_SERVER["REQUEST_URI"]);
     // var_dump($_GET);
     // echo 'heloooo';
 
-//   print_r($sousCategories);
+$var = explode('?', $_SERVER['REQUEST_URI']);
+// echo'cccococo';
+// var_dump(count($products));
+var_dump($var);
+
+$getCat = explode('/', $_SERVER['REQUEST_URI']);
 
 
+ 
+$_GET['page'] = $var[1];
 
-    for ($i = 1; $i <= $nbrPages; $i++) {
-        if ($page != $i)
-            echo "<a class='page'href='?page=$i'>$i</a>";
-        else
-            echo "<a class='page'>$i</a>";
-    }
+$page = $_GET['page'];
+
+// echo'<pre>';
+// var_dump($_GET);
+// echo'</pre>';
+
+
 
 
 //? pointer events: none sur css
+// echo'<pre>';
+// var_dump(intval($nbrPages));
+// echo'</pre>';
+$new_page = substr_replace($page, '', 0, 5);
+// var_dump($new_page);
+// var_dump(intval($new_page));
 
+// if ($new_page = 0){
+//      $new_page = 1; 
+
+         
+//         }
 if(isset($products))
 {
-
-    foreach($products as $product)
-    {
-        // var_dump($product);
-        $images = explode(',', $product['url']);
-        // var_dump($images);
+        for ($i = 1; $i <= intval($nbrPages); $i++) {
         
+        echo "<a class='page'href='?page=$i'>$i</a>";
+        
+    } 
+    
+    for($i =intval($new_page) * (intval($new_page) - 1) ; $i < intval($nbrProductsByPage) * intval($new_page) && $i < count($products) ; $i++)    {
+        $images = explode(',', $products[$i]['url']);
+        // echo'fytdgd';
+      
+        {
+            // foreach($products as $product){
+                ?>
+                <div class="products">
+                    <h2><a href="products/<?= $products[$i]['id'] ?>"><?= $products[$i]['name'] ?></a></h2>
+                    <img src="Uploads/<?= $image[$i] ?>" width="50px">
+                    <h3><?= $products[$i]['description'] ?></h3>
+                    <p><?= $products[$i]['price']?>€</p>
+                </div>
+            <?php
+            // }
+        }
+        /*
     ?>
-
             <div class="products">
                 <?php
                     foreach($images as $image){
@@ -97,24 +131,17 @@ if(isset($products))
                         <?php
                     }
                 ?>
-                <h2><a href="products/<?= $product['id'] ?>"><?= $product['name'] ?></a></h2>
-                <h3><?= $product['description'] ?></h3>
-                <p><?= $product['price'] ?></p>
+                <h2><a href="products/<?= $products[$i]['id'] ?>"><?= $products[$i]['name'] ?></a></h2>
+                <h3><?= $products[$i]['description'] ?></h3>
+                <p><?= $products[$i]['price'] ?></p>
             </div>
-    <?php
+            <?php
+            */
     }
 }
-else
-{
-    foreach($products as $product){
-        ?>
-        <div class="products">
-            <h2><a href="products/<?= $product['id'] ?>"><?= $product['name'] ?></a></h2>
-            <h3><?= $product['description'] ?></h3>
-            <p><?= $product['price']?>€</p>
-        </div>
-    <?php
-    }
-}
+
+// else
+
+
 
 ?>
