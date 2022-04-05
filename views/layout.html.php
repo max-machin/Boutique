@@ -71,7 +71,7 @@
                     <li><a href="<?= url ?>">Our products</a></li>
                     <li><a href="<?= url ?>">Skincare</a></li>
                     <li><a href="<?= url ?>">Make up</a></li>
-                    <li><a href="<?= url ?>">Discover your skin</a></li>
+                    <li><a href="quizz">Discover your skin</a></li>
                 </ul>
             </nav>
         </div> 
