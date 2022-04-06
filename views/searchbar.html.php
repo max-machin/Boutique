@@ -1,21 +1,14 @@
-
-<?php
-foreach($searchedProducts as $searchProduct){
-    $images = explode(',', $searchProduct['url']);
-?>
-
-<div class="foundproducts">
+<div class='wrapper'>
     <?php
-        foreach($images as $image){
-
-            var_dump($image);
-            ?>
-            <img src="uploads/<?= $image ?>" width="50px">
+    foreach($searchedProducts as $searchProduct){
+        $images = explode(',', $searchProduct['url']);
+    ?>
+        <div class='found-products'>
+            <!-- <div class="bestsellers-img"> -->
+                    <!-- <div class="searchbarimg"> -->
+                        <img src="uploads/<?= $images[0] ?>" width="50px">
+                        <h2><a href="products/<?= $searchProduct['id'] ?>"><?= $searchProduct['name'] ?></a></h2>
+                    </div>
             <?php
-        }
-        ?>
-        <h2><a href="products/<?= $searchProduct['id'] ?>"><?= $searchProduct['name'] ?></a></h2>
-    </div>
-    <?php
-}
-?>
+            }
+            ?>
