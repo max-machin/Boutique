@@ -10,11 +10,11 @@ foreach($searchedProducts as $searchProduct){
 
             var_dump($image);
             ?>
-            <img src="<?= url ?>uploads/<?= $image ?>" width="50px">
+            <img src="uploads/<?= $image ?>" width="50px">
             <?php
         }
         ?>
-        <h2><a href="<?= url ?>products/<?= $searchProduct['id'] ?>"><?= $searchProduct['name'] ?></a></h2>
+        <h2><a href="products/<?= $searchProduct['id'] ?>"><?= $searchProduct['name'] ?></a></h2>
     </div>
     <?php
 }
