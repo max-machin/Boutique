@@ -73,7 +73,7 @@ class Router
                 } 
             }
 
-            var_dump($url[1]);
+            // var_dump($url[1]);
             // var_dump($url[2]);
            
 
@@ -92,12 +92,12 @@ class Router
 
                         if(!empty($url[2])){
                         
-                        if(in_array($url[2], $controllerName::getSousCategorieName($url[1]))){
-                            $controllerName::createViewProducts($url[2]);
-                        }   
-                        if($url[2] == 'update'){
-                            $controllerName::seeUpdateProduct($url[2]);
-                        }
+                            if(in_array($url[2], $controllerName::getSousCategorieName($url[1]))){
+                                $controllerName::createViewProducts($url[2]);
+                            }   
+                            if($url[2] == 'update'){
+                                $controllerName::seeUpdateProduct($url[2]);
+                            }
                     }
                     }
                                
