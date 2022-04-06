@@ -162,19 +162,8 @@ class ProductsModel extends Model
 
         return($resultProduct);
     }
-    // public function getAllProducts()
-    // {
-    //     $query = $this->requete("SELECT * FROM {$this->table}");
-    //     return $query->fetchAll();
-    // }
-
-    public function productsByPage($nbrProductsByPage,$debut)
-    {
-        $query = $this->requete("SELECT * FROM {$this->table} LIMIT $debut , $nbrProductsByPage");
-
-        return $query->fetchAll();
-    }
-
+ 
+    
     public function countProducts()
     {
         $query = $this->requete("SELECT COUNT(id) AS liste FROM {$this->table}");

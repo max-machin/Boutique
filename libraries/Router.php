@@ -73,7 +73,7 @@ class Router
                 } 
             }
 
-            // var_dump($url[1]);
+            var_dump($url[1]);
             // var_dump($url[2]);
            
 
@@ -86,8 +86,10 @@ class Router
             {
                 if($controllerName == "ProductsController"){
                     
+                    
                     if (in_array($url[1], $controllerName::getCategorieName($url[1]))){
                         $controllerName::createViewProducts($url[1]);
+
                         if(!empty($url[2])){
                         
                         if(in_array($url[2], $controllerName::getSousCategorieName($url[1]))){

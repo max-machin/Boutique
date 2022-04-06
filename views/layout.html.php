@@ -33,6 +33,7 @@
         </nav>
     <?php
     } else {
+        $pageEnCours = '?page=1';
     ?>
         <nav>
             <ul>
@@ -41,7 +42,7 @@
                 <?php
                 foreach ($categories as $categorie)  
                     {
-                        echo ('<li class="navli"><a href="'.urlmac.'products/'.$categorie['name'].'">'.$categorie['name'].'</a></li>');
+                        echo ('<li class="navli"><a href="'.urlmac.'products/'.$categorie['name'].$pageEnCours.'">'.$categorie['name'].'</a></li>');
                     }
                 ?>
             </ul>

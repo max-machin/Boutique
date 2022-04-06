@@ -111,7 +111,6 @@ class ProductsController extends Controller
          ->SetName($_SESSION['product']['name'])
          ->setDescription($_SESSION['product']['description'])
          ->setPrice($_SESSION['product']['price']);
-        //  var_dump($updateProduit);
          $updateProduit->update($model);
  
      }
@@ -232,18 +231,13 @@ class ProductsController extends Controller
 
 
     //pagination va prendre en paramètre des countsrproducts all , cat et sous cat. Il va également recevoir en paramètre le resultat de la requete select...
-    public static function pagination()
+    public static function paginationSousCat()
     {
         $model = new ProductsModel();
         $sousCat = self::getUrlCategories();
 
-      
-        // $nameSousCategorie = self::getSousCategorieName($cat);
         $products = $model->productsBySousCategories($sousCat[2]);
-        // $productsCat = $model->productsByCategory($sousCat[2]);
 
-        // $url = self::getUrlCategories();
-        $var = explode('?', $_SERVER['REQUEST_URI']);
         $countProducts = count($products);
 
         $page = null;
@@ -251,87 +245,79 @@ class ProductsController extends Controller
 
             $page === 1;
         }
-        $new_page = substr_replace($page, '', 0, 5);
+       
         $nbrProductsByPage = 2;
         $nbrPages = ceil($countProducts / $nbrProductsByPage);
-        // $debut = ($page - 1) * $nbrProductsByPage;
-        
-        // echo'gueygfuhfhrfku';
-        // var_dump($products);
-        // for ($i = 1; $i <= $nbrPages; $i++) {
-        //     if ($page != $i)
-        //         echo "<a class='page'href='?page=$i'>$i</a>";
-        //     else
-        //         echo "<a class='page'>$i</a>";
-        // }
-        // var_dump('coucou');
-        // var_dump($sousCat);
-        // var_dump($countProducts);
-        // var_dump('coucou');
-        
-        
-		// if(!isset($_GET['page']) || intval($_GET['page']) == 0) {
-            // 	$page = 1;
-            // } else {
-                // 	$page = intval($_GET['page']);
-                // }
-                
-        
-        
-        return array ($page, $nbrProductsByPage, $nbrPages, $new_page, $countProducts);
+       
+        return array ($page, $nbrProductsByPage, $nbrPages, $countProducts);
         
     }
     
-    
+    public static function paginationCat()
+    {
+        $model = new ProductsModel();
+        $catUrl = self::getUrlCategories();
+
+       
+        $productsCat = $model->productsByCategorie($catUrl[1]);
+
+        $countProducts = count($productsCat);
+
+        $page = null;
+        if($page === 0){
+
+            $page === 1;
+        }
+       
+        $nbrProductsByPage = 2;
+        $nbrPages = ceil($countProducts / $nbrProductsByPage);
+        // $new_page = substr_replace($page, '', 0, 5);
+      
+        return array ($page, $nbrProductsByPage, $nbrPages, $countProducts);
+        
+    }
+
     //paramètre $cat et sous cat viennent de l'url                
     public static function createViewProducts($cat = null, $sousCat = null) 
     {
         $model = new ProductsModel();
-        // $countProducts = $model->countProducts();
         $categories = self::getCategories();
         $nameCategorie = self::getCategorieName();
-        $pagination = self::pagination();
+        $pagination = self::paginationCat();
         $nameSousCategorie = self::getSousCategorieName($cat);
         $recupSousCat = self::getUrlCategories();
+        $sousCategories = self::getSousCategories($cat);
         
         $sousCat = @$recupSousCat[2];
         $cat = @$recupSousCat[1];
-        // echo'tetetd';
-        // var_dump($cat);
-        // var_dump($recupSousCat);
-
-        
-        
+     
         $page = $pagination[0];
         $nbrProductsByPage = $pagination[1];
         $nbrPages = $pagination[2];
        
-        $new_page = $pagination[3];
-        $countProducts = $pagination[4];
+        // $new_page = $pagination[3];
+        $countProducts = $pagination[3];
         
-        
-        //3 fonction pour les produits
+       
         if (!empty($sousCat) ) {
             
             $products = self::productsBySousCategories($sousCat);
-            //   echo'<pre>';
-            // var_dump($products);
-            // echo'</pre>';
-            $pagination = self::pagination();
+             
+            $pagination = self::paginationSousCat();
             $nameSousCategorie = self::getSousCategorieName($cat);
             $sousCategories = self::getSousCategories($cat);
             
         } 
         else if (!empty($cat)) {
             
-            $nameSousCategorie = self::getSousCategorieName($cat);
-            $sousCategories = self::getSousCategories($cat);
             $products = self::productsByCategories($cat);
-            $pagination = self::pagination();
+            $pagination = self::paginationCat();
+            $nameCategorie = self::getCategorieName();
+            $categories = self::getCategories();
             
-            echo'<pre>';
-            var_dump($cat);
-            echo'</pre>';
+            // echo'<pre>';
+            // var_dump($products);
+            // echo'</pre>';
 
         } else {
           
