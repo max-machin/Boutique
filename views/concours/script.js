@@ -4,7 +4,7 @@ function compte_a_rebours()
     var compte_a_rebours = document.getElementById("compte_a_rebours");
 
     var date_actuelle = new Date();
-    var date_evenement = new Date("April 3 10:20:00 2022");
+    var date_evenement = new Date("April 6 10:20:00 2022");
     var total_secondes = (date_evenement - date_actuelle) / 1000;
 
     var prefixe = "Tirage au sort dans :  ";
@@ -82,7 +82,7 @@ function compte_a_rebours()
 
         var formDisplay = document.getElementById("concours-form").style.display = "none";
 
-        var winner = document.getElementById("winner").style.display = "block";
+        var winner = document.getElementById("winner").style.display = "flex";
         
     }
 

@@ -323,7 +323,7 @@ if ( isset ($_SESSION['user_data'] ))
 
                         <?= $error ?><br>
                 </form>
-                <form action="" method="post">
+                <form class="formPromo" action="" method="post">
                     <input type="text" name="codePromo" placeholder="CODE PROMO">
                     <input type="submit" name="promo" value="Appliquez PROMO">
                 </form>

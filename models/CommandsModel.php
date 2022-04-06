@@ -318,6 +318,23 @@ class CommandsModel extends Model
         return $this->requete("SELECT DISTINCT GROUP_CONCAT(c.id) as id,GROUP_CONCAT(id_command) as id_command,GROUP_CONCAT(quantity_product) as quantity_product, GROUP_CONCAT(p.name) as product_name ,GROUP_CONCAT(c.id_color) as product_color,GROUP_CONCAT(c.price) as price, GROUP_CONCAT(total_price) as total_price ,GROUP_CONCAT(date) as date,GROUP_CONCAT(promo) as promo ,GROUP_CONCAT(adresse_livraison) as adresse_livraison ,GROUP_CONCAT(adresse_facturation) as adresse_facturation , GROUP_CONCAT(p.name) as product_name, GROUP_CONCAT(c.price_livraison) as price_livraison, GROUP_CONCAT(c.mode) as mode FROM {$this->table} as c INNER JOIN products as p ON c.id_product = p.id WHERE id_user = ? GROUP BY id_command ORDER BY date DESC", array($id_user))->fetchAll();
     }
 
+    /**PARTIE ADMIN */
+
+    public function chiffreAffaire()
+    {
+        return $this->requete("SELECT  SUM(total_price) as prix FROM {$this->table}")->fetch();
+    }
+
+    public function nbrCommand()
+    {
+        return $this->requete("SELECT DISTINCT GROUP_CONCAT(id) as command FROM {$this->table} GROUP BY id_command")->fetchAll();
+    }
+
+    public function findBestSeller()
+    {
+        return $this->requete("SELECT DISTINCT GROUP_CONCAT(p.id) as id, GROUP_CONCAT(p.name) as product_name FROM commands as c INNER JOIN products as p on c.id_product = p.id  GROUP BY c.id_product")->fetchAll(); 
+    }
+
     /**
      * Get the value of price_livraison
      */ 

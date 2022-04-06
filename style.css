@@ -1575,6 +1575,11 @@ fieldset {
     height: 30vh;
 }
 
+.formPromo{
+    text-align: center;
+    margin-bottom: 4vh;
+}
+
 /* ------------------------------------------------
 
                 PRODUCT SELF
@@ -1723,7 +1728,7 @@ i {
 
 @media (min-width: 821px) {
     #winner {
-        width: 65%;
+        width: 70%;
         display: flex;
         padding: 0;
         margin: auto;
@@ -1733,6 +1738,7 @@ i {
     #winner img {
         display: block;
         height: 450px;
+        /* float: left; */
     }
     #winner div {
         margin-left: 1vh;
@@ -1903,6 +1909,12 @@ i {
         display: flex;
         justify-content: space-around;
         align-items: center;
+        
+    }
+
+    .formPromo{
+        text-align: center;
+        margin-bottom: 10vh;
     }
 
     .userCommand p {
@@ -2146,7 +2158,86 @@ i {
         box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     }
 
+    /* ------------------------------------------------
+
+                ADMIN
+
+--------------------------------------------------- */
+.panelAdmin {
+    margin-top: 10vh;
+    margin-bottom: 10vh;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.panelcard:nth-child(1){
+    background-color: #ef5350;
+}
+
+.panelcard:nth-child(2){
+    background-color: #f39c12;
     
+}
+
+.panelcard:nth-child(3){
+    background-color: #26c6da;
+}
+
+.panelcard:nth-child(4){
+    background-color: #66bb6a;
+}
+
+.panelcard {
+    padding: 2vh;
+    background-color: #e5e5e5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 23%;
+    border-radius: 4px;
+}
+
+.panelcard i {
+    font-size: 8vh;
+    color: rgba(236, 236, 236, 0.71);
+}
+
+.panelcard p:nth-child(1){
+    text-align: end;
+}
+
+
+.graph {
+    width: 400px;
+    height: 600px;
+    background-color: #f8f8f8d8;
+    display: flex;
+    margin: auto;
+    margin-bottom: 10vh;
+}
+
+.bar {
+    flex-grow: 1;
+    border: 1px solid white;
+    background-color: rgb(var(--clr-black));
+    margin: 6px;
+    color: white;
+    text-align: center;
+}
+
+.colonne {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.colonne:nth-child(even){
+    background-color: #e5e5e5;
+}
+
+.bar p {
+    margin-top: 1.5vh;
+}
+
 
 }
 
