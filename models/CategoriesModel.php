@@ -4,11 +4,12 @@ class CategoriesModel extends Model
 {
     protected $id;
     protected $name;
-   
-
+    
     public function __construct()
     {
+ 
         $this->table = "categories";
+
     }
 
     public function getId()
@@ -35,11 +36,4 @@ class CategoriesModel extends Model
         return $this;
     }
 
-    public function findAllCategories()
-    {
-        $query = $this->requete("SELECT * FROM {$this->table} WHERE");
-        // var_dump($query->fetchAll());
-        // return ("test");
-       return $query->fetchAll();
-    }
 }

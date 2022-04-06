@@ -31,6 +31,50 @@
                     <img src="images/utilitaires/search.svg" width="40px">
                 </div>             
 
+<?php
+    // var_dump($_GET);
+ 
+    if ( isset ($_SESSION['user_data'] ) )
+    {
+    ?>
+        <nav>
+            <ul>
+                <li><a href="<?= urlmac ?>products">Nos produits</a></li>
+                <li><a href="<?= urlmac ?>users/profil">Profil</a></li>
+                <li><a href="<?= urlmac ?>users/disconnect">Deconnexion</a></li>
+                <?php
+                foreach ($categories as $categorie)  
+                    {
+                        echo ('<li class="navli"><a href="'.urlmac.'products/'.$categorie['name'].'">'.$categorie['name'].'</a></li>');
+                    }
+                ?>
+            </ul>
+        </nav>
+    <?php
+    } else {
+        $pageEnCours = '?page=1';
+    ?>
+        <nav>
+            <ul>
+                <li><a href="<?= urlmac ?>users/register">Inscription</a></li>
+                <li><a href="<?= urlmac ?>users/login">Connexion</a></li>
+                <?php
+                foreach ($categories as $categorie)  
+                    {
+                        echo ('<li class="navli"><a href="'.urlmac.'products/'.$categorie['name'].$pageEnCours.'">'.$categorie['name'].'</a></li>');
+                    }
+                ?>
+            </ul>
+        </nav>
+    <?php
+    }
+
+    ?>
+
+<div class="container">
+    <?= $content ?>
+</div>
+
                 <a href="accueil"><img src="images/utilitaires/Everglow.png" id='everglow' width="120px"></a>
     
     

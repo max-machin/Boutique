@@ -4,7 +4,7 @@ session_start();
 define('promos', "");
 CONST codePromo = "CREAMYDELUXE";
 CONST url = 'http://localhost/Boutique/';
-CONST urlmac = 'http://localhost8888/Boutique/';
+CONST urlmac = 'http://localhost:8888/Boutique/';
 CONST urlLaura = 'http://localhost:8080/Boutique/';
 
 // $urlOK = $_SERVER['HTTP_REFERER'] . $_SERVER['REQUEST_URI'];

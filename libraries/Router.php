@@ -4,7 +4,7 @@ class Router
 {
     public static function process() 
     {
-        
+        // var_dump($_GET);
         // ce qu'on va inclure comme fichier en fonction des différentes actions de l'utilisateur
         if(!empty($_GET['p']))
         {
@@ -103,6 +103,9 @@ class Router
                 } 
             }
 
+            // var_dump($url[1]);
+            // var_dump($url[2]);
+           
 
 
         
@@ -120,49 +123,35 @@ class Router
             elseif($controllerName == "ProductsController"){
                 $controllerName::selectAllProducts();
                 }
+   //in array me cherche une clé ds un tableau ici le retour des noms, ma méthode générant 
+   //ma view prend la clé en paramètre 
+   //parcourir le get et comparer avc in_array la var
+   //qui contient mes noms de sous catégories
 
-                // if($controllerName == "ImagesController"){
-                //     $controllerName::seeProductImg();
-                // }
-            
-            
-        //cat à definir en amont 
-        //refaire une query pour avoir une liste de categorie
-
-        if($controllerName == "ProductsController")
-        {
             if(!empty($url[1]))
             {
-                // var_dump($url[1]);
-              
-                // // $controllerName::selectAllProducts();
-                if($url[1] == 'makeup'||'skincare'){
-                    // foreach($categories as $categorie){
-                        // $controllerName::selectAllSousCategory();
-                        // $controllerName::selectAllProductsCategory();
-                        // $controllerName::getCategories();
-                        $controllerName::createViewProducts();
-                        // $controllerName::getNameCategories();
-                        // $controllerName::seeProduct();
-                        // $controllerName::productsByCategories();
-                        // $controllerName::pagination(); 
-                    }  
-                // }
-            }    
-                // if($controllerName == "ProductsController")
-                // {
-                // // $controllerName::seeProduct($url[2]);
-                // }
-                 
-            elseif(empty($url[1]))
-                {
-                    // $controllerName::pagination();
-                    // $controllerName::seeProduct();
-                    $controllerName::createViewProducts();
+                if($controllerName == "ProductsController"){
+                    
+                    
+                    if (in_array($url[1], $controllerName::getCategorieName($url[1]))){
+                        $controllerName::createViewProducts($url[1]);
 
-                    // $controllerName::selectAllProducts();
-                    // $controllerName::selectAllSousCategory();
-                    // $controllerName::getCategories();
+                        if(!empty($url[2])){
+                        
+                            if(in_array($url[2], $controllerName::getSousCategorieName($url[1]))){
+                                $controllerName::createViewProducts($url[2]);
+                            }   
+                            if($url[2] == 'update'){
+                                $controllerName::seeUpdateProduct($url[2]);
+                            }
+                    }
+                    }
+                               
+                    
+                    elseif($controllerName == "ProductsController"){
+                        
+                        $controllerName::createViewProducts();
+                    }
                 }
             // elseif(!empty($url[2]))
             // {

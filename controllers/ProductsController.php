@@ -1,10 +1,12 @@
 <?php
+
 require_once('libraries/Renderer.php');
 
 class ProductsController extends Controller
 {  
     
     public static function selectAllProducts(){
+
         $model = new ProductsModel();
         $products = $model->findAllProducts(); 
         // foreach($products as $product){
@@ -349,7 +351,6 @@ class ProductsController extends Controller
          ->SetName($_SESSION['product']['name'])
          ->setDescription($_SESSION['product']['description'])
          ->setPrice($_SESSION['product']['price']);
-        //  var_dump($updateProduit);
          $updateProduit->update($model);
  
      }
@@ -371,163 +372,198 @@ class ProductsController extends Controller
         // var_dump($product = $model->delete((3)));
         
     }
-
-    // public static function productsByCategories()
-    // {
-    //     $model = new ProductsModel();
-    //     $products_cat = $model->productsByCategorie();
-    // }
-
     public static function getCategories()
     {
         $model = new CategoriesModel();
         $categories = $model->findAll();
-        Renderer::render('layout' , compact('categories'));
+      
         return $categories;
     }
-    
-    
-    
-    
-    public static function pagination()
+
+    public static function getSousCategories($cat) 
     {
-        //     // $productByCat::paginationGenerale();
-        
-        //     // $catModel = new CategoriesModel();
-        //     // $categories = $catModel->findAll();
-        
-        // var_dump('OK');
-        // var_dump($_GET);
-        // var_dump('OK');
-        
-        //     $productModel = new ProductsModel();
-        //     $products = $productModel->findAll();
-        //     // $productByCat = $model->getProductByCategorie();
-        
-        //     // var_dump($productByCat);
-        //     // echo "</pre>";
-        //     //  var_dump($productByCat);
-        
-        //     $page = $_GET["page"];
+        $modelSousCat = new SousCategoriesModel();
+        $sousCategories = $modelSousCat->findSousCategories($cat);
 
-        $categories = self::getCategories();
-       
-        // if(isset($_GET['categorie']))
-        // {
-            
-            // $page_categorie = 2;  
-        // }
-        // if (empty($page)) 
-        // {
-        //         $page = 1;
-        // }
-                    // $model = new ProductsModel();
-                    // $count_products= $model->countProductsByCategories('makeup'); 
-                    // $categories = $model->findAllCategories();
-                
-                
-                
-                
-                //     $nbr_product_par_page = 3;
-                //     $nbr_page = ceil($count_products[0]["liste"] / $nbr_product_par_page);
-                //     $debut = ($page - 1) * $nbr_product_par_page;
-                
-                //     $productsByPage = $model->productsByPage($nbr_product_par_page, $debut);
-                //     // $model->productsByPage($nbr_product_par_page, $debut);
-                
-                //     echo 'pagination';
-                
-                
-                
-                //     if(isset($_GET['categorie']))
-                //     {
-                    
-                    //         $sous_categorie = $model->productsBySousCategories($page_categorie,$debut_cat);
-                    
-                    //         //  
-                    
-                    //         $nbr_product_par_page = 3;
-                    //         $nbr_page_cat = ceil($count_products[0]["liste"] / $nbr_product_par_page);
-                    //         $debut_cat = ($page - 1) * $nbr_product_par_page;
-                    
-                    //     }
-                    
-                    
-                    //     Renderer::render('products/allProducts' , compact('products', 'categories', 'count_products', 'nbr_page', 'page', 'page_categorie'  ));
-                    // }
-                    
-                    // public static function calculPage()
-                    // {
-                        
-                        //     $nbr_product_par_page = 3;
-                        //     $nbr_page = ceil($count_products[0]["liste"] / $nbr_product_par_page);
-                        //     $debut = ($page - 1) * $nbr_product_par_page;
-                        
-    }
-
-    public static function getNameCategories()
-    {
-        $categories = self::getCategories();
-
-        foreach ($categories as $categorie)
-        {
-
-        }
-        
-        echo "cateeeeee";
-            
-            //    $categorieNames[] = array();
-
-        // for ($i = 0; $i <)
-        // while ($categories = self::getCategories())
-        // {
-        //     $name = $categories['name'];
-
-        //     $categorieNames[] = array("name" => $name);
-        // }
-        print_r($categorieNames);
-        // 
-        // Renderer::render('products/allProducts' , compact('categories', 'categorieName', 'categorie'));
-        return $categories;
+        return $sousCategories;
     }
     
-    
-                    
-    public static function createViewProducts() 
+    public static function getCategorieName()
     {
-        $categorieName = self::getNameCategories();
         $categories = self::getCategories();
-        // $sousCategories = self::selectAllSousCategory();
-        $products = self::selectAllProducts();
-        $productsByCategories = self::selectAllProductsCategory();
-        $pagination = self::pagination();
-        
-        // var_dump($_GET['categorie']);
-        if(isset($categorieName))
+
+        $nameCategorie = [];
+
+        foreach ($categories as $categorie )
         {
-            var_dump($categories);
-            var_dump($categories);
-           
+    
+            array_push($nameCategorie, $categorie['name']);
         }
-        // echo 'brrr';
-            
-        // echo 'brrr';
-        // var_dump($categories[0]["name"]);
-        
-        
+      
+        return $nameCategorie;
+    }
+
+    public static function getSousCategorieName($cat)
+    {
+        $sousCategories = self::getSousCategories($cat);
+
+        $nameSousCategorie = [];
+
+        foreach ($sousCategories as $sousCategorie )
+        {
+    
+            array_push($nameSousCategorie, $sousCategorie['name']);
+        }
+        //  var_dump($nameSousCategorie);
+        return $nameSousCategorie;
+    }
+
+
+    public static function productsByCategories($nameCategorie)
+    {
+        $model = new ProductsModel();
+        $productsCat = $model->productsByCategorie($nameCategorie);
+
+        return $productsCat;
+
+    }
+
+    public static function productsBySousCategories($nameCategorie)
+    {
+        $model = new ProductsModel();
+        $productsSousCat = $model->productsBySousCategories($nameCategorie);
+
+        return $productsSousCat;
+
+    }
+
+    public static function getUrl($qry)
+    {
+            $result = array();
+     
+             if(strpos($qry,'?')!==false) {
+               $q = parse_url($qry);
+               $qry = $q['query'];
+              }
+            else {
+                    return false;
+            }
+
+            foreach (explode('&', $qry) as $couple) {
+                    list ($key, $val) = explode('=', $couple);
+                    $result[$key] = $val;
+            }
+
+            return $result;
+    }
+
+    
+    public static function getUrlCategories()
+    {
+
+        $categorieUrl = self::getCategorieName();
+
         $url = explode("/", filter_var($_GET['p'], FILTER_SANITIZE_URL));
-        var_dump($url);
-        if($url[1] !== $categories[0]['name']){
+        // var_dump($url);
+        return $url;
+        
+    }
 
-            echo "test operationnel";
-            // if()
 
+    //pagination va prendre en paramètre des countsrproducts all , cat et sous cat. Il va également recevoir en paramètre le resultat de la requete select...
+    public static function paginationSousCat()
+    {
+        $model = new ProductsModel();
+        $sousCat = self::getUrlCategories();
+
+        $products = $model->productsBySousCategories(@$sousCat[2]);
+
+        $countProductsSousCat = count($products);
+
+        $page = null;
+        if($page === 0){
+
+            $page === 1;
         }
-        var_dump($categories);
-        // var_dump($sousCategories);
-        // var_dump($products);
-        // var_dump($productsByCategories);
-        Renderer::render('products/allProducts' , compact('categories', 'products', 'productsByCategories', 'sousCategories', 'page', 'categorieName'));
-    }             
+       
+        $nbrProductsByPage = 2;
+        $nbrPagesSousCat = ceil($countProductsSousCat / $nbrProductsByPage);
+       
+        return array ($page, $nbrProductsByPage, $nbrPagesSousCat, $countProductsSousCat);
+        
+    }
+    
+    public static function paginationCat()
+    {
+        $model = new ProductsModel();
+        $catUrl = self::getUrlCategories();
+
+       
+        $productsCat = $model->productsByCategorie($catUrl[1]);
+
+        $countProductsCat = count($productsCat);
+
+        $page = null;
+        if($page === 0){
+
+            $page === 1;
+        }
+       
+        $nbrProductsByPage = 2;
+        $nbrPagesCat = ceil($countProductsCat / $nbrProductsByPage);
+     
+      
+        return array ($page, $nbrProductsByPage, $nbrPagesCat, $countProductsCat);
+        
+    }
+           
+    public static function createViewProducts($cat = null, $sousCat = null) 
+    {
+        $model = new ProductsModel();
+        $categories = self::getCategories();
+        $nameCategorie = self::getCategorieName();
+        $pagination = self::paginationCat();
+        $paginationSousCat = self::paginationSousCat();
+        $nameSousCategorie = self::getSousCategorieName($cat);
+        $recupSousCat = self::getUrlCategories();
+        $sousCategories = self::getSousCategories($cat);
+        
+        $sousCat = @$recupSousCat[2];
+        $cat = @$recupSousCat[1];
+     
+        $page = $pagination[0];
+        $nbrProductsByPage = $pagination[1];
+        $nbrPagesCat = $pagination[2];
+        $nbrPagesSousCat = $paginationSousCat[2];
+       
+        $countProductsCat = $pagination[3];
+        $countProductsSousCat = $paginationSousCat[3];
+        
+       
+        if (!empty($sousCat) ) {
+            
+            $products = self::productsBySousCategories($sousCat);
+             
+            $pagination = self::paginationSousCat();
+            $nameSousCategorie = self::getSousCategorieName($cat);
+            $sousCategories = self::getSousCategories($cat);
+            
+        } 
+        else if (!empty($cat)) {
+            
+            $products = self::productsByCategories($cat);
+            $pagination = self::paginationCat();
+            $nameCategorie = self::getCategorieName();
+            $categories = self::getCategories();
+          
+        } 
+        
+       
+        Renderer::render('products/allProducts' , compact('categories','nameCategorie', 'nbrPagesCat','nbrPagesSousCat', 'sousCategories', 'products', 'nameSousCategorie', 'page','nbrProductsByPage','countProductsCat', 'countProductsSousCat'));
+       
+    }
+    
+    
 }
     
+//! faire une fonction pour make up et une func pour skincare avec deux renderer différents 

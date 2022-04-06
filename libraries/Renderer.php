@@ -4,7 +4,7 @@
 class Renderer {
 
 /**
-     * Undocumented function
+     *
      *
      * @param string $fichier dans quel fichier injecter la view
      * @param array $donnees données à afficher dans la view
