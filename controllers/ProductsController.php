@@ -535,10 +535,6 @@ class ProductsController extends Controller
             $nameCategorie = self::getCategorieName();
             $categories = self::getCategories();
         } 
-        else {
-            $product = self::selectAllProducts();
-            $pagination = self::paginationCat();
-        }
         
        
         Renderer::render('products/catProducts' , compact('categories','nameCategorie', 'nbrPagesCat','nbrPagesSousCat', 'sousCategories', 'products', 'nameSousCategorie', 'page','nbrProductsByPage','countProductsCat', 'countProductsSousCat'));
