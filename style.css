@@ -13,6 +13,7 @@
 - QUIZZ
 - SEARCH
 - INSTAFEED
+- PRODUCTS
 
 */
 
@@ -2586,6 +2587,42 @@ i {
   padding: 10px;
 }
 
+
+
+/* ------------------------------------------------
+
+                PRODUCTS
+
+--------------------------------------------------- */
+
+.allProducts_wrapper {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.Souscat {
+    width: 100%;
+    height: 7vh;
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    background-color: white;
+}
+.Souscat ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.Souscat button {
+    margin-top: 20%;
+    border: 1px solid rgb(27, 27, 27);
+    background-color: white;
+    cursor: pointer;
+    padding-left: 30%;
+    padding-right: 30%;
+    font-family: SousTitreouAccent;
+}
 
 
 .txt-center {

@@ -16,11 +16,11 @@ class ProductsController extends Controller
         if (!isset($url[1]))
         {
             $model = new ProductsModel();
-            $findAllProducts = $model->findAll();
+            $findAllProducts = $model->findAllProducts();
             Renderer::render('products/allProducts', compact('findAllProducts', 'url'));
         }
 
-        //Affichage de tout les produits trié par categorie
+        //Affichage de tous les produits trié par categorie
         if (isset($url[1])){
             $model = new CategoriesModel();
             $findCategories = $model->findAll();
@@ -31,7 +31,7 @@ class ProductsController extends Controller
                 if ($url[1] == $categories['name'])
                 {
                     $model = new ProductsModel();
-                    $findProductByCategorie = $model->findBy(['id_categorie' => $categories['id']]);
+                    $findProductByCategorie = $model->findByCat($categories['id']);
 
                     $model = new CategoriesModel();
                     $findCat = $model->findBy(['id' => $categories['id']]);
@@ -43,18 +43,17 @@ class ProductsController extends Controller
                 
             }
             
-
             if (isset($url[2]))
             {
                 
                 $model = new SousCategoriesModel();
-                $sousCategories = $model->FindBy(['name' => $url[2]]);
+                $sousCategories = $model->findBy(['name' => $url[2]]);
                 
                 $model = new ProductsModel();
-                $findProductBySousCategorie = $model->FindBy(['id_sous_categorie' => $sousCategories[0]['id']]);
-                var_dump($findProductBySousCategorie);
+                $findProductBySousCategorie = $model->findBySsCat(['id_sous_categorie' => $sousCategories[0]['id']]);
+                // var_dump($findProductBySousCategorie);
 
-            Renderer::render("products/allProducts", compact('url', 'sousCategories'));
+            Renderer::render("products/allProducts", compact('url', 'sousCategories', 'findProductBySousCategorie'));
             }
             
             Renderer::render("products/allProducts", compact('findProductByCategorie','findSousCategories','findCat', 'url'));
@@ -64,8 +63,6 @@ class ProductsController extends Controller
 
     public static function categorieProducts($categorie)
     {
-        
-
         Renderer::render('products/allProducts/skincare', compact('findCategories'));
     }
 

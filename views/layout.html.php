@@ -15,9 +15,9 @@
 
 <body>
     <header>
-        <!-- <div class="container_promo">
+        <div class="container_promo">
             <p>15% de réduction en profitant du code : <?= codePromo ?></p>
-        </div> -->
+        </div>
         <div class="top-header">           
             <form action="" method="post">
                 <div class="intern-form">
