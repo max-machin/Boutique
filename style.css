@@ -12,6 +12,7 @@
 - ABOUT
 - QUIZZ
 - SEARCH
+- INSTAFEED
 
 */
 
@@ -2238,6 +2239,34 @@ i {
     flex-direction: row;
 } */
 
+
+
+/* ------------------------------------------------
+
+                INSTAFEED
+
+--------------------------------------------------- */
+
+.insta {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 70px;
+  margin-bottom: 100px;
+}
+
+.instafeed {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: auto;
+}
+
+.instafeed img,
+.instafeed video {
+  object-fit: contain;
+  height: 220px;
+  width: 100%;
+  padding: 10px;
+}
 
 
 
