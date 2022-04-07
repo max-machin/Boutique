@@ -1090,7 +1090,32 @@ i {
     border: 1px solid black;
 }
 
+    /* pour l'admin */
 
+.admin_product {
+    display: flex;
+    flex-direction: column;
+}
+
+.admin_update_button {
+    display: flex;
+    flex-direction: column;
+}
+
+.admin_update_button p {
+    width: 40%;
+}
+
+.admin_update_button button {
+    width: 40%;
+    margin-bottom: 10%;
+}
+
+.sectionCommentsAdmin {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
 
 /* ------------------------------------------------
 

@@ -4,6 +4,9 @@
     //si admin
     if($_SESSION['user_data']['id'] == 1)
     { 
+        ?>
+        <div class='slider'>
+        <?php
         //les images
         foreach($images as $image){
         ?>     
@@ -12,14 +15,45 @@
             }
         ?>
 
-        <h1><?= $product['name'] ?></h1>
+            <img src="images/utilitaires/previous.svg" id="previous">
+            <img src="images/utilitaires/next.svg" id="next"> 
+        </div> 
+        <article class="admin_product">
+        <section class = "admin_update_button">
+            <h1><?= $product['name'] ?></h1>
+            <p><?= $product['description'] ?></p>
 
-        <form action="<?= $product['id'] ?>/update" method="post">  
-            <input type="hidden" name="id" value="<?= $product['id'] ?>"/>          
-            <button class="addBag" type="submit" name="updateProduct">Update</button>
-        </form>
-    <?php
+            <form action="<?= $product['id'] ?>/update" method="post">  
+                <input type="hidden" name="id" value="<?= $product['id'] ?>"/>          
+                <button class="addBag" type="submit" name="updateProduct">Update</button>
+            </form>
+        </section>
 
+        <section class="sectionCommentsAdmin"> 
+            <?php
+                foreach ( $allComments as $comment)
+                {
+            ?>
+                <div class="commentsAdmin">
+                    <?php
+                    $i = 0;
+                    while ( $i < $comment['note']){
+                    ?>
+                        <label for="">★</label>
+
+                    <?php
+                    $i++;
+                    }
+                    ?>
+                    <p><?= $comment['comment'] ?></p>
+                    <p class="info_commentaire">Posté par : <?= $comment['prenom'] ?> le : <?= $comment['datefr'] ?> à <?= $comment['heurefr'] ?></p>
+                </div>
+        <?php
+                }
+        ?>
+</section>
+</article>
+<?php
     } 
     //sinon le user
     else
