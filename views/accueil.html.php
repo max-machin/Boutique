@@ -86,6 +86,9 @@
         <hr>
         <div class='titre-instagram'><h2>Instagram with you</h2> <img src="images/utilitaires/like.png"></div>
         
+        <div class="insta">
+            <div class="instafeed"></div>
+        </div>
     </section>
 </article>
 

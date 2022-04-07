@@ -555,4 +555,3 @@ class ProductsController extends Controller
     
 }
     
-//! faire une fonction pour make up et une func pour skincare avec deux renderer différents 
