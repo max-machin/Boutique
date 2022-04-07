@@ -95,9 +95,10 @@
                             echo "<div class='error-msg'><p>$error_color</p></div>";
                         ?>
                     </div>
-
+                    <p class="priceProduct"><?= $product['price'] ?> €</p>
                     <!-- quantité du produit -->
                     <div class="add_quantity">
+                       
                         <select name="product_quantity" id="product_quantity">
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -105,7 +106,7 @@
                             <option value="4">4</option>
                             <option value="5">5</option>
                         </select>
-
+                            
                         <!-- add bouton -->
                         <input type="hidden" name="id_Product" value="<?= $product['id'] ?>">
                         <button class="addBag" type="submit" name="addBag">Add</button>                        
@@ -185,6 +186,7 @@
                 </div>
 
             </section>
+            
             <?php
             } 
             // sinon il faut se connecter
@@ -199,6 +201,29 @@
         </section>
 
 </article>
+    <h2 class="txt-center titre_related">Complétez votre look</h2>
+            <section class="wrapper relatedProduct">
+                    <?php
+                    
+                        foreach ( $findRelated as $product)
+                        {
+                            $images = new ImagesModel();
+                            $findImages = $images->relatedImages($product['id_product']);
+                            ?>
+                    <div class="bestsellers-products">
+                        <a href='products/<?= $product['id_product'] ?>'>
+                            <img src="uploads/<?= $findImages['url_image'] ?>" >
+                            <div class='intern-case'>
+                                <h3><?= $product['product_name'] ?></h3>
+                                <p class="txt-center"><?= $product['prix'] ?> €</p>
+                                <button>VOIR</button>                     
+                            </div>
+                        </a>  
+                    </div>
+                            <?php
+                        }
+                    ?>
+            </section>
        
 <script type="text/javascript" src="views/products/js/script.js"></script>
          

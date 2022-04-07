@@ -64,6 +64,11 @@ if(@$_SESSION['user_data']['id'] !== "1")
     </section>
 
     <h2 class="text-center">Best Sellers</h2>
+    <section class="bestSellersGraph">
+        <div class="content">
+            <p>Produits les plus vendus en %</p>
+            <p>Classement effectué selon : <i><?= $nbrProduit[0]['COUNT(*)']  ?></i> ventes</p>
+        </div>
         <div class="graph">
             <?php 
                 foreach ($bestSellers as $produit)
@@ -86,5 +91,6 @@ if(@$_SESSION['user_data']['id'] !== "1")
                 }
             ?>
         </div>
+    </section>
 </article>
 

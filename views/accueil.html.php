@@ -34,6 +34,7 @@
     </article>
 </div>
 
+
 <article>
     <section class="images-accueil">
         <div id="accueil-img">

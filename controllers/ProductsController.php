@@ -287,14 +287,14 @@ class ProductsController extends Controller
          */
         $model = new ProductsModel();
         $findRelated = $model->findRelatedproduct($product['id_categorie'], $id);
-        var_dump($findRelated);
+        
 
 
         if ( isset ($_SESSION['user_data']))
         {
-            Renderer::render('products/seeProduct' , compact('product', 'images', 'allComments', 'errorComment', 'findUser', 'findColors', 'error_color', 'findFav', 'favoritFind'));
+            Renderer::render('products/seeProduct' , compact('product', 'images', 'allComments', 'errorComment', 'findUser', 'findColors', 'error_color', 'findFav', 'favoritFind', 'findRelated'));
         } else {
-            Renderer::render('products/seeProduct' , compact('product', 'images', 'allComments', 'errorComment', 'findUser', 'findColors'));
+            Renderer::render('products/seeProduct' , compact('product', 'images', 'allComments', 'errorComment', 'findUser', 'findColors', 'findRelated'));
         }
         
     }

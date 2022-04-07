@@ -13,11 +13,6 @@ class ImagesModel extends Model
         $this->table = "images";
     }
 
-    public function __construct()
-    {
-       $this->table = 'images';
-    }
-
     /**
      * Get the value of id
      */ 
@@ -93,5 +88,10 @@ class ImagesModel extends Model
 
         $updateImg=$database->prepare('INSERT INTO `images` SET url_image=:url_image, id_product=:id_product');
         $updateImg -> execute(['url_image'=>$url_image,'id_product'=>$id_product]);
+    }
+
+    public function relatedImages($id_product)
+    {
+        return $this->requete("SELECT url_image FROM images WHERE id_product = ?", array($id_product))->fetch();
     }
 }
