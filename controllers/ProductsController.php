@@ -11,12 +11,16 @@ class ProductsController extends Controller
         // var_dump($_GET);
         $url = explode("/", $_GET['p']);
         var_dump($url);
+
+        //Affichage de tout les produits car par de paramètres 'categorie' en url
         if (!isset($url[1]))
         {
             $model = new ProductsModel();
             $findAllProducts = $model->findAll();
             Renderer::render('products/Allproducts', compact('findAllProducts', 'url'));
         }
+
+        //Affichage de tout les produits trié par categorie
         if (isset($url[1])){
             $model = new CategoriesModel();
             $findCategories = $model->findAll();
@@ -26,13 +30,34 @@ class ProductsController extends Controller
             {
                 if ($url[1] == $categories['name'])
                 {
-                   $model = new ProductsModel();
+                    $model = new ProductsModel();
                     $findProductByCategorie = $model->findBy(['id_categorie' => $categories['id']]);
-                    var_dump($findProductByCategorie); 
+
+                    $model = new CategoriesModel();
+                    $findCat = $model->findBy(['id' => $categories['id']]);
+                    
+                    $souscat = new SousCategoriesModel();
+                    $findSousCategories = $souscat->findBy(['id_categorie' => $categories['id']]);
+
                 }
                 
             }
-            Renderer::render("products/Allproducts", compact('findCategories', 'url'));
+            
+
+            if (isset($url[2]))
+            {
+                
+                $model = new SousCategoriesModel();
+                $sousCategories = $model->FindBy(['name' => $url[2]]);
+                
+                $model = new ProductsModel();
+                $findProductBySousCategorie = $model->FindBy(['id_sous_categorie' => $sousCategories[0]['id']]);
+                var_dump($findProductBySousCategorie);
+
+            Renderer::render("products/Allproducts", compact('url', 'sousCategories'));
+            }
+            
+            Renderer::render("products/Allproducts", compact('findProductByCategorie','findSousCategories','findCat', 'url'));
         }
         
     }
