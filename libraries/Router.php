@@ -124,29 +124,34 @@ class Router
    //parcourir le get et comparer avc in_array la var
    //qui contient mes noms de sous catégories
 
-                if($controllerName == "ProductsController"){
-                    if (empty($url[1]) && empty($url[2])) {
-                        $controllerName::productsAll();
-                    }  
-                    else if ($url[1] === 'makeup' || $url[1] === 'skincare')
+                if ($url[0] == 'products'){
+                    if($controllerName == "ProductsController")
                     {
-                        $controllerName::createViewProducts($url[1]);
-
-                        if(!empty($url[2])){
-                        
-                            if(in_array($url[2], $controllerName::getSousCategorieName($url[1]))){
-                                $controllerName::createViewProducts($url[2]);
-                            }   
-                            if($url[2] == 'update'){
-                                $controllerName::seeUpdateProduct($url[2]);
-                            }
-                        }
-                    } 
-                    else if(!empty($url[1]) && empty($url[2])){
-                        $controllerName::seeProduct($url[1]);
+                        $controllerName::allProducts();
                     }
                 }
-        } 
+                //     if (empty($url[1]) && empty($url[2])) {
+                //         $controllerName::productsAll();
+                //     }  
+                //     else if ($url[1] === 'makeup' || $url[1] === 'skincare')
+                //     {
+                //         $controllerName::createViewProducts($url[1]);
+
+                //         if(!empty($url[2])){
+                        
+                //             if(in_array($url[2], $controllerName::getSousCategorieName($url[1]))){
+                //                 $controllerName::createViewProducts($url[2]);
+                //             }   
+                //             if($url[2] == 'update'){
+                //                 $controllerName::seeUpdateProduct($url[2]);
+                //             }
+                //         }
+                //     } 
+                //     else if(!empty($url[1]) && empty($url[2])){
+                //         $controllerName::seeProduct($url[1]);
+                //     }
+                // }
+                
  
             if ( $controllerName == "BagsController")
             {
@@ -185,7 +190,7 @@ class Router
             }
         }      
  
-
+}
 
      
 

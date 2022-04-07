@@ -5,6 +5,7 @@ require_once('libraries/Renderer.php');
 
 class CategoriesController extends Controller
 {  
+
   
 
     public static function getCategories()
