@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <BASE href="http://localhost/Boutique/"> -->
-    <BASE href="http://localhost:8080/Boutique/">
+    <BASE href="http://localhost/Boutique/">
+    <!-- <BASE href="http://localhost:8080/Boutique/"> -->
     <link rel="stylesheet" href="style.css">
     <script src="index.js" charset="utf-8"></script>
     <script src="https://kit.fontawesome.com/81dc42ea59.js" crossorigin="anonymous"></script>
@@ -15,9 +15,9 @@
 
 <body>
     <header>
-        <!-- <div class="container_promo">
+        <div class="container_promo">
             <p>15% de réduction en profitant du code : <?= codePromo ?></p>
-        </div> -->
+        </div>
         <div class="top-header">           
             <form action="" method="post">
                 <div class="intern-form">
