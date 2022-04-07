@@ -318,22 +318,9 @@ class ProductsController extends Controller
         $model = new ProductsModel();
         $productsByCategories = $model->productsByCategorie();
         return $productsByCategories;
-        // var_dump($_GET['categorie']);
-        // var_dump($productsByCategories);
         
-
-        // Renderer::render('products/allProducts' , [compact('productsByCategories')]);
     }
 
-    // public static function selectAllSousCategory()
-    // {
-    //     $model = new ProductsModel();
-    //     $soloproduct = $model->findBy($id);
-    //     foreach($soloproduct as $product){
-    //         $images = explode(',', $product->url); 
-    //      }  
-    //     Renderer::render('products/seeProduct' , compact('product', 'images'));
-    // }
 
     public static function seeUpdateProduct($id)
     {
@@ -372,6 +359,7 @@ class ProductsController extends Controller
         // var_dump($product = $model->delete((3)));
         
     }
+
     public static function getCategories()
     {
         $model = new CategoriesModel();
@@ -403,6 +391,7 @@ class ProductsController extends Controller
         return $nameCategorie;
     }
 
+    //me stock mes noms de sous catégories dans un tableau 
     public static function getSousCategorieName($cat)
     {
         $sousCategories = self::getSousCategories($cat);
@@ -414,7 +403,6 @@ class ProductsController extends Controller
     
             array_push($nameSousCategorie, $sousCategorie['name']);
         }
-        //  var_dump($nameSousCategorie);
         return $nameSousCategorie;
     }
 
@@ -437,27 +425,29 @@ class ProductsController extends Controller
 
     }
 
+    //méthode, permet de diviser une URI et de récuperer un couple key/value
     public static function getUrl($qry)
     {
-            $result = array();
-     
-             if(strpos($qry,'?')!==false) {
-               $q = parse_url($qry);
-               $qry = $q['query'];
-              }
-            else {
-                    return false;
+        $result = array();
+    
+            if(strpos($qry,'?')!==false) {
+            $q = parse_url($qry);
+            $qry = $q['query'];
             }
+        else {
+                return false;
+        }
 
-            foreach (explode('&', $qry) as $couple) {
-                    list ($key, $val) = explode('=', $couple);
-                    $result[$key] = $val;
-            }
+        foreach (explode('&', $qry) as $couple) {
+                list ($key, $val) = explode('=', $couple);
+                $result[$key] = $val;
+        }
 
-            return $result;
+        return $result;
     }
 
-    
+  
+
     public static function getUrlCategories()
     {
 
@@ -469,8 +459,8 @@ class ProductsController extends Controller
         
     }
 
+//pagination par sous categories 
 
-    //pagination va prendre en paramètre des countsrproducts all , cat et sous cat. Il va également recevoir en paramètre le resultat de la requete select...
     public static function paginationSousCat()
     {
         $model = new ProductsModel();
@@ -493,6 +483,8 @@ class ProductsController extends Controller
         
     }
     
+//pagination par categories 
+
     public static function paginationCat()
     {
         $model = new ProductsModel();
@@ -516,7 +508,9 @@ class ProductsController extends Controller
         return array ($page, $nbrProductsByPage, $nbrPagesCat, $countProductsCat);
         
     }
-           
+
+    //me creer une vue dynamique selon si les paramètres que sont les categories et sous catégories
+    //intègre les paginations selons les bons produits 
     public static function createViewProducts($cat = null, $sousCat = null) 
     {
         $model = new ProductsModel();
@@ -543,7 +537,6 @@ class ProductsController extends Controller
         if (!empty($sousCat) ) {
             
             $products = self::productsBySousCategories($sousCat);
-             
             $pagination = self::paginationSousCat();
             $nameSousCategorie = self::getSousCategorieName($cat);
             $sousCategories = self::getSousCategories($cat);
@@ -566,4 +559,3 @@ class ProductsController extends Controller
     
 }
     
-//! faire une fonction pour make up et une func pour skincare avec deux renderer différents 

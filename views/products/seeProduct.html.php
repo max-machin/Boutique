@@ -1,6 +1,3 @@
-<?php
-/*require_once('libraries/Renderer.php');*/
-?>
 
 <article class='seeproduct'>
     <?php

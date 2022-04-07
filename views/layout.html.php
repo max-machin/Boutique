@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <BASE href="http://localhost/Boutique/"> -->
-    <BASE href="http://localhost:8080/Boutique/">
+    <!-- <BASE href="http://localhost:8080/Boutique/"> -->
+    <BASE href="http://localhost:8888/Boutique/">
     <link rel="stylesheet" href="style.css">
     <script src="index.js" charset="utf-8"></script>
     <script src="https://kit.fontawesome.com/81dc42ea59.js" crossorigin="anonymous"></script>
@@ -33,37 +34,35 @@
 
 <?php
     // var_dump($_GET);
- 
+    $pageEnCours = '?page=1';
     if ( isset ($_SESSION['user_data'] ) )
     {
     ?>
-        <nav>
+        <!-- <nav>
             <ul>
-                <li><a href="<?= urlmac ?>products">Nos produits</a></li>
-                <li><a href="<?= urlmac ?>users/profil">Profil</a></li>
-                <li><a href="<?= urlmac ?>users/disconnect">Deconnexion</a></li>
-                <?php
-                foreach ($categories as $categorie)  
+                <li><a href="products">Nos produits</a></li>
+                <li><a href="users/profil">Profil</a></li>
+                <li><a href="users/disconnect">Deconnexion</a></li>
+                /*
+                  <?php
+                // foreach ($categories as $categorie)  
                     {
-                        echo ('<li class="navli"><a href="'.urlmac.'products/'.$categorie['name'].'">'.$categorie['name'].'</a></li>');
+                        // echo ('<li class="navli"><a href="products/'.$categorie['name'].'">'.$categorie['name'].'</a></li>');
                     }
                 ?>
+                 */
+                
             </ul>
-        </nav>
+        </nav> -->
     <?php
     } else {
-        $pageEnCours = '?page=1';
+        
     ?>
         <nav>
             <ul>
-                <li><a href="<?= urlmac ?>users/register">Inscription</a></li>
-                <li><a href="<?= urlmac ?>users/login">Connexion</a></li>
-                <?php
-                foreach ($categories as $categorie)  
-                    {
-                        echo ('<li class="navli"><a href="'.urlmac.'products/'.$categorie['name'].$pageEnCours.'">'.$categorie['name'].'</a></li>');
-                    }
-                ?>
+                <li><a href="users/register">Inscription</a></li>
+                <li><a href="users/login">Connexion</a></li>
+                
             </ul>
         </nav>
     <?php
@@ -112,9 +111,13 @@
         <div class="bottom-header">
             <nav class="categories">
                 <ul>
-                    <li><a href="<?= urlmac ?>">Our products</a></li>
-                    <li><a href="<?= urlmac ?>">Skincare</a></li>
-                    <li><a href="<?= urlmac ?>">Make up</a></li>
+                    <li><a href="">Our products</a></li>
+                    <?php
+                foreach ($categories as $categorie)  
+                    {
+                        echo ('<li class="navli"><a href="products/'.$categorie['name'].$pageEnCours.'">'.$categorie['name'].'</a></li>');
+                    }
+                ?>
                     <li><a href="quizz">Discover your skin</a></li>
                 </ul>
             </nav>

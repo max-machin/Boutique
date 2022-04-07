@@ -223,7 +223,7 @@ class ProductsModel extends Model
       
 
         @$nameEnCours = $resultNames['name'];
-        // var_dump($nameEnCours); 
+        
         
         $query = $this->database->prepare("SELECT products.*, GROUP_CONCAT(images.url_image SEPARATOR ',') as url FROM `products` 
         INNER JOIN images ON products.id = images.id_product 

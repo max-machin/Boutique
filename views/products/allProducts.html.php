@@ -1,33 +1,22 @@
 
-<h1>Liste de nos produits</h1>
+<h1>Our products</h1>
 <?php 
 
 $urlExplode = ProductsController::getUrlCategories();
 // var_dump($categories);
 
 $var = explode('?', $_SERVER['REQUEST_URI']);
+$_GET['page'] = $var[1];
+$page = $_GET['page'];
 
 
 $getCat = explode('/', $_SERVER['REQUEST_URI']);
-// var_dump($var);
-
-
- 
-$_GET['page'] = $var[1];
-
-$page = $_GET['page'];
-
-// echo'<pre>';
-// var_dump($getCat);
-// echo'</pre>';
-
 $pageEnCours = '?page=1';
 
 
-// ?>
+/*
+?>
 <nav>
-
-   
      <ul>
         <?php
         foreach ($sousCategories as $sousCategorie) { ?>
@@ -41,7 +30,7 @@ $pageEnCours = '?page=1';
 </nav>
 
 <?php 
-
+*/
 
 $urlSousCat = $_SERVER["REQUEST_URI"];
 
@@ -113,3 +102,17 @@ if(isset($getCat[2]) && !isset($getCat[4]))
 
 
 ?>
+
+<div class='slider'>
+            <?php
+            //les images
+                foreach($images as $image){
+                ?>         
+                    <img src="uploads/<?= $image ?>" width="50px" class = "img_slider">
+                <?php
+                }
+            ?> 
+        
+                <img src="images/utilitaires/previous.svg" id="previous">
+                <img src="images/utilitaires/next.svg" id="next"> 
+        </div> 

@@ -153,10 +153,7 @@ class Router
                         $controllerName::createViewProducts();
                     }
                 }
-            // elseif(!empty($url[2]))
-            // {
-
-            // }
+           
         } 
  
             if ( $controllerName == "BagsController")
