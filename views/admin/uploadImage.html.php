@@ -2,7 +2,7 @@
 
 if(@$_SESSION['user_data']['id'] !== "1")
 {
-    header('Location:../index');
+    header('Location:../accueil');
 }
 
 ?>

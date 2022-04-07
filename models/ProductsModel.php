@@ -164,6 +164,17 @@ class ProductsModel extends Model
         return($resultProduct);
     }
  
+    public function findProductsforUpdate()
+    {
+        $this->database = DataBase::getPdo();
+
+        $findProduct=$this->database->prepare('SELECT products.*, GROUP_CONCAT(DISTINCT CONCAT(images.url_image,",", images.id ) SEPARATOR ";") as url FROM `products` INNER JOIN images ON products.id = images.id_product GROUP BY products.id');
+        $findProduct -> execute();
+        $resultProduct = $findProduct -> fetchAll();
+
+        //var_dump($resultProduct);
+        return($resultProduct);
+    }
 
     public function searchProduct($mot)
     {
@@ -178,6 +189,30 @@ class ProductsModel extends Model
         return($resultProduct);
     }
 
+
+    public function findByCat($id_categorie)
+    {
+        $this->database = DataBase::getPdo();
+
+        $findByCat=$this->database->prepare('SELECT products.*, GROUP_CONCAT(images.url_image) as url FROM products INNER JOIN images ON products.id = images.id_product WHERE products.id_categorie=:id_categorie GROUP BY images.id_product');
+        $findByCat -> execute(['id_categorie' => $id_categorie]);
+        $resultProductCat = $findByCat -> fetchAll();
+
+        return($resultProductCat);
+    }
+
+    public function findBySsCat($id_sous_cat)
+    {
+        $id_sous_categorie = $id_sous_cat["id_sous_categorie"];
+
+        $this->database = DataBase::getPdo();
+
+        $findBySsCat=$this->database->prepare('SELECT products.*, GROUP_CONCAT(images.url_image) as url FROM products INNER JOIN images ON products.id = images.id_product WHERE products.id_sous_categorie=:id_sous_categorie GROUP BY images.id_product');
+        $findBySsCat -> execute(['id_sous_categorie' => $id_sous_categorie]);
+        $resultProductSsCat = $findBySsCat -> fetchAll();
+
+        return($resultProductSsCat);
+    }
     
     public function countProducts()
     {
@@ -200,68 +235,6 @@ class ProductsModel extends Model
         return $query->fetchAll();
     }
 
-    public function productsByCategorie($nameCategorie) 
-    {
-        $this->database = DataBase::getPdo();
-
-        $query = $this->database->prepare("SELECT name FROM categories WHERE name=:nameCategorie");
-        $query->execute([
-            'nameCategorie' => $nameCategorie
-        ]);
-
-        $resultNames = $query->fetch();
-
-        $findProduct = $this->database->prepare("SELECT products.*, GROUP_CONCAT(images.url_image SEPARATOR ',') as url FROM {$this->table}  
-        INNER JOIN images ON products.id = images.id_product 
-        INNER JOIN categories ON products.id_categorie = categories.id
-        WHERE categories.name = :nameCategorie
-        GROUP BY products.id");        
-        $findProduct->execute(['nameCategorie' => $nameCategorie]);
-        $resultProduct = $findProduct->fetchAll();
-
-
-        return($resultProduct);
-    }
-   
-
-    public function productsBySousCategories($nameSousCategorie)
-    {
-        $this->database = DataBase::getPdo();
-
-        $query = $this->database->prepare("SELECT name FROM sous_categories WHERE name=:nameSousCategorie");
-        $query->execute([
-            'nameSousCategorie' => $nameSousCategorie
-        ]);
-        
-        $resultNames = $query->fetch();
-      
-
-        @$nameEnCours = $resultNames['name'];
-        // var_dump($nameEnCours); 
-        
-        $query = $this->database->prepare("SELECT products.*, GROUP_CONCAT(images.url_image SEPARATOR ',') as url FROM `products` 
-        INNER JOIN images ON products.id = images.id_product 
-        INNER JOIN sous_categories ON sous_categories.id = products.id_sous_categorie 
-        INNER JOIN categories ON categories.id = products.id_categorie 
-        WHERE sous_categories.name = :correspondanceName 
-        GROUP BY products.id
-        ");
-        
-        $query->execute([
-            'correspondanceName' => $nameEnCours
-        ]);
-        $result = $query->fetchAll();
-
-        // var_dump($result);
-
-        return $result;
-    }
-   
-
-   
-
-
-    
 
     public function findRelatedproduct($id_categorie,$id)
     {

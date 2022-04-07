@@ -4,16 +4,65 @@ require_once('libraries/Renderer.php');
 
 class ProductsController extends Controller
 {  
-    
-    public static function selectAllProducts(){
 
-        $model = new ProductsModel();
-        $products = $model->findAllProducts(); 
-        // foreach($products as $product){
-        //     $images = explode(',', $product->url); 
-        //  }      
+    public static function allProducts()
+    {
         
-        Renderer::render('products/allProducts' , compact('products'));   
+        // var_dump($_GET);
+        $url = explode("/", $_GET['p']);
+
+        //Affichage de tout les produits car par de paramètres 'categorie' en url
+        if (!isset($url[1]))
+        {
+            $model = new ProductsModel();
+            $findAllProducts = $model->findAllProducts();
+            Renderer::render('products/allProducts', compact('findAllProducts', 'url'));
+        }
+
+        //Affichage de tous les produits trié par categorie
+        if (isset($url[1])){
+            $model = new CategoriesModel();
+            $findCategories = $model->findAll();
+
+            
+            foreach ($findCategories as $categories)
+            {
+                if ($url[1] == $categories['name'])
+                {
+                    $model = new ProductsModel();
+                    $findProductByCategorie = $model->findByCat($categories['id']);
+
+                    $model = new CategoriesModel();
+                    $findCat = $model->findBy(['id' => $categories['id']]);
+                    
+                    $souscat = new SousCategoriesModel();
+                    $findSousCategories = $souscat->findBy(['id_categorie' => $categories['id']]);
+
+                }
+                
+            }
+            
+            if (isset($url[2]))
+            {
+                
+                $model = new SousCategoriesModel();
+                $sousCategories = $model->findBy(['name' => $url[2]]);
+                
+                $model = new ProductsModel();
+                $findProductBySousCategorie = $model->findBySsCat(['id_sous_categorie' => $sousCategories[0]['id']]);
+                // var_dump($findProductBySousCategorie);
+
+            Renderer::render("products/allProducts", compact('url', 'sousCategories', 'findProductBySousCategorie'));
+            }
+            
+            Renderer::render("products/allProducts", compact('findProductByCategorie','findSousCategories','findCat', 'url'));
+        }
+        
+    }
+
+    public static function categorieProducts($categorie)
+    {
+        Renderer::render('products/allProducts/skincare', compact('findCategories'));
     }
 
     public static function selectAll(){
@@ -39,6 +88,8 @@ class ProductsController extends Controller
 
         $findUser = "";
         $error_color = "";
+
+        $success = "";
 
         $model = new ProductsModel();
         $soloproduct = $model->selectProductbyId($id);
@@ -87,7 +138,7 @@ class ProductsController extends Controller
                             ->setId_color($color)
                             ->setQuantity_product($_POST['product_quantity']);
                         $productAdded->create($model);  
-
+                        $success = '<div class="success"> <i class="fa-solid fa-thumbs-up"></i> Produit ajouté au panier</div>';
                         
                         $findModel = new BagsModel();
                         $find = $findModel->findBy(['id_product' => $_POST['id_Product']]);
@@ -106,12 +157,14 @@ class ProductsController extends Controller
                             ->setQuantity_product($_POST['product_quantity'])
                             ->setId_color($color);
                             $productAdded->create($model);  
+                            $success = '<div class="success"> <i class="fa-solid fa-thumbs-up"></i> Produit ajouté au panier</div>';
 
                         // Sinon on update sa quantité
                         } else {
                             
                             $model = new BagsModel();
                             $updateBag = $model->updateQuantityColors($_POST['product_quantity'], $_POST['id_Product'], $_SESSION['user_data']['id'], $_POST['color']);
+                            $success = '<div class="success"> <i class="fa-solid fa-thumbs-up"></i> Quantité modifié</div>';
                         }
                     // Si l'utilisateur a déjà un panier
                     } else {
@@ -130,12 +183,14 @@ class ProductsController extends Controller
                             ->setQuantity_product($_POST['product_quantity'])
                             ->setId_color($color);
                             $productAdded->create($model);  
+                            $success = '<div class="success"> <i class="fa-solid fa-thumbs-up"></i> Produit ajouté au panier</div>';
 
                         // Sinon on l'update
                         } else {
 
                         $model = new BagsModel();
                         $updateBag = $model->updateQuantityColors($_POST['product_quantity'], $_POST['id_Product'], $_SESSION['user_data']['id'], $_POST['color']);
+                        $success = '<div class="success"> <i class="fa-solid fa-thumbs-up"></i> Quantité modifié</div>';
                         }
                     }
                 } 
@@ -159,7 +214,7 @@ class ProductsController extends Controller
                         ->setId_product($_POST['id_Product'])
                         ->setQuantity_product($_POST['product_quantity']);
                     $productAdded->create($model);  
-
+                    $success = '<div class="success"> <i class="fa-solid fa-thumbs-up"></i> Produit ajouté au panier</div>';
                     
                     $findModel = new BagsModel();
                     $find = $findModel->findBy(['id_product' => $_POST['id_Product']]);
@@ -174,7 +229,7 @@ class ProductsController extends Controller
                         ->setId_user($_SESSION['user_data']['id'])
                         ->setId_product($_POST['id_Product'])
                         ->setQuantity_product($_POST['product_quantity']);
-                        
+                        $success = '<div class="success"> <i class="fa-solid fa-thumbs-up"></i> Produit ajouté au panier</div>';
                         $productAdded->create($model);  
 
                     // Sinon on update sa quantité
@@ -183,7 +238,7 @@ class ProductsController extends Controller
 
                         $model = new BagsModel();
                         $updateBag = $model->updateQuantity($_POST['product_quantity'],$_POST['id_Product'], $_SESSION['user_data']['id']);
-                        
+                        $success = '<div class="success"> <i class="fa-solid fa-thumbs-up"></i> Quantité modifié</div>';
                     }
                 // Si l'utilisateur a déjà un panier
                 } else {
@@ -199,12 +254,13 @@ class ProductsController extends Controller
                         ->setId_product($_POST['id_Product'])
                         ->setQuantity_product($_POST['product_quantity']);
                         $productAdded->create($model);  
+                        $success = '<div class="success"> <i class="fa-solid fa-thumbs-up"></i> Produit ajouté au panier</div>';
 
                     // Sinon on l'update
                     } else {
                     $model = new BagsModel();
                     $updateBag = $model->updateQuantity($_POST['product_quantity'], $_POST['id_Product'], $_SESSION['user_data']['id']);
-                    
+                    $success = '<div class="success"> <i class="fa-solid fa-thumbs-up"></i> Quantité modifié</div>';
                     }
                 }
             
@@ -292,7 +348,7 @@ class ProductsController extends Controller
 
         if ( isset ($_SESSION['user_data']))
         {
-            Renderer::render('products/seeProduct' , compact('product', 'images', 'allComments', 'errorComment', 'findUser', 'findColors', 'error_color', 'findFav', 'favoritFind', 'findRelated'));
+            Renderer::render('products/seeProduct' , compact('product', 'images', 'allComments', 'errorComment', 'findUser', 'findColors', 'error_color', 'findFav', 'favoritFind', 'findRelated', 'success'));
         } else {
             Renderer::render('products/seeProduct' , compact('product', 'images', 'allComments', 'errorComment', 'findUser', 'findColors', 'findRelated'));
         }
@@ -315,8 +371,10 @@ class ProductsController extends Controller
     {
         // var_dump($id);
         $model = new ProductsModel();
-        $product = $model->find($id);
+        $product = $model->find(2);
+        var_dump($product);
         Renderer::render('products/updateProduct' , compact('product'));
+        // Renderer::render('products/updateProduct' , compact('product'));
     }
 
     public static function updateProduct()
@@ -356,197 +414,199 @@ class ProductsController extends Controller
         return $categories;
     }
 
-    public static function getSousCategories($cat) 
-    {
-        $modelSousCat = new SousCategoriesModel();
-        $sousCategories = $modelSousCat->findSousCategories($cat);
-
-        return $sousCategories;
-    }
     
-    public static function getCategorieName()
-    {
-        $categories = self::getCategories();
 
-        // var_dump($categories);
-        // echo 'je suis dans getcatename';
+    // public static function getSousCategories($cat) 
+    // {
+    //     $modelSousCat = new SousCategoriesModel();
+    //     $sousCategories = $modelSousCat->findSousCategories($cat);
 
-        $nameCategorie = [];
-
-        foreach ($categories as $categorie )
-        {
+    //     return $sousCategories;
+    // }
     
-            array_push($nameCategorie, $categorie['name']);
-        }
+    // public static function getCategorieName()
+    // {
+    //     $categories = self::getCategories();
+
+    //     // var_dump($categories);
+    //     // echo 'je suis dans getcatename';
+
+    //     $nameCategorie = [];
+
+    //     foreach ($categories as $categorie )
+    //     {
+    
+    //         array_push($nameCategorie, $categorie['name']);
+    //     }
       
-        return $nameCategorie;
-    }
+    //     return $nameCategorie;
+    // }
 
-    public static function getSousCategorieName($cat)
-    {
-        $sousCategories = self::getSousCategories($cat);
+    // public static function getSousCategorieName($cat)
+    // {
+    //     $sousCategories = self::getSousCategories($cat);
 
-        $nameSousCategorie = [];
+    //     $nameSousCategorie = [];
 
-        foreach ($sousCategories as $sousCategorie )
-        {
+    //     foreach ($sousCategories as $sousCategorie )
+    //     {
     
-            array_push($nameSousCategorie, $sousCategorie['name']);
-        }
-        //  var_dump($nameSousCategorie);
-        return $nameSousCategorie;
-    }
+    //         array_push($nameSousCategorie, $sousCategorie['name']);
+    //     }
+    //     //  var_dump($nameSousCategorie);
+    //     return $nameSousCategorie;
+    // }
 
 
-    public static function productsByCategories($nameCategorie)
-    {
-        $model = new ProductsModel();
-        $productsCat = $model->productsByCategorie($nameCategorie);
+    // public static function productsByCategories($nameCategorie)
+    // {
+    //     $model = new ProductsModel();
+    //     $productsCat = $model->productsByCategorie($nameCategorie);
 
-        var_dump($productsCat);
+    //     var_dump($productsCat);
 
-        return $productsCat;
+    //     return $productsCat;
 
-    }
+    // }
 
-    public static function productsBySousCategories($nameCategorie)
-    {
-        $model = new ProductsModel();
-        $productsSousCat = $model->productsBySousCategories($nameCategorie);
+    // public static function productsBySousCategories($nameCategorie)
+    // {
+    //     $model = new ProductsModel();
+    //     $productsSousCat = $model->productsBySousCategories($nameCategorie);
 
-        return $productsSousCat;
+    //     return $productsSousCat;
 
-    }
+    // }
 
-    public static function getUrl($qry)
-    {
-            $result = array();
+    // public static function getUrl($qry)
+    // {
+    //         $result = array();
      
-             if(strpos($qry,'?')!==false) {
-               $q = parse_url($qry);
-               $qry = $q['query'];
-              }
-            else {
-                    return false;
-            }
+    //          if(strpos($qry,'?')!==false) {
+    //            $q = parse_url($qry);
+    //            $qry = $q['query'];
+    //           }
+    //         else {
+    //                 return false;
+    //         }
 
-            foreach (explode('&', $qry) as $couple) {
-                    list ($key, $val) = explode('=', $couple);
-                    $result[$key] = $val;
-            }
+    //         foreach (explode('&', $qry) as $couple) {
+    //                 list ($key, $val) = explode('=', $couple);
+    //                 $result[$key] = $val;
+    //         }
 
-            return $result;
-    }
+    //         return $result;
+    // }
 
     
-    public static function getUrlCategories()
-    {
+    // public static function getUrlCategories()
+    // {
 
-        $categorieUrl = self::getCategorieName();
+    //     $categorieUrl = self::getCategorieName();
 
-        $url = explode("/", filter_var($_GET['p'], FILTER_SANITIZE_URL));
-        // var_dump($url);
-        return $url;
+    //     $url = explode("/", filter_var($_GET['p'], FILTER_SANITIZE_URL));
+    //     // var_dump($url);
+    //     return $url;
         
-    }
+    // }
 
 
-    //pagination va prendre en paramètre des countsrproducts all , cat et sous cat. Il va également recevoir en paramètre le resultat de la requete select...
-    public static function paginationSousCat()
-    {
-        $model = new ProductsModel();
-        $sousCat = self::getUrlCategories();
+    // //pagination va prendre en paramètre des countsrproducts all , cat et sous cat. Il va également recevoir en paramètre le resultat de la requete select...
+    // public static function paginationSousCat()
+    // {
+    //     $model = new ProductsModel();
+    //     $sousCat = self::getUrlCategories();
 
-        $products = $model->productsBySousCategories(@$sousCat[2]);
+    //     $products = $model->productsBySousCategories(@$sousCat[2]);
 
-        $countProductsSousCat = count($products);
+    //     $countProductsSousCat = count($products);
 
-        $page = null;
-        if($page === 0){
+    //     $page = null;
+    //     if($page === 0){
 
-            $page === 1;
-        }
+    //         $page === 1;
+    //     }
        
-        $nbrProductsByPage = 2;
-        $nbrPagesSousCat = ceil($countProductsSousCat / $nbrProductsByPage);
+    //     $nbrProductsByPage = 2;
+    //     $nbrPagesSousCat = ceil($countProductsSousCat / $nbrProductsByPage);
        
-        return array ($page, $nbrProductsByPage, $nbrPagesSousCat, $countProductsSousCat);
+    //     return array ($page, $nbrProductsByPage, $nbrPagesSousCat, $countProductsSousCat);
         
-    }
+    // }
     
-    public static function paginationCat()
-    {
-        $model = new ProductsModel();
-        $catUrl = self::getUrlCategories();
+    // public static function paginationCat()
+    // {
+    //     $model = new ProductsModel();
+    //     $catUrl = self::getUrlCategories();
 
        
-        $productsCat = $model->productsByCategorie($catUrl[1]);
+    //     $productsCat = $model->productsByCategorie($catUrl[1]);
 
-        $countProductsCat = count($productsCat);
+    //     $countProductsCat = count($productsCat);
 
-        $page = null;
-        if($page === 0){
+    //     $page = null;
+    //     if($page === 0){
 
-            $page === 1;
-        }
+    //         $page === 1;
+    //     }
        
-        $nbrProductsByPage = 2;
-        $nbrPagesCat = ceil($countProductsCat / $nbrProductsByPage);
+    //     $nbrProductsByPage = 2;
+    //     $nbrPagesCat = ceil($countProductsCat / $nbrProductsByPage);
      
       
-        return array ($page, $nbrProductsByPage, $nbrPagesCat, $countProductsCat);
+    //     return array ($page, $nbrProductsByPage, $nbrPagesCat, $countProductsCat);
         
-    }
+    // }
            
-    public static function createViewProducts($cat = null, $sousCat = null) 
-    {
-        $model = new ProductsModel();
-        $categories = self::getCategories();
-        $nameCategorie = self::getCategorieName();
-        $pagination = self::paginationCat();
-        $paginationSousCat = self::paginationSousCat();
-        $nameSousCategorie = self::getSousCategorieName($cat);
-        $recupSousCat = self::getUrlCategories();
-        $sousCategories = self::getSousCategories($cat);
+    // public static function createViewProducts($cat = null, $sousCat = null) 
+    // {
+    //     $model = new ProductsModel();
+    //     $categories = self::getCategories();
+    //     $nameCategorie = self::getCategorieName();
+    //     $pagination = self::paginationCat();
+    //     $paginationSousCat = self::paginationSousCat();
+    //     $nameSousCategorie = self::getSousCategorieName($cat);
+    //     $recupSousCat = self::getUrlCategories();
+    //     $sousCategories = self::getSousCategories($cat);
         
-        $sousCat = @$recupSousCat[2];
-        $cat = @$recupSousCat[1];
+    //     $sousCat = @$recupSousCat[2];
+    //     $cat = @$recupSousCat[1];
      
-        $page = $pagination[0];
-        $nbrProductsByPage = $pagination[1];
-        $nbrPagesCat = $pagination[2];
-        $nbrPagesSousCat = $paginationSousCat[2];
+    //     $page = $pagination[0];
+    //     $nbrProductsByPage = $pagination[1];
+    //     $nbrPagesCat = $pagination[2];
+    //     $nbrPagesSousCat = $paginationSousCat[2];
        
-        $countProductsCat = $pagination[3];
-        $countProductsSousCat = $paginationSousCat[3];
+    //     $countProductsCat = $pagination[3];
+    //     $countProductsSousCat = $paginationSousCat[3];
         
        
-        if (!empty($sousCat) ) {
+    //     if (!empty($sousCat) ) {
             
-            $products = self::productsBySousCategories($sousCat);
-            $pagination = self::paginationSousCat();
-            $nameSousCategorie = self::getSousCategorieName($cat);
-            $sousCategories = self::getSousCategories($cat);
+    //         $products = self::productsBySousCategories($sousCat);
+    //         $pagination = self::paginationSousCat();
+    //         $nameSousCategorie = self::getSousCategorieName($cat);
+    //         $sousCategories = self::getSousCategories($cat);
             
-        } 
-        else if (!empty($cat)) {
-            $products = self::productsByCategories($cat);
-            $pagination = self::paginationCat();
-            $nameCategorie = self::getCategorieName();
-            $categories = self::getCategories();
-        } 
+    //     } 
+    //     else if (!empty($cat)) {
+    //         $products = self::productsByCategories($cat);
+    //         $pagination = self::paginationCat();
+    //         $nameCategorie = self::getCategorieName();
+    //         $categories = self::getCategories();
+    //     } 
         
        
-        Renderer::render('products/catProducts' , compact('categories','nameCategorie', 'nbrPagesCat','nbrPagesSousCat', 'sousCategories', 'products', 'nameSousCategorie', 'page','nbrProductsByPage','countProductsCat', 'countProductsSousCat'));
+    //     Renderer::render('products/catProducts' , compact('categories','nameCategorie', 'nbrPagesCat','nbrPagesSousCat', 'sousCategories', 'products', 'nameSousCategorie', 'page','nbrProductsByPage','countProductsCat', 'countProductsSousCat'));
        
-    }
+    // }
 
-    public static function productsAll()
-    {
-        $products = self::selectAllProducts();
+    // public static function productsAll()
+    // {
+    //     $products = self::selectAllProducts();
 
-        Renderer::render('products/allProducts' , compact('products'));
-    }
+    //     Renderer::render('products/allProducts' , compact('products'));
+    // }
     
     
 }

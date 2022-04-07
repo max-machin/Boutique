@@ -2,7 +2,7 @@
 
 if(@$_SESSION['user_data']['id'] !== "1")
 {
-    header('Location:../index');
+    header('Location:../accueil');
 }
 
 
@@ -26,9 +26,15 @@ if(@$_SESSION['user_data']['id'] !== "1")
         <button type="submit" class="btn btn-outline-dark" name="goCreate">Create a new product</button>
     </form>
 
+    <form action="admin/create/image" method="post">
+        <button type="submit" class="btn btn-outline-dark" name="goUpdate">Add an image to a product</button> 
+    </form>
+
     <form action="admin/update" method="post">
         <button type="submit" class="btn btn-outline-dark" name="goUpdate">Update a product</button> 
     </form>
+
+
 
     <section>
         <article class="panelAdmin">
