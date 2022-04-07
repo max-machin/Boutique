@@ -103,37 +103,33 @@ class Router
                 } 
             }
 
-            // var_dump($url[1]);
-            // var_dump($url[2]);
-           
-
-
         
-            if(!empty($url[1]) && empty($url[2])){
-                if($controllerName == "ProductsController"){
-                 $controllerName::seeProduct($url[1]);
-                }            
-            }elseif(!empty($url[1]) && !empty($url[2])){
-                if($controllerName == "ProductsController"){
-                    if($url[2] == 'update'){
-                        $controllerName::seeUpdateProduct($url[1]);
-                        }
-                    }
-                }
-            elseif($controllerName == "ProductsController"){
-                $controllerName::selectAllProducts();
-                }
+        
+            // if(!empty($url[1]) && empty($url[2])){
+            //     if($controllerName == "ProductsController"){
+            //      $controllerName::seeProduct($url[1]);
+            //     }            
+            // }elseif(!empty($url[1]) && !empty($url[2])){
+            //     if($controllerName == "ProductsController"){
+            //         if($url[2] == 'update'){
+            //             $controllerName::seeUpdateProduct($url[1]);
+            //             }
+            //         }
+            //     }
+            // elseif($controllerName == "ProductsController"){
+            //     $controllerName::selectAllProducts();
+            //     }
    //in array me cherche une clé ds un tableau ici le retour des noms, ma méthode générant 
    //ma view prend la clé en paramètre 
    //parcourir le get et comparer avc in_array la var
    //qui contient mes noms de sous catégories
 
-            if(!empty($url[1]))
-            {
                 if($controllerName == "ProductsController"){
-                    
-                    
-                    if (in_array($url[1], $controllerName::getCategorieName($url[1]))){
+                    if (empty($url[1]) && empty($url[2])) {
+                        $controllerName::productsAll();
+                    }  
+                    else if ($url[1] === 'makeup' || $url[1] === 'skincare')
+                    {
                         $controllerName::createViewProducts($url[1]);
 
                         if(!empty($url[2])){
@@ -144,19 +140,12 @@ class Router
                             if($url[2] == 'update'){
                                 $controllerName::seeUpdateProduct($url[2]);
                             }
-                    }
-                    }
-                               
-                    
-                    elseif($controllerName == "ProductsController"){
-                        
-                        $controllerName::createViewProducts();
+                        }
+                    } 
+                    else if(!empty($url[1]) && empty($url[2])){
+                        $controllerName::seeProduct($url[1]);
                     }
                 }
-            // elseif(!empty($url[2]))
-            // {
-
-            // }
         } 
  
             if ( $controllerName == "BagsController")
@@ -194,7 +183,7 @@ class Router
                 }
             }
         }      
-    }   
+ 
 
 
      

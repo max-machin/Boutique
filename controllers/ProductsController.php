@@ -202,8 +202,6 @@ class ProductsController extends Controller
 
                     // Sinon on l'update
                     } else {
-
-
                     $model = new BagsModel();
                     $updateBag = $model->updateQuantity($_POST['product_quantity'], $_POST['id_Product'], $_SESSION['user_data']['id']);
                     
@@ -313,28 +311,6 @@ class ProductsController extends Controller
     }
 
 
-    public static function selectAllProductsCategory()
-    {
-        $model = new ProductsModel();
-        $productsByCategories = $model->productsByCategorie();
-        return $productsByCategories;
-        // var_dump($_GET['categorie']);
-        // var_dump($productsByCategories);
-        
-
-        // Renderer::render('products/allProducts' , [compact('productsByCategories')]);
-    }
-
-    // public static function selectAllSousCategory()
-    // {
-    //     $model = new ProductsModel();
-    //     $soloproduct = $model->findBy($id);
-    //     foreach($soloproduct as $product){
-    //         $images = explode(',', $product->url); 
-    //      }  
-    //     Renderer::render('products/seeProduct' , compact('product', 'images'));
-    // }
-
     public static function seeUpdateProduct($id)
     {
         // var_dump($id);
@@ -392,6 +368,9 @@ class ProductsController extends Controller
     {
         $categories = self::getCategories();
 
+        // var_dump($categories);
+        // echo 'je suis dans getcatename';
+
         $nameCategorie = [];
 
         foreach ($categories as $categorie )
@@ -423,6 +402,8 @@ class ProductsController extends Controller
     {
         $model = new ProductsModel();
         $productsCat = $model->productsByCategorie($nameCategorie);
+
+        var_dump($productsCat);
 
         return $productsCat;
 
@@ -543,24 +524,32 @@ class ProductsController extends Controller
         if (!empty($sousCat) ) {
             
             $products = self::productsBySousCategories($sousCat);
-             
             $pagination = self::paginationSousCat();
             $nameSousCategorie = self::getSousCategorieName($cat);
             $sousCategories = self::getSousCategories($cat);
             
         } 
         else if (!empty($cat)) {
-            
             $products = self::productsByCategories($cat);
             $pagination = self::paginationCat();
             $nameCategorie = self::getCategorieName();
             $categories = self::getCategories();
-          
         } 
+        else {
+            $product = self::selectAllProducts();
+            $pagination = self::paginationCat();
+        }
         
        
-        Renderer::render('products/allProducts' , compact('categories','nameCategorie', 'nbrPagesCat','nbrPagesSousCat', 'sousCategories', 'products', 'nameSousCategorie', 'page','nbrProductsByPage','countProductsCat', 'countProductsSousCat'));
+        Renderer::render('products/catProducts' , compact('categories','nameCategorie', 'nbrPagesCat','nbrPagesSousCat', 'sousCategories', 'products', 'nameSousCategorie', 'page','nbrProductsByPage','countProductsCat', 'countProductsSousCat'));
        
+    }
+
+    public static function productsAll()
+    {
+        $products = self::selectAllProducts();
+
+        Renderer::render('products/allProducts' , compact('products'));
     }
     
     

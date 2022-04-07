@@ -15,10 +15,9 @@
 
 <body>
     <header>
-        <div class="container_promo">
+        <!-- <div class="container_promo">
             <p>15% de réduction en profitant du code : <?= codePromo ?></p>
-            <!-- voir comment rajouter un deuxième -->
-        </div>
+        </div> -->
         <div class="top-header">           
             <form action="" method="post">
                 <div class="intern-form">
@@ -29,7 +28,14 @@
             <div class="top-before-animation">
                 <div class="btn-search">
                     <img src="images/utilitaires/search.svg" width="40px">
-                </div>             
+                </div>  
+                
+                <a href="accueil"><img src="images/utilitaires/Everglow.png" id='everglow' width="120px"></a>
+    
+                <div class="btn-navigation">
+                    <img id='menu' src="images/utilitaires/menu.svg" width="40px">
+                </div>
+            </div>
 
 <?php
     // var_dump($_GET);
@@ -39,87 +45,40 @@
     ?>
         <nav>
             <ul>
-                <li><a href="<?= urlmac ?>products">Nos produits</a></li>
-                <li><a href="<?= urlmac ?>users/profil">Profil</a></li>
-                <li><a href="<?= urlmac ?>users/disconnect">Deconnexion</a></li>
-                <?php
-                foreach ($categories as $categorie)  
-                    {
-                        echo ('<li class="navli"><a href="'.urlmac.'products/'.$categorie['name'].'">'.$categorie['name'].'</a></li>');
-                    }
-                ?>
+                <li><a href="users/profil"><img src="images/utilitaires/user.svg" width="40px"></a></li>
+                <li><a href="bags"><img src="images/utilitaires/bag.svg" width="40px"></a></li>                    
+                <li><a href="users/disconnect"><img src="images/utilitaires/power.svg" width="43px"></a></li>
             </ul>
         </nav>
-    <?php
-    } else {
-        $pageEnCours = '?page=1';
-    ?>
-        <nav>
-            <ul>
-                <li><a href="<?= urlmac ?>users/register">Inscription</a></li>
-                <li><a href="<?= urlmac ?>users/login">Connexion</a></li>
-                <?php
-                foreach ($categories as $categorie)  
-                    {
-                        echo ('<li class="navli"><a href="'.urlmac.'products/'.$categorie['name'].$pageEnCours.'">'.$categorie['name'].'</a></li>');
-                    }
-                ?>
-            </ul>
-        </nav>
-    <?php
-    }
 
-    ?>
-
-<div class="container">
-    <?= $content ?>
-</div>
-
-                <a href="accueil"><img src="images/utilitaires/Everglow.png" id='everglow' width="120px"></a>
-    
-    
-                <div class="btn-navigation">
-                    <img id='menu' src="images/utilitaires/menu.svg" width="40px">
-                </div>
-            </div>
-
- 
         <?php
-            if ( isset ($_SESSION['user_data'] ) )
-            {
-            ?>
-                <nav>
-                    <ul>
-                        <li><a href="users/profil"><img src="images/utilitaires/user.svg" width="40px"></a></li>
-                        <li><a href="bags"><img src="images/utilitaires/bag.svg" width="40px"></a></li>                    
-                        <li><a href="users/disconnect"><img src="images/utilitaires/power.svg" width="43px"></a></li>
-                    </ul>
-                </nav>
-            <?php
-            } else {
-            ?>
-                <nav>
-                    <ul>
-                        <li><a href="users/register"><img src="images/utilitaires/register.svg" width="45px"></a></li>
-                        <li><a href="users/login"><img src="images/utilitaires/power.svg" width="45px"></a></li>
-                    </ul>
-                </nav>
-            <?php
-            }
-            ?>           
+        
+        }
+        else 
+        {
+        ?>
+            <nav>
+                <ul>
+                    <li><a href="users/register"><img src="images/utilitaires/register.svg" width="45px"></a></li>
+                    <li><a href="users/login"><img src="images/utilitaires/power.svg" width="45px"></a></li>
+                </ul>
+            </nav>
+        <?php
+        }
+        ?>           
         </div>
 
         <div class="bottom-header">
             <nav class="categories">
                 <ul>
-                    <li><a href="<?= url ?>">Our products</a></li>
-                    <li><a href="<?= url ?>">Skincare</a></li>
-                    <li><a href="<?= url ?>">Make up</a></li>
+                    <li><a href="products">Our products</a></li>
+                    <li><a href="products/skincare">Skincare</a></li>
+                    <li><a href="products/makeup">Make up</a></li>
                     <li><a href="quizz">Discover your skin</a></li>
                 </ul>
             </nav>
         </div> 
-    </header>
+</header>
 
     <div class="flex-wrapper">            
         <main>
