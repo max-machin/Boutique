@@ -103,18 +103,10 @@ class Router
                 } 
             }
 
-        
-        
             // if(!empty($url[1]) && empty($url[2])){
             //     if($controllerName == "ProductsController"){
             //      $controllerName::seeProduct($url[1]);
             //     }            
-            // }elseif(!empty($url[1]) && !empty($url[2])){
-            //     if($controllerName == "ProductsController"){
-            //         if($url[2] == 'update'){
-            //             $controllerName::seeUpdateProduct($url[1]);
-            //             }
-            //         }
             //     }
             // elseif($controllerName == "ProductsController"){
             //     $controllerName::selectAllProducts();
@@ -137,13 +129,15 @@ class Router
                             if(in_array($url[2], $controllerName::getSousCategorieName($url[1]))){
                                 $controllerName::createViewProducts($url[2]);
                             }   
-                            if($url[2] == 'update'){
-                                $controllerName::seeUpdateProduct($url[2]);
-                            }
                         }
                     } 
                     else if(!empty($url[1]) && empty($url[2])){
                         $controllerName::seeProduct($url[1]);
+                    }
+
+                    if(!empty($url[1]) && ($url[2] == 'update')){
+                        // var_dump($url[1]);
+                        $controllerName::seeUpdateProduct($url[1]);
                     }
                 }
         } 

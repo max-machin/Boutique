@@ -315,8 +315,10 @@ class ProductsController extends Controller
     {
         // var_dump($id);
         $model = new ProductsModel();
-        $product = $model->find($id);
+        $product = $model->find(2);
+        var_dump($product);
         Renderer::render('products/updateProduct' , compact('product'));
+        // Renderer::render('products/updateProduct' , compact('product'));
     }
 
     public static function updateProduct()

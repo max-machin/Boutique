@@ -23,7 +23,7 @@
             <h1><?= $product['name'] ?></h1>
             <p><?= $product['description'] ?></p>
 
-            <form action="<?= $product['id'] ?>/update" method="post">  
+            <form action="products/<?= $product['id'] ?>/update" method="post">  
                 <input type="hidden" name="id" value="<?= $product['id'] ?>"/>          
                 <button class="addBag" type="submit" name="updateProduct">Update</button>
             </form>
