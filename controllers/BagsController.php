@@ -38,6 +38,7 @@ class BagsController extends Controller
         foreach ($bagProducts as $table){
             $model = new BagsModel();
             $images = $model->findImages($_SESSION['user_data']['id'], $table['id']);
+            var_dump($images);
         }
             
         // Update de la quantité produit avec COULEUR
@@ -72,6 +73,7 @@ class BagsController extends Controller
             header('refresh: 0');
             echo "Produit supprimé avec succés";
         }
+        
 
         // Validation du panier pour passer commande
         elseif ( isset ( $_POST['command']))
@@ -82,10 +84,10 @@ class BagsController extends Controller
         if ( isset ($imagesColors)){
             Renderer::render('bag/userBag', compact('bagProductsColors','bagProducts', 'findColors', 'imagesColors'));
         }
-        elseif ( isset ($images)){
+        if ( isset ($images)){
             Renderer::render('bag/userBag', compact('bagProductsColors','bagProducts', 'findColors','images'));
         }
-        elseif ( isset($images) && isset($imagesColors)) {
+        if ( isset($images) || isset($imagesColors)) {
             Renderer::render('bag/userBag', compact('bagProductsColors','bagProducts', 'findColors', 'imagesColors','images')); 
         } else {
             Renderer::render('bag/userBag', compact('bagProductsColors','bagProducts', 'findColors'));

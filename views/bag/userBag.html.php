@@ -5,6 +5,8 @@
     // Si l'utilisateur est connecté
     if ( isset ( $_SESSION['user_data']))
     {
+        var_dump($images);
+        $images = "";
         // Initialisation de la quantité et du prix du panier
         $bagQuantity = 0; 
         $bagPrice = 0;
@@ -70,10 +72,10 @@
         
             <?php
             } 
-
             foreach ($bagProducts as $product)
             {
-                $images = explode(',', $images['url_image']);
+                
+                $image = explode(',', $images['url_image']);
                 // Calcul du prix total d'un produit = Prix unitaire * quantité
                 $productsPrice = $product['price'] * $product['quantity_product'];
 
@@ -90,10 +92,10 @@
                     <form action="" method="post">
                         <div class="flex productbag">
                             <button class="# delete1" type="submit" name="deleteFromBag">&#x2715</button>
-                            <img src="<?= url ?>Uploads/<?= $images[0] ?>" alt="">
+                            <img src="Uploads/<?= $image[0] ?>" alt="">
                             <div class="inbag">
                                 <div class="flex intproductbag">
-                                    <p><a href="<?= url ?>products/<?= $product['id'] ?>"><?= $product['name'] ?></a></p>
+                                    <p><a href="products/<?= $product['id'] ?>"><?= $product['name'] ?></a></p>
                                     <label class="color"></label>
                                 </div>
 
