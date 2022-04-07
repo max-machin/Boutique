@@ -27,7 +27,7 @@ $pageEnCours = '?page=1';
         <?php
         foreach ($sousCategories as $sousCategorie) { ?>
             <li>
-                <a href="<?=urlmac.'products/'.$urlExplode[1].'/'.$sousCategorie['name'].'?page=1'?>"><?php echo $sousCategorie['name']; ?></a>
+                <a href="products/'.$urlExplode[1].'/'.$sousCategorie['name'].'?page=1'?>"><?php echo $sousCategorie['name']; ?></a>
             </li>
                 
         <?php } ?> 

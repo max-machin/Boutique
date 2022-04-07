@@ -850,9 +850,50 @@ hr {
     height: 20px;
 }
 
+/* ------------------------------------------------
 
+                    WRAPPERPRODUCT
 
+--------------------------------------------------- */
 
+.wrapper-product {
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5vh;
+}
+
+.wrapper-product .bestsellers-products {
+    text-align: center;
+    width: 300px;
+    max-width: 270px;
+    margin: auto;
+}
+
+.wrapper-product .bestsellers-img img {
+    object-fit: cover;
+    height: 330px;
+    min-width: 270px;
+}
+
+.wrapper-product .intern-case h3 {
+    font-size: 3vh;
+}
+
+.wrapper-product .intern-case p:nth-child(3),
+.wrapper-product .intern-case p:nth-child(2){
+    font-family: "LoremIpsumV2";
+}
+
+.wrapper-product .intern-case p:nth-child(3) {
+    font-size: 2.6vh;
+    font-weight: bold;
+}
+
+.wrapper-product button {
+    font-size: 2.5vh;
+    padding: 1vh;
+}
 /* ------------------------------------------------
 
                     SEEPRODUCT

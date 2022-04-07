@@ -136,7 +136,7 @@ class Commentsmodel extends Model
 
     public function findProductNote( $id_product)
     {
-        return $this->requete("SELECT AVG(note) from comments INNER JOIN products ON comments.id_product = products.id WHERE comments.id_product = ?" , array($id_product))->fetchAll();
+        return $this->requete("SELECT AVG(note) as note from comments INNER JOIN products ON comments.id_product = products.id WHERE comments.id_product = ?" , array($id_product))->fetchAll();
     }
 
     /**
