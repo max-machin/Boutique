@@ -119,6 +119,19 @@ class Model extends Database
     }
 
     /**
+     * Trouver toutes les informations d'une table
+     *
+     * @return void
+     */
+    public function countAll()
+    {
+        $query = $this->requete('SELECT COUNT(*) FROM '. $this->table);
+        $find_all = $query->fetchAll();
+        // var_dump($find_all);
+        return $find_all;
+    }
+
+    /**
      * Crée une annonce/user 
      *
      * @return void

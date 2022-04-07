@@ -526,7 +526,9 @@ footer {
     color: #4F8A10;;
 }
 
+
 .pop-up {
+  
     background-color: rgb(var(--clr-white));
     width: 90%;
     border: 2px solid rgb(var(--clr-lightgrey));
@@ -851,11 +853,34 @@ hr {
                     SEEPRODUCT
 
 --------------------------------------------------- */
+.relatedProduct p {
+    font-family: "LoremIpsumV2";
+    font-size: 2.8vh;
+    font-weight: 800;
+}
+
+.priceProduct {
+    font-weight: bold;
+    font-family: "LoremIpsumV2";
+    font-size: 3vh;
+}
+
+.relatedProduct button {
+    padding: 2vh;
+    font-family: "SousTitreouAccent";
+    cursor: pointer;
+}
+
+.titre_related {
+    font-family: "TitrePrincipal";
+}
 
 .seeproduct {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    border-bottom: 1px solid #e5e5e5;
+    margin-bottom: 5vh;
 }
 
 
@@ -1634,6 +1659,11 @@ fieldset {
     height: 30vh;
 }
 
+.formPromo{
+    text-align: center;
+    margin-bottom: 4vh;
+}
+
 /* ------------------------------------------------
 
                 PRODUCT SELF
@@ -1742,6 +1772,252 @@ i {
     font-family: SousTitreouAccent;
 }
 
+.cardsAbout {
+    margin-bottom: 10vh;
+    display: flex;
+    justify-content: space-around;
+}
+
+.cardAbout {
+    text-align: center;
+    border-radius: 7px;
+    width: 20%;
+    background-color: rgb(var(--clr-pink));
+    padding: 2vh;
+}
+
+.cardAbout img{
+    margin: auto;
+}
+
+.cardAbout p {
+    font-family: LoremIpsumV2;
+    font-size: 2.5vh;
+    font-weight: bold;
+}
+
+
+
+/* ------------------------------------------------
+
+                    CONCOURS
+
+--------------------------------------------------- */
+
+#winner {
+    background-color: rgb(249, 190, 205);
+    text-align: center;    
+    padding: 2vh;
+    font-family: "LoremIpsumV2";
+}
+
+#winner img {
+    display: none;
+}
+
+#winner h2{
+    font-family: "SousTitreouAccent";
+}
+
+#winner i {
+    text-decoration: underline;
+    font-family: "LoremIpsumV2";
+    font-weight: bold;
+}
+
+#compte_a_rebours {
+    font-family: "LoremIpsumV2";
+    background-color: black;
+    color: white;
+    padding: 2vh;
+    margin-top: 4vh;
+    margin-bottom: 4vh;
+}
+
+@media (min-width: 821px) {
+    #winner {
+        width: 70%;
+        display: flex;
+        padding: 0;
+        margin: auto;
+        margin-bottom: 10vh;
+    }
+
+    #winner img {
+        display: block;
+        height: 450px;
+        /* float: left; */
+    }
+    #winner div {
+        margin-left: 1vh;
+    }
+    #winner h2 {
+        margin-top: 10vh;
+        font-size: 4vh;
+
+    }
+    #compte_a_rebours {
+        font-size: 2.5vh;
+        padding: 1vh 0;
+        width: 60%;
+        margin: auto;
+        margin-top: 10vh;
+        margin-bottom: 10vh;
+    }
+}
+
+ /* ------------------------------------------------
+
+                ADMIN
+
+--------------------------------------------------- */
+
+.panelAdmin {
+    margin-top: 10vh;
+    margin-bottom: 10vh;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.panelcard {
+    padding: 2vh;
+    background-color: rgb(var(--clr-black));
+    border-radius: 4px;
+    margin: 1vh;
+}
+
+.panelcard i {
+    font-size: 5vh;
+    color: rgba(66, 66, 66, 0.89);
+}
+
+.bestSellersGraph {
+    margin-top: 5vh;
+    margin-bottom: 10vh;
+    
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bestSellersGraph .content {
+    background-color: rgb(var(--clr-black));
+    padding: 2vh;
+    color: rgb(var(--clr-white));
+    border-radius: 4px;
+    font-family: "LoremIpsumV2";
+}
+
+.bestSellersGraph .content p:nth-child(1){
+    font-size: 2.6vh;
+}
+
+.bestSellersGraph .content p:nth-child(2){
+    color: rgb(172, 172, 172);
+}
+
+.bestSellersGraph .content p i {
+    color: white;
+    font-size: 2.1vh;
+}
+
+
+@media (min-width: 821px ) {
+    .panelcard i {
+        font-size: 8vh;
+        color: rgba(66, 66, 66, 0.89);
+    }
+
+    .bestSellersGraph {
+        display: flex;
+    }
+
+    .bestSellersGraph .content {
+        padding: 4vh;
+    }
+
+    
+}
+
+@media (min-width: 1206px) {
+    .panelAdmin {
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    .bestSellersGraph .content p:nth-child(1){
+        font-size: 3vh;
+    }
+    
+    .bestSellersGraph .content p i {
+        font-size: 2.6vh;
+    }
+    
+    
+    .panelcard {
+        padding: 2vh;
+        background-color: rgb(var(--clr-black));
+        justify-content: space-between;
+        align-items: center;
+        display: flex;
+        width: 23%;
+        border-radius: 4px;
+    }
+    
+    .panelcard i {
+        font-size: 11vh;
+        color: rgba(66, 66, 66, 0.89);
+    }
+    
+    .panelcard p:nth-child(1){
+        margin-bottom: 0;
+        font-size: 5vh;
+        text-align: end;
+        color: white;
+        font-family: 'loremIpsumV2';
+    }
+    
+    .panelcard p:nth-child(2){
+        color: #b9b9b9;
+        text-align: end;
+    }
+    
+    
+    .graph {
+        width: 400px;
+        height: 550px;
+        background-color: #f8f8f8d8;
+        display: flex;
+        margin: auto;
+    }
+    
+    .bar {
+        flex-grow: 1;
+        border: 1px solid white;
+        background-color: rgb(var(--clr-black));
+        margin: 6px;
+        color: white;
+        text-align: center;
+    }
+    
+    .colonne {
+        flex-grow: 1;
+        text-align: center;
+    }
+    
+    .colonne:nth-child(even){
+        background-color: #f1f1f1;
+    }
+    
+    .bar p {
+        margin-top: 1.5vh;
+    }
+    
+}
+/* ------------------------------------------------
+
+                   MEDIA QUERIES MAX
+
+--------------------------------------------------- */
 
 
 
@@ -1749,6 +2025,7 @@ i {
 @media (min-width: 821px) {
 
     .pop-up {
+        backdrop-filter: blur(4px) !important;
         width: 60%;
         padding: 5vh;
     }
@@ -1889,6 +2166,12 @@ i {
         display: flex;
         justify-content: space-around;
         align-items: center;
+        
+    }
+
+    .formPromo{
+        text-align: center;
+        margin-bottom: 10vh;
     }
 
     .userCommand p {

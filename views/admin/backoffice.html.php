@@ -5,6 +5,10 @@ if(@$_SESSION['user_data']['id'] !== "1")
     header('Location:../index');
 }
 
+
+//total * nbr / 100
+
+
 ?>
 
 <head>
@@ -14,7 +18,7 @@ if(@$_SESSION['user_data']['id'] !== "1")
 
 
 <article>
-    <h1>Backoffice</h1>
+    <h1>Backoffice</h1> 
 
     <p>What do you want to do?</p>
 
@@ -25,5 +29,68 @@ if(@$_SESSION['user_data']['id'] !== "1")
     <form action="admin/update" method="post">
         <button type="submit" class="btn btn-outline-dark" name="goUpdate">Update a product</button> 
     </form>
+
+    <section>
+        <article class="panelAdmin">
+            <div class="panelcard">
+                <i class="fa-solid fa-users"></i>
+                <div>
+                    <p><?= $findUsers[0]['COUNT(*)'] ?></p>
+                    <p>Nombre d'utilisateurs</p>
+                </div>
+            </div>
+            <div class="panelcard">
+                <i class="fa-solid fa-box"></i>
+                <div>
+                    <p><?= $findProducts[0]['COUNT(*)'] ?></p>
+                    <p>Nombre de produits</p>
+                </div>
+            </div>
+            <div class="panelcard">
+                <i class="fa-solid fa-cart-arrow-down"></i>
+                <div>
+                    <p><?= count($nbrCommand) ?></p>
+                    <p>Nombre de commandes</p>
+                </div>
+            </div>
+            <div class="panelcard">
+                <i class="fa-solid fa-money-bill"></i>
+                <div>
+                    <p><?= $chiffreAffaire['prix'] ?> €</p>
+                    <p>Chiffre d'affaires</p>
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <h2 class="text-center">Best Sellers</h2>
+    <section class="bestSellersGraph">
+        <div class="content">
+            <p>Produits les plus vendus en %</p>
+            <p>Classement effectué selon : <i><?= $nbrProduit[0]['COUNT(*)']  ?></i> ventes</p>
+        </div>
+        <div class="graph">
+            <?php 
+                foreach ($bestSellers as $produit)
+                {
+                    $name = explode(",", $produit['product_name']);
+                    $nameProduit = array_unique($name);        
+                    $resultat = (count($name)/$nbrProduit[0]['COUNT(*)']) * 100;
+
+                    $id = explode(",", $produit['id']);
+                    $numero = array_unique($id);
+                    ?>
+                    <div class="colonne">
+                        <div class="bar bar<?= $numero[0] ?>" style="height: <?= round($resultat) ?>%">
+                            <p><?= round($resultat) ?>%</p>
+                        </div>
+                        <p><?= $nameProduit[0] ?></p>
+                        <p>x <?= count($name) ?></p>
+                    </div>
+                    <?php
+                }
+            ?>
+        </div>
+    </section>
 </article>
 

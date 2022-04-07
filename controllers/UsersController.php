@@ -335,7 +335,7 @@ class UsersController extends Controller
                 $error_new_password = "Veuillez remplir le champ";
                 $display2 = "block";
                 $display1 = "none";
-            }
+            } 
         }
         
         $model = new CommandsModel();
@@ -535,6 +535,7 @@ class UsersController extends Controller
             // Si un prix est définit / différent de vide = commande vide
             if ( isset ( $_POST['prix']) && !empty ( $_POST['prix']))
             {
+                $_SESSION['user_data']['existCommand'] = true;
                 require_once('vendor/autoload.php');
                 $prix = ($_POST['prix']);
 
@@ -548,6 +549,7 @@ class UsersController extends Controller
             // On redirige vers la page commande car vide
             } else {
                 header('location: commands');
+                $_SESSION['user_data']['existCommand'] = false;
             }
         // On redirige vers la page commande car informations mal remplis
         } else {
@@ -567,57 +569,61 @@ class UsersController extends Controller
             // Si la commande n'est pas vide
             if ( !empty ($command))
             {
-                // On récupère le plus grand numéro de commande et on l'incrémente pour la prochaine commande à entrer en BDD
-                $check = new CommandsModel();
-                $checkNum = $check->checkNumCommand();
-                $numCommand = intval($checkNum['MAX(id_command)'])+1;
-                
-                // Si l'utilisateur a entré un code PROMO
-                if ( $_SESSION['user_data']['promo'] === 1){
-                    // Insertion de la commande avec PROMO ( totalité de la table bags + infos par rapport à l'id user)
-                    foreach ($command as $product)
-                    {
-                        $promo = 15;
-                        
-                        $insert = new CommandsModel();
-                        $insertCommand = $insert
-                            ->setPrice($product['price'])
-                            ->setTotal_price($product['price'] * $product['quantity_product'])
-                            ->setId_user($_SESSION['user_data']['id'])
-                            ->setId_command($numCommand)
-                            ->setId_product($product['id'])
-                            ->setId_color($product['id_color'])
-                            ->setPromo($promo)
-                            ->setQuantity_product($product['quantity_product'])
-                            ->setAdresse_livraison($_SESSION['user_data']['livraison'])
-                            ->setAdresse_facturation($_SESSION['user_data']['facturation'])
-                            ->setPrice_livraison($_SESSION['user_data']['deliveryPrice'])
-                            ->setMode($_SESSION['user_data']['deliveryMode']);
-                        $insertCommand->create($insert);
+                if ( $_SESSION['user_data']['existCommand'] == true)
+                {
+                    // On récupère le plus grand numéro de commande et on l'incrémente pour la prochaine commande à entrer en BDD
+                    $check = new CommandsModel();
+                    $checkNum = $check->checkNumCommand();
+                    $numCommand = intval($checkNum['MAX(id_command)'])+1;
+                    
+                    // Si l'utilisateur a entré un code PROMO
+                    if ( $_SESSION['user_data']['promo'] === 1){
+                        // Insertion de la commande avec PROMO ( totalité de la table bags + infos par rapport à l'id user)
+                        foreach ($command as $product)
+                        {
+                            $promo = 15;
+                            
+                            $insert = new CommandsModel();
+                            $insertCommand = $insert
+                                ->setPrice($product['price'])
+                                ->setTotal_price($product['price'] * $product['quantity_product'])
+                                ->setId_user($_SESSION['user_data']['id'])
+                                ->setId_command($numCommand)
+                                ->setId_product($product['id'])
+                                ->setId_color($product['id_color'])
+                                ->setPromo($promo)
+                                ->setQuantity_product($product['quantity_product'])
+                                ->setAdresse_livraison($_SESSION['user_data']['livraison'])
+                                ->setAdresse_facturation($_SESSION['user_data']['facturation'])
+                                ->setPrice_livraison($_SESSION['user_data']['deliveryPrice'])
+                                ->setMode($_SESSION['user_data']['deliveryMode']);
+                            $insertCommand->create($insert);
+                        }
+                    } else {
+                        // Insertion de la commande sans PROMO ( totalité de la table bags + infos par rapport à l'id user)
+                        foreach ($command as $product)
+                        {
+                            $promo = 0;
+    
+                            $insert = new CommandsModel();
+                            $insertCommand = $insert
+                                ->setPrice($product['price'])
+                                ->setTotal_price($product['price'] * $product['quantity_product'])
+                                ->setId_user($_SESSION['user_data']['id'])
+                                ->setId_command($numCommand)
+                                ->setId_product($product['id'])
+                                ->setId_color($product['id_color'])
+                                ->setQuantity_product($product['quantity_product'])
+                                ->setPromo($promo)
+                                ->setAdresse_livraison($_SESSION['user_data']['livraison'])
+                                ->setAdresse_facturation($_SESSION['user_data']['facturation'])
+                                ->setPrice_livraison($_SESSION['user_data']['deliveryPrice'])
+                                ->setMode($_SESSION['user_data']['deliveryMode']);
+                            $insertCommand->create($insert);
+                        }
                     }
-                } else {
-                    // Insertion de la commande sans PROMO ( totalité de la table bags + infos par rapport à l'id user)
-                    foreach ($command as $product)
-                    {
-                        $promo = 0;
-  
-                        $insert = new CommandsModel();
-                        $insertCommand = $insert
-                            ->setPrice($product['price'])
-                            ->setTotal_price($product['price'] * $product['quantity_product'])
-                            ->setId_user($_SESSION['user_data']['id'])
-                            ->setId_command($numCommand)
-                            ->setId_product($product['id'])
-                            ->setId_color($product['id_color'])
-                            ->setQuantity_product($product['quantity_product'])
-                            ->setPromo($promo)
-                            ->setAdresse_livraison($_SESSION['user_data']['livraison'])
-                            ->setAdresse_facturation($_SESSION['user_data']['facturation'])
-                            ->setPrice_livraison($_SESSION['user_data']['deliveryPrice'])
-                            ->setMode($_SESSION['user_data']['deliveryMode']);
-                        $insertCommand->create($insert);
-                    }
-                }
+                     
+                } 
                 // On vide le panier car insérer en base de données dans la table COMMANDS
                 $delete = new BagsModel();
                 $deleteBag = $delete->deleteBy(['id_user' => $_SESSION['user_data']['id']]);
@@ -632,6 +638,7 @@ class UsersController extends Controller
         // Réinitialisation des variables plus nécessaires
         $command = NULL;
         $_SESSION['user_data']['promo'] = 0;
+        
         unset($_SESSION['user_data']['livraison']);
         unset($_SESSION['user_data']['facturation']);
         unset($_SESSION['user_data']['deliveryMode']);

@@ -53,7 +53,7 @@ class ConcoursController extends Controller
                                         ->setAdresse($livraison);
                                     $newUser->create($user);
 
-                                    $success = "Bravo, vous êtes désormais inscrit au concours";
+                                    $success = '<div class="success" style="width: 60%; margin: auto;"> <i class="fa-solid fa-thumbs-up"></i> Bravo, vous êtes désormais inscrit au concours</div>';
                                 } else {
                                     $error = "Bien tenté! Mais vous participez déjà au concours...";
                                 }
@@ -76,17 +76,15 @@ class ConcoursController extends Controller
 
         // Date Anglaise donc prévoir une heure avant , doit être égale à l'heure de JS
         // ! SUR PLESK PAS BESOIN DE METTRE UNE HEURE DE MOINS
-        $dateDebut = new DateTime("17-03-2022 20:08:00");
+        $dateDebut = new DateTime("01-04-2022 10:20:00");
         $dateActuelle = new DateTime(date("d-m-Y H:i:s"));
-
         if($dateDebut < $dateActuelle){
-            echo "Execution de la fonction";
-            $user = new ConcoursModel();
-            $Winner = $user->findWinner();
-            var_dump($Winner);
+            if (!isset ($winner)){
+                $user = new ConcoursModel();
+                $winner = $user->findWinner();
+            }
         }
-
-        Renderer::render('concours/concours', compact('error', 'success'));
+        Renderer::render('concours/concours', compact('error', 'success', 'winner'));
     }
 }
 

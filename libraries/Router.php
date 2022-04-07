@@ -160,6 +160,7 @@ class Router
 
                 if ($controllerName == "AdminController"){
                     if(empty($url[1]) && empty($url[2]) && $url[0] == 'admin'){
+                        $controllerName::dashBoardAdmin();
                         Renderer::render('admin/backoffice');
                     }
                     elseif(!empty($url[1]) && empty($url[2])){

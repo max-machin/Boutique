@@ -30,6 +30,7 @@
     </article>
 </div>
 
+
 <article>
     <section class="images-accueil">
         <div id="accueil-img">
@@ -47,6 +48,7 @@
         </div>
          
     </section>
+   
     <section class="accueil-bestsellers">
         <hr> 
         <h2>Our Bestsellers</h2>
@@ -89,6 +91,26 @@
         <div class="insta">
             <div class="instafeed"></div>
         </div>
+    </section>
+
+    <section class="cardsAbout">
+        <div class="cardAbout">
+            <img src="images/utilitaires/leaf (1).png" height="100px" alt="">
+            <p>Produits 100% naturels</p>
+        </div>
+        <div class="cardAbout">
+            <img src="images/utilitaires/clock.png" height="100px" alt="">
+            <p>Livraison en 24h</p>
+        </div>
+        <div class="cardAbout">
+            <img src="images/utilitaires/delivery.png" height="100px" alt="">
+            <p>Livraison offerte dès 50€</p>
+        </div>
+        <div class="cardAbout">
+            <img src="images/utilitaires/security.png" height="100px" alt="">
+            <p>Paiements sécurisés</p>
+        </div>
+        
     </section>
 </article>
 
