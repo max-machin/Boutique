@@ -164,6 +164,20 @@ class ProductsModel extends Model
         return($resultProduct);
     }
  
+
+    public function searchProduct($mot)
+    {
+        $transformWord = '%'.$mot.'%';
+
+        $this->database = DataBase::getPdo();
+
+        $findProduct=$this->database->prepare('SELECT products.*, GROUP_CONCAT(images.url_image) as url FROM products INNER JOIN images ON products.id = images.id_product WHERE CONCAT(products.name,products.description,products.tags) LIKE :transformWord GROUP BY images.id_product');
+        $findProduct -> execute(['transformWord' => $transformWord]);
+        $resultProduct = $findProduct -> fetchAll();
+
+        return($resultProduct);
+    }
+
     
     public function countProducts()
     {
