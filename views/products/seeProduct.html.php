@@ -1,5 +1,7 @@
 <article class='seeproduct'>
     <?php
+if (isset($_SESSION['user_data'])){
+
 
     //si admin
     if($_SESSION['user_data']['id'] == 1)
@@ -21,9 +23,8 @@
     <?php
 
     } 
+}
     //sinon le user
-    else
-    { 
         ?>
         <!-- le slide -->
         <div class='slider'>
@@ -44,6 +45,7 @@
                 <h1><?= $product['name'] ?></h1>
                 <!-- le coeur favoris -->
                     <?php
+                    if( isset ( $_SESSION['user_data'])){
                         if( isset($findFav) && $favoritFind == true )
                         {
                         ?>  
@@ -64,6 +66,7 @@
                         </form>
                         <?php
                         }
+                    }
                     ?>
             </div>
                         
@@ -192,7 +195,6 @@
                 <p>Veuillez vous <a href="users/register">inscrire</a> / <a href="users/login">connectez</a> pour ajouter un commentaire</p>
             <?php 
             }
-        }
         ?>
         </section>
 
