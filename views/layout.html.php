@@ -45,7 +45,18 @@
     ?>
         <nav>
             <ul>
-                <li><a href="users/profil"><img src="images/utilitaires/user.svg" width="40px"></a></li>
+                <?php
+                    if($_SESSION['user_data']['id'] === "1"){
+                        ?>
+                            <li><a href="admin"><img src="images/utilitaires/admin.svg" width="55px"></a></li>
+                        <?php
+                    }
+                    else {
+                        ?>
+                            <li><a href="users/profil"><img src="images/utilitaires/user.svg" width="40px"></a></li>                        
+                        <?php
+                    }
+                ?>
                 <li><a href="bags"><img src="images/utilitaires/bag.svg" width="40px"></a></li>                    
                 <li><a href="users/disconnect"><img src="images/utilitaires/power.svg" width="43px"></a></li>
             </ul>
@@ -90,7 +101,7 @@
         <footer>
             <div class="social-media">
                 <p>@everglow.brand</p>
-                <img src="images/utilitaires/instagram-brands.svg" width="15px" class="filter-white">
+                <a href="https://www.instagram.com/everglow.brand/"><img src="images/utilitaires/instagram-brands.svg" width="15px" class="filter-white"></a>
                 <img src="images/utilitaires/twitter-brands.svg" width="15px" class="filter-white">
                 <img src="images/utilitaires/facebook-brands.svg" width="15px" class="filter-white">
                 <img src="images/utilitaires/tiktok-brands.svg" width="15px" class="filter-white">
@@ -115,7 +126,7 @@
             <div class="bordure-horizontale"></div>
            
             <div id="footer-down">
-                <h3>About us</h3>
+                <h3><a href="about">About us</a></h3>
                 <h3>Customer service</h3>
                 <h3>Help & FaQ</h3>
             </div>
