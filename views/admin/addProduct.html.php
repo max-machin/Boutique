@@ -63,7 +63,7 @@ if(@$_SESSION['user_data']['id'] !== "1")
 
         <?php
 
-        if($_POST['category'] == 'skincare')
+        if(@$_POST['category'] == 'skincare')
         {
         ?>
 
@@ -77,7 +77,7 @@ if(@$_SESSION['user_data']['id'] !== "1")
 
         <?php
         }
-        elseif($_POST['category'] == 'makeup')
+        elseif(@$_POST['category'] == 'makeup')
             {
         ?>
         <label for="subcategory-select">Choose a sub-category:</label>
@@ -91,7 +91,7 @@ if(@$_SESSION['user_data']['id'] !== "1")
         ?>
 <button class="btn btn-outline-dark" type="submit" name="getTheSubCate">Get the subcategories</button>
 <?php
-    if(isset($_POST['getTheSubCate'])){
+    if(@isset($_POST['getTheSubCate'])){
 ?>
 <button class="btn btn-outline-dark" type="submit" name="createProduct">Add the product</button>
 <?php

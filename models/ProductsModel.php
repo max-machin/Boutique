@@ -164,6 +164,17 @@ class ProductsModel extends Model
         return($resultProduct);
     }
  
+    public function findProductsforUpdate()
+    {
+        $this->database = DataBase::getPdo();
+
+        $findProduct=$this->database->prepare('SELECT products.*, GROUP_CONCAT(DISTINCT CONCAT(images.url_image,",", images.id ) SEPARATOR ";") as url FROM `products` INNER JOIN images ON products.id = images.id_product GROUP BY products.id');
+        $findProduct -> execute();
+        $resultProduct = $findProduct -> fetchAll();
+
+        //var_dump($resultProduct);
+        return($resultProduct);
+    }
 
     public function searchProduct($mot)
     {
