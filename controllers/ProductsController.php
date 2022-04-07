@@ -17,7 +17,7 @@ class ProductsController extends Controller
         {
             $model = new ProductsModel();
             $findAllProducts = $model->findAll();
-            Renderer::render('products/Allproducts', compact('findAllProducts', 'url'));
+            Renderer::render('products/allProducts', compact('findAllProducts', 'url'));
         }
 
         //Affichage de tout les produits trié par categorie
@@ -54,10 +54,10 @@ class ProductsController extends Controller
                 $findProductBySousCategorie = $model->FindBy(['id_sous_categorie' => $sousCategories[0]['id']]);
                 var_dump($findProductBySousCategorie);
 
-            Renderer::render("products/Allproducts", compact('url', 'sousCategories'));
+            Renderer::render("products/allProducts", compact('url', 'sousCategories'));
             }
             
-            Renderer::render("products/Allproducts", compact('findProductByCategorie','findSousCategories','findCat', 'url'));
+            Renderer::render("products/allProducts", compact('findProductByCategorie','findSousCategories','findCat', 'url'));
         }
         
     }
@@ -66,7 +66,7 @@ class ProductsController extends Controller
     {
         
 
-        Renderer::render('products/Allproducts/skincare', compact('findCategories'));
+        Renderer::render('products/allProducts/skincare', compact('findCategories'));
     }
 
     public static function selectAll(){

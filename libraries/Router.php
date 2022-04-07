@@ -125,11 +125,33 @@ class Router
    //qui contient mes noms de sous catégories
 
                 if ($url[0] == 'products'){
-                    if($controllerName == "ProductsController")
-                    {
-                        $controllerName::allProducts();
+                    if($controllerName == "ProductsController"){
+                        if (empty($url[1]) && empty($url[2])) {
+                            $controllerName::allProducts();
+                        }  
+                        else if (($url[1] === 'makeup' || $url[1] === 'skincare') && empty($url[2]))
+                        {
+                            $controllerName::allProducts();
+                            
+                        }
+                        else if(($url[1] === 'makeup' || $url[1] === 'skincare') && !empty($url[2]))
+                        {
+                            // echo 'je suis dans sous-cat';
+                            $controllerName::allProducts();
+    
+                        } 
+                        else if(!empty($url[1]) && empty($url[2])){
+                            $controllerName::seeProduct($url[1]);
+                        }
+    
+                        if(!empty($url[1]) && ($url[2] == 'update')){
+                            // var_dump($url[1]);
+                            $controllerName::seeUpdateProduct($url[1]);
+                        }
                     }
-                }
+                    }
+    
+                
                 //     if (empty($url[1]) && empty($url[2])) {
                 //         $controllerName::productsAll();
                 //     }  
