@@ -358,14 +358,6 @@ class ProductsController extends Controller
         return $categories;
     }
 
-    public static function getSousCategories($cat) 
-    {
-        $modelSousCat = new SousCategoriesModel();
-        $sousCategories = $modelSousCat->findSousCategories($cat);
-
-        return $sousCategories;
-    }
-    
     public static function getCategorieName()
     {
         $categories = self::getCategories();
@@ -382,21 +374,29 @@ class ProductsController extends Controller
         }
       
         return $nameCategorie;
+    }   
+    
+    public static function getSousCategories($cat) 
+    {
+        // $modelSousCat = new SousCategoriesModel();
+        // $sousCategories = $modelSousCat->findSousCategories($cat);
+
+        // return $sousCategories;
     }
 
     public static function getSousCategorieName($cat)
     {
         $sousCategories = self::getSousCategories($cat);
 
-        $nameSousCategorie = [];
+        // $nameSousCategorie = [];
 
-        foreach ($sousCategories as $sousCategorie )
-        {
+        // foreach ($sousCategories as $sousCategorie )
+        // {
     
-            array_push($nameSousCategorie, $sousCategorie['name']);
-        }
-        //  var_dump($nameSousCategorie);
-        return $nameSousCategorie;
+        //     array_push($nameSousCategorie, $sousCategorie['name']);
+        // }
+        // //  var_dump($nameSousCategorie);
+        // return $nameSousCategorie;
     }
 
 
@@ -460,6 +460,7 @@ class ProductsController extends Controller
         $sousCat = self::getUrlCategories();
 
         $products = $model->productsBySousCategories(@$sousCat[2]);
+        // var_dump($products);
 
         $countProductsSousCat = count($products);
 
@@ -480,6 +481,8 @@ class ProductsController extends Controller
     {
         $model = new ProductsModel();
         $catUrl = self::getUrlCategories();
+
+        // var_dump($catUrl);
 
        
         $productsCat = $model->productsByCategorie($catUrl[1]);
@@ -505,6 +508,7 @@ class ProductsController extends Controller
         $model = new ProductsModel();
         $categories = self::getCategories();
         $nameCategorie = self::getCategorieName();
+        var_dump($nameCategorie);
         $pagination = self::paginationCat();
         $paginationSousCat = self::paginationSousCat();
         $nameSousCategorie = self::getSousCategorieName($cat);
@@ -537,8 +541,7 @@ class ProductsController extends Controller
             $nameCategorie = self::getCategorieName();
             $categories = self::getCategories();
         } 
-        
-       
+          
         Renderer::render('products/catProducts' , compact('categories','nameCategorie', 'nbrPagesCat','nbrPagesSousCat', 'sousCategories', 'products', 'nameSousCategorie', 'page','nbrProductsByPage','countProductsCat', 'countProductsSousCat'));
        
     }

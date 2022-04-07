@@ -120,16 +120,16 @@ class Router
                     if (empty($url[1]) && empty($url[2])) {
                         $controllerName::productsAll();
                     }  
-                    else if ($url[1] === 'makeup' || $url[1] === 'skincare')
+                    else if (($url[1] === 'makeup' || $url[1] === 'skincare') && empty($url[2]))
                     {
                         $controllerName::createViewProducts($url[1]);
-
-                        if(!empty($url[2])){
                         
-                            if(in_array($url[2], $controllerName::getSousCategorieName($url[1]))){
-                                $controllerName::createViewProducts($url[2]);
-                            }   
-                        }
+                    }
+                    else if(($url[1] === 'makeup' || $url[1] === 'skincare') && !empty($url[2]))
+                    {
+                        echo 'je suis dans sous-cat';
+                        $controllerName::createViewProducts($url[2]);
+
                     } 
                     else if(!empty($url[1]) && empty($url[2])){
                         $controllerName::seeProduct($url[1]);
