@@ -207,14 +207,16 @@
                             $findImages = $images->relatedImages($product['id_product']);
                             ?>
                     <div class="bestsellers-products">
-                        <a href='products/<?= $product['id_product'] ?>'>
+                        
+                        <div class="bestsellers-img">
                             <img src="uploads/<?= $findImages['url_image'] ?>" >
+                        </div>
                             <div class='intern-case'>
                                 <h3><?= $product['product_name'] ?></h3>
                                 <p class="txt-center"><?= $product['prix'] ?> €</p>
-                                <button>VOIR</button>                     
+                                <a href='products/<?= $product['id_product'] ?>'><button>VOIR</button></a>                     
                             </div>
-                        </a>  
+                          
                     </div>
                             <?php
                         }

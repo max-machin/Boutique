@@ -864,10 +864,15 @@ hr {
     font-weight: 800;
 }
 
+.relatedProduct{
+    margin-bottom: 10vh;
+}
+
 .priceProduct {
     font-weight: bold;
     font-family: "LoremIpsumV2";
     font-size: 3vh;
+    
 }
 
 .relatedProduct button {

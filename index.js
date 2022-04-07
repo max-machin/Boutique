@@ -1,19 +1,19 @@
 document.addEventListener('DOMContentLoaded', function loaded() {
         //pour le pop up à l'accueil
-        // var close = document.getElementById('close');
+        var close = document.getElementById('close');
 
-        // window.addEventListener('load', function(){
-        //     // console.log('hey')
-        //     setTimeout(
-        //         function(){
-        //             document.querySelector('.pop-up').style.display = 'block';
-        //         },
-        //         900
-        //     )
-        // });
-        //     close.addEventListener("click", function(){
-        //         document.querySelector('.pop-up').style.display = 'none';
-        //     });
+        window.addEventListener('load', function(){
+            // console.log('hey')
+            setTimeout(
+                function(){
+                    document.querySelector('.pop-up').style.display = 'block';
+                },
+                900
+            )
+        });
+            close.addEventListener("click", function(){
+                document.querySelector('.pop-up').style.display = 'none';
+            });
 
 
         //NAV BURGER
