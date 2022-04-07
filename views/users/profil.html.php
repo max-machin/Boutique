@@ -317,7 +317,9 @@ if ( empty ( $user)) {
                 $images = explode(",", $userProduct['url_image']);
         ?>
             <div class='bestsellers-products'>
+            <div class="bestsellers-img">
                 <img src="uploads/<?=$images[0]?>">
+            </div>
                 <div class='intern-case'>
                     <h3><a href="products/<?= $userProduct['id_product'] ?>"><?= $userProduct['product_name'] ?></a></h3>
                     <button><p id=''>Add  -  $<?= $userProduct['product_price'] ?></p></button>  

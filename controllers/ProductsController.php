@@ -223,17 +223,17 @@ class ProductsController extends Controller
             {
     
             
-            $fav = new favorisModel();
+            $fav = new FavorisModel();
             $findFav = $fav->findFavoris( $_SESSION['user_data']['id'],$id);
                 
                 // Si le produit est en favoris ( connu en base de données selon l'id de l'user)
                 if ( !empty ( $findFav))
                 {
-                    $delete = new favorisModel();
+                    $delete = new FavorisModel();
                     $deleteFavoris = $delete->deleteBy(['id_product' => $_POST['id_Product'], 'id_user' => $_SESSION['user_data']['id']]);
                 // Si le produit n'est pas en favoris ( inconnu en base de données)on l'ajoute
                 } elseif ($findFav == null) {
-                    $favoris = new favorisModel();
+                    $favoris = new FavorisModel();
                     $addFav = $favoris
                         ->setId_user($_SESSION['user_data']['id'])
                         ->setId_product($_POST['id_Product'])
