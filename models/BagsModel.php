@@ -161,7 +161,7 @@ class bagsModel extends Model
     }
 
     public function findImages($id_user, $id_product){
-        return $this->requete("SELECT GROUP_CONCAT(images.url_image) AS url_image FROM bags INNER JOIN images on bags.id_product = images.id_product WHERE id_user = ? AND images.id_product = ?", array($id_user, $id_product))->fetch();
+        return $this->requete("SELECT GROUP_CONCAT(images.url_image) AS url_image FROM bags INNER JOIN images on bags.id_product = images.id_product WHERE id_user = ? AND images.id_product = ?", array($id_user, $id_product))->fetchAll();
     }
     
 

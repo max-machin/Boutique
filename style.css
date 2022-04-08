@@ -754,7 +754,7 @@ footer a {
 }
 
 .accueil-bestsellers {
-    padding: 10% 0;
+    padding: 5% 0;
 }
 
 .accueil-bestsellers h2 {
@@ -803,6 +803,11 @@ footer a {
     width: 100%;
     border-radius: 5%;
     font-family: LoremIpsum;
+    cursor: pointer;
+}
+
+.bestsellers-products button:hover {
+    background-color: rgb(30, 30, 30);
 }
 
 hr {
@@ -813,6 +818,7 @@ hr {
 }
 
 .banderole {
+    padding: 5% 0;
     background-color: rgb(var(--clr-black));
     width: 100%;
     display: flex;
@@ -856,6 +862,25 @@ hr {
                     WRAPPERPRODUCT
 
 --------------------------------------------------- */
+
+
+.listCat a button {
+    font-family: "LoremIpsumV2";
+    font-size: 2.4vh;
+}
+@media (min-width: 821px){
+    .listCat a button {
+        font-family: "LoremIpsumV2";
+        font-size: 2.4vh;
+    }
+
+    .listCat a button:hover {
+        background-color: black;
+        border: 1px solid white;
+        transition: .3s ease-out;
+        color: white;
+    }
+}
 
 .wrapper-product {
     margin: auto;
@@ -2651,9 +2676,12 @@ i {
     background-color: white;
 }
 .Souscat ul {
+    padding-left: 0;
+    align-items: center;
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    flex-direction: row-reverse;
+    justify-content: center;
+    margin-bottom: 5vh;
 }
 
 .Souscat button {
@@ -2661,9 +2689,12 @@ i {
     border: 1px solid rgb(27, 27, 27);
     background-color: white;
     cursor: pointer;
-    padding-left: 30%;
-    padding-right: 30%;
-    font-family: SousTitreouAccent;
+}
+
+@media (min-width: 821px) {
+    .Souscat ul {
+        justify-content: space-around;
+    }
 }
 
 

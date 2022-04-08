@@ -181,7 +181,7 @@ if ( isset ($_SESSION['user_data'] ))
             // affichage des produits avec couleur
             foreach ($commandColors as $productColor)
             { 
-                $imagesColor = explode(",",$imagesColors['url_image']);
+                $imagesColor = explode(",",$imagesColors[0]['url_image']);
                 /**
                  * On calcule le prix total pour un produit : prix unitaire * quantité
                  * On additione tous les prix totaux au total de la commandes
@@ -215,7 +215,9 @@ if ( isset ($_SESSION['user_data'] ))
             // Affichage des produits sans COULEUR
             foreach ($command as $product)
             { 
-                $images = explode(",",$images['url_image']);
+                $model = new BagsModel();
+                $images = $model->findImages($_SESSION['user_data']['id'], $product['id']);
+                $image = explode(",",$images[0]['url_image']);
                 /**
                  * On calcule le prix total pour un produit : prix unitaire * quantité
                  * On additione tous les prix totaux au total de la commandes
@@ -226,7 +228,7 @@ if ( isset ($_SESSION['user_data'] ))
                 $commandQuantity += $product['quantity_product'];
             ?>
             <article class=" flex commandproduct">
-                <img src="<?= url ?>Uploads/<?= $images[0] ?>" alt="" width="120px" height="150px">
+                <img src="<?= url ?>Uploads/<?= $image[0] ?>" alt="" width="120px" height="150px">
                 <div class="incommand">
                     <div class="flex intcommandPorduct">
                        <p><a href="products/<?= $product['id'] ?>"><?= $product['name'] ?></a></p>

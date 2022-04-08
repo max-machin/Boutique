@@ -19,11 +19,6 @@ class BagsController extends Controller
         $model = new BagsModel();
         $bagProductsColors = $model->checkBagColors($_SESSION['user_data']['id']);
 
-        foreach ($bagProductsColors as $table){
-            $model = new BagsModel();
-            $imagesColors = $model->findImages($_SESSION['user_data']['id'], $table['id']);
-        }
-
         // Boucle pour récupérer les couleurs des produits 
         foreach($bagProductsColors as $product)
         {
@@ -35,11 +30,6 @@ class BagsController extends Controller
         $bagModel = new BagsModel();
         $bagProducts = $bagModel->checkBag($_SESSION['user_data']['id']);
 
-        foreach ($bagProducts as $table){
-            $model = new BagsModel();
-            $images = $model->findImages($_SESSION['user_data']['id'], $table['id']);
-            var_dump($images);
-        }
             
         // Update de la quantité produit avec COULEUR
         if ( isset ( $_POST['submitQuantityColors']))
@@ -81,17 +71,9 @@ class BagsController extends Controller
             header('location: users/commands');
         }
 
-        if ( isset ($imagesColors)){
-            Renderer::render('bag/userBag', compact('bagProductsColors','bagProducts', 'findColors', 'imagesColors'));
-        }
-        if ( isset ($images)){
-            Renderer::render('bag/userBag', compact('bagProductsColors','bagProducts', 'findColors','images'));
-        }
-        if ( isset($images) || isset($imagesColors)) {
-            Renderer::render('bag/userBag', compact('bagProductsColors','bagProducts', 'findColors', 'imagesColors','images')); 
-        } else {
-            Renderer::render('bag/userBag', compact('bagProductsColors','bagProducts', 'findColors'));
-        }
+        
+        Renderer::render('bag/userBag', compact('bagProductsColors','bagProducts', 'findColors'));
+      
         
     }
 }

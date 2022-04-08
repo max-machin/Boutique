@@ -5,8 +5,6 @@
     // Si l'utilisateur est connecté
     if ( isset ( $_SESSION['user_data']))
     {
-        var_dump($images);
-        $images = "";
         // Initialisation de la quantité et du prix du panier
         $bagQuantity = 0; 
         $bagPrice = 0;
@@ -16,7 +14,9 @@
             // Affichage des produits possédant une couleur
             foreach($bagProductsColors as $bagProduct)
             {
-                $imagesColor = explode(',', $imagesColors['url_image']);
+                $model = new BagsModel();
+                $images = $model->findImages($_SESSION['user_data']['id'], $bagProduct['id']);
+                $imagesColor = explode(',', $images[0]['url_image']);
                 
                 // Calcul du prix total d'un produit = Prix unitaire * quantité
                 $productsPrice = $bagProduct['price'] * $bagProduct['quantity_product'];
@@ -74,8 +74,10 @@
             } 
             foreach ($bagProducts as $product)
             {
+                $model = new BagsModel();
+                $images = $model->findImages($_SESSION['user_data']['id'], $product['id']);
                 
-                $image = explode(',', $images['url_image']);
+                $image = explode(',', $images[0]['url_image']);
                 // Calcul du prix total d'un produit = Prix unitaire * quantité
                 $productsPrice = $product['price'] * $product['quantity_product'];
 

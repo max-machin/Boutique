@@ -37,7 +37,7 @@ elseif (isset($url[1]) && !isset($url[2]))
                 {   
                     
                     ?>
-                    <li>
+                    <li class="listCat">
                         <a href="products/<?= $findCat[0]['name'] ?>/<?= $sousCategories['name'] ?>"><button><?= $sousCategories['name'] ?></button></a>
                     </li>
 
