@@ -107,7 +107,7 @@ CREATE TABLE IF NOT EXISTS `commands` (
   `id_color` int(11) DEFAULT NULL,
   `price` float NOT NULL,
   `total_price` int(11) NOT NULL,
-  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `promo` int(11) DEFAULT NULL,
   `adresse_livraison` varchar(255) NOT NULL,
   `adresse_facturation` varchar(255) NOT NULL,
@@ -144,7 +144,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `id_product` int(11) NOT NULL,
   `comment` text NOT NULL,
   `note` int(11) NOT NULL,
-  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `relation_comment_product` (`id_product`),
   KEY `relation_user_comment` (`id_user`)
