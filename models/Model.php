@@ -15,7 +15,7 @@ class Model extends Database
      * Gestion des préparations et execute des requetes en fonctions des attributs
      *
      * @param [type] $sql
-     * @param array|null $attributs
+     * @param array|null $attributs 
      * @return void
      */
     public function requete($sql, ?array $attributs = null){

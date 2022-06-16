@@ -11,7 +11,7 @@ CONST urlLaura = 'http://localhost:8080/Boutique/';
 
 require_once('Autoloader.php');
 Autoloader::Autoload();
-Router::process();
+Router::process(); 
 
 $promo = "";
 ?>

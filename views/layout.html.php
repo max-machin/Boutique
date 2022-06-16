@@ -88,7 +88,7 @@
                     <li><a href="quizz">Discover your skin</a></li>
                 </ul>
             </nav>
-        </div> 
+        </div>  
 </header>
 
     <div class="flex-wrapper">            
