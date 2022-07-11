@@ -64,7 +64,7 @@ class Model extends Database
         // On boucle pour éclater le tableau
         foreach($criteres as $champ => $valeur){
             //SELECT * FROM annonces where actif = ? AND signale = 0
-            //bindValue(1, valeur);
+            
             $champs[] = "$champ = ?";
             $valeurs[] = $valeur;
         }
@@ -138,14 +138,14 @@ class Model extends Database
      */
     public function create(model $model) 
     {
-        $champs = [];
+        $champs = []; 
         $inter = [];
         $valeurs = [];
 
         // On boucle pour éclater le tableau
         foreach($this as $champ => $valeur){
             // INSERT INTO annonces (titre, description, actif) values (?,?,?)
-            
+
             if($valeur != null && $champ != 'database' && $champ != 'table'){
                 $champs[] = $champ;
                 $inter[] = "?";

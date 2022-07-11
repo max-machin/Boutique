@@ -86,7 +86,7 @@ class UsersController extends Controller
                                         $user_data = $model
                                         ->setNom($name)
                                         ->setPrenom($surname)
-                                        ->setEmail($email)
+                                        ->setEmail($email) 
                                         ->setPassword($password_hash);
                                         
                                         // On inscrit l'utilisateur en base de données
