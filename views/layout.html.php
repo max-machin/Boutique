@@ -7,7 +7,7 @@
     <!-- <BASE href="http://localhost/Boutique/"> -->
     <BASE href="http://localhost/Boutique/">
     <link rel="stylesheet" href="style.css">
-    <script src="index.js" charset="utf-8"></script>
+    <script src="<?php url ?>index.js" charset="utf-8"></script>
     <script src="https://kit.fontawesome.com/81dc42ea59.js" crossorigin="anonymous"></script>
     <link href="image/fontawesome-free-5.15.4-web.zip/css/all.css" rel="stylesheet">
     <title>Everglow | Clean Skincare & Beauty products </title>
@@ -27,13 +27,13 @@
             </form>  
             <div class="top-before-animation">
                 <div class="btn-search">
-                    <img src="images/utilitaires/search.svg" width="40px">
+                    <img src="images/utilitaires/search.svg" width="40px" alt="search-bar button">
                 </div>  
                 
-                <a href="accueil"><img src="images/utilitaires/Everglow.png" id='everglow' width="120px"></a>
+                <a href="accueil"><img src="images/utilitaires/Everglow.png" id='everglow' width="120px" alt="Logo"></a>
     
                 <div class="btn-navigation">
-                    <img id='menu' src="images/utilitaires/menu.svg" width="40px">
+                    <img id='menu' src="images/utilitaires/menu.svg" width="40px" alt="Menu navbar">
                 </div>
             </div>
 
@@ -48,17 +48,17 @@
                 <?php
                     if($_SESSION['user_data']['id'] === "1"){
                         ?>
-                            <li><a href="admin"><img src="images/utilitaires/admin.svg" width="55px"></a></li>
+                            <li><a href="admin"><img src="images/utilitaires/admin.svg" width="55px" alt="icon administrateur"></a></li>
                         <?php
                     }
                     else {
                         ?>
-                            <li><a href="users/profil"><img src="images/utilitaires/user.svg" width="40px"></a></li>                        
+                            <li><a href="users/profil"><img src="images/utilitaires/user.svg" width="40px" alt="Icone profil"></a></li>                        
                         <?php
                     }
                 ?>
-                <li><a href="bags"><img src="images/utilitaires/bag.svg" width="40px"></a></li>                    
-                <li><a href="users/disconnect"><img src="images/utilitaires/power.svg" width="43px"></a></li>
+                <li><a href="bags"><img src="images/utilitaires/bag.svg" width="40px" alt="icone panier"></a></li>                    
+                <li><a href="users/disconnect"><img src="images/utilitaires/power.svg" width="43px" alt="bouton de déconnexion"></a></li>
             </ul>
         </nav>
 
@@ -70,8 +70,8 @@
         ?>
             <nav>
                 <ul>
-                    <li><a href="users/register"><img src="images/utilitaires/register.svg" width="45px"></a></li>
-                    <li><a href="users/login"><img src="images/utilitaires/power.svg" width="45px"></a></li>
+                    <li><a href="users/register"><img src="images/utilitaires/register.svg" width="45px" alt="bouton de formulaire d'insciription"></a></li>
+                    <li><a href="users/login"><img src="images/utilitaires/power.svg" width="45px" alt="bouton de formulaire de connexion"></a></li>
                 </ul>
             </nav>
         <?php
@@ -101,10 +101,10 @@
         <footer>
             <div class="social-media">
                 <p>@everglow.brand</p>
-                <a href="https://www.instagram.com/everglow.brand/"><img src="images/utilitaires/instagram-brands.svg" width="15px" class="filter-white"></a>
-                <img src="images/utilitaires/twitter-brands.svg" width="15px" class="filter-white">
-                <img src="images/utilitaires/facebook-brands.svg" width="15px" class="filter-white">
-                <img src="images/utilitaires/tiktok-brands.svg" width="15px" class="filter-white">
+                <a href="https://www.instagram.com/everglow.brand/"><img src="images/utilitaires/instagram-brands.svg" width="15px" class="filter-white" alt="logo instagram"></a>
+                <img src="images/utilitaires/twitter-brands.svg" width="15px" class="filter-white" alt="logo twitter">
+                <img src="images/utilitaires/facebook-brands.svg" width="15px" class="filter-white" alt="logo facebook">
+                <img src="images/utilitaires/tiktok-brands.svg" width="15px" class="filter-white" alt="logo tiktok">
             </div>
             <div class="footer-up">
                 <div id="sign-up">
