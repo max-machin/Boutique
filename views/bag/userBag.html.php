@@ -1,5 +1,5 @@
 <section class="bag">
-    <h1 class="sous-titre">Mon panier</h1>
+    <h1 class="sous-titre">My bag</h1>
     <?php
 
     // Si l'utilisateur est connecté
@@ -94,7 +94,7 @@
                     <form action="" method="post">
                         <div class="flex productbag">
                             <button class="# delete1" type="submit" name="deleteFromBag">&#x2715</button>
-                            <img src="Uploads/<?= $image[0] ?>" alt="">
+                            <img src="<?= url ?>Uploads/<?= $image[0] ?>" alt="">
                             <div class="inbag">
                                 <div class="flex intproductbag">
                                     <p><a href="products/<?= $product['id'] ?>"><?= $product['name'] ?></a></p>
@@ -133,7 +133,7 @@
             ?>
             <article class="flex bagPrice">
                 <div>
-                    <p>Sous-total :</p>
+                    <p>Subtotal :</p>
                     <p>(<?= $bagQuantity ?> articles)</p>
                 </div>
                 <div>
@@ -154,17 +154,17 @@
         <article class="emptyBagcontainer">
             <img src="images/generalvibe/collection1(1).jpeg" alt="" height="270px">
             <div>
-                <h3>Parceque la beauté n'a pas de prix..</h3>
-                <p>Livraison offerte à partir de 50€</p>
-                <a href="products"><button class="submit">J'en profite</button></a>
-                <p class="help">Offre appliquable seulement pour le territoire Français*</p>
+                <h3>Because beauty has no price..</h3>
+                <p>Free delivery from 50€</p>
+                <a href="products"><button class="submit">I take it</button></a>
+                <p class="help">Offer applicable only for the French territory*</p>
             </div>
         </article>
 
         <article class="emptyBag txt-center">
             <i class="fa-solid fa-tag"></i>
-            <p>Votre panier est vide</p>
-            <a href="products"><button class="submit">Commencer le shopping</button></a>
+            <p>Your bag is empty</p>
+            <a href="products"><button class="submit">Start shopping</button></a>
         </article>
         <?php
         }

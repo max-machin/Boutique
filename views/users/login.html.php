@@ -1,5 +1,5 @@
 <form class="form logreg" action="" method="post">
-    <h1>Je me connecte</h1>
+    <h1>Log in</h1>
     
     <div class="form-group">
         <input id="email" type="email" name="email" required>
@@ -12,15 +12,15 @@
 
     <div class="form-group">
         <input id="password" type="password" name="password" required>
-        <label for="password">Mot de passe *</label>
+        <label for="password">Password *</label>
         <div class="error-msg">
             <?= $error_password ?>
         </div>
     </div>
 
-    <a class="help bold" href="users/forgotPassword">Mot de passe oublié ?</a><br>
+    <a class="help bold" href="users/forgotPassword">Forgot password ?</a><br>
 
     <input class="submit login" type="submit" name="submit" value="Connexion">
-    <p class="sous_texte">Pas encore inscrit ? <a href="<?= url ?>users/register"> Rejoignez-nous</a></p>
+    <p class="sous_texte">Not registered yet ? <a href="<?= url ?>users/register">Join us</a></p>
 </form>
 

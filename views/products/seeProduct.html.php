@@ -49,7 +49,7 @@ if (isset($_SESSION['user_data'])){
                     }
                     ?>
                     <p><?= $comment['comment'] ?></p>
-                    <p class="info_commentaire">Posté par : <?= $comment['prenom'] ?> le : <?= $comment['datefr'] ?> à <?= $comment['heurefr'] ?></p>
+                    <p class="info_commentaire">Posted by : <?= $comment['prenom'] ?> the : <?= $comment['datefr'] ?> at <?= $comment['heurefr'] ?></p>
                 </div>
         <?php
                 }
@@ -188,7 +188,7 @@ if (isset($_SESSION['user_data'])){
                     }
                     ?>
                     <p><?= $comment['comment'] ?></p>
-                    <p class="info_commentaire">Posté par : <?= $comment['prenom'] ?> le : <?= $comment['datefr'] ?> à <?= $comment['heurefr'] ?></p>
+                    <p class="info_commentaire">Posted by : <?= $comment['prenom'] ?> the : <?= $comment['datefr'] ?> at <?= $comment['heurefr'] ?></p>
                 </div>
             <?php
                 }
@@ -228,14 +228,14 @@ if (isset($_SESSION['user_data'])){
             else
              {
             ?>
-                <p>Veuillez vous <a href="users/register">inscrire</a> / <a href="users/login">connectez</a> pour ajouter un commentaire</p>
+                <p>Please <a href="users/register">register</a> / <a href="users/login">log in</a> to add a comment</p>
             <?php 
             }
         ?>
         </section>
 
 </article>
-    <h2 class="txt-center titre_related">Complétez votre look</h2>
+    <h2 class="txt-center titre_related">Complete your look</h2>
             <section class="wrapper relatedProduct">
                     <?php
                     
@@ -252,7 +252,7 @@ if (isset($_SESSION['user_data'])){
                             <div class='intern-case'>
                                 <h3><?= $product['product_name'] ?></h3>
                                 <p class="txt-center"><?= $product['prix'] ?> €</p>
-                                <a href='products/<?= $product['id_product'] ?>'><button>VOIR</button></a>                     
+                                <a href='products/<?= $product['id_product'] ?>'><button>SEE</button></a>                     
                             </div>
                           
                     </div>

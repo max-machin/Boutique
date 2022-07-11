@@ -7,11 +7,11 @@ function compte_a_rebours()
     var date_evenement = new Date("April 7 15:34:00 2022");
     var total_secondes = (date_evenement - date_actuelle) / 1000;
 
-    var prefixe = "Tirage au sort dans :  ";
+    var prefixe = "Draw in :  ";
 
     if (total_secondes == 1)
     {
-        compte_a_rebours.innerHTML = "Tirage au sort en cours.."
+        compte_a_rebours.innerHTML = "Draw in progress.."
     }
     if (total_secondes > 0)
     {
@@ -78,7 +78,7 @@ function compte_a_rebours()
     }
     else
     {
-        compte_a_rebours.innerHTML = 'Tirage au sort terminé.';
+        compte_a_rebours.innerHTML = 'Draw completed.';
 
         var formDisplay = document.getElementById("concours-form").style.display = "none";
 

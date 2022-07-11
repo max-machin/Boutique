@@ -766,7 +766,7 @@ footer a {
 
 .wrapper {
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .bestsellers-products {
@@ -1315,9 +1315,13 @@ fieldset {
     margin-bottom: 3vh;
 }
 .userCommand {
-    margin-top: 2vh;
+    margin: 2vh 0;
     font-family: "LoremIpsumV2";
     text-align: center;
+}
+
+.userCommand .grid {
+    gap: 5px;
 }
 
 .userCommand p {

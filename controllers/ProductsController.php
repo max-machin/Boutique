@@ -371,8 +371,7 @@ class ProductsController extends Controller
     {
         // var_dump($id);
         $model = new ProductsModel();
-        $product = $model->find(2);
-        var_dump($product);
+        $product = $model->find($id);
         Renderer::render('products/updateProduct' , compact('product'));
         // Renderer::render('products/updateProduct' , compact('product'));
     }

@@ -5,56 +5,56 @@ if ( empty ( $user)) {
     header('location: login');
 } else {
 ?>
-    <h1 class="txt-center titre-profil">Votre profil</h1>
+    <h1 class="txt-center titre-profil">Your profile</h1>
    
     <article class="articleProfil">
         <form class="form" action="" method="post">
-            <h2 class="sous-titre">Informations personnelles</h3>
+            <h2 class="sous-titre">Personal information</h3>
             <div class="form-group">
                 <input id="email" type="email" name="email" value="<?= $user['email'] ?>" required>
-                <label for="email">E-mail * (facturation)</label>
+                <label for="email">E-mail * (billing)</label>
             </div>
             <div class="form-group">
                 <input id="surname" type="text" name="surname" value="<?= $user['prenom'] ?>" required>
-                <label for="surname">Prénom *</label>
+                <label for="surname">First Name *</label>
             </div>
             <div class="form-group">
                 <input id="name" type="text" name="name" value="<?= $user['nom'] ?>" required>
-                <label for="name">Nom *</label>
+                <label for="name">Last Name *</label>
             </div>
-            <input class="submit submit-profil" type="submit" name="submit" value="Modifier infos">
+            <input class="submit submit-profil" type="submit" name="submit" value="Change infos">
         </form>
         
         <img src="images/generalvibe/general1.jpeg" alt="Manage your account">
         <form class="form" action="" method="post" style="display: <?= $display1 ?>">
-        <h2 class="sous-titre">Mot de passe</h3>
+        <h2 class="sous-titre">Password</h3>
             <?= $success ?>
             <div class="form-group">
                 <input id="oldPassword" type="password" name="oldPassword" required>
-                <label for="oldPassword">Ancien mot de passe *</label>
+                <label for="oldPassword">Last password *</label>
                 <div class="error-msg"><?= $error_old_password ?></div>
             </div>
-            <input class="submit submit-profil" type="submit" name="subPassword" value="Confirmer password">
+            <input class="submit submit-profil" type="submit" name="subPassword" value="Confirme password">
         </form>
 
         <form class="form" action="" method="post" style="display: <?= $display2 ?>">
-        <h2 class="sous-titre">Mot de passe</h3>
+        <h2 class="sous-titre">Password</h3>
             <div class="form-group">
                 <input id="newPassword" type="password" name="newPassword" required>
-                <label for="newPassword">Nouveau mot de passe *</label>
+                <label for="newPassword">New password *</label>
                 <div class="error-msg"><?= $error_new_password ?></div>
             </div>
             <div class="form-group">
                 <input id="validPassword" type="password" name="validPassword" required>
-                <label for="validPassword">Valider mot de passe *</label>
+                <label for="validPassword">Validate password *</label>
                 <div class="error-msg"><?= $error_validPassword ?></div>
             </div>
-            <input class="submit submit-profil" type="submit" name="subNewPassword" value="Modifier password">
+            <input class="submit submit-profil" type="submit" name="subNewPassword" value="change password">
         </form>
     
     </article>
     <hr>
-    <h2 class="sous-titre txt-center">Vos dernières commandes</h2>
+    <h2 class="sous-titre txt-center">Your last commands</h2>
 
 <?php 
 
@@ -119,7 +119,7 @@ if ( empty ( $user)) {
             <article class="userCommand">
                 <div class="inCommandUser">
                     <article>
-                        <p>N° de commande : <i class="bold"><?= $num ?></i></p>
+                        <p>N° of command : <i class="bold"><?= $num ?></i></p>
             
             <?php
         }
@@ -135,13 +135,13 @@ if ( empty ( $user)) {
                     {
                     
                         ?>
-                        <p>Montant : <i class="bold"><?= $commandPrice ?>€</i></p>
+                        <p>Amount : <i class="bold"><?= $commandPrice ?>€</i></p>
                         <?php
 
                     } else {
                     $commandPricePromo = $commandPricePromo += $deliveryPrice[0];
                         ?>
-                        <p>Montant: <i class="bold"><?= $commandPricePromo ?>€</i></p>
+                        <p>Amount: <i class="bold"><?= $commandPricePromo ?>€</i></p>
                         <?php
                     }
                 }
@@ -159,8 +159,8 @@ if ( empty ( $user)) {
                 {
                     ?>
                         <div>
-                            <h3>Expédition</h3>
-                            <p>Adresse de livraison : <i class="bold"><?= $livraison ?></i></p>
+                            <h3>Shipping</h3>
+                            <p>Delivery address : <i class="bold"><?= $livraison ?></i></p>
                         </div>
                     <?php
                 }
@@ -171,8 +171,8 @@ if ( empty ( $user)) {
                 {
                     ?>
                         <div>
-                            <h3>Facturation</h3>
-                            <p>Adresse de facturation : <i class="bold"><?= $facturation ?></i></p>
+                            <h3>Billing</h3>
+                            <p>Billing address : <i class="bold"><?= $facturation ?></i></p>
                         </div>
                     <?php
                 }
@@ -182,7 +182,7 @@ if ( empty ( $user)) {
                 <section class="containerCommandUser">
                     <article class="grid article-profil">
                         <div>
-                            <h4>Produits</h4> 
+                            <h4>Products</h4> 
                             <?php
                                 foreach($names as $name)
                                 {
@@ -193,7 +193,7 @@ if ( empty ( $user)) {
                             ?>
                         </div>
                         <div>
-                        <h4>Couleurs</h4> 
+                        <h4>Colors</h4> 
                             <?php
 
                                 foreach($colors as $color)
@@ -215,7 +215,7 @@ if ( empty ( $user)) {
                             ?>
                         </div>
                         <div>
-                            <h4>Prix</h4>
+                            <h4>Price</h4>
                             <?php
                                 foreach($prices as $price)
                                 {
@@ -226,7 +226,7 @@ if ( empty ( $user)) {
                             ?>
                         </div>
                         <div>
-                            <h4>Quantité</h4>
+                            <h4>Quantity</h4>
                             <?php
                                 foreach($quantities as $quantity)
                                 {
@@ -238,7 +238,7 @@ if ( empty ( $user)) {
                         </div>
                         
                         <div>
-                            <h4>Prix</h4>
+                            <h4>Price</h4>
                             <?php
                                 foreach($total_prices as $total_price)
                                 {
@@ -263,18 +263,18 @@ if ( empty ( $user)) {
                                 $totalPrice = $commandPrice - $deliveryPrice[0];
                             
                                 ?>
-                                <p>Prix total : <i class="bold"><?= $totalPrice ?>€</i></p>
-                                <p>Pas de PROMO</p>
-                                <p>Livraison : <i class="bold"><?= $deliveryPrice[0] ?>€</i> (<?= $mode[0] ?>)</p>
-                                <p>Prix total commande : <i class="bold"><?= $commandPrice ?>€</i></p>
+                                <p>Total price : <i class="bold"><?= $totalPrice ?>€</i></p>
+                                <p>Without PROMO</p>
+                                <p>Delivery : <i class="bold"><?= $deliveryPrice[0] ?>€</i> (<?= $mode[0] ?>)</p>
+                                <p>Total command price : <i class="bold"><?= $commandPrice ?>€</i></p>
                                 <?php
                             } else {
                                 $totalPrice = $commandPrice
                                 ?>
-                                    <p>Prix total : <i class="bold"><?= $totalPrice ?>€</i></p>
-                                    <p>Pas de PROMO</p>
-                                    <p>Livraison offerte</p>
-                                    <p>Prix total commande : <i class="bold"><?= $commandPrice ?>€</i></p>
+                                    <p>Total price : <i class="bold"><?= $totalPrice ?>€</i></p>
+                                    <p>No PROMO</p>
+                                    <p>Free delivery</p>
+                                    <p>Total command price : <i class="bold"><?= $commandPrice ?>€</i></p>
                                 <?php
                             }
                         } else {
@@ -282,19 +282,19 @@ if ( empty ( $user)) {
                             if ( $commandPrice < 50)
                             {
                                 ?>
-                                <p>Prix sans PROMO : <i class="bold"><?= $commandPrice ?>€</i></p>
+                                <p>Price without PROMO : <i class="bold"><?= $commandPrice ?>€</i></p>
                                 <p>PROMO : <i class="bold"><?= $promo ?>%</i></p>
-                                <p>Prix avec PROMO : <i class="bold"><?= $commandPricePromo ?>€</i></p>
-                                <p>Livraison : <i class="bold"><?= $deliveryPrice[0] ?>€</i>  (<?= $mode[0] ?>)</p>
-                                <p>Prix total commande : <i class="bold"><?= $commandPricePromo ?>€</i></p>
+                                <p>Price with PROMO : <i class="bold"><?= $commandPricePromo ?>€</i></p>
+                                <p>Delivery : <i class="bold"><?= $deliveryPrice[0] ?>€</i>  (<?= $mode[0] ?>)</p>
+                                <p>Total command price : <i class="bold"><?= $commandPricePromo ?>€</i></p>
                                 <?php
                             } else {
                             ?>
-                                <p>Prix sans PROMO : <i class="bold"><?= $commandPrice ?>€</i></p>
+                                <p>Prix without PROMO : <i class="bold"><?= $commandPrice ?>€</i></p>
                                 <p>PROMO : <i class="bold"><?= $promo ?>%</i></p>
-                                <p>Prix avec PROMO : <i class="bold"><?= $commandPricePromo ?>€</i></p>
-                                <p>Livraison offerte</p>
-                                <p>Prix total commande : <i class="bold"><?= $commandPricePromo ?>€</i></p>
+                                <p>Prix with PROMO : <i class="bold"><?= $commandPricePromo ?>€</i></p>
+                                <p>Free delivery</p>
+                                <p>Total command price : <i class="bold"><?= $commandPricePromo ?>€</i></p>
                             <?php
                             }
                         }
@@ -309,7 +309,7 @@ if ( empty ( $user)) {
 
     <section  class="txt-center section-favoris">
         <hr>
-        <h2 class="sous-titre">Vos produits favoris</h2>
+        <h2 class="sous-titre">Your favorite products</h2>
         <div class="wrapper">
         <?php
             foreach($userProducts as $userProduct)
@@ -332,7 +332,7 @@ if ( empty ( $user)) {
         
     </section>
     <hr>
-    <h2 class="sous-titre txt-center">Vos commentaires</h2>
+    <h2 class="sous-titre txt-center">Your comments</h2>
     <section class="txt-center section-comment">
        
 

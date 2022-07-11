@@ -1,5 +1,5 @@
 
-<h1>Liste de nos produits</h1>
+<h1>Our products</h1>
 <?php 
 
 $urlExplode = ProductsController::getUrlCategories();

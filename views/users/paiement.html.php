@@ -3,11 +3,11 @@
     {
 
 ?>
-<h1 class="txt-center">Paiement</h1>
+<h1 class="txt-center">Payment</h1>
     <section class="paiement">
         
         <form method="post" action="">
-            <h2 class="sous-titre">Informations</h2>
+            <h2 class="sous-titre">Information</h2>
                 <div id="errors"></div>
                 <div class="row">
                     <span>
@@ -19,7 +19,7 @@
                     <div id="card-errors" role="alert"></div>
                 </div>
             
-            <button class="submit" id="card-button" type="button" data-secret="<?= $intent["client_secret"]; ?>">Payer</button>
+            <button class="submit" id="card-button" type="button" data-secret="<?= $intent["client_secret"]; ?>">Pay</button>
         </form>
         <img src="images/generalvibe/paiement2.jpg" alt="Ballon">
     </section>

@@ -8,6 +8,7 @@
     <BASE href="http://localhost/Boutique/">
     <link rel="stylesheet" href="style.css">
     <script src="<?php url ?>index.js" charset="utf-8"></script>
+    <script src="instapopup.js"></script>
     <script src="https://kit.fontawesome.com/81dc42ea59.js" crossorigin="anonymous"></script>
     <link href="image/fontawesome-free-5.15.4-web.zip/css/all.css" rel="stylesheet">
     <title>Everglow | Clean Skincare & Beauty products </title>
