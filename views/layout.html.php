@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <BASE href="http://localhost/Boutique/"> -->
-    <BASE href="http://localhost/Boutique/">
+    <BASE href="http://localhost:8080/Boutique/">
     <link rel="stylesheet" href="style.css">
     <script src="index.js" charset="utf-8"></script>
     <script src="https://kit.fontawesome.com/81dc42ea59.js" crossorigin="anonymous"></script>
@@ -27,7 +27,7 @@
             </form>  
             <div class="top-before-animation">
                 <div class="btn-search">
-                    <img src="images/utilitaires/search.svg" width="40px">
+                    <img id="search" src="images/utilitaires/search.svg" width="40px">
                 </div>  
                 
                 <a href="accueil"><img src="images/utilitaires/Everglow.png" id='everglow' width="120px"></a>
