@@ -96,19 +96,19 @@
     <section class="cardsAbout">
         <div class="cardAbout">
             <img src="images/utilitaires/leaf (1).png" height="100px" alt="">
-            <p>Produits 100% naturels</p>
+            <p>100% natural products</p>
         </div>
         <div class="cardAbout">
             <img src="images/utilitaires/clock.png" height="100px" alt="">
-            <p>Livraison en 24h</p>
+            <p>Delivery within 24h</p>
         </div>
         <div class="cardAbout">
             <img src="images/utilitaires/delivery.png" height="100px" alt="">
-            <p>Livraison offerte dès 50€</p>
+            <p>Free delivery for commands over 50€</p>
         </div>
         <div class="cardAbout">
             <img src="images/utilitaires/security.png" height="100px" alt="">
-            <p>Paiements sécurisés</p>
+            <p>Secured payements</p>
         </div>
         
     </section>
