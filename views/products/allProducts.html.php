@@ -54,7 +54,7 @@ elseif (isset($url[1]) && !isset($url[2]))
             ?>
             <div class='bestsellers-products'>
                 <div class="bestsellers-img">
-                    <img src='uploads/<?= $images[0] ?>'/>  
+                    <img src='uploads/<?= $images[0] ?>' alt="product image"/>  
                 </div>
                 <div class='intern-case'>
                     <h3><a href='products/<?= $allProductsCat['id'] ?>'><?= $allProductsCat['name'] ?></a></h3>

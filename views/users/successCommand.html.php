@@ -15,7 +15,7 @@ if ( $_SESSION['user_data']['existCommand'] == true){
             <p>because your beauty is important</p>
             <a href="products"><button class="submit">SHOPPER</button></a>
         </div>
-        <img src="images/generalvibe/baniere2.jpg" alt="">
+        <img src="images/generalvibe/baniere2.jpg" alt="Products">
     </div>
 </section> 
 <?php

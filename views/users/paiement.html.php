@@ -21,7 +21,7 @@
             
             <button class="submit" id="card-button" type="button" data-secret="<?= $intent["client_secret"]; ?>">Payer</button>
         </form>
-        <img src="images/generalvibe/paiement2.jpg" alt="">
+        <img src="images/generalvibe/paiement2.jpg" alt="Ballon">
     </section>
     
     <script src="https://js.stripe.com/v3/"></script>

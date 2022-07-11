@@ -25,7 +25,7 @@ if ( empty ( $user)) {
             <input class="submit submit-profil" type="submit" name="submit" value="Modifier infos">
         </form>
         
-        <img src="images/generalvibe/general1.jpeg" alt="">
+        <img src="images/generalvibe/general1.jpeg" alt="Manage your account">
         <form class="form" action="" method="post" style="display: <?= $display1 ?>">
         <h2 class="sous-titre">Mot de passe</h3>
             <?= $success ?>
@@ -318,7 +318,7 @@ if ( empty ( $user)) {
         ?>
             <div class='bestsellers-products'>
             <div class="bestsellers-img">
-                <img src="uploads/<?=$images[0]?>">
+                <img src="uploads/<?=$images[0]?>" alt="favorite product pic">
             </div>
                 <div class='intern-case'>
                     <h3><a href="products/<?= $userProduct['id_product'] ?>"><?= $userProduct['product_name'] ?></a></h3>

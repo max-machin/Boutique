@@ -67,13 +67,13 @@ if (isset($_SESSION['user_data'])){
             //les images
                 foreach($images as $image){
                 ?>         
-                    <img src="uploads/<?= $image ?>" width="50px" class = "img_slider">
+                    <img src="uploads/<?= $image ?>" width="50px" class = "img_slider" alt="product image">
                 <?php
                 }
             ?> 
         
-                <img src="images/utilitaires/previous.svg" id="previous">
-                <img src="images/utilitaires/next.svg" id="next"> 
+                <img src="images/utilitaires/previous.svg" id="previous" alt="previous picture arrow">
+                <img src="images/utilitaires/next.svg" id="next" alt="next picture arrow"> 
         </div>                 
         <section class='text-product'>
             <div class='titre_product'>
