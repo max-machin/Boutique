@@ -124,12 +124,18 @@ class Router
                             $controllerName::seeProduct($url[1]);
                         }
     
-                        if(!empty($url[1]) && ($url[2] == 'update')){
-                            // var_dump($url[1]);
-                            $controllerName::seeUpdateProduct($url[1]);
-                        }
+                        
                     }
+                    
+                }
+                if (isset($url[2])){
+                    if($url[2] == 'update'){
+                        var_dump($url);
+                        $controllerName::seeUpdateProduct($url[1]);
                     }
+                }
+
+                
                 
  
             if ( $controllerName == "BagsController")
@@ -155,6 +161,13 @@ class Router
                             ImagesController::updateImage();
                         }elseif($url[1] == 'images'){
                             ImagesController::seeImages();
+                        } elseif($url[1] == 'delete'){
+                            $controllerName::findAllProdAdmin();
+                        } elseif ($url[1] == 'manage'){
+                            $controllerName::findAllUsers();
+                            
+                        } elseif ($url[1] == 'comments'){
+                            $controllerName::findAllComments();
                         }
                     }elseif(!empty($url[1]) && !empty($url[2])){
                         if($url[1]== 'create' && $url[2] == 'image'){

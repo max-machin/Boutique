@@ -1,26 +1,30 @@
 document.addEventListener('DOMContentLoaded', function loaded() {
-    console.log("IM here")
     //pour le pop up à l'accueil
     var close = document.getElementById('close');
+    
+    
+    console.log(window.innerWidth)
 
-    window.addEventListener('load', function(){
-        // console.log('hey')
-        setTimeout(
-            function(){
-                document.querySelector('.pop-up').style.display = 'block';
-            },
-            900
-        )
-    });
-        close.addEventListener("click", function(){
-            document.querySelector('.pop-up').style.display = 'none';
+    if (window.innerWidth > 830){
+        window.addEventListener('load', function(){
+            // console.log('hey')
+            setTimeout(
+                function(){
+                    document.querySelector('.pop-up').style.display = 'block';
+                },
+                900
+            )
         });
+            close.addEventListener("click", function(){
+                document.querySelector('.pop-up').style.display = 'none';
+            });
+    }
 
         
 
         //INSTAFEED
 
-const accessToken = "IGQVJXZAzljNlV0OHVUNDRUZAkNaZA28tRE5Nc09WMGp2Q3V3ekRTRjV2empnZA1kwSDc0UUE1WWlMbnppYnF0elFRNWFSZAFVyeFZAiWkgxZAnNEdEFSM3VwWlA3VFdoQkNOc2hrVXFZAMnBlTW9Dci1ZARlhXTQZDZD";
+const accessToken = "IGQVJXY0R5bkVEWXQwSmlSa1NMbzlzS2NFNjNOdHVCV3phUXlENnVfM0FDRFljZAzlJYWVRRHh2cE5wdGVqa2plV3FFWUYwWkFLVlhlbE80dW9WZAHJ0SEVyb2VZAbmtBNWRuY01zdVdhdjdJUXNCUHhiegZDZD";
 
 const fields = "id,media_type,media_url,timestamp,permalink";
 

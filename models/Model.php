@@ -18,7 +18,7 @@ class Model extends Database
      * @param array|null $attributs 
      * @return void
      */
-    public function requete($sql, ?array $attributs = null){
+    public function requete($sql, array $attributs = null){
     
         //On récupere l'instance de database
         $this->database = DataBase::getPdo();
@@ -139,7 +139,7 @@ class Model extends Database
     public function create(model $model) 
     {
         $champs = []; 
-        $inter = [];
+        $inter = []; 
         $valeurs = [];
 
         // On boucle pour éclater le tableau

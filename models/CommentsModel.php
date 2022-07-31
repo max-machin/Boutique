@@ -160,4 +160,8 @@ class Commentsmodel extends Model
     {
         return $this->requete("SELECT products.id as id_product ,products.name, comments.comment, comments.note, comments.id, DATE_FORMAT(date, '%M/%d/%Y') AS 'datefr' , DATE_FORMAT(date, '%H:%i:%s') AS 'heurefr' FROM `comments` INNER JOIN `products` ON comments.id_product = products.id AND comments.id_user = $id_user ORDER BY date DESC")->fetchAll();
     }
+
+    public function findCommentsByProduct(){
+        return $this->requete("SELECT u.prenom, p.name, c.comment, c.note, c.date, c.id_product, c.id FROM comments as c INNER JOIN products as p ON c.id_product = p.id INNER JOIN users as u ON c.id_user = u.id ORDER BY p.name")->fetchAll();
+    }
 }

@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <BASE href="http://localhost/Boutique/"> -->
     <BASE href="http://localhost/Boutique/">
     <link rel="stylesheet" href="style.css">
     <script src="<?php url ?>index.js" charset="utf-8"></script>
@@ -22,13 +21,22 @@
         <div class="top-header">           
             <form action="" method="post">
                 <div class="intern-form">
-                    <input type="text" name="search" placeholder="Search">
-                    <button id="searchbutton" type="submit" name="submit-search"><img src="images/utilitaires/search.svg" width="35px"></button>                    
+                    <input type="text" name="search" placeholder="Search" class="inputSearchHeader">
+                    <button id="searchbutton" type="submit" name="submit-search"><img src="images/utilitaires/search.svg" width="35px"></button>  
+                    <div class="resultats-container">
+                        <ul class="resultats-list-one" id="list">
+
+                        </ul>
+                        <hr>
+                        <ul class="resultats-list-two" id="list2">
+                            
+                        </ul>
+                    </div>                  
                 </div>
             </form>  
             <div class="top-before-animation">
                 <div class="btn-search">
-                    <img src="images/utilitaires/search.svg" width="40px" alt="search-bar button">
+                    <img id="search" src="images/utilitaires/search.svg" width="40px" alt="search-bar button">
                 </div>  
                 
                 <a href="accueil"><img src="images/utilitaires/Everglow.png" id='everglow' width="120px" alt="Logo"></a>

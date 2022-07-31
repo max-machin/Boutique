@@ -31,7 +31,7 @@ window.onload = () => {
                     billing_details: {name: cardHolderName.value}
                 }
             }
-        ).then((result) => {
+        ).then((result) => { 
             if ( result.error){
                 document.getElementById("errors").innerText = result.error.message
             } else {

@@ -60,7 +60,8 @@ if ( isset ($_SESSION['user_data'] ))
             // affichage des produits sans couleur
             foreach ( $command as $product)
             {
-                $images = explode(",", $images['url_image']);
+                
+                $images = explode(",", $images[0]['url_image']);
                 // Prix total de chaque produit
                 $productPrice = $product['price'] * $product['quantity_product'];
 

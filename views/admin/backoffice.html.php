@@ -18,21 +18,48 @@ if(@$_SESSION['user_data']['id'] !== "1")
 
 
 <article>
-    <h1>Backoffice</h1> 
+    <h1 class="titreBackoff">Backoffice</h1> 
 
     <p>What do you want to do?</p>
 
-    <form action="admin/create" method="post">
-        <button type="submit" class="btn btn-outline-dark" name="goCreate">Create a new product</button>
-    </form>
+    <section class="backoff">
 
-    <form action="admin/create/image" method="post">
-        <button type="submit" class="btn btn-outline-dark" name="goUpdate">Add an image to a product</button> 
-    </form>
+        <article class="backprod">
+            <p>Product management</p>
+            <div class="backoffproduct">
+                <form action="admin/create" method="post">
+                    <button type="submit" class="btn btn-outline-dark" name="goCreate">Create a new product</button>
+                </form>
 
-    <form action="admin/update" method="post">
-        <button type="submit" class="btn btn-outline-dark" name="goUpdate">Update a product</button> 
-    </form>
+                <form action="admin/create/image" method="post">
+                    <button type="submit" class="btn btn-outline-dark" name="goUpdate">Add an image to a product</button> 
+                </form>
+
+                <form action="admin/update" method="post">
+                    <button type="submit" class="btn btn-outline-dark" name="goUpdate">Update a product</button> 
+                </form>
+
+                <form action="admin/delete" method="post">
+                    <button type="submit" class="btn btn-outline-dark" name="goUpdate">Delete a product</button> 
+                </form> 
+            </div>
+        </article>
+
+        <div class="hr"></div>
+
+        <article class="manageUserSection">
+            <p>User management</p>
+            <div class="backoffproduct">
+                <form action="admin/manage" method="post">
+                    <button type="submit" class="btn btn-outline-dark" name="goUpdate">Users management</button> 
+                </form>
+                <form action="admin/comments" method="post">
+                    <button type="submit" class="btn btn-outline-dark" name="goUpdate">Comments management</button> 
+                </form>
+            </div>
+        </article>
+</section>
+    
 
 
 
@@ -69,7 +96,7 @@ if(@$_SESSION['user_data']['id'] !== "1")
         </article>
     </section>
 
-    <h2 class="text-center">Best Sellers</h2>
+    <h2 class="text-center bestSellerAdmin">Best Sellers</h2>
     <section class="bestSellersGraph">
         <div class="content">
             <p>Produits les plus vendus en %</p>

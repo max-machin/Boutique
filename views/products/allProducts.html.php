@@ -14,8 +14,8 @@ if (!isset($url[1]))
                 <img src='uploads/<?= $images[0] ?>'/>  
             </div>
             <div class='intern-case'>
-                <h3><a href='products/<?= $allProducts['id'] ?>'><?= $allProducts['name'] ?></a></h3>
-                <a href='products/<?= $allProducts['id'] ?>'><button><p id=''>Add  -  $<?= $allProducts['price'] ?></p></button></a>                         
+                <h3><a href='<?= url ?>products/<?= $allProducts['id'] ?>'><?= $allProducts['name'] ?></a></h3>
+                <a href='<?= url ?>products/<?= $allProducts['id'] ?>'><button><p id=''>Add  -  $<?= $allProducts['price'] ?></p></button></a>                         
             </div>
                 
         </div> 

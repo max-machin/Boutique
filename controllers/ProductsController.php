@@ -49,8 +49,7 @@ class ProductsController extends Controller
                 $sousCategories = $model->findBy(['name' => $url[2]]);
                 
                 $model = new ProductsModel();
-                $findProductBySousCategorie = $model->findBySsCat(['id_sous_categorie' => $sousCategories[0]['id']]);
-                // var_dump($findProductBySousCategorie);
+                $findProductBySousCategorie = $model->findBySsCat(['id_sous_categorie' => $sousCategories[0]['id']]);   
 
             Renderer::render("products/allProducts", compact('url', 'sousCategories', 'findProductBySousCategorie'));
             }
@@ -138,7 +137,7 @@ class ProductsController extends Controller
                             ->setId_color($color)
                             ->setQuantity_product($_POST['product_quantity']);
                         $productAdded->create($model);  
-                        $success = '<div class="success"> <i class="fa-solid fa-thumbs-up"></i> Produit ajouté au panier</div>';
+                        $success = '<div class="success"> <i class="fa-solid fa-thumbs-up"></i> Product added</div>';
                         
                         $findModel = new BagsModel();
                         $find = $findModel->findBy(['id_product' => $_POST['id_Product']]);
@@ -157,14 +156,14 @@ class ProductsController extends Controller
                             ->setQuantity_product($_POST['product_quantity'])
                             ->setId_color($color);
                             $productAdded->create($model);  
-                            $success = '<div class="success"> <i class="fa-solid fa-thumbs-up"></i> Produit ajouté au panier</div>';
+                            $success = '<div class="success"> <i class="fa-solid fa-thumbs-up"></i> Product added</div>';
 
                         // Sinon on update sa quantité
                         } else {
                             
                             $model = new BagsModel();
                             $updateBag = $model->updateQuantityColors($_POST['product_quantity'], $_POST['id_Product'], $_SESSION['user_data']['id'], $_POST['color']);
-                            $success = '<div class="success"> <i class="fa-solid fa-thumbs-up"></i> Quantité modifié</div>';
+                            $success = '<div class="success"> <i class="fa-solid fa-thumbs-up"></i> Modified</div>';
                         }
                     // Si l'utilisateur a déjà un panier
                     } else {
@@ -183,20 +182,20 @@ class ProductsController extends Controller
                             ->setQuantity_product($_POST['product_quantity'])
                             ->setId_color($color);
                             $productAdded->create($model);  
-                            $success = '<div class="success"> <i class="fa-solid fa-thumbs-up"></i> Produit ajouté au panier</div>';
+                            $success = '<div class="success"> <i class="fa-solid fa-thumbs-up"></i> Product added</div>';
 
                         // Sinon on l'update
                         } else {
 
                         $model = new BagsModel();
                         $updateBag = $model->updateQuantityColors($_POST['product_quantity'], $_POST['id_Product'], $_SESSION['user_data']['id'], $_POST['color']);
-                        $success = '<div class="success"> <i class="fa-solid fa-thumbs-up"></i> Quantité modifié</div>';
+                        $success = '<div class="success"> <i class="fa-solid fa-thumbs-up"></i> Modified</div>';
                         }
                     }
                 } 
                 else 
                 {
-                    $error_color = "Veuillez sélectionner une couleur";
+                    $error_color = "Please select a color";
                 } 
             } 
             /**
@@ -214,7 +213,7 @@ class ProductsController extends Controller
                         ->setId_product($_POST['id_Product'])
                         ->setQuantity_product($_POST['product_quantity']);
                     $productAdded->create($model);  
-                    $success = '<div class="success"> <i class="fa-solid fa-thumbs-up"></i> Produit ajouté au panier</div>';
+                    $success = '<div class="success"> <i class="fa-solid fa-thumbs-up"></i> Product added</div>';
                     
                     $findModel = new BagsModel();
                     $find = $findModel->findBy(['id_product' => $_POST['id_Product']]);
@@ -229,7 +228,7 @@ class ProductsController extends Controller
                         ->setId_user($_SESSION['user_data']['id'])
                         ->setId_product($_POST['id_Product'])
                         ->setQuantity_product($_POST['product_quantity']);
-                        $success = '<div class="success"> <i class="fa-solid fa-thumbs-up"></i> Produit ajouté au panier</div>';
+                        $success = '<div class="success"> <i class="fa-solid fa-thumbs-up"></i> Product added</div>';
                         $productAdded->create($model);  
 
                     // Sinon on update sa quantité
@@ -238,7 +237,7 @@ class ProductsController extends Controller
 
                         $model = new BagsModel();
                         $updateBag = $model->updateQuantity($_POST['product_quantity'],$_POST['id_Product'], $_SESSION['user_data']['id']);
-                        $success = '<div class="success"> <i class="fa-solid fa-thumbs-up"></i> Quantité modifié</div>';
+                        $success = '<div class="success"> <i class="fa-solid fa-thumbs-up"></i> Modified</div>';
                     }
                 // Si l'utilisateur a déjà un panier
                 } else {
@@ -254,13 +253,13 @@ class ProductsController extends Controller
                         ->setId_product($_POST['id_Product'])
                         ->setQuantity_product($_POST['product_quantity']);
                         $productAdded->create($model);  
-                        $success = '<div class="success"> <i class="fa-solid fa-thumbs-up"></i> Produit ajouté au panier</div>';
+                        $success = '<div class="success"> <i class="fa-solid fa-thumbs-up"></i> Product added</div>';
 
                     // Sinon on l'update
                     } else {
                     $model = new BagsModel();
                     $updateBag = $model->updateQuantity($_POST['product_quantity'], $_POST['id_Product'], $_SESSION['user_data']['id']);
-                    $success = '<div class="success"> <i class="fa-solid fa-thumbs-up"></i> Quantité modifié</div>';
+                    $success = '<div class="success"> <i class="fa-solid fa-thumbs-up"></i> Modified</div>';
                     }
                 }
             

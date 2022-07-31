@@ -1,79 +1,33 @@
 <article class='seeproduct'>
-    <?php
+    
+<?php
+$compo = explode('/', $product['composition']);
+$with = explode(',', $compo[0]);
+if(isset($compo[1])){
+  $without = explode('-', $compo[1]);  
+}
 if (isset($_SESSION['user_data'])){
 
 
-    //si admin
-    if($_SESSION['user_data']['id'] == 1)
-    { 
-        ?>
-        <div class='slider'>
-        <?php
-        //les images
-        foreach($images as $image){
-        ?>     
-            <img src="uploads/<?= $image ?>" width="50px">
-        <?php
-            }
-        ?>
 
-            <img src="images/utilitaires/previous.svg" id="previous">
-            <img src="images/utilitaires/next.svg" id="next"> 
-        </div> 
-        <article class="admin_product">
-        <section class = "admin_update_button">
-            <h1><?= $product['name'] ?></h1>
-            <p><?= $product['description'] ?></p>
 
-            <form action="products/<?= $product['id'] ?>/update" method="post">  
-                <input type="hidden" name="id" value="<?= $product['id'] ?>"/>          
-                <button class="addBag" type="submit" name="updateProduct">Update</button>
-                
-            </form>
-        </section>
-
-        <section class="sectionCommentsAdmin"> 
-            <?php
-                foreach ( $allComments as $comment)
-                {
-            ?>
-                <div class="commentsAdmin">
-                    <?php
-                    $i = 0;
-                    while ( $i < $comment['note']){
-                    ?>
-                        <label for="">★</label>
-
-                    <?php
-                    $i++;
-                    }
-                    ?>
-                    <p><?= $comment['comment'] ?></p>
-                    <p class="info_commentaire">Posted by : <?= $comment['prenom'] ?> the : <?= $comment['datefr'] ?> at <?= $comment['heurefr'] ?></p>
-                </div>
-        <?php
-                }
-        ?>
-</section>
-</article>
-<?php
-    } 
 }
     //sinon le user
         ?>
         <!-- le slide -->
         <div class='slider'>
+        
             <?php
             //les images
                 foreach($images as $image){
                 ?>         
-                    <img src="uploads/<?= $image ?>" width="50px" class = "img_slider" alt="product image">
+                    <img src="<?= url ?>uploads/<?= $image ?>" width="50px" class = "img_slider" alt="product image">
                 <?php
                 }
             ?> 
         
-                <img src="images/utilitaires/previous.svg" id="previous" alt="previous picture arrow">
-                <img src="images/utilitaires/next.svg" id="next" alt="next picture arrow"> 
+                <img src="<?= url ?>images/utilitaires/previous.svg" id="previous" alt="previous picture arrow">
+                <img src="<?= url ?>images/utilitaires/next.svg" id="next" alt="next picture arrow"> 
         </div>                 
         <section class='text-product'>
             <div class='titre_product'>
@@ -87,7 +41,7 @@ if (isset($_SESSION['user_data'])){
                         <form action="" method="post">
                             <input type="hidden" value="<?= $product['id']?>" name="id_Product">
                             <button class="fav outfav" type="submit" name="addFav">
-                                <img src="images/utilitaires/heart_fill.png" alt="" width="20px">
+                                <img src="<?= url ?>images/utilitaires/heart_fill.png" alt="" width="20px">
                             </button>
                         </form>
                         <?php
@@ -104,9 +58,52 @@ if (isset($_SESSION['user_data'])){
                     }
                     ?>
             </div>
+
+                
+            
                         
             <!-- description du produit -->
             <p><?= $product['description'] ?></p>
+                    
+            <section class="compositionProduct">
+                <?php 
+                    if(isset($with)){
+                ?>
+                <article>
+                    <p>Composition</p>
+                    <ol>
+                        <?php
+                            foreach($with as $item){
+                            ?>
+                                <li><?= $item ?></li>
+                            <?php
+                            } 
+                        ?>
+                    </ol>
+                </article>
+                <?php 
+                    }
+                    if(isset($without)){
+                ?>
+                <article>
+                    <p>Without</p>
+                    <ol>
+                        <?php
+                            foreach($without as $item){
+                            ?>
+                                <li><?= $item ?></li>
+                            <?php
+                            } 
+                        ?>
+                    </ol>
+                </article>
+                <?php 
+                    }
+                ?>
+            </section>
+            
+            
+
 
             <!-- si l'utilisateur est là -->
             <?php
@@ -132,6 +129,10 @@ if (isset($_SESSION['user_data'])){
                     <p class="priceProduct"><?= $product['price'] ?> €</p>
                     <!-- quantité du produit -->
                     <div class="add_quantity">
+
+                    <?php 
+                        
+                    ?>
                        
                         <select name="product_quantity" id="product_quantity">
                             <option value="1">1</option>
@@ -139,12 +140,34 @@ if (isset($_SESSION['user_data'])){
                             <option value="3">3</option>
                             <option value="4">4</option>
                             <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
                         </select>
                             
-                        <!-- add bouton -->
-                        <input type="hidden" name="id_Product" value="<?= $product['id'] ?>">
-                        <button class="addBag" type="submit" name="addBag">Add</button>   
-                        <?= $success ?>                     
+                        <?php 
+                            if($_SESSION['user_data']['id'] == 1){
+                        ?>
+
+                            <!-- <form action="products/<?= $product['id'] ?>/update" method="post">  
+                                <input type="hidden" name="id" value="<?= $product['id'] ?>"/>          
+                                <button class="addBag" type="submit" name="updateProduct">Update</button> 
+                            </form> -->
+                            <a class="addBag update-button" href="<?= url ?>products/<?= $product['id'] ?>/update">Update</a>
+
+                        <?php 
+                            } else {
+                        ?>
+
+                            <!-- add bouton -->
+                            <input type="hidden" name="id_Product" value="<?= $product['id'] ?>">
+                            <button class="addBag" type="submit" name="addBag">Add</button>   
+                            <?= $success ?>  
+                        <?php
+                            }
+                         ?>                  
                     </div>
                 </form>
             <?php
@@ -169,7 +192,6 @@ if (isset($_SESSION['user_data'])){
             <?php
             }
             ?>
-
             <!-- commentaires pour users -->
         <section class="sectionComments"> 
             <?php

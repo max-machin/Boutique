@@ -24,7 +24,7 @@ class ImagesController extends Controller
             $fileActExt = strtolower(end($fileExt)); 
         
             $allowedExt = array('jpeg', 'jpg', 'png');
-            
+             
             if (in_array($fileActExt, $allowedExt)){
         
                 if ($fileError === 0){
@@ -78,6 +78,7 @@ class ImagesController extends Controller
                     }
                 }
             }
+            header('refresh: 0');
         }
     }
 }     

@@ -6,7 +6,7 @@ if(@$_SESSION['user_data']['id'] !== "1")
 }
 
 ?>
-
+<a href="admin" class="return"><i class="fa-solid fa-arrow-left"></i></a>
 <form action="" method="post" enctype="multipart/form-data">
     <label for="product-select">Choose which product you want to add your images:</label>
 
@@ -22,5 +22,5 @@ if(@$_SESSION['user_data']['id'] !== "1")
     
     <input type="file" name="productImg">
     <!-- <span><?php echo $profilErr; echo $pictureErr; echo $sizeErr; ?></span> -->
-    <button class="boutonsauv" type="submit" name="sauvimg" value="Sauvegarder">Sauvegarder</button>
+    <button class="boutonsauv" type="submit" name="sauvimg" value="Sauvegarder">Save</button>
 </form>
